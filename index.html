@@ -325,6 +325,19 @@ textarea{min-height:110px;resize:vertical}
 .steps h4{color:#fff;font-size:1.2rem}
 .steps p{font-size:.94rem;color:#c9c3bb;margin-top:2px}
 
+/* ---------- tout en ligne ---------- */
+.online{display:grid;grid-template-columns:380px 1fr;gap:52px;align-items:center;margin-top:30px}
+@media(max-width:900px){.online{grid-template-columns:1fr;gap:28px}}
+.online-list{list-style:none;margin-top:6px}
+.online-list li{position:relative;padding:0 0 24px 48px;font-size:1.04rem}
+.online-list li b{display:block;font-weight:600}
+.online-list li span{color:var(--ink-soft);font-size:.95rem}
+.online-list li::before{content:"";position:absolute;left:5px;top:5px;width:20px;height:20px;background:var(--orange);border:3px solid var(--black);border-radius:58% 58% 58% 58% / 68% 68% 48% 48%}
+.online-list li::after{content:"";position:absolute;left:14px;top:32px;bottom:2px;border-left:3px dotted #C9C3BB}
+.online-list li:last-child{padding-bottom:0}
+.online-list li:last-child::after{display:none}
+.online-foot{background:#FFF4EE;border-left:5px solid var(--orange);padding:20px 22px;margin-top:26px}
+
 footer{background:var(--black);color:#a8a29b;padding:54px 0 38px;border-top:5px solid var(--orange);font-size:.92rem}
 footer .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:32px;margin-bottom:32px}
 footer h4{color:#fff;margin-bottom:10px}
@@ -335,19 +348,49 @@ footer a{color:#c9c3bb}
 
 <!-- symboles véhicules réutilisables -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <symbol id="voiture" viewBox="0 0 130 60">
-    <path d="M8 44 h6 a10 10 0 0 1 20 0 h48 a10 10 0 0 1 20 0 h20 q4 0 4-4 v-8 q0-5-5-6 l-19-3 -15-13 q-3-3-8-3 h-32 q-5 0-8 3 l-12 13 -12 3 q-5 1-5 6 v8 q0 4 4 4 z"/>
-    <path d="M45 12 h26 q4 0 6 2 l11 10 h-43 z" fill="#fff" opacity=".85"/>
-    <path d="M40 12 h-2 q-3 0-5 2 l-10 10 h17 z" fill="#fff" opacity=".85"/>
-    <circle cx="24" cy="44" r="9" fill="#0B0A09"/><circle cx="24" cy="44" r="3.6" fill="#fff"/>
-    <circle cx="92" cy="44" r="9" fill="#0B0A09"/><circle cx="92" cy="44" r="3.6" fill="#fff"/>
+  <symbol id="voiture" viewBox="0 0 200 120">
+    <g stroke="#0B0A09" stroke-width="7" stroke-linejoin="round" stroke-linecap="round">
+      <path d="M16 86 v-20 q0-9 9-11 l22-6 18-22 q4-5 11-5 h44 q7 0 11 5 l18 22 22 6 q9 2 9 11 v20 q0 6-6 6 h-152 q-6 0-6-6 z" fill="#F26522"/>
+      <path d="M104 26 h24 q4 0 6 3 l15 21 h-45 z" fill="#FFFFFF"/>
+      <path d="M94 26 h-22 q-4 0-6 3 l-15 21 h43 z" fill="#FFFFFF"/>
+    </g>
+    <circle cx="56" cy="92" r="17" fill="#0B0A09"/><circle cx="56" cy="92" r="6" fill="#FFFFFF"/>
+    <circle cx="148" cy="92" r="17" fill="#0B0A09"/><circle cx="148" cy="92" r="6" fill="#FFFFFF"/>
+    <rect x="170" y="62" width="14" height="10" rx="5" fill="#FFFFFF" stroke="#0B0A09" stroke-width="5"/>
   </symbol>
-  <symbol id="voiturette" viewBox="0 0 104 60">
-    <path d="M8 44 h5 a9 9 0 0 1 18 0 h28 a9 9 0 0 1 18 0 h13 q4 0 4-4 l-2-14 q-1-5-6-6 l-8-1 -10-11 q-3-3-7-3 h-26 q-4 0-6 3 l-8 11 -7 2 q-5 1-5 6 v13 q0 4 4 4 z"/>
-    <path d="M38 11 h20 q3 0 5 2 l8 9 h-33 z" fill="#fff" opacity=".85"/>
-    <path d="M33 11 h-1 q-3 0-4 2 l-7 9 h12 z" fill="#fff" opacity=".85"/>
-    <circle cx="22" cy="44" r="8" fill="#0B0A09"/><circle cx="22" cy="44" r="3.2" fill="#fff"/>
-    <circle cx="70" cy="44" r="8" fill="#0B0A09"/><circle cx="70" cy="44" r="3.2" fill="#fff"/>
+
+  <symbol id="voiturette" viewBox="0 0 160 120">
+    <g stroke="#0B0A09" stroke-width="7" stroke-linejoin="round" stroke-linecap="round">
+      <path d="M18 86 v-32 q0-8 8-10 l14-4 14-22 q3-5 10-5 h30 q7 0 10 5 l14 22 14 4 q8 2 8 10 v32 q0 6-6 6 h-110 q-6 0-6-6 z" fill="#F26522"/>
+      <path d="M84 26 h14 q4 0 6 3 l11 19 h-31 z" fill="#FFFFFF"/>
+      <path d="M74 26 h-14 q-4 0-6 3 l-11 19 h31 z" fill="#FFFFFF"/>
+    </g>
+    <circle cx="48" cy="92" r="15" fill="#0B0A09"/><circle cx="48" cy="92" r="5" fill="#FFFFFF"/>
+    <circle cx="116" cy="92" r="15" fill="#0B0A09"/><circle cx="116" cy="92" r="5" fill="#FFFFFF"/>
+  </symbol>
+
+  <symbol id="cle" viewBox="0 0 90 210">
+    <g stroke="#0B0A09" stroke-width="7" stroke-linejoin="round" stroke-linecap="round">
+      <rect x="12" y="8" width="66" height="76" rx="20" fill="#F26522"/>
+      <path d="M45 34 a10 10 0 0 1 0 20 v10" fill="none"/>
+      <path d="M45 84 v106" fill="none"/>
+      <path d="M45 140 h20 M45 162 h20" fill="none"/>
+    </g>
+  </symbol>
+
+  <symbol id="mascotte" viewBox="0 0 260 300">
+    <g stroke="#0B0A09" stroke-width="8" stroke-linejoin="round" stroke-linecap="round" fill="none">
+      <path d="M96 196 v66 M148 196 v66"/>
+      <path d="M78 264 h34 M132 264 h34"/>
+      <path d="M64 148 c-32 6 -34 44 -4 48"/>
+      <path d="M180 148 c34 4 40 40 14 50"/>
+    </g>
+    <ellipse cx="122" cy="118" rx="66" ry="82" fill="#F26522" stroke="#0B0A09" stroke-width="8"/>
+    <ellipse cx="122" cy="52" rx="24" ry="13" fill="#FFFFFF" stroke="#0B0A09" stroke-width="7"/>
+    <circle cx="100" cy="112" r="8" fill="#0B0A09"/>
+    <circle cx="146" cy="112" r="8" fill="#0B0A09"/>
+    <path d="M98 142 q24 22 48 0" stroke="#0B0A09" stroke-width="8" fill="none" stroke-linecap="round"/>
+    <g transform="translate(186,158) rotate(18) scale(.52)"><use href="#cle" width="90" height="210"/></g>
   </symbol>
 </svg>
 
@@ -366,9 +409,9 @@ footer a{color:#c9c3bb}
       <svg class="mark" viewBox="0 0 300 70" role="img" aria-label="Logo Olive Conduite">
         <ellipse cx="36" cy="35" rx="33" ry="31" fill="#0B0A09"/>
         <ellipse cx="36" cy="35" rx="33" ry="31" fill="none" stroke="#F26522" stroke-width="3"/>
-        <g transform="translate(11,14) scale(.38)"><use href="#voiture" width="130" height="60" fill="#F26522"/></g>
-        <rect x="6" y="35" width="60" height="8" fill="#F26522"/>
-        <g transform="translate(13,44) scale(.30)"><use href="#voiturette" width="104" height="60" fill="#FFFFFF"/></g>
+        <g transform="translate(13,10)"><use href="#voiture" width="46" height="28"/></g>
+        <rect x="5" y="37" width="62" height="7" fill="#F26522"/>
+        <g transform="translate(17,45)"><use href="#voiturette" width="38" height="28"/></g>
         <text x="82" y="33" fill="#0B0A09" font-family="Big Shoulders Display,sans-serif" font-size="33" font-weight="800" letter-spacing="1">OLIVE</text>
         <rect x="82" y="39" width="200" height="3" fill="#F26522"/>
         <text x="82" y="62" fill="#F26522" font-family="Big Shoulders Display,sans-serif" font-size="21" font-weight="700" letter-spacing="5.4">CONDUITE</text>
@@ -377,6 +420,7 @@ footer a{color:#c9c3bb}
     <button class="burger" id="burger" aria-expanded="false" aria-controls="menu">Menu</button>
     <ul id="menu">
       <li><a href="#score">Permis Score</a></li>
+      <li><a href="#enligne">En ligne</a></li>
       <li><a href="#packs">Packs</a></li>
       <li><a href="#confiance">Permis Confiance</a></li>
       <li><a href="#vsp">Sans permis</a></li>
@@ -407,33 +451,18 @@ footer a{color:#c9c3bb}
       </div>
     </div>
 
-    <!-- illustration : la route, la voiture et la voiturette -->
-    <svg viewBox="0 0 520 380" role="img" aria-label="Illustration d'une voiture et d'une voiturette sur la route">
-      <rect x="0" y="0" width="520" height="380" fill="#F0ECE6"/>
-      <circle cx="410" cy="82" r="46" fill="#FFE2CE"/>
-      <circle cx="410" cy="82" r="30" fill="#F26522" opacity=".22"/>
-      <path d="M0 250 L520 250 L520 380 L0 380 Z" fill="#2A2724"/>
-      <path d="M0 250 L520 250 L520 258 L0 258 Z" fill="#0B0A09"/>
-      <g fill="#F7F5F2">
-        <rect x="20" y="322" width="58" height="7"/><rect x="118" y="322" width="58" height="7"/>
-        <rect x="216" y="322" width="58" height="7"/><rect x="314" y="322" width="58" height="7"/>
-        <rect x="412" y="322" width="58" height="7"/>
+    <!-- illustration : la mascotte, la voiture et la voiturette -->
+    <svg viewBox="0 0 540 400" role="img" aria-label="Illustration : une olive souriante tenant une clé de voiture, devant une voiture et une voiturette">
+      <circle cx="428" cy="96" r="72" fill="#FFE2CE"/>
+      <g stroke="#0B0A09" stroke-width="7" stroke-linecap="round">
+        <path d="M62 338 h420" fill="none"/>
       </g>
-      <g fill="#C9C3BB">
-        <rect x="36" y="176" width="52" height="74"/><rect x="100" y="150" width="42" height="100"/>
-        <rect x="154" y="192" width="60" height="58"/>
+      <g transform="translate(228,150)"><use href="#voiture" width="290" height="174"/></g>
+      <g transform="translate(58,218)"><use href="#voiturette" width="176" height="132"/></g>
+      <g transform="translate(150,74)"><use href="#mascotte" width="230" height="266"/></g>
+      <g stroke="#0B0A09" stroke-width="6" stroke-linecap="round" fill="none" opacity=".55">
+        <path d="M492 224 h34 M486 250 h28 M496 198 h30"/>
       </g>
-      <g fill="#EFEBE5">
-        <rect x="46" y="188" width="14" height="16"/><rect x="66" y="188" width="14" height="16"/>
-        <rect x="46" y="214" width="14" height="16"/><rect x="66" y="214" width="14" height="16"/>
-        <rect x="110" y="164" width="10" height="14"/><rect x="126" y="164" width="10" height="14"/>
-        <rect x="110" y="190" width="10" height="14"/><rect x="126" y="190" width="10" height="14"/>
-      </g>
-      <g transform="translate(210,168)"><use href="#voiture" width="240" height="111" fill="#F26522"/></g>
-      <g transform="translate(48,236)"><use href="#voiturette" width="150" height="87" fill="#0B0A09"/></g>
-      <rect x="466" y="150" width="7" height="104" fill="#8C867F"/>
-      <circle cx="469" cy="140" r="24" fill="#0B0A09"/>
-      <circle cx="469" cy="140" r="18" fill="#F26522"/>
     </svg>
   </div>
 </div>
@@ -502,7 +531,7 @@ footer a{color:#c9c3bb}
 <section id="valeurs" class="alt">
   <div class="wrap">
     <p class="eyebrow">Notre positionnement</p>
-    <h2>Cinq engagements,<br>le prix vient après</h2>
+    <h2>Cinq engagements<br>tenus à chaque leçon</h2>
 
     <div class="penta">
       <svg viewBox="0 0 400 380" role="img" aria-label="Pentagone des cinq engagements">
@@ -535,8 +564,40 @@ footer a{color:#c9c3bb}
   </div>
 </section>
 
+<!-- ====== TOUT EN LIGNE ====== -->
+<section id="enligne">
+  <div class="wrap">
+    <p class="eyebrow">Sans paperasse</p>
+    <h2>Tout se fait en ligne,<br>quand ça vous arrange</h2>
+    <p class="lede">Une auto-école de quartier n'oblige pas à revenir au bureau pour chaque signature. Vous gérez votre formation depuis votre canapé à 23 h, et vous poussez la porte quand vous en avez envie.</p>
+
+    <div class="online">
+      <svg viewBox="0 0 300 340" role="img" aria-label="Illustration : une olive souriante tenant une clé de voiture">
+        <circle cx="150" cy="150" r="132" fill="#FFF0E6"/>
+        <g transform="translate(28,36)"><use href="#mascotte" width="250" height="288"/></g>
+      </svg>
+
+      <div>
+        <ul class="online-list">
+          <li><b>Constituez votre dossier depuis votre téléphone</b><span>Photographiez vos pièces, envoyez-les, on s'occupe du NEPH et de l'ANTS. Aucun aller-retour en préfecture.</span></li>
+          <li><b>Réservez vos leçons quand vous voulez</b><span>Le planning d'Olivier est en ligne. Vous prenez, vous décalez, vous annulez jusqu'à 48 h avant, sans appeler.</span></li>
+          <li><b>Payez en ligne, en trois fois</b><span>Acompte, échéance ou heure supplémentaire, par carte. Reçu par e-mail dans la seconde.</span></li>
+          <li><b>Suivez votre Permis Score en direct</b><span>Votre note, vos neuf compétences et votre courbe, mises à jour dès la fin de la leçon.</span></li>
+          <li><b>Révisez le code où vous voulez</b><span>Séries Ediser illimitées sur mobile, statistiques par thème, tests blancs corrigés.</span></li>
+          <li><b>Recevez vos convocations par e-mail</b><span>Date, lieu, heure de rendez-vous et pièces à apporter. Rappel automatique la veille.</span></li>
+        </ul>
+
+        <div class="online-foot">
+          <b>Et si vous préférez le contact</b>
+          <p style="color:var(--ink-soft);font-size:.96rem;margin-top:4px">Le bureau est ouvert six jours sur sept et le téléphone décroche. Le numérique enlève la paperasse, il ne remplace pas Olivier.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ====== PACKS ====== -->
-<section id="packs">
+<section id="packs" class="alt">
   <div class="wrap">
     <div style="text-align:center;max-width:640px;margin:0 auto">
       <p class="eyebrow">Permis B</p>
@@ -685,7 +746,7 @@ footer a{color:#c9c3bb}
 
     <div class="cards">
       <div class="card">
-        <svg class="ico" viewBox="0 0 104 60" aria-hidden="true"><use href="#voiturette" width="104" height="60" fill="#F26522"/></svg>
+        <svg class="ico" viewBox="0 0 160 120" aria-hidden="true"><use href="#voiturette" width="160" height="120"/></svg>
         <p class="tag">Permis AM</p>
         <h3>Voiture sans permis</h3>
         <p>Dès 14 ans, huit heures de formation sur nos voiturettes à double commande, dont six en circulation réelle. Pas d'examen, une attestation en fin de stage.</p>
@@ -693,7 +754,7 @@ footer a{color:#c9c3bb}
       </div>
 
       <div class="card">
-        <svg class="ico" viewBox="0 0 130 60" aria-hidden="true"><use href="#voiture" width="130" height="60" fill="#0B0A09"/></svg>
+        <svg class="ico" viewBox="0 0 200 120" aria-hidden="true"><use href="#voiture" width="200" height="120"/></svg>
         <p class="tag">Dès 15 ans</p>
         <h3>Conduite accompagnée</h3>
         <p>Vingt heures avec Olivier, puis 3 000 km avec un proche. Examen possible à 17 ans et demi, période probatoire réduite à deux ans, et deux rendez-vous pédagogiques inclus.</p>
@@ -701,10 +762,10 @@ footer a{color:#c9c3bb}
       </div>
 
       <div class="card">
-        <svg class="ico" viewBox="0 0 140 60" aria-hidden="true">
-          <use href="#voiture" width="110" height="51" y="4" fill="#0B0A09"/>
-          <rect x="98" y="26" width="38" height="22" rx="2" fill="#F26522"/>
-          <circle cx="122" cy="50" r="7" fill="#0B0A09"/><circle cx="122" cy="50" r="2.8" fill="#fff"/>
+        <svg class="ico" viewBox="0 0 280 120" aria-hidden="true">
+          <use href="#voiture" width="200" height="120"/>
+          <rect x="196" y="52" width="70" height="42" rx="6" fill="#FFFFFF" stroke="#0B0A09" stroke-width="7"/>
+          <circle cx="232" cy="98" r="15" fill="#0B0A09"/><circle cx="232" cy="98" r="5" fill="#FFFFFF"/>
         </svg>
         <p class="tag">Permis BE</p>
         <h3>Remorque et attelage</h3>
@@ -713,11 +774,12 @@ footer a{color:#c9c3bb}
       </div>
 
       <div class="card">
-        <svg class="ico" viewBox="0 0 60 60" aria-hidden="true">
-          <circle cx="30" cy="30" r="26" fill="#F26522"/>
-          <circle cx="30" cy="30" r="19" fill="#fff"/>
-          <rect x="26" y="4" width="8" height="12" fill="#0B0A09"/>
-          <path d="M30 30 L30 16 M30 30 L42 38 M30 30 L18 38" stroke="#0B0A09" stroke-width="4" fill="none"/>
+        <svg class="ico" viewBox="0 0 120 120" aria-hidden="true">
+          <circle cx="60" cy="60" r="46" fill="#F26522" stroke="#0B0A09" stroke-width="8"/>
+          <circle cx="60" cy="60" r="17" fill="#FFFFFF" stroke="#0B0A09" stroke-width="8"/>
+          <g stroke="#0B0A09" stroke-width="8" stroke-linecap="round">
+            <path d="M60 43 V16 M74 70 l24 14 M46 70 l-24 14"/>
+          </g>
         </svg>
         <p class="tag">Théorie</p>
         <h3>Code de la route</h3>
@@ -732,8 +794,8 @@ footer a{color:#c9c3bb}
 <section id="difference" class="alt">
   <div class="wrap">
     <p class="eyebrow">Pourquoi nous plutôt qu'une plateforme</p>
-    <h2>Ce que 600 € d'écart<br>achètent vraiment</h2>
-    <p class="lede">Les plateformes en ligne sont moins chères, c'est vrai, et nous ne prétendrons pas le contraire. Voilà ce que vous obtenez en échange de la différence.</p>
+    <h2>Ce que vous obtenez<br>en plus</h2>
+    <p class="lede">Les plateformes en ligne affichent des tarifs plus bas, et nous ne prétendrons pas le contraire. Voilà ce que vous avez chez nous et pas ailleurs. À vous de juger.</p>
 
     <table class="compare">
       <thead>
@@ -784,9 +846,10 @@ footer a{color:#c9c3bb}
       <h2>La voiturette,<br>l'autre liberté</h2>
       <p class="lede">Nous avons arrêté la formation moto pour concentrer nos moyens sur le véhicule sans permis. Une voiturette se conduit dès 14 ans avec le permis AM, sans examen théorique ni pratique, après huit heures de formation encadrée.</p>
       <p style="margin-top:16px;color:#c9c3bb">C'est la solution pour un lycéen qui doit rejoindre son établissement, pour quelqu'un dont le permis a été suspendu, ou simplement pour se déplacer dans le Calaisis sans dépendre de personne. Nos voiturettes ont des doubles commandes et la formation se fait en circulation réelle, pas seulement sur parking.</p>
-      <svg viewBox="0 0 300 110" style="margin-top:26px;max-width:320px" aria-hidden="true">
-        <rect x="0" y="86" width="300" height="4" fill="#35302b"/>
-        <g transform="translate(60,10)"><use href="#voiturette" width="180" height="104" fill="#F26522"/></g>
+      <svg viewBox="0 0 340 150" style="margin-top:26px;max-width:340px" aria-hidden="true">
+        <path d="M14 138 h312" stroke="#EFEBE5" stroke-width="7" stroke-linecap="round" fill="none"/>
+        <g transform="translate(96,14)"><use href="#voiturette" width="170" height="128"/></g>
+        <g transform="translate(18,58)"><use href="#cle" width="46" height="107"/></g>
       </svg>
       <p style="margin-top:22px"><a class="btn" href="#rdv">Réserver une session</a></p>
     </div>
@@ -1091,7 +1154,7 @@ footer a{color:#c9c3bb}
       </div>
       <div>
         <h4>Pratique</h4>
-        <p><a href="#budget">Simulateur de budget</a><br><a href="#dossier">Pièces à fournir</a><br><a href="#paiement">Paiement et aides</a><br><a href="#rdv">Prendre rendez-vous</a></p>
+        <p><a href="#enligne">Tout faire en ligne</a><br><a href="#budget">Simulateur de budget</a><br><a href="#dossier">Pièces à fournir</a><br><a href="#paiement">Paiement et aides</a><br><a href="#rdv">Prendre rendez-vous</a></p>
       </div>
       <div>
         <h4>Informations</h4>
