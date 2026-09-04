@@ -1,63 +1,62 @@
 # Olive Conduite
 
-Site vitrine d'auto-école, page unique, sans dépendance ni build. Un seul fichier `index.html` qui contient le HTML, le CSS et le JavaScript.
+Site vitrine d'auto-école, page unique, sans dépendance ni build. Un seul fichier `index.html` qui contient le HTML, le CSS, le JavaScript et toutes les illustrations en SVG.
+
+Thème clair, accents orange, noir réservé au logo, au bandeau, à la section voiture sans permis et au pied de page.
 
 ## Mise en ligne sur GitHub Pages
 
-1. Créer un dépôt public, par exemple `olive-conduite`.
-2. Y déposer `index.html` et ce `README.md` à la racine.
-3. Dans le dépôt : **Settings** puis **Pages**.
-4. Sous *Build and deployment*, choisir la source **Deploy from a branch**, branche `main`, dossier `/ (root)`, puis **Save**.
-5. Le site est en ligne une à deux minutes plus tard sur `https://<votre-compte>.github.io/olive-conduite/`.
-
-En ligne de commande :
-
-```bash
-git init
-git add .
-git commit -m "Site Olive Conduite"
-git branch -M main
-git remote add origin https://github.com/<votre-compte>/olive-conduite.git
-git push -u origin main
-```
+1. Déposer `index.html` et `README.md` à la racine d'un dépôt public.
+2. Settings puis Pages, source *Deploy from a branch*, branche `main`, dossier `/ (root)`, Save.
+3. Le site répond une à deux minutes plus tard.
 
 ## Ce qu'il reste à remplacer
 
-Tout est en dur dans `index.html`, aucune base de données.
-
 | À changer | Où le trouver |
 |---|---|
-| Adresse, téléphone, e-mail | Barre de statut en haut, section « L'agence », pied de page |
+| Adresse, téléphone, e-mail | Barre de statut, section rendez-vous, pied de page |
 | Numéro d'agrément préfectoral | Pied de page |
-| Tarifs affichés | Section `#formations`, cartes `.price` |
-| Tarifs du simulateur | Attributs `value` des `input` dans la section `#budget` |
-| Prix de l'heure supplémentaire | Constante `HEURE` dans le script, actuellement 48 |
-| Horaires | Tableau `#hours` **et** l'objet `PLAGES` dans le script, les deux doivent rester cohérents |
-| Logo | Les deux blocs `<svg>`, dans la nav et dans le hero |
-| Sessions voiture sans permis | Tableau `SESSIONS` dans le script : `dans` est le nombre de jours à partir d'aujourd'hui, `prises` le nombre de places déjà vendues. `PLACES_MAX` fixe la capacité |
-| Créneaux de rendez-vous | Objet `CRENEAUX` dans le script, une liste d'heures par jour de la semaine |
-| Avis Google | Section `#avis`, les quatre `<article>`, la note et le nombre d'avis |
-| Échéancier | Section `#paiement`, bloc `.echeances` |
+| Tarifs des trois packs | Objet `TARIFS` dans le script, une ligne par pack et par volume d'heures : `p` est le prix pratiqué, `r` le prix de référence barré |
+| Tarifs du simulateur | Attributs `value` des `input` de la section `#budget` |
+| Prix de l'heure supplémentaire | Constante `HEURE`, actuellement 48 |
+| Horaires | Tableau `#hours-table` **et** objet `PLAGES` dans le script, les deux doivent rester cohérents |
+| Créneaux de rendez-vous | Objet `CRENEAUX`, une liste d'heures par jour de la semaine |
+| Sessions voiture sans permis | Tableau `SESSIONS` : `dans` est le nombre de jours à partir d'aujourd'hui, `prises` le nombre de places vendues |
+| Avis Google | Section `#avis`, les six `<article>`, la note et le nombre d'avis |
+| Logo | Le bloc `<svg class="mark">` dans la nav |
+| Permis Score | Tableaux `COMP` (les neuf compétences) et `STAGES` (six paliers, `h` = heures effectuées, `v` = notes) dans le script. `SEUIL` fixe le niveau examen, `RYTHME` le nombre de points gagnés par heure et sert au calcul des heures restantes |
+| Parcours Permis Confiance | Section `#confiance`, tarif dans le simulateur et dans la FAQ |
 
-## Les trois sections à brancher avant la mise en ligne
+## Les images
 
-**Avis Google.** Les quatre avis affichés sont des exemples, pas de vrais avis. Les publier tels quels serait une pratique commerciale trompeuse au sens de l'article L. 121-2 du code de la consommation, et Google supprime les fiches qui inventent des avis. Deux solutions : les remplacer par vos avis réels en copiant le texte depuis votre fiche Google, ou brancher un widget qui les tire automatiquement de l'API Google Places. Le bouton « Voir tous les avis » doit pointer vers votre fiche.
+Toutes les illustrations sont des SVG dessinés à la main dans le fichier : la voiture, la voiturette, la scène du hero, le portrait d'Olivier, les pictogrammes des formations. Aucun fichier externe, aucun droit à payer, aucun risque de lien mort.
 
-**Rendez-vous en ligne.** Le sélecteur de créneaux fonctionne mais ne réserve rien : l'occupation affichée est simulée par une formule dans le script. Pour un vrai agenda, remplacez la section par un widget Cal.com ou Calendly, tous deux gratuits en version de base et intégrables en une ligne. Vous gardez alors le design en habillant l'iframe, ou vous laissez leur interface.
+Trois endroits gagneraient à recevoir de vraies photos :
 
-**Paiement.** Le bouton « Régler une échéance » ouvre une alerte tant que son `href` vaut `#`. Créez un lien de paiement chez Stripe, SumUp ou PayPal et collez-le à la place. GitHub Pages ne peut pas héberger de traitement de paiement, mais un lien externe fonctionne parfaitement.
+| Emplacement | Ce qu'il faut | Comment faire |
+|---|---|---|
+| Portrait d'Olivier, section `#olivier` | Photo verticale, format 4/5 | Remplacer le `<svg>` dans `.portrait` par `<img src="olivier.jpg" alt="Olivier, moniteur">` |
+| Illustration du hero | Photo de la voiture-école ou de la devanture | Remplacer le grand `<svg>` de `.hero-grid` par une `<img>` |
+| Logos partenaires, section `#partenaires` | Fichiers officiels | Remplacer chaque `.logo-box` par une `<img>` |
 
+Vos propres photos valent toujours mieux que du stock. À défaut, Unsplash, Pexels et Pixabay proposent des images libres, avec les mots-clés *driving school*, *learner driver*, *car interior*, *microcar*. Vérifiez la licence de chaque fichier avant publication.
 
-## Formulaire de préinscription
+## Points juridiques à traiter avant la mise en ligne
 
-Il n'envoie rien pour l'instant, GitHub Pages ne sert que des fichiers statiques. Trois options :
+**Les avis sont inventés.** Les six témoignages sont des exemples de maquette. Les publier tels quels serait une pratique commerciale trompeuse au sens de l'article L. 121-2 du code de la consommation, et Google supprime les fiches qui fabriquent des avis. Remplacez-les par vos avis réels ou branchez l'API Google Places.
 
-- **Formspree** : créer un formulaire, puis remplacer `<form id="form">` par `<form id="form" action="https://formspree.io/f/VOTRE_ID" method="POST">` et supprimer le bloc `addEventListener('submit', ...)` dans le script.
-- **Netlify Forms** : héberger sur Netlify plutôt que GitHub Pages et ajouter l'attribut `netlify` au formulaire.
-- **mailto** : solution de repli, `action="mailto:contact@oliveconduite.fr"`, peu fiable selon les navigateurs.
+**Le prix barré.** Un tarif de référence barré doit correspondre au prix le plus bas réellement pratiqué au cours des trente derniers jours, en application de l'article L. 112-1-1 du code de la consommation. Si l'offre de rentrée n'existe pas, supprimez la ligne `.old` des trois packs.
 
-## Obligations légales à compléter
+**La mention Ediser.** Le partenariat doit exister réellement, et l'usage de la marque et du logo doit être autorisé par Ediser. Même chose pour les logos ANTS et CPF.
 
-Les liens du pied de page sont inertes. Un site d'auto-école doit publier ses mentions légales, ses conditions générales de vente, sa politique de protection des données et les coordonnées de son médiateur de la consommation. Les tarifs affichés doivent correspondre à ceux du contrat.
+**Mentions obligatoires.** Les liens du pied de page sont inertes. Un site d'auto-école doit publier ses mentions légales, ses conditions générales de vente, sa politique de protection des données et les coordonnées de son médiateur de la consommation. Les tarifs affichés doivent correspondre au contrat.
 
 Aucune bannière cookies n'est nécessaire en l'état : le site ne dépose aucun cookie et n'utilise aucun traceur. Si vous ajoutez Google Analytics ou une carte Google Maps embarquée, il en faudra une.
+
+## Les trois fonctions à brancher
+
+**Rendez-vous.** Le sélecteur fonctionne mais ne réserve rien, l'occupation affichée est simulée par une formule. Pour un vrai agenda, remplacez la section par un widget Cal.com ou Calendly, gratuits en version de base.
+
+**Paiement.** Le bouton « Régler une échéance » ouvre une alerte tant que son `href` vaut `#`. Créez un lien de paiement Stripe, SumUp ou PayPal et collez-le à la place.
+
+**Formulaire.** GitHub Pages ne sert que du statique. Branchez Formspree en remplaçant `<form id="formRdv">` par `<form id="formRdv" action="https://formspree.io/f/VOTRE_ID" method="POST">` et en supprimant le bloc `addEventListener('submit', ...)` correspondant.
