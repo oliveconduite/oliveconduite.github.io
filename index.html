@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Olive Conduite — Auto-école à Marck : permis B, conduite accompagnée et voiture sans permis</title>
+<meta name="description" content="Auto-école Olive Conduite à Marck. Permis B boîte manuelle et automatique, conduite accompagnée, permis remorque et formation voiture sans permis. Tarifs clairs, simulateur de budget en ligne.">
+<meta name="theme-color" content="#000000">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23000'/><ellipse cx='16' cy='16' rx='13' ry='10' fill='none' stroke='%23F26522' stroke-width='3'/><rect x='4' y='14' width='24' height='4' fill='%23F26522'/></svg>">
+
+<style>
+:root{
+  --ink:#000000;
+  --surface:#141210;
+  --surface-2:#1d1a17;
+  --line:#33302c;
+  --orange:#F26522;
+  --orange-hi:#FF8C1A;
+  --paper:#F2EFEA;
+  --mute:#96908a;
+  --max:1180px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+body{
+  background:var(--ink);color:var(--paper);
+  font-family:"Barlow",system-ui,-apple-system,"Segoe UI",sans-serif;
+  font-size:17px;line-height:1.62;-webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+h1,h2,h3,.disp{font-family:"Big Shoulders Display","Barlow Condensed",Impact,sans-serif;font-weight:800;line-height:.92;letter-spacing:.01em}
+h2{font-size:clamp(2.6rem,7vw,4.6rem)}
+h3{font-size:1.6rem;font-weight:700;line-height:1.05}
+p{max-width:66ch}
+a{color:var(--orange-hi);text-decoration:none}
+a:hover{text-decoration:underline}
+:focus-visible{outline:3px solid var(--orange-hi);outline-offset:3px}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 22px}
+section{padding:86px 0;border-top:1px solid var(--line)}
+.eyebrow{font-family:"Big Shoulders Display",sans-serif;font-weight:700;font-size:1.15rem;color:var(--orange);letter-spacing:.06em}
+.lede{font-size:1.15rem;color:#cfc9c2;margin-top:18px}
+
+/* ---------- barre statut ---------- */
+.status{background:var(--orange);color:#160b04;font-weight:600;font-size:.92rem;padding:8px 0}
+.status .wrap{display:flex;gap:16px;flex-wrap:wrap;align-items:center;justify-content:space-between}
+.status a{color:#160b04;text-decoration:underline}
+.dot{width:9px;height:9px;border-radius:50%;background:#0a5c1e;display:inline-block;margin-right:7px}
+.dot.off{background:#7a1608}
+
+/* ---------- nav ---------- */
+header{position:sticky;top:0;z-index:60;background:rgba(0,0,0,.93);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;gap:26px;height:74px}
+.nav svg{height:44px;width:auto;flex:none}
+.nav ul{display:flex;gap:24px;list-style:none;margin-left:auto}
+.nav ul a{color:var(--paper);font-weight:500;font-size:.97rem}
+.nav ul a:hover{color:var(--orange-hi)}
+.burger{display:none;margin-left:auto;background:none;border:1px solid var(--line);color:var(--paper);padding:9px 13px;font:600 .95rem "Barlow";cursor:pointer}
+@media(max-width:900px){
+  .nav ul{display:none;position:absolute;top:74px;left:0;right:0;background:#0a0908;flex-direction:column;gap:0;padding:8px 22px 20px;border-bottom:2px solid var(--orange)}
+  .nav ul.open{display:flex}
+  .nav ul li{border-top:1px solid var(--line)}
+  .nav ul a{display:block;padding:14px 0;font-size:1.05rem}
+  .burger{display:block}
+}
+
+/* ---------- boutons ---------- */
+.btn{display:inline-block;background:var(--orange);color:#140800;font-family:"Big Shoulders Display",sans-serif;font-weight:800;font-size:1.35rem;letter-spacing:.02em;padding:12px 30px 9px;border:none;cursor:pointer;transition:background .15s}
+.btn:hover{background:var(--orange-hi);text-decoration:none}
+.btn.ghost{background:transparent;color:var(--paper);box-shadow:inset 0 0 0 2px var(--line)}
+.btn.ghost:hover{box-shadow:inset 0 0 0 2px var(--orange);color:var(--orange-hi);background:transparent}
+
+/* ---------- hero ---------- */
+.hero{position:relative;padding:70px 0 76px;border-top:none;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background:
+  repeating-linear-gradient(115deg,transparent 0 58px,rgba(242,101,34,.045) 58px 60px);
+  pointer-events:none}
+.hero-grid{position:relative;display:grid;grid-template-columns:1fr 300px;gap:52px;align-items:center}
+.hero h1{font-size:clamp(3.4rem,10.5vw,7.2rem);text-transform:none}
+.hero .rule{height:7px;background:var(--orange);width:104px;margin:26px 0}
+.hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:32px}
+.badge-hero{width:100%;height:auto}
+@media(max-width:820px){.hero-grid{grid-template-columns:1fr;gap:34px}.badge-hero{max-width:210px}}
+
+/* bandeau défilant */
+.ticker{background:var(--orange);color:#140800;overflow:hidden;white-space:nowrap;border-top:2px solid #000;border-bottom:2px solid #000}
+.ticker div{display:inline-block;padding:9px 0;animation:slide 34s linear infinite;font-family:"Big Shoulders Display",sans-serif;font-weight:700;font-size:1.3rem;letter-spacing:.04em}
+.ticker span{padding:0 26px}
+@keyframes slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.ticker div{animation:none}}
+
+/* ---------- formations ---------- */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2px;background:var(--line);margin-top:44px}
+.card{background:var(--surface);padding:30px 26px 28px;display:flex;flex-direction:column}
+.card.feature{background:linear-gradient(160deg,#241408,#141210)}
+.card .tag{font-family:"Big Shoulders Display",sans-serif;font-weight:700;color:var(--orange);font-size:1.05rem}
+.card h3{margin:6px 0 14px}
+.card ul{list-style:none;margin:16px 0 22px;font-size:.96rem;color:#c6c0b9}
+.card ul li{padding:6px 0 6px 20px;position:relative}
+.card ul li::before{content:"";position:absolute;left:0;top:15px;width:9px;height:2px;background:var(--orange)}
+.price{margin-top:auto;padding-top:16px;border-top:1px solid var(--line)}
+.price b{font-family:"Big Shoulders Display",sans-serif;font-size:2.9rem;font-weight:800;color:var(--paper);line-height:1}
+.price small{display:block;color:var(--mute);font-size:.85rem}
+.flag{display:inline-block;background:var(--orange);color:#140800;font-weight:600;font-size:.78rem;padding:3px 9px;margin-bottom:12px}
+
+/* ---------- VSP ---------- */
+.vsp{background:var(--surface);}
+.vsp-grid{display:grid;grid-template-columns:1.15fr 1fr;gap:52px;align-items:start}
+@media(max-width:860px){.vsp-grid{grid-template-columns:1fr;gap:34px}}
+.facts{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--line);margin-top:30px}
+.fact{background:var(--ink);padding:22px 20px}
+.fact b{display:block;font-family:"Big Shoulders Display",sans-serif;font-size:3rem;font-weight:800;color:var(--orange);line-height:1}
+.fact span{font-size:.92rem;color:#c6c0b9}
+
+/* ---------- simulateur ---------- */
+.sim{display:grid;grid-template-columns:1fr 330px;gap:2px;background:var(--line);margin-top:44px}
+@media(max-width:860px){.sim{grid-template-columns:1fr}}
+.sim-panel{background:var(--surface);padding:30px 26px}
+.sim-out{background:var(--surface-2);padding:30px 26px;position:sticky;top:96px;align-self:start}
+@media(max-width:860px){.sim-out{position:static}}
+fieldset{border:none;margin-bottom:26px}
+legend{font-family:"Big Shoulders Display",sans-serif;font-weight:700;font-size:1.3rem;color:var(--orange);margin-bottom:12px}
+.opt{display:flex;align-items:center;gap:12px;padding:11px 13px;border:1px solid var(--line);margin-bottom:8px;cursor:pointer;transition:border-color .15s,background .15s}
+.opt:hover{border-color:#5a534b}
+.opt input{accent-color:var(--orange);width:19px;height:19px;flex:none}
+.opt span{flex:1;font-size:.98rem}
+.opt em{font-style:normal;color:var(--mute);font-variant-numeric:tabular-nums;font-size:.95rem}
+.opt:has(input:checked){border-color:var(--orange);background:rgba(242,101,34,.07)}
+input[type=range]{width:100%;accent-color:var(--orange);height:26px}
+.range-head{display:flex;justify-content:space-between;align-items:baseline;font-size:.95rem;color:#c6c0b9}
+.range-head b{font-family:"Big Shoulders Display",sans-serif;font-size:2rem;color:var(--paper)}
+.total{font-family:"Big Shoulders Display",sans-serif;font-weight:800;font-size:4.2rem;line-height:.9;color:var(--orange);font-variant-numeric:tabular-nums}
+.breakdown{list-style:none;margin:18px 0;font-size:.93rem;color:#c6c0b9}
+.breakdown li{display:flex;justify-content:space-between;gap:12px;padding:7px 0;border-bottom:1px dashed var(--line)}
+.breakdown li em{font-style:normal;font-variant-numeric:tabular-nums;color:var(--paper)}
+.note{font-size:.83rem;color:var(--mute);margin-top:14px}
+
+/* ---------- checklist ---------- */
+.check-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--line);margin-top:36px}
+@media(max-width:760px){.check-grid{grid-template-columns:1fr}}
+.check-col{background:var(--surface);padding:28px 26px}
+.progress{height:8px;background:var(--surface-2);margin:18px 0 8px;overflow:hidden}
+.progress i{display:block;height:100%;background:var(--orange);width:0;transition:width .25s}
+.opt.done span{color:var(--mute);text-decoration:line-through}
+
+/* ---------- faq ---------- */
+details{border-bottom:1px solid var(--line);padding:20px 0}
+summary{cursor:pointer;font-family:"Big Shoulders Display",sans-serif;font-weight:700;font-size:1.5rem;list-style:none;display:flex;justify-content:space-between;gap:18px;align-items:center}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";color:var(--orange);font-size:2rem;line-height:1}
+details[open] summary::after{content:"–"}
+details p{margin-top:12px;color:#c6c0b9}
+
+/* ---------- contact ---------- */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:52px}
+@media(max-width:860px){.contact-grid{grid-template-columns:1fr;gap:34px}}
+label{display:block;font-size:.92rem;color:#c6c0b9;margin:16px 0 6px}
+input[type=text],input[type=email],input[type=tel],select,textarea{
+  width:100%;background:var(--surface);border:1px solid var(--line);color:var(--paper);
+  padding:12px 14px;font:400 1rem "Barlow";
+}
+input:focus,select:focus,textarea:focus{border-color:var(--orange);outline:none}
+textarea{min-height:110px;resize:vertical}
+.hours{width:100%;border-collapse:collapse;margin-top:22px;font-size:.97rem}
+.hours td{padding:11px 0;border-bottom:1px solid var(--line)}
+.hours td:last-child{text-align:right;color:#c6c0b9;font-variant-numeric:tabular-nums}
+.hours tr.now td{color:var(--orange);font-weight:600}
+.hours tr.now td:last-child{color:var(--orange)}
+
+/* ---------- comparatif ---------- */
+.compare{width:100%;border-collapse:collapse;margin-top:40px;font-size:1rem}
+.compare th,.compare td{padding:15px 14px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+.compare thead th{font-family:"Big Shoulders Display",sans-serif;font-size:1.55rem;font-weight:800;border-bottom:3px solid var(--orange)}
+.compare thead th:nth-child(2){color:var(--orange)}
+.compare td:first-child{color:var(--mute);width:24%}
+.compare td:nth-child(2){color:var(--paper);font-weight:500}
+.compare td:last-child{color:#8a847c}
+@media(max-width:720px){
+  .compare,.compare tbody,.compare tr,.compare td{display:block;width:100%}
+  .compare thead{display:none}
+  .compare tr{border-bottom:1px solid var(--line);padding:16px 0}
+  .compare td{border:none;padding:3px 0}
+  .compare td:first-child{color:var(--orange);font-family:"Big Shoulders Display",sans-serif;font-size:1.4rem;font-weight:700;width:auto}
+  .compare td:nth-child(2)::before{content:"Chez nous : ";color:var(--mute);font-weight:400}
+  .compare td:last-child::before{content:"Sur une plateforme : ";color:var(--mute)}
+}
+
+/* ---------- sessions VSP ---------- */
+.sessions{margin-top:28px;background:var(--ink);border:1px solid var(--line);border-left:5px solid var(--orange);padding:20px 22px 14px}
+.session{display:flex;justify-content:space-between;gap:14px;align-items:baseline;padding:13px 0;border-bottom:1px dashed var(--line)}
+.session:last-of-type{border-bottom:none}
+.session b{font-family:"Big Shoulders Display",sans-serif;font-size:1.5rem;font-weight:700}
+.session small{display:block;color:var(--mute);font-size:.85rem;font-family:"Barlow",sans-serif;font-weight:400}
+.places{font-size:.92rem;font-weight:600;white-space:nowrap}
+.places.ok{color:#5fbf6a}.places.low{color:var(--orange-hi)}.places.full{color:var(--mute)}
+
+/* ---------- avis ---------- */
+.gnote{display:flex;align-items:center;gap:22px;flex-wrap:wrap;margin-top:30px}
+.gnote b{font-family:"Big Shoulders Display",sans-serif;font-size:4.4rem;font-weight:800;line-height:.85;color:var(--paper)}
+.stars{color:var(--orange);letter-spacing:3px;font-size:1.25rem}
+.avis{display:grid;grid-template-columns:repeat(auto-fit,minmax(265px,1fr));gap:2px;background:var(--line);margin-top:34px}
+.avis article{background:var(--surface);padding:24px 22px}
+.avis .who{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.avis .ini{width:38px;height:38px;flex:none;border-radius:50%;background:var(--orange);color:#140800;display:grid;place-items:center;font-weight:600}
+.avis .who span{font-weight:600;font-size:.98rem}
+.avis .who small{display:block;color:var(--mute);font-size:.82rem;font-weight:400}
+.avis p{font-size:.96rem;color:#c6c0b9;max-width:none}
+
+/* ---------- paiement ---------- */
+.pay{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:2px;background:var(--line);margin-top:40px}
+.pay > div{background:var(--surface);padding:28px 24px;display:flex;flex-direction:column}
+.pay h3{color:var(--orange);margin-bottom:12px}
+.pay p{font-size:.96rem;color:#c6c0b9}
+.pay > div > p:last-of-type{margin-top:auto;padding-top:16px}
+.echeances{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--line);margin-top:34px}
+@media(max-width:620px){.echeances{grid-template-columns:1fr}}
+.echeances div{background:var(--surface-2);padding:20px 18px}
+.echeances b{display:block;font-family:"Big Shoulders Display",sans-serif;font-size:2.4rem;font-weight:800;color:var(--orange);line-height:1;font-variant-numeric:tabular-nums}
+.echeances span{font-size:.88rem;color:#c6c0b9}
+
+/* ---------- rendez-vous ---------- */
+.rdv{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:start}
+@media(max-width:860px){.rdv{grid-template-columns:1fr;gap:32px}}
+.days{display:flex;gap:8px;overflow-x:auto;padding-bottom:8px;margin-top:22px}
+.day{flex:none;background:var(--surface);border:1px solid var(--line);padding:11px 15px;cursor:pointer;text-align:center;font:500 .85rem "Barlow";color:var(--paper)}
+.day b{display:block;font-family:"Big Shoulders Display",sans-serif;font-size:1.9rem;font-weight:800;line-height:1;color:var(--paper)}
+.day[aria-pressed="true"]{border-color:var(--orange);background:rgba(242,101,34,.13)}
+.day[disabled]{opacity:.3;cursor:not-allowed}
+.slots{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.slot{background:var(--surface);border:1px solid var(--line);color:var(--paper);padding:10px 17px;font:500 .95rem "Barlow";cursor:pointer;font-variant-numeric:tabular-nums}
+.slot:hover:not([disabled]){border-color:var(--orange)}
+.slot[aria-pressed="true"]{background:var(--orange);color:#140800;border-color:var(--orange)}
+.slot[disabled]{opacity:.3;cursor:not-allowed;text-decoration:line-through}
+.recap{background:var(--surface-2);border-left:5px solid var(--orange);padding:22px;margin-top:26px}
+.recap b{font-family:"Big Shoulders Display",sans-serif;font-size:1.7rem;font-weight:700;display:block;margin-bottom:6px}
+
+footer{background:#080706;padding:56px 0 40px;border-top:3px solid var(--orange);font-size:.92rem;color:var(--mute)}
+footer .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:34px;margin-bottom:34px}
+footer h4{font-family:"Big Shoulders Display",sans-serif;font-size:1.25rem;color:var(--paper);margin-bottom:10px}
+footer a{color:#c6c0b9}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+</style>
+</head>
+<body>
+
+<!-- ====== STATUT ====== -->
+<div class="status">
+  <div class="wrap">
+    <span id="statut"><span class="dot"></span>Bureau ouvert</span>
+    <span>03 21 00 00 00 · 145 avenue de la Liberté, 62730 Marck</span>
+  </div>
+</div>
+
+<!-- ====== NAV ====== -->
+<header>
+  <nav class="wrap nav" aria-label="Navigation principale">
+    <a href="#top" aria-label="Olive Conduite, accueil">
+      <svg viewBox="0 0 260 64" role="img" aria-label="Logo Olive Conduite">
+        <ellipse cx="32" cy="32" rx="28" ry="28" fill="none" stroke="#F26522" stroke-width="4"/>
+        <path d="M32 12 a20 20 0 0 1 0 40 a13 20 0 0 0 0-40" fill="#F26522"/>
+        <circle cx="32" cy="32" r="7" fill="#000"/>
+        <text x="74" y="30" fill="#F2EFEA" font-family="Big Shoulders Display,sans-serif" font-size="30" font-weight="800" letter-spacing="1">OLIVE</text>
+        <rect x="74" y="36" width="176" height="3" fill="#F26522"/>
+        <text x="74" y="57" fill="#F26522" font-family="Big Shoulders Display,sans-serif" font-size="19" font-weight="700" letter-spacing="4.5">CONDUITE</text>
+      </svg>
+    </a>
+    <button class="burger" id="burger" aria-expanded="false" aria-controls="menu">Menu</button>
+    <ul id="menu">
+      <li><a href="#difference">Pourquoi nous</a></li>
+      <li><a href="#formations">Formations</a></li>
+      <li><a href="#vsp">Sans permis</a></li>
+      <li><a href="#avis">Avis</a></li>
+      <li><a href="#budget">Budget</a></li>
+      <li><a href="#paiement">Paiement</a></li>
+      <li><a href="#rdv">Rendez-vous</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- ====== HERO ====== -->
+<main id="top">
+<div class="wrap hero">
+  <div class="hero-grid">
+    <div>
+      <p class="eyebrow">Auto-école à Marck, dans le Calaisis</p>
+      <h1>Prenez la route,<br>on s'occupe du reste.</h1>
+      <div class="rule"></div>
+      <p class="lede">Permis B en boîte manuelle ou automatique, conduite accompagnée, remorque, et depuis cette année la formation voiture sans permis. Des tarifs affichés, un moniteur qui vous suit du début à la fin.</p>
+      <div class="hero-cta">
+        <a class="btn" href="#rdv">Prendre rendez-vous</a>
+        <a class="btn ghost" href="#budget">Calculer mon budget</a>
+      </div>
+    </div>
+    <svg class="badge-hero" viewBox="0 0 300 300" role="img" aria-label="Écusson Olive Conduite">
+      <ellipse cx="150" cy="150" rx="140" ry="118" fill="#141210" stroke="#F26522" stroke-width="6"/>
+      <ellipse cx="150" cy="150" rx="127" ry="105" fill="none" stroke="#33302c" stroke-width="2"/>
+      <path d="M150 62 a88 88 0 0 1 0 176 a57 88 0 0 0 0-176" fill="#F26522" opacity=".2"/>
+      <rect x="10" y="132" width="280" height="38" fill="#F26522"/>
+      <text x="150" y="120" text-anchor="middle" fill="#F2EFEA" font-family="Big Shoulders Display,sans-serif" font-size="62" font-weight="800">OLIVE</text>
+      <text x="150" y="162" text-anchor="middle" fill="#140800" font-family="Big Shoulders Display,sans-serif" font-size="30" font-weight="800" letter-spacing="7">CONDUITE</text>
+      <text x="150" y="210" text-anchor="middle" fill="#96908a" font-family="Big Shoulders Display,sans-serif" font-size="22" font-weight="700" letter-spacing="4">MARCK · 62730</text>
+      <circle cx="150" cy="232" r="5" fill="#F26522"/>
+    </svg>
+  </div>
+</div>
+
+<div class="ticker" aria-hidden="true">
+  <div>
+    <span>Permis B</span><span>•</span><span>Boîte automatique</span><span>•</span><span>Conduite accompagnée dès 15 ans</span><span>•</span><span>Voiture sans permis dès 14 ans</span><span>•</span><span>Permis remorque</span><span>•</span><span>Code en ligne illimité</span><span>•</span>
+    <span>Permis B</span><span>•</span><span>Boîte automatique</span><span>•</span><span>Conduite accompagnée dès 15 ans</span><span>•</span><span>Voiture sans permis dès 14 ans</span><span>•</span><span>Permis remorque</span><span>•</span><span>Code en ligne illimité</span><span>•</span>
+  </div>
+</div>
+
+<!-- ====== DIFFERENCE ====== -->
+<section id="difference">
+  <div class="wrap">
+    <p class="eyebrow">Pourquoi nous plutôt qu'une plateforme</p>
+    <h2>Le même moniteur,<br>du premier cours à l'examen</h2>
+    <p class="lede">Les plateformes en ligne sont moins chères, c'est vrai, et nous ne prétendrons pas le contraire. Voilà ce que vous obtenez en échange de la différence de prix.</p>
+
+    <table class="compare">
+      <thead>
+        <tr><th scope="col"><span class="sr">Critère</span></th><th scope="col">Chez Olive Conduite</th><th scope="col">Sur une plateforme en ligne</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Votre moniteur</td>
+          <td>Le même du début à la fin. Il connaît vos réflexes, vos points faibles et n'a pas besoin de trois leçons pour vous redécouvrir.</td>
+          <td>Un enseignant indépendant différent à chaque créneau disponible.</td>
+        </tr>
+        <tr>
+          <td>Le passage de l'examen</td>
+          <td>Nos places d'examen, nos dates, notre voiture. Vous passez sur les routes où vous vous êtes entraîné.</td>
+          <td>Dépend des places attribuées à la plateforme dans votre département.</td>
+        </tr>
+        <tr>
+          <td>Quand ça coince</td>
+          <td>Vous poussez la porte du bureau, ou vous appelez et quelqu'un décroche.</td>
+          <td>Un formulaire, un numéro de ticket, un délai de réponse.</td>
+        </tr>
+        <tr>
+          <td>Les parents</td>
+          <td>Reçus avec l'élève, informés de la progression réelle, pas d'une barre de pourcentage.</td>
+          <td>Un compte pour payer, un tableau de bord pour suivre.</td>
+        </tr>
+        <tr>
+          <td>La voiture sans permis</td>
+          <td>Formation permis AM sur nos voiturettes à double commande, en circulation réelle.</td>
+          <td>Non proposé.</td>
+        </tr>
+        <tr>
+          <td>Le terrain</td>
+          <td>Marck, Calais, Coulogne, Guemps. Les giratoires du Calaisis, la rocade, le port. On les fait tous.</td>
+          <td>Là où un enseignant indépendant est disponible ce jour-là.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ====== FORMATIONS ====== -->
+<section id="formations">
+  <div class="wrap">
+    <p class="eyebrow">Nos formations</p>
+    <h2>Six façons de rouler</h2>
+    <p class="lede">Chaque forfait comprend l'évaluation de départ, le suivi pédagogique et la présentation à l'examen. Les tarifs sont affichés en euros TTC.</p>
+
+    <div class="cards">
+      <div class="card">
+        <p class="tag">Permis B</p>
+        <h3>Boîte manuelle</h3>
+        <ul>
+          <li>20 heures de conduite</li>
+          <li>Code en ligne illimité, 6 mois</li>
+          <li>Livret d'apprentissage numérique</li>
+          <li>Présentation au code et à la conduite</li>
+        </ul>
+        <div class="price"><b>1 290 €</b><small>Frais de dossier 60 € en sus</small></div>
+      </div>
+
+      <div class="card">
+        <p class="tag">Permis B</p>
+        <h3>Boîte automatique</h3>
+        <ul>
+          <li>13 heures de conduite</li>
+          <li>Passage en manuelle possible après 7 h</li>
+          <li>Code en ligne illimité, 6 mois</li>
+          <li>Idéal pour reprendre confiance</li>
+        </ul>
+        <div class="price"><b>1 050 €</b><small>Frais de dossier 60 € en sus</small></div>
+      </div>
+
+      <div class="card feature">
+        <span class="flag">Nouveau</span>
+        <p class="tag">Permis AM</p>
+        <h3>Voiture sans permis</h3>
+        <ul>
+          <li>Dès 14 ans, 8 heures de formation</li>
+          <li>Sur nos voiturettes double commande</li>
+          <li>Pas d'examen, attestation en fin de stage</li>
+          <li>Sessions pendant les vacances scolaires</li>
+        </ul>
+        <div class="price"><b>340 €</b><small>Attestation de sécurité routière incluse</small></div>
+      </div>
+
+      <div class="card">
+        <p class="tag">Dès 15 ans</p>
+        <h3>Conduite accompagnée</h3>
+        <ul>
+          <li>20 heures puis 3 000 km avec un proche</li>
+          <li>Examen possible à 17 ans et demi</li>
+          <li>Période probatoire réduite à 2 ans</li>
+          <li>Deux rendez-vous pédagogiques inclus</li>
+        </ul>
+        <div class="price"><b>1 340 €</b><small>Frais de dossier 60 € en sus</small></div>
+      </div>
+
+      <div class="card">
+        <p class="tag">Permis BE</p>
+        <h3>Remorque et attelage</h3>
+        <ul>
+          <li>7 heures de formation</li>
+          <li>Pour remorque de plus de 750 kg</li>
+          <li>Attelage, dételage, manœuvres</li>
+          <li>Véhicule et remorque fournis</li>
+        </ul>
+        <div class="price"><b>520 €</b><small>Présentation à l'examen incluse</small></div>
+      </div>
+
+      <div class="card">
+        <p class="tag">Théorie</p>
+        <h3>Code de la route</h3>
+        <ul>
+          <li>Salle de code, séances encadrées</li>
+          <li>Application web et mobile illimitée</li>
+          <li>Tests blancs corrigés chaque semaine</li>
+          <li>Redevance d'examen de 30 € à régler à part</li>
+        </ul>
+        <div class="price"><b>290 €</b><small>Sans engagement de durée</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== VSP ====== -->
+<section id="vsp" class="vsp">
+  <div class="wrap vsp-grid">
+    <div>
+      <p class="eyebrow">La nouveauté de l'année</p>
+      <h2>La voiturette,<br>l'autre liberté</h2>
+      <p class="lede">Nous avons arrêté la formation moto pour concentrer nos moyens sur le véhicule sans permis. Une voiturette se conduit dès 14 ans avec le permis AM, sans examen théorique ni pratique, après huit heures de formation encadrée.</p>
+      <p style="margin-top:18px;color:#c6c0b9">C'est la solution pour un lycéen qui doit rejoindre son établissement, pour quelqu'un dont le permis a été suspendu, ou simplement pour se déplacer dans le Calaisis sans dépendre de personne. Nos voiturettes sont équipées de doubles commandes et la formation se fait en circulation réelle, pas seulement sur parking.</p>
+      <p style="margin-top:26px"><a class="btn" href="#inscription">Réserver une session</a></p>
+    </div>
+    <div>
+      <div class="facts">
+        <div class="fact"><b>14</b><span>ans, l'âge minimum pour conduire une voiturette</span></div>
+        <div class="fact"><b>8 h</b><span>de formation, dont 6 h en circulation</span></div>
+        <div class="fact"><b>45</b><span>km/h, la vitesse maximale autorisée</span></div>
+        <div class="fact"><b>0</b><span>examen à passer, une attestation suffit</span></div>
+      </div>
+      <div class="sessions">
+        <p class="eyebrow" style="margin-bottom:4px">Prochaines sessions</p>
+        <div id="sessionsList"></div>
+        <p class="note" style="margin-top:12px">Sessions de quatre élèves maximum, sur deux journées. Réservation confirmée à réception de l'acompte.</p>
+      </div>
+      <p class="note">Le permis AM couvre aussi les cyclomoteurs 50 cm³. Si vous êtes né avant le 1<sup>er</sup> janvier 1988, aucune formation n'est exigée pour conduire un quadricycle léger.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ====== AVIS ====== -->
+<section id="avis">
+  <div class="wrap">
+    <p class="eyebrow">Avis Google</p>
+    <h2>Ce qu'en disent<br>nos élèves</h2>
+
+    <div class="gnote">
+      <b>4,8</b>
+      <div>
+        <p class="stars" aria-hidden="true">★★★★★</p>
+        <p style="color:#c6c0b9">Note moyenne sur 132 avis Google
+          <span class="sr">, 4,8 sur 5</span></p>
+      </div>
+      <p style="margin-left:auto"><a class="btn ghost" href="#" rel="noopener">Voir tous les avis</a></p>
+    </div>
+
+    <div class="avis">
+      <article>
+        <div class="who"><span class="ini" aria-hidden="true">LD</span><span>Léa D.<small>il y a 3 semaines</small></span></div>
+        <p class="stars" aria-hidden="true">★★★★★</p>
+        <p>Permis du premier coup. J'ai eu le même moniteur pendant toute la formation, il savait exactement où j'en étais à chaque leçon. Ça change tout par rapport à ce que m'avaient raconté mes copines.</p>
+      </article>
+      <article>
+        <div class="who"><span class="ini" aria-hidden="true">MV</span><span>Mathis V.<small>il y a 1 mois</small></span></div>
+        <p class="stars" aria-hidden="true">★★★★★</p>
+        <p>Formation voiturette faite pendant les vacances de février. Deux journées, six heures sur la route, on m'a fait faire la rocade et le centre de Calais. Je me sens vraiment prêt.</p>
+      </article>
+      <article>
+        <div class="who"><span class="ini" aria-hidden="true">SL</span><span>Sabrina L.<small>il y a 2 mois</small></span></div>
+        <p class="stars" aria-hidden="true">★★★★☆</p>
+        <p>Accueil au top et tarifs annoncés respectés au centime près. Un peu d'attente pour ma date d'examen mais on m'avait prévenue dès l'inscription, donc pas de mauvaise surprise.</p>
+      </article>
+      <article>
+        <div class="who"><span class="ini" aria-hidden="true">JP</span><span>Jean-Marc P.<small>il y a 2 mois</small></span></div>
+        <p class="stars" aria-hidden="true">★★★★★</p>
+        <p>J'ai inscrit ma fille ici après une mauvaise expérience sur une appli où elle changeait de moniteur toutes les semaines. Rien à voir. On est reçus, on nous explique, on sait où on va.</p>
+      </article>
+    </div>
+    <p class="note">Avis publiés sur notre fiche Google, sans sélection ni modération de notre part.</p>
+  </div>
+</section>
+
+<!-- ====== SIMULATEUR ====== -->
+<section id="budget">
+  <div class="wrap">
+    <p class="eyebrow">Simulateur</p>
+    <h2>Combien ça va me coûter</h2>
+    <p class="lede">Choisissez votre formation, ajoutez les heures dont vous pensez avoir besoin, le total se met à jour. Aucune donnée n'est envoyée, le calcul se fait dans votre navigateur.</p>
+
+    <div class="sim">
+      <div class="sim-panel">
+        <fieldset>
+          <legend>Votre formation</legend>
+          <label class="opt"><input type="radio" name="forfait" value="1290" data-nom="Permis B boîte manuelle" checked><span>Permis B boîte manuelle</span><em>1 290 €</em></label>
+          <label class="opt"><input type="radio" name="forfait" value="1050" data-nom="Permis B boîte automatique"><span>Permis B boîte automatique</span><em>1 050 €</em></label>
+          <label class="opt"><input type="radio" name="forfait" value="1340" data-nom="Conduite accompagnée"><span>Conduite accompagnée</span><em>1 340 €</em></label>
+          <label class="opt"><input type="radio" name="forfait" value="340" data-nom="Voiture sans permis"><span>Voiture sans permis, permis AM</span><em>340 €</em></label>
+          <label class="opt"><input type="radio" name="forfait" value="520" data-nom="Permis remorque BE"><span>Permis remorque BE</span><em>520 €</em></label>
+          <label class="opt"><input type="radio" name="forfait" value="290" data-nom="Code seul"><span>Code de la route seul</span><em>290 €</em></label>
+        </fieldset>
+
+        <fieldset>
+          <legend>Heures de conduite en plus</legend>
+          <div class="range-head"><span>Au-delà du forfait</span><b><span id="hVal">0</span> h</b></div>
+          <input type="range" id="heures" min="0" max="20" step="1" value="0" aria-label="Heures de conduite supplémentaires">
+          <p class="note">Une leçon supplémentaire est facturée 48 €. La moyenne nationale se situe autour de 15 heures au-delà du forfait de base.</p>
+        </fieldset>
+
+        <fieldset>
+          <legend>Options</legend>
+          <label class="opt"><input type="checkbox" class="opt-box" value="60" data-nom="Frais de dossier" checked><span>Frais de dossier et enregistrement ANTS</span><em>60 €</em></label>
+          <label class="opt"><input type="checkbox" class="opt-box" value="45" data-nom="Pack web illimité"><span>Pack web illimité, 6 mois</span><em>45 €</em></label>
+          <label class="opt"><input type="checkbox" class="opt-box" value="18" data-nom="Livre de code"><span>Livre de code papier</span><em>18 €</em></label>
+          <label class="opt"><input type="checkbox" class="opt-box" value="55" data-nom="Accompagnement à l'examen"><span>Accompagnement à l'épreuve de circulation</span><em>55 €</em></label>
+          <label class="opt"><input type="checkbox" class="opt-box" value="30" data-nom="Redevance code"><span>Redevance d'examen du code</span><em>30 €</em></label>
+        </fieldset>
+      </div>
+
+      <div class="sim-out">
+        <p class="eyebrow">Budget estimé</p>
+        <p class="total"><span id="total">1 350</span> €</p>
+        <ul class="breakdown" id="detail"></ul>
+        <a class="btn" href="#inscription" style="width:100%;text-align:center">Bloquer ma place</a>
+        <p class="note">Estimation indicative, sans valeur contractuelle. Paiement possible en trois fois sans frais. Un devis nominatif vous est remis à l'inscription.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== PAIEMENT ====== -->
+<section id="paiement">
+  <div class="wrap">
+    <p class="eyebrow">Régler sa formation</p>
+    <h2>Payer sans y laisser<br>un mois de salaire</h2>
+    <p class="lede">Personne ne sort 1 300 € d'un coup. Trois façons d'étaler, et des aides que beaucoup de candidats ignorent.</p>
+
+    <div class="echeances">
+      <div><b>430 €</b><span>À l'inscription : frais de dossier, fournitures, forfait code et évaluation de départ</span></div>
+      <div><b>430 €</b><span>Au démarrage des leçons de conduite, 30 jours plus tard</span></div>
+      <div><b>430 €</b><span>Solde à 60 jours, avant la présentation à l'examen</span></div>
+    </div>
+    <p class="note">Exemple pour un permis B boîte manuelle à 1 290 €. Trois fois sans frais, par carte ou par prélèvement.</p>
+
+    <div class="pay">
+      <div>
+        <h3>Payer en ligne</h3>
+        <p>Acompte, échéance ou heure supplémentaire, réglés par carte depuis chez vous. Reçu envoyé par e-mail immédiatement.</p>
+        <p style="margin-top:14px"><a class="btn" href="#" id="payLink">Régler une échéance</a></p>
+      </div>
+      <div>
+        <h3>Permis à 1 € par jour</h3>
+        <p>Prêt à taux zéro de 600 à 1 200 €, remboursé 30 € par mois. Ouvert de 15 à 25 ans. Nous montons le dossier avec vous et notre organisme partenaire.</p>
+      </div>
+      <div>
+        <h3>Compte personnel de formation</h3>
+        <p>Vos droits CPF financent le permis B, y compris en boîte automatique. Solde souvent suffisant pour couvrir la moitié du forfait. Vérifiez sur moncompteformation.gouv.fr.</p>
+      </div>
+      <div>
+        <h3>Aides locales</h3>
+        <p>Aide au permis de la commune, du département, de la mission locale ou de France Travail. Elles se cumulent souvent entre elles. Apportez vos justificatifs, on regarde ensemble.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== CHECKLIST ====== -->
+<section id="dossier">
+  <div class="wrap">
+    <p class="eyebrow">Avant de venir</p>
+    <h2>Préparez votre dossier</h2>
+    <p class="lede">Un dossier incomplet ne peut pas être transmis. Cochez au fur et à mesure, la barre vous dit où vous en êtes.</p>
+
+    <div class="progress" aria-hidden="true"><i id="bar"></i></div>
+    <p class="note" id="barTxt">0 pièce sur 8 réunie</p>
+
+    <div class="check-grid">
+      <div class="check-col">
+        <h3 style="margin-bottom:18px">Pour tout le monde</h3>
+        <label class="opt"><input type="checkbox" class="doc"><span>Carte d'identité en cours de validité, recto verso</span></label>
+        <label class="opt"><input type="checkbox" class="doc"><span>Justificatif de domicile de moins de trois mois</span></label>
+        <label class="opt"><input type="checkbox" class="doc"><span>Quatre photos au format ePhoto avec signature numérique</span></label>
+        <label class="opt"><input type="checkbox" class="doc"><span>Attestation de recensement ou journée défense, entre 17 et 25 ans</span></label>
+        <p class="note">Si le justificatif n'est pas à votre nom, joignez une attestation d'hébergement et la pièce d'identité de l'hébergeant.</p>
+      </div>
+      <div class="check-col">
+        <h3 style="margin-bottom:18px">Selon votre situation</h3>
+        <label class="opt"><input type="checkbox" class="doc"><span>Attestation scolaire de sécurité routière, ASSR 1 ou 2, pour le permis AM</span></label>
+        <label class="opt"><input type="checkbox" class="doc"><span>Permis actuel recto verso, si vous en avez déjà un</span></label>
+        <label class="opt"><input type="checkbox" class="doc"><span>Autorisation parentale signée, pour les mineurs</span></label>
+        <label class="opt"><input type="checkbox" class="doc"><span>Avis médical, en cas de restriction connue</span></label>
+        <p class="note">Nous nous chargeons de la demande de numéro NEPH et du dépôt sur le site de l'ANTS.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== RENDEZ-VOUS ====== -->
+<section id="rdv">
+  <div class="wrap rdv">
+    <div>
+      <p class="eyebrow">Rendez-vous en ligne</p>
+      <h2>Choisissez<br>votre créneau</h2>
+      <p class="lede">Trente minutes au bureau pour faire le point sur votre situation, votre budget et votre planning. Sans engagement, et sans avoir à appeler pendant vos heures de cours ou de travail.</p>
+
+      <p class="eyebrow" style="margin-top:34px">Le jour</p>
+      <div class="days" id="days" role="group" aria-label="Choix du jour"></div>
+
+      <p class="eyebrow" style="margin-top:20px">L'heure</p>
+      <div class="slots" id="slots" role="group" aria-label="Choix de l'horaire"></div>
+
+      <div class="recap" id="recap" hidden>
+        <b id="recapTxt"></b>
+        <p style="color:#c6c0b9;font-size:.95rem">Complétez le formulaire à droite pour confirmer. Vous recevrez un e-mail de rappel la veille.</p>
+      </div>
+    </div>
+
+    <div>
+      <p class="eyebrow">Vos coordonnées</p>
+      <h3 style="font-size:2rem;margin:8px 0 4px">On vous attend</h3>
+      <form id="formRdv">
+        <label for="rdvNom">Nom et prénom</label>
+        <input type="text" id="rdvNom" required autocomplete="name">
+        <label for="rdvTel">Téléphone</label>
+        <input type="tel" id="rdvTel" required autocomplete="tel">
+        <label for="rdvMail">Adresse e-mail</label>
+        <input type="email" id="rdvMail" required autocomplete="email">
+        <label for="rdvObjet">Motif du rendez-vous</label>
+        <select id="rdvObjet">
+          <option>Inscription au permis B</option>
+          <option>Conduite accompagnée</option>
+          <option>Formation voiture sans permis</option>
+          <option>Permis remorque</option>
+          <option>Financement et aides</option>
+          <option>Simple renseignement</option>
+        </select>
+        <p style="margin-top:22px"><button class="btn" type="submit">Confirmer le rendez-vous</button></p>
+        <p class="note" id="rdvNote">Les créneaux affichés sont ceux du bureau. Une confirmation vous est envoyée par e-mail.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ====== FAQ ====== -->
+<section id="questions">
+  <div class="wrap">
+    <p class="eyebrow">Questions fréquentes</p>
+    <h2>Ce qu'on nous demande</h2>
+    <div style="margin-top:34px;max-width:820px">
+      <details><summary>Vous faites encore la moto ?</summary><p>Non. Nous avons arrêté les formations A1, A2 et 125 pour développer la voiture sans permis. Nous pouvons vous orienter vers une moto-école partenaire du Calaisis si vous le souhaitez.</p></details>
+      <details><summary>En combien de temps j'ai mon permis ?</summary><p>Comptez trois à six mois selon votre rythme et les délais de présentation à l'examen pratique. Nous proposons deux à trois leçons par semaine si votre planning le permet.</p></details>
+      <details><summary>Je peux payer en plusieurs fois ?</summary><p>Oui, en trois fois sans frais. Les frais de dossier, les fournitures et le forfait code se règlent à l'inscription, le reste est échelonné.</p></details>
+      <details><summary>Ma voiturette, je peux la conduire sans rien passer ?</summary><p>Si vous êtes né avant le 1<sup>er</sup> janvier 1988, oui. Sinon le permis AM est obligatoire, et il s'obtient après huit heures de formation, sans examen.</p></details>
+      <details><summary>J'ai raté le code, je repaye tout ?</summary><p>Non. Vous repayez uniquement la redevance d'examen de 30 €. L'accès aux cours et aux tests reste ouvert pendant la validité de votre forfait.</p></details>
+      <details><summary>Vous prenez les aides au financement ?</summary><p>Nous acceptons le permis à un euro par jour, le compte personnel de formation pour le permis B, et les aides de certaines communes. Demandez-nous, on regarde votre cas.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- ====== INSCRIPTION ====== -->
+<section id="inscription">
+  <div class="wrap contact-grid">
+    <div>
+      <p class="eyebrow">Préinscription</p>
+      <h2>On vous rappelle</h2>
+      <p class="lede">Remplissez, envoyez, nous revenons vers vous sous 48 heures ouvrées avec une proposition de planning.</p>
+      <form id="form">
+        <label for="nom">Nom et prénom</label>
+        <input type="text" id="nom" name="nom" required autocomplete="name">
+        <label for="tel">Téléphone</label>
+        <input type="tel" id="tel" name="tel" required autocomplete="tel">
+        <label for="mail">Adresse e-mail</label>
+        <input type="email" id="mail" name="mail" required autocomplete="email">
+        <label for="form-formation">Formation souhaitée</label>
+        <select id="form-formation" name="formation">
+          <option>Permis B boîte manuelle</option>
+          <option>Permis B boîte automatique</option>
+          <option>Conduite accompagnée</option>
+          <option>Voiture sans permis, permis AM</option>
+          <option>Permis remorque BE</option>
+          <option>Code de la route seul</option>
+          <option>Je ne sais pas encore</option>
+        </select>
+        <label for="msg">Votre message</label>
+        <textarea id="msg" name="msg" placeholder="Vos disponibilités, votre situation, vos questions"></textarea>
+        <p style="margin-top:22px"><button class="btn" type="submit">Envoyer ma demande</button></p>
+        <p class="note" id="formNote">Vos coordonnées servent uniquement à traiter votre demande. Elles ne sont ni revendues ni utilisées à d'autres fins.</p>
+      </form>
+    </div>
+
+    <div>
+      <p class="eyebrow">L'agence</p>
+      <h3 style="font-size:2rem;margin:8px 0 16px">Marck, avenue de la Liberté</h3>
+      <p style="color:#c6c0b9">145 avenue de la Liberté<br>62730 Marck<br><a href="tel:+33321000000">03 21 00 00 00</a><br><a href="mailto:contact@oliveconduite.fr">contact@oliveconduite.fr</a></p>
+      <table class="hours" id="hours">
+        <tbody>
+          <tr data-d="1"><td>Lundi</td><td>14 h – 19 h</td></tr>
+          <tr data-d="2"><td>Mardi</td><td>9 h – 12 h · 14 h – 19 h</td></tr>
+          <tr data-d="3"><td>Mercredi</td><td>9 h – 12 h · 14 h – 19 h</td></tr>
+          <tr data-d="4"><td>Jeudi</td><td>9 h – 12 h · 14 h – 19 h</td></tr>
+          <tr data-d="5"><td>Vendredi</td><td>9 h – 12 h · 14 h – 19 h</td></tr>
+          <tr data-d="6"><td>Samedi</td><td>9 h – 12 h</td></tr>
+          <tr data-d="0"><td>Dimanche</td><td>Fermé</td></tr>
+        </tbody>
+      </table>
+      <p class="note">Parking devant l'agence. Ligne de bus 5, arrêt Liberté, à deux minutes à pied.</p>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ====== FOOTER ====== -->
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <h4>Olive Conduite</h4>
+        <p>École de conduite agréée<br>Agrément préfectoral E 00 000 0000 0<br>145 avenue de la Liberté, 62730 Marck</p>
+      </div>
+      <div>
+        <h4>Formations</h4>
+        <p><a href="#formations">Permis B</a><br><a href="#vsp">Voiture sans permis</a><br><a href="#formations">Conduite accompagnée</a><br><a href="#formations">Permis remorque</a></p>
+      </div>
+      <div>
+        <h4>Espace élève</h4>
+        <p><a href="#budget">Simulateur de budget</a><br><a href="#dossier">Pièces à fournir</a><br><a href="#questions">Questions fréquentes</a></p>
+      </div>
+      <div>
+        <h4>Informations</h4>
+        <p>Mentions légales<br>Conditions générales de vente<br>Protection des données<br>Médiateur de la consommation</p>
+      </div>
+    </div>
+    <p>© <span id="year"></span> Olive Conduite. Tarifs applicables au 1<sup>er</sup> janvier 2026, susceptibles de révision.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var euro = function(n){ return n.toLocaleString('fr-FR'); };
+
+  /* --- menu mobile --- */
+  var burger = document.getElementById('burger'), menu = document.getElementById('menu');
+  burger.addEventListener('click', function(){
+    var open = menu.classList.toggle('open');
+    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  menu.addEventListener('click', function(e){
+    if(e.target.tagName === 'A'){ menu.classList.remove('open'); burger.setAttribute('aria-expanded','false'); }
+  });
+
+  /* --- simulateur --- */
+  var HEURE = 48;
+  var heures = document.getElementById('heures'),
+      hVal = document.getElementById('hVal'),
+      total = document.getElementById('total'),
+      detail = document.getElementById('detail');
+
+  function calcul(){
+    var lignes = [], somme = 0;
+    var f = document.querySelector('input[name=forfait]:checked');
+    somme += Number(f.value);
+    lignes.push([f.dataset.nom, Number(f.value)]);
+
+    var h = Number(heures.value);
+    hVal.textContent = h;
+    if(h > 0){ somme += h * HEURE; lignes.push([h + ' h supplémentaires', h * HEURE]); }
+
+    document.querySelectorAll('.opt-box:checked').forEach(function(o){
+      somme += Number(o.value);
+      lignes.push([o.dataset.nom, Number(o.value)]);
+    });
+
+    total.textContent = euro(somme);
+    detail.innerHTML = lignes.map(function(l){
+      return '<li><span>' + l[0] + '</span><em>' + euro(l[1]) + ' €</em></li>';
+    }).join('');
+  }
+  document.querySelectorAll('input[name=forfait], .opt-box').forEach(function(el){
+    el.addEventListener('change', calcul);
+  });
+  heures.addEventListener('input', calcul);
+  calcul();
+
+  /* --- checklist --- */
+  var docs = document.querySelectorAll('.doc'),
+      bar = document.getElementById('bar'),
+      barTxt = document.getElementById('barTxt');
+  function maj(){
+    var n = document.querySelectorAll('.doc:checked').length;
+    bar.style.width = (n / docs.length * 100) + '%';
+    barTxt.textContent = n === docs.length
+      ? 'Dossier complet, vous pouvez passer à l\'agence'
+      : n + (n > 1 ? ' pièces réunies sur ' : ' pièce réunie sur ') + docs.length;
+    docs.forEach(function(d){ d.closest('.opt').classList.toggle('done', d.checked); });
+  }
+  docs.forEach(function(d){ d.addEventListener('change', maj); });
+  maj();
+
+  /* --- horaires et statut --- */
+  var PLAGES = {1:[[14,19]], 2:[[9,12],[14,19]], 3:[[9,12],[14,19]], 4:[[9,12],[14,19]], 5:[[9,12],[14,19]], 6:[[9,12]], 0:[]};
+  var now = new Date(), jour = now.getDay(), h = now.getHours() + now.getMinutes()/60;
+  var ouvert = (PLAGES[jour] || []).some(function(p){ return h >= p[0] && h < p[1]; });
+  var st = document.getElementById('statut');
+  st.innerHTML = '<span class="dot' + (ouvert ? '' : ' off') + '"></span>' + (ouvert ? 'Bureau ouvert en ce moment' : 'Bureau fermé, laissez-nous un message');
+  var ligne = document.querySelector('#hours tr[data-d="' + jour + '"]');
+  if(ligne){ ligne.classList.add('now'); }
+
+  /* --- formulaire --- */
+  document.getElementById('form').addEventListener('submit', function(e){
+    e.preventDefault();
+    var note = document.getElementById('formNote');
+    note.textContent = 'Demande enregistrée côté navigateur. Branchez un service d\'envoi (Formspree, Netlify Forms ou votre propre backend) pour la recevoir par e-mail.';
+    note.style.color = '#FF8C1A';
+  });
+
+  /* --- sessions voiture sans permis --- */
+  var PLACES_MAX = 4;
+  var SESSIONS = [{dans:11, prises:3}, {dans:25, prises:1}, {dans:39, prises:0}];
+  var fmtJour = function(d){ return d.toLocaleDateString('fr-FR',{weekday:'long',day:'numeric'}); };
+  var fmtMois = function(d){ return d.toLocaleDateString('fr-FR',{month:'long'}); };
+  var cap = function(s){ return s.charAt(0).toUpperCase() + s.slice(1); };
+
+  document.getElementById('sessionsList').innerHTML = SESSIONS.map(function(s){
+    var d1 = new Date(); d1.setDate(d1.getDate() + s.dans);
+    var d2 = new Date(d1); d2.setDate(d2.getDate() + 1);
+    var libre = PLACES_MAX - s.prises;
+    var cls = libre === 0 ? 'full' : (libre <= 1 ? 'low' : 'ok');
+    var txt = libre === 0 ? 'Complet' : libre + (libre > 1 ? ' places libres' : ' place libre');
+    return '<div class="session"><b>' + cap(fmtJour(d1)) + ' et ' + fmtJour(d2) + ' ' + fmtMois(d2) +
+           '<small>9 h – 12 h et 14 h – 17 h, les deux jours</small></b>' +
+           '<span class="places ' + cls + '">' + txt + '</span></div>';
+  }).join('');
+
+  /* --- rendez-vous : jours et créneaux --- */
+  var CRENEAUX = {1:[14,15,16,17,18], 2:[9,10,11,14,15,16,17,18], 3:[9,10,11,14,15,16,17,18],
+                  4:[9,10,11,14,15,16,17,18], 5:[9,10,11,14,15,16,17,18], 6:[9,10,11], 0:[]};
+  var pris = function(d, hr){ return ((d.getDate() * 7 + hr * 3) % 11) < 4; }; /* occupation simulée */
+  var daysBox = document.getElementById('days'), slotsBox = document.getElementById('slots'),
+      recap = document.getElementById('recap'), recapTxt = document.getElementById('recapTxt');
+  var jours = [], choixJour = null, choixHeure = null;
+
+  var curseur = new Date(); curseur.setDate(curseur.getDate() + 1);
+  while(jours.length < 7){
+    if(CRENEAUX[curseur.getDay()].length){ jours.push(new Date(curseur)); }
+    curseur.setDate(curseur.getDate() + 1);
+  }
+
+  daysBox.innerHTML = jours.map(function(d,i){
+    return '<button type="button" class="day" data-i="' + i + '" aria-pressed="false">' +
+      d.toLocaleDateString('fr-FR',{weekday:'short'}) + '<b>' + d.getDate() + '</b>' +
+      d.toLocaleDateString('fr-FR',{month:'short'}) + '</button>';
+  }).join('');
+
+  function afficheSlots(){
+    var d = jours[choixJour];
+    slotsBox.innerHTML = CRENEAUX[d.getDay()].map(function(hr){
+      var occupe = pris(d, hr);
+      return '<button type="button" class="slot" data-h="' + hr + '" aria-pressed="false"' +
+        (occupe ? ' disabled aria-label="Créneau déjà réservé"' : '') + '>' + hr + ' h 00</button>';
+    }).join('');
+  }
+
+  daysBox.addEventListener('click', function(e){
+    var b = e.target.closest('.day'); if(!b) return;
+    daysBox.querySelectorAll('.day').forEach(function(x){ x.setAttribute('aria-pressed','false'); });
+    b.setAttribute('aria-pressed','true');
+    choixJour = Number(b.dataset.i); choixHeure = null; recap.hidden = true;
+    afficheSlots();
+  });
+
+  slotsBox.addEventListener('click', function(e){
+    var b = e.target.closest('.slot'); if(!b || b.disabled) return;
+    slotsBox.querySelectorAll('.slot').forEach(function(x){ x.setAttribute('aria-pressed','false'); });
+    b.setAttribute('aria-pressed','true');
+    choixHeure = Number(b.dataset.h);
+    var d = jours[choixJour];
+    recapTxt.textContent = cap(d.toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long'})) + ' à ' + choixHeure + ' h 00';
+    recap.hidden = false;
+  });
+
+  daysBox.querySelector('.day').click();
+
+  document.getElementById('formRdv').addEventListener('submit', function(e){
+    e.preventDefault();
+    var n = document.getElementById('rdvNote');
+    if(choixHeure === null){
+      n.textContent = 'Choisissez d\'abord un jour et une heure dans la colonne de gauche.';
+      n.style.color = '#FF8C1A'; return;
+    }
+    n.textContent = 'Créneau retenu : ' + recapTxt.textContent + '. Branchez Cal.com, Calendly ou votre agenda pour envoyer la confirmation.';
+    n.style.color = '#FF8C1A';
+  });
+
+  /* --- paiement --- */
+  document.getElementById('payLink').addEventListener('click', function(e){
+    if(this.getAttribute('href') === '#'){
+      e.preventDefault();
+      alert('Remplacez le lien de ce bouton par votre lien de paiement Stripe, SumUp ou PayPal.');
+    }
+  });
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+})();
+</script>
+</body>
+</html>
