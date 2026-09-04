@@ -576,7 +576,7 @@ footer a{color:#c9c3bb}
 
       <div>
         <ul class="online-list">
-          <li><b>Constituez votre dossier depuis votre téléphone</b><span>Photographiez vos pièces, envoyez-les, on s'occupe du NEPH et de l'ANTS. Aucun aller-retour en préfecture.</span></li>
+          <li><b>Envoyez vos pièces depuis votre téléphone</b><span>Photographiez vos documents et transmettez-les par e-mail. On s'occupe du NEPH et du dépôt sur l'ANTS. Aucun aller-retour en préfecture.</span></li>
           <li><b>Réservez vos leçons quand vous voulez</b><span>Le planning d'Olivier est en ligne. Vous prenez, vous décalez, vous annulez jusqu'à 48 h avant, sans appeler.</span></li>
           <li><b>Payez en ligne, en trois fois</b><span>Acompte, échéance ou heure supplémentaire, par carte. Reçu par e-mail dans la seconde.</span></li>
           <li><b>Suivez votre Permis Score en direct</b><span>Votre note, vos neuf compétences et votre courbe, mises à jour dès la fin de la leçon.</span></li>
@@ -1114,7 +1114,6 @@ footer a{color:#c9c3bb}
     <div class="actions">
       <button class="btn" type="button" id="btnPrint">Imprimer ma liste</button>
       <button class="btn ghost" type="button" id="btnMail">Me l'envoyer par e-mail</button>
-      <a class="btn ghost" href="#rdv">Déposer mes pièces en ligne</a>
     </div>
     <p class="note">Nous nous chargeons de la demande de numéro NEPH et du dépôt du dossier sur le site de l'ANTS. Si votre justificatif de domicile n'est pas à votre nom, ajoutez une attestation d'hébergement et la pièce d'identité de l'hébergeant.</p>
 </div>
@@ -1166,7 +1165,7 @@ footer a{color:#c9c3bb}
         <input type="tel" id="rdvTel" required autocomplete="tel">
         <label for="rdvMail">Adresse e-mail</label>
         <input type="email" id="rdvMail" required autocomplete="email">
-        <label for="rdvObjet">Motif du rendez-vous</label>
+        <label for="rdvObjet">Motif du rendez-vous ou de la demande</label>
         <select id="rdvObjet">
           <option>Pack Essentiel</option>
           <option>Pack Confort</option>
@@ -1178,7 +1177,11 @@ footer a{color:#c9c3bb}
           <option>Financement et aides</option>
           <option>Simple renseignement</option>
         </select>
-        <p style="margin-top:20px"><button class="btn" type="submit">Confirmer le rendez-vous</button></p>
+        <div id="zoneMsg" hidden>
+          <label for="rdvMsg" id="lblMsg">Votre question</label>
+          <textarea id="rdvMsg"></textarea>
+        </div>
+        <p style="margin-top:20px"><button class="btn" type="submit">Envoyer</button></p>
         <p class="note" id="rdvNote">Les créneaux affichés sont ceux du bureau. Une confirmation vous est envoyée par e-mail.</p>
       </form>
 
@@ -1364,6 +1367,24 @@ footer a{color:#c9c3bb}
     });
   });
   rendre();
+
+  var LIBRE = {
+    'Simple renseignement': {
+      label: 'Votre question',
+      hint: "Dites-nous ce que vous souhaitez savoir, Olivier vous répondra directement."
+    },
+    'Financement et aides': {
+      label: 'Votre situation',
+      hint: "Votre âge, votre statut (lycéen, étudiant, salarié, demandeur d'emploi) et les aides que vous pensez pouvoir mobiliser. On regarde ce à quoi vous avez droit."
+    }
+  };
+  var objet = document.getElementById('rdvObjet'), zoneMsg = document.getElementById('zoneMsg'),
+      lblMsg = document.getElementById('lblMsg'), txtMsg = document.getElementById('rdvMsg');
+  objet.addEventListener('change', function(){
+    var conf = LIBRE[objet.value];
+    zoneMsg.hidden = !conf;
+    if(conf){ lblMsg.textContent = conf.label; txtMsg.placeholder = conf.hint; }
+  });
 
   document.getElementById('btnPrint').addEventListener('click', function(){ window.print(); });
   document.getElementById('btnMail').addEventListener('click', function(){
