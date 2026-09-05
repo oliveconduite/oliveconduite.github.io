@@ -14,7 +14,8 @@ Thème clair, accents orange, noir réservé au logo, au bandeau, à la section 
 
 | À changer | Où le trouver |
 |---|---|
-| Adresse, téléphone, e-mail | Barre de statut, section rendez-vous, pied de page |
+| Téléphone | Placeholder `03 00 00 00 00`. Le numéro de l'ancienne enseigne ne sera pas conservé, remplacez-le dès qu'il est attribué : barre de statut, section agence, pied de page et bloc JSON-LD |
+| E-mail | `contact@oliveconduite.fr`, à créer ou à corriger |
 | Numéro d'agrément préfectoral | Pied de page |
 | Tarifs des trois packs | Objet `TARIFS` dans le script, une ligne par pack et par volume d'heures : `p` est le prix pratiqué, `r` le prix de référence barré |
 | Tarifs du simulateur | Attributs `value` des `input` de la section `#budget` |
@@ -27,23 +28,29 @@ Thème clair, accents orange, noir réservé au logo, au bandeau, à la section 
 | Permis Score | Tableaux `COMP` (les neuf compétences) et `STAGES` (six paliers, `h` = heures effectuées, `v` = notes) dans le script. `SEUIL` fixe le niveau examen, `RYTHME` le nombre de points gagnés par heure et sert au calcul des heures restantes |
 | Parcours Permis Confiance | Section `#confiance`, tarif dans le simulateur et dans la FAQ |
 
-## Les avis : à traiter avant publication
+## Ce que le site ne dit pas, et pourquoi
 
-Les six témoignages en ligne sont **reformulés à partir des avis Google de l'auto-école de Coquelles**, où Olivier exerçait auparavant. Ils ne sont pas publiables en l'état sur ce site.
+Deux sujets sont volontairement absents des textes :
 
-Trois raisons :
+- **La continuité des dossiers en cours.** Une reprise ne fait pas automatiquement passer les contrats de formation de l'ancienne structure à la nouvelle. C'est un point juridique à trancher avec le cédant et, le cas échéant, avec les élèves concernés. La FAQ invite simplement à prendre contact.
+- **Le maintien du numéro de téléphone.** Il change. Aucune mention de continuité téléphonique n'apparaît sur le site.
 
-1. **Ils appartiennent à leurs auteurs.** Le texte d'un avis est une œuvre de son rédacteur. Le republier ailleurs, même reformulé, sans son accord, est juridiquement fragile.
-2. **Ils ont été déposés pour un autre établissement.** L'article L. 111-7-2 du code de la consommation impose d'indiquer si les avis font l'objet d'un contrôle et, le cas échéant, leurs modalités de collecte. Afficher sous Olive Conduite des avis recueillis par l'auto-école de Coquelles, sans le dire, relève de la pratique commerciale trompeuse.
-3. **La note de 4,8 sur 132 avis est inventée.** Elle doit correspondre à votre fiche Google réelle.
+N'ajoutez rien sur ces deux points tant que le montage de la reprise n'est pas signé.
 
-Trois façons légitimes de valoriser le passé d'Olivier :
+## Les avis et la reprise
 
-- Écrire une phrase de contexte assumée, sans reproduire les avis : « Olivier a formé plusieurs centaines d'élèves à l'auto-école de Coquelles, notée 4,7 sur Google. »
-- Recontacter d'anciens élèves et leur demander de déposer un avis sur la nouvelle fiche Google d'Olive Conduite. C'est long mais c'est propre, et ça alimente le référencement local.
-- Recueillir un accord écrit d'un ou deux anciens élèves pour citer leur témoignage nommément sur le site.
+Olive Conduite reprend l'auto-école de Coquelles, 1087 avenue Charles de Gaulle, où Olivier enseignait. Ça change complètement la situation des avis : ils appartiennent à l'établissement repris, pas à un concurrent.
 
-Dernier point : si vous publiez des avis, vous ne pouvez pas supprimer les négatifs. La fiche d'origine comporte un avis à 1 sur 5. Un mur d'avis uniquement élogieux est un signal de défiance pour le lecteur autant que pour la DGCCRF.
+**Ne créez pas une nouvelle fiche Google.** Revendiquez la fiche existante « Auto Ecole de Coquelles » et renommez-la en « Olive Conduite ». Vous conservez la note de 4,7, les quatorze avis, l'historique et l'ancienneté du référencement local, qui vaut des mois de travail. Créer une fiche neuve remet le compteur à zéro et fait cohabiter deux établissements à la même adresse, ce que Google pénalise.
+
+Les six témoignages du site sont **reformulés** à partir de ces avis. Deux options avant publication :
+
+- Rétablir les textes d'origine, avec le prénom et la date, en indiquant qu'ils proviennent de la fiche Google de l'établissement.
+- Mieux : brancher un widget relié à l'API Google Places, qui affiche les avis réels et se met à jour tout seul. Plus aucune question de fidélité au texte.
+
+Deux points de vigilance. La note affichée doit suivre la fiche réelle, pensez à la corriger quand elle bouge. Et si vous publiez des avis, vous ne pouvez pas masquer les négatifs : la fiche comporte un avis à 1 sur 5. Un mur de cinq étoiles inspire moins confiance qu'un 4,7 assumé.
+
+Enfin, certains anciens avis citent l'ancienne gérante. Ne les reprenez pas sur le site, ils créent une confusion sur l'identité du moniteur.
 
 ## Les données structurées
 
@@ -55,13 +62,23 @@ Testez le balisage sur `search.google.com/test/rich-results` après chaque modif
 
 ## Les images
 
+Sept visuels sont **encodés en base64 dans `index.html`** : la photo d'Olivier, cinq photographies libres de droit en médaillon rond et le pictogramme officiel de la conduite accompagnée. Aucun fichier image à déposer, le site reste en un seul fichier. La page pèse environ 300 Ko, ce qui reste raisonnable.
+
+Toutes les photos passent par le même traitement (`.pc`) : recadrage carré, médaillon rond, cerne noir de 5 px, disque orange décalé en arrière-plan, léger ajustement de saturation. C'est ce traitement qui les fait tenir ensemble malgré leurs origines différentes. Si vous ajoutez une photo, réutilisez ce composant plutôt que de poser l'image telle quelle.
+
+Si vous dépassez une dizaine de photos, sortez-les en fichiers séparés : au-delà, le base64 pénalise le temps de chargement parce que les images ne sont plus mises en cache indépendamment de la page.
+
+**Vérifiez les licences.** Les photos viennent de banques d'images. Conservez la preuve de licence de chacune, certaines banques exigent une mention de l'auteur. Le pictogramme de la conduite accompagnée est un visuel réglementaire, son usage est libre dans un contexte de formation.
+
+## Les images de remplacement
+
 Toutes les illustrations sont des SVG dessinés à la main dans le fichier : la voiture, la voiturette, la scène du hero, le portrait d'Olivier, les pictogrammes des formations. Aucun fichier externe, aucun droit à payer, aucun risque de lien mort.
 
 Trois endroits gagneraient à recevoir de vraies photos :
 
 | Emplacement | Ce qu'il faut | Comment faire |
 |---|---|---|
-| Portrait d'Olivier, section `#olivier` | Photo verticale, format 4/5, 800 × 1000 px minimum | Le fichier `olivier.jpg` est en place mais fait 200 × 200 px, il sera flou en grand. Remplacez-le par une version haute définition sous le même nom |
+| Portrait d'Olivier, section `#olivier` | Photo verticale, format 4/5, 800 × 1000 px minimum | La photo actuelle est **encodée en base64 directement dans `index.html`**, il n'y a donc aucun fichier image à déposer. Pour la remplacer : déposez `olivier.jpg` à la racine du dépôt et remettez `src="olivier.jpg"` à la place de la longue chaîne `data:image/jpeg;base64,...`. La photo actuelle fait 200 × 200 px et sera floue en grand |
 | Illustration du hero | Photo de la voiture-école ou de la devanture | Remplacer le grand `<svg>` de `.hero-grid` par une `<img>` |
 | Logos partenaires, section `#partenaires` | Fichiers officiels | Remplacer chaque `.logo-box` par une `<img>` |
 
