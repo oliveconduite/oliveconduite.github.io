@@ -27,6 +27,32 @@ Thème clair, accents orange, noir réservé au logo, au bandeau, à la section 
 | Permis Score | Tableaux `COMP` (les neuf compétences) et `STAGES` (six paliers, `h` = heures effectuées, `v` = notes) dans le script. `SEUIL` fixe le niveau examen, `RYTHME` le nombre de points gagnés par heure et sert au calcul des heures restantes |
 | Parcours Permis Confiance | Section `#confiance`, tarif dans le simulateur et dans la FAQ |
 
+## Les avis : à traiter avant publication
+
+Les six témoignages en ligne sont **reformulés à partir des avis Google de l'auto-école de Coquelles**, où Olivier exerçait auparavant. Ils ne sont pas publiables en l'état sur ce site.
+
+Trois raisons :
+
+1. **Ils appartiennent à leurs auteurs.** Le texte d'un avis est une œuvre de son rédacteur. Le republier ailleurs, même reformulé, sans son accord, est juridiquement fragile.
+2. **Ils ont été déposés pour un autre établissement.** L'article L. 111-7-2 du code de la consommation impose d'indiquer si les avis font l'objet d'un contrôle et, le cas échéant, leurs modalités de collecte. Afficher sous Olive Conduite des avis recueillis par l'auto-école de Coquelles, sans le dire, relève de la pratique commerciale trompeuse.
+3. **La note de 4,8 sur 132 avis est inventée.** Elle doit correspondre à votre fiche Google réelle.
+
+Trois façons légitimes de valoriser le passé d'Olivier :
+
+- Écrire une phrase de contexte assumée, sans reproduire les avis : « Olivier a formé plusieurs centaines d'élèves à l'auto-école de Coquelles, notée 4,7 sur Google. »
+- Recontacter d'anciens élèves et leur demander de déposer un avis sur la nouvelle fiche Google d'Olive Conduite. C'est long mais c'est propre, et ça alimente le référencement local.
+- Recueillir un accord écrit d'un ou deux anciens élèves pour citer leur témoignage nommément sur le site.
+
+Dernier point : si vous publiez des avis, vous ne pouvez pas supprimer les négatifs. La fiche d'origine comporte un avis à 1 sur 5. Un mur d'avis uniquement élogieux est un signal de défiance pour le lecteur autant que pour la DGCCRF.
+
+## Les données structurées
+
+Le fichier contient un bloc JSON-LD en fin de `<head>` avec deux entités : `DrivingSchool` (coordonnées, horaires, zone desservie, catalogue de tarifs, moniteur) et `FAQPage` (cinq questions). Mettez-le à jour en même temps que le contenu visible, les deux doivent concorder.
+
+**Il n'y a volontairement pas de `aggregateRating`.** Google ignore depuis 2019 les notes auto-déclarées par une entreprise sur son propre site, et les marquer peut valoir une action manuelle. Les étoiles qui s'affichent dans les résultats locaux et sur Maps proviennent de votre fiche Google Business Profile, pas du code du site. Pour les obtenir, créez et vérifiez la fiche, c'est là que se joue le trafic local.
+
+Testez le balisage sur `search.google.com/test/rich-results` après chaque modification.
+
 ## Les images
 
 Toutes les illustrations sont des SVG dessinés à la main dans le fichier : la voiture, la voiturette, la scène du hero, le portrait d'Olivier, les pictogrammes des formations. Aucun fichier externe, aucun droit à payer, aucun risque de lien mort.
@@ -35,7 +61,7 @@ Trois endroits gagneraient à recevoir de vraies photos :
 
 | Emplacement | Ce qu'il faut | Comment faire |
 |---|---|---|
-| Portrait d'Olivier, section `#olivier` | Photo verticale, format 4/5 | Remplacer le `<svg>` dans `.portrait` par `<img src="olivier.jpg" alt="Olivier, moniteur">` |
+| Portrait d'Olivier, section `#olivier` | Photo verticale, format 4/5, 800 × 1000 px minimum | Le fichier `olivier.jpg` est en place mais fait 200 × 200 px, il sera flou en grand. Remplacez-le par une version haute définition sous le même nom |
 | Illustration du hero | Photo de la voiture-école ou de la devanture | Remplacer le grand `<svg>` de `.hero-grid` par une `<img>` |
 | Logos partenaires, section `#partenaires` | Fichiers officiels | Remplacer chaque `.logo-box` par une `<img>` |
 
