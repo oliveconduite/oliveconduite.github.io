@@ -25,17 +25,18 @@
   --max:1180px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;overflow-x:hidden;max-width:100%}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
-body{background:var(--paper);color:var(--ink);font-family:"Barlow",system-ui,-apple-system,"Segoe UI",sans-serif;font-size:17px;line-height:1.62;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body{background:var(--paper);color:var(--ink);font-family:"Barlow",system-ui,-apple-system,"Segoe UI",sans-serif;font-size:17px;line-height:1.62;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%;overflow-wrap:break-word}
 h1,h2,h3,h4,.disp{font-family:"Big Shoulders Display","Barlow Condensed",Impact,sans-serif;font-weight:800;line-height:.94;letter-spacing:.005em;color:var(--black)}
-h2{font-size:clamp(2.5rem,6.4vw,4.3rem)}
+h2{font-size:clamp(2.2rem,8vw,4.3rem)}
 h3{font-size:1.55rem;font-weight:700;line-height:1.06}
 h4{font-size:1.25rem;font-weight:700}
 p{max-width:66ch}
 a{color:var(--orange-deep);text-decoration:none}
 a:hover{text-decoration:underline}
-img,svg{max-width:100%}
+img,svg,table,iframe{max-width:100%}
+*,*::before,*::after{min-width:0}
 :focus-visible{outline:3px solid var(--orange);outline-offset:3px}
 .wrap{max-width:var(--max);margin:0 auto;padding:0 22px}
 section{padding:62px 0}
@@ -86,12 +87,20 @@ header{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.96);backdro
 /* ---------- hero ---------- */
 .hero{padding:64px 0 58px;background:linear-gradient(180deg,#FFFFFF 0%,#F7F5F2 100%)}
 .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:46px;align-items:center}
-.hero h1{font-size:clamp(3.1rem,8.6vw,6.2rem)}
+.hero h1{font-size:clamp(2.6rem,11vw,6.2rem)}
 .hero .rule{height:7px;background:var(--orange);width:104px;margin:24px 0}
 .hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
 .hero-proof{display:flex;gap:26px;flex-wrap:wrap;margin-top:32px;padding-top:22px;border-top:1px solid var(--line);font-size:.93rem;color:var(--ink-soft)}
 .hero-proof b{display:block;font-family:"Big Shoulders Display",sans-serif;font-size:2.1rem;font-weight:800;color:var(--black);line-height:1}
-@media(max-width:900px){.hero-grid{grid-template-columns:1fr;gap:30px}}
+.hero-mascot{display:none}
+@media(max-width:900px){
+  .hero-grid{grid-template-columns:1fr;gap:26px}
+  .hero{padding-top:26px}
+  .hero-mascot{display:block;order:-1;width:172px;margin:0 auto;position:relative}
+  .hero-mascot::before{content:"";position:absolute;left:50%;top:8%;transform:translateX(-50%);width:150px;height:150px;border-radius:50%;background:#FFF0E6}
+  .hero-mascot svg{position:relative;display:block;width:100%;height:auto}
+  .hero-scene{display:none}
+}
 
 .reprise{display:inline-block;background:#FFF4EE;border-left:5px solid var(--orange);padding:11px 16px;margin-top:26px;font-weight:600;font-size:.96rem;color:var(--ink)}
 
@@ -282,10 +291,15 @@ textarea{min-height:110px;resize:vertical}
 .pc::after{content:"";position:absolute;inset:0;border-radius:50%;background:var(--orange);transform:translate(15px,15px);z-index:0}
 .pc img{position:relative;z-index:1;width:100%;height:100%;object-fit:cover;border-radius:50%;border:5px solid var(--black);filter:saturate(.92) contrast(1.04);display:block}
 .pc-sm{max-width:190px}
+@media(max-width:560px){
+  .pc::after{transform:translate(10px,10px)}
+  .pw::after{transform:translate(10px,10px)}
+  .pc{max-width:250px}
+}
 .pw{position:relative;max-width:520px;margin:26px auto 0}
 .pw::after{content:"";position:absolute;inset:0;border-radius:28px;background:var(--orange);transform:translate(16px,16px);z-index:0}
 .pw img{position:relative;z-index:1;width:100%;border-radius:28px;border:5px solid var(--black);display:block;filter:saturate(.95) contrast(1.03)}
-.pc-name{position:absolute;z-index:2;left:50%;bottom:-14px;transform:translateX(-50%);background:var(--black);color:#fff;padding:9px 20px 7px;font-family:"Big Shoulders Display",sans-serif;font-weight:800;font-size:1.45rem;line-height:1;white-space:nowrap}
+.pc-name{position:absolute;z-index:2;left:50%;bottom:-14px;transform:translateX(-50%);background:var(--black);color:#fff;padding:9px 18px 7px;font-family:"Big Shoulders Display",sans-serif;font-weight:800;font-size:1.4rem;line-height:1;text-align:center;max-width:96%}
 .pc-name small{display:block;font-family:"Barlow",sans-serif;font-size:.68rem;font-weight:400;color:#bdb7af;letter-spacing:.05em;margin-top:3px}
 .pc-cap{text-align:center;font-size:.85rem;color:#7d7770;margin:26px auto 0;max-width:260px}
 .ico-img{height:78px;width:auto;margin-bottom:12px;display:block}
@@ -612,6 +626,9 @@ footer a{color:#c9c3bb}
 <!-- ====== HERO ====== -->
 <div class="hero">
   <div class="wrap hero-grid">
+    <div class="hero-mascot" aria-hidden="true">
+      <svg viewBox="0 0 310 320"><use href="#mascotte" width="310" height="320"/></svg>
+    </div>
     <div>
       <p class="eyebrow">Auto-école à Coquelles, dans le Calaisis</p>
       <h1>Prêt à conduire.</h1>
@@ -630,7 +647,7 @@ footer a{color:#c9c3bb}
     </div>
 
     <!-- illustration : la mascotte, la voiture et la voiturette -->
-    <svg viewBox="0 0 540 400" role="img" aria-label="Illustration : une olive souriante tenant une clé de voiture, devant une voiture et une voiturette">
+    <svg class="hero-scene" viewBox="0 0 540 400" role="img" aria-label="Illustration : une olive souriante tenant une clé de voiture, devant une voiture et une voiturette">
       <circle cx="428" cy="96" r="72" fill="#FFE2CE"/>
       <g stroke="#0B0A09" stroke-width="7" stroke-linecap="round">
         <path d="M62 338 h420" fill="none"/>
