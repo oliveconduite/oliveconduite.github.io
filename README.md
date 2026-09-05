@@ -24,7 +24,9 @@ Thème clair, accents orange, noir réservé au logo, au bandeau, à la section 
 | Créneaux de rendez-vous | Objet `CRENEAUX`, une liste d'heures par jour de la semaine |
 | Sessions voiture sans permis | Tableau `SESSIONS` : `dans` est le nombre de jours à partir d'aujourd'hui, `prises` le nombre de places vendues |
 | Avis Google | Section `#avis`, les six `<article>`, la note et le nombre d'avis |
-| Logo | Le bloc `<svg class="mark">` dans la nav |
+| Logo | `<symbol id="logo-oc">` dans le bloc de définitions SVG, en haut du `<body>`. Entièrement vectoriel : jauge, aiguille, volant et lettrages sont des tracés, aucune police n'est nécessaire au rendu. Les parties noires utilisent `currentColor`, donc le logo s'inverse tout seul en blanc dans le pied de page. L'orange est en dur (`#F26522`) |
+| Signature | « Conduire en confiance, avancer en liberté. » Elle apparaît sous le titre du hero, en ouverture de la section agence, dans le pied de page et dans le JSON-LD |
+| Photo de vitrine | Classe `.vitrine`, en ouverture de la section rendez-vous |
 | Permis Score | Tableaux `COMP` (les neuf compétences) et `STAGES` (six paliers, `h` = heures effectuées, `v` = notes) dans le script. `SEUIL` fixe le niveau examen, `RYTHME` le nombre de points gagnés par heure et sert au calcul des heures restantes |
 | Parcours Permis Confiance | Section `#confiance`, tarif dans le simulateur et dans la FAQ |
 
@@ -62,7 +64,9 @@ Testez le balisage sur `search.google.com/test/rich-results` après chaque modif
 
 ## Les images
 
-Sept visuels sont **encodés en base64 dans `index.html`** : la photo d'Olivier, cinq photographies libres de droit en médaillon rond et le pictogramme officiel de la conduite accompagnée. Aucun fichier image à déposer, le site reste en un seul fichier. La page pèse environ 300 Ko, ce qui reste raisonnable.
+Neuf photographies sont **encodées en base64 dans `index.html`** : la vitrine, la photo d'Olivier, la voiturette, cinq photographies en médaillon et le pictogramme de la conduite accompagnée : la photo d'Olivier, cinq photographies libres de droit en médaillon rond et le pictogramme officiel de la conduite accompagnée. Aucun fichier image à déposer, le site reste en un seul fichier. **La page pèse 455 Ko. C'est la limite haute.** Le prochain visuel doit passer en fichier séparé, sinon le temps de chargement sur réseau mobile devient pénalisant. Le logo, lui, est vectoriel et ne pèse que 16 Ko, réutilisé deux fois par une simple référence `<use>`.
+
+Le lettrage du logo est vectorisé à partir de Saira en graisse 900, largeur étendue, sous licence SIL Open Font. C'est une approximation de la typographie d'origine, pas la police exacte. Quand le logo sera arrêté, demandez le fichier vectoriel au graphiste : il suffira de remplacer le contenu du `<symbol>`.
 
 Toutes les photos passent par le même traitement (`.pc`) : recadrage carré, médaillon rond, cerne noir de 5 px, disque orange décalé en arrière-plan, léger ajustement de saturation. C'est ce traitement qui les fait tenir ensemble malgré leurs origines différentes. Si vous ajoutez une photo, réutilisez ce composant plutôt que de poser l'image telle quelle.
 
