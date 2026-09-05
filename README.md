@@ -6,7 +6,9 @@ Thème clair, accents orange, noir réservé au logo, au bandeau, à la section 
 
 ## Mise en ligne sur GitHub Pages
 
-1. Déposer `index.html` et `README.md` à la racine d'un dépôt public.
+**Deux fichiers sont désormais nécessaires** : `index.html` et `banniere-olive-conduite.jpg`. La bannière est le seul visuel externe, tous les autres sont encodés dans la page. Si vous ne déposez que le HTML, la bannière apparaîtra cassée.
+
+1. Déposer `index.html`, `banniere-olive-conduite.jpg` et `README.md` à la racine d'un dépôt public.
 2. Settings puis Pages, source *Deploy from a branch*, branche `main`, dossier `/ (root)`, Save.
 3. Le site répond une à deux minutes plus tard.
 
@@ -17,9 +19,11 @@ Thème clair, accents orange, noir réservé au logo, au bandeau, à la section 
 | Téléphone | Placeholder `03 00 00 00 00`. Le numéro de l'ancienne enseigne ne sera pas conservé, remplacez-le dès qu'il est attribué : barre de statut, section agence, pied de page et bloc JSON-LD |
 | E-mail | `contact@oliveconduite.fr`, à créer ou à corriger |
 | Numéro d'agrément préfectoral | Pied de page |
-| Tarifs des trois packs | Objet `TARIFS` dans le script, une ligne par pack et par volume d'heures : `p` est le prix pratiqué, `r` le prix de référence barré |
+| Tarifs des packs | Objet `PACKS` dans le script : `manu` et `auto` par pack, plus le libellé des heures. Les mêmes montants sont repris dans le simulateur (`value` et `data-h` des `input`), dans le tableau des tarifs à l'unité et dans le catalogue JSON-LD : les quatre doivent rester cohérents |
+| Tarifs à l'unité | Section `#budget`, onglet « Tarifs à l'unité », six tableaux `.tarifs` |
+| Échéanciers | Section `#budget`, onglet « Paiement et aides », blocs `.echeances` |
 | Tarifs du simulateur | Attributs `value` des `input` de la section `#budget` |
-| Prix de l'heure supplémentaire | Constante `HEURE`, actuellement 48 |
+| Prix de l'heure supplémentaire | Attribut `data-h` de chaque `input` du simulateur : 45 € en boîte manuelle, 50 € en automatique |
 | Horaires | Tableau `#hours-table` **et** objet `PLAGES` dans le script, les deux doivent rester cohérents |
 | Créneaux de rendez-vous | Objet `CRENEAUX`, une liste d'heures par jour de la semaine |
 | Sessions voiture sans permis | Tableau `SESSIONS` : `dans` est le nombre de jours à partir d'aujourd'hui, `prises` le nombre de places vendues |
@@ -29,6 +33,18 @@ Thème clair, accents orange, noir réservé au logo, au bandeau, à la section 
 | Photo de vitrine | Classe `.vitrine`, en ouverture de la section rendez-vous |
 | Permis Score | Tableaux `COMP` (les neuf compétences) et `STAGES` (six paliers, `h` = heures effectuées, `v` = notes) dans le script. `SEUIL` fixe le niveau examen, `RYTHME` le nombre de points gagnés par heure et sert au calcul des heures restantes |
 | Parcours Permis Confiance | Section `#confiance`, tarif dans le simulateur et dans la FAQ |
+
+## Les tarifs
+
+Tous les montants du site proviennent des plaquettes en vigueur au 1<sup>er</sup> janvier 2025 : Pack Classic, Pack Accompagné, Pack Supervisé, Pack Sénior et la grille des tarifs à l'unité. Les totaux ont été recalculés poste par poste et concordent exactement avec les prix affichés sur les plaquettes.
+
+**Deux points restent à compléter.**
+
+L'échéancier du Pack Supervisé n'était pas lisible sur les documents transmis. Le site renvoie donc vers l'agence pour ce pack. Dès que vous l'avez, il s'ajoute dans l'onglet « Paiement et aides » sur le modèle des deux autres.
+
+Le pictogramme officiel de la conduite accompagnée a été retiré en même temps que l'ancienne carte. Il pesait 33 Ko encodé. Si vous le voulez sur la carte du Pack Accompagné, dites-le, mais la vitrine le montre déjà.
+
+**Le permis remorque BE a disparu du site.** Il ne figure ni sur l'enseigne ni sur aucune plaquette, et n'apparaît pas dans l'agrément affiché. Il est remplacé par le Pack Sénior.
 
 ## Ce que le site ne dit pas, et pourquoi
 
