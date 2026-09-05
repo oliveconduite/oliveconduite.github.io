@@ -92,9 +92,15 @@ Vos propres photos valent toujours mieux que du stock. À défaut, Unsplash, Pex
 
 **La mention Ediser.** Le partenariat doit exister réellement, et l'usage de la marque et du logo doit être autorisé par Ediser. Même chose pour les logos ANTS et CPF.
 
-**Mentions obligatoires.** Les liens du pied de page sont inertes. Un site d'auto-école doit publier ses mentions légales, ses conditions générales de vente, sa politique de protection des données et les coordonnées de son médiateur de la consommation. Les tarifs affichés doivent correspondre au contrat.
+**Mentions obligatoires.** La section `#legal` contient les trois blocs requis : mentions légales, données personnelles et cookies, conditions générales de vente. Les crochets `[...]` sont à compléter avant la mise en ligne : forme juridique, capital, RCS, SIRET, TVA, nom du gérant, numéro d'agrément préfectoral, hébergeur, date d'application des tarifs et coordonnées du médiateur de la consommation.
 
-Aucune bannière cookies n'est nécessaire en l'état : le site ne dépose aucun cookie et n'utilise aucun traceur. Si vous ajoutez Google Analytics ou une carte Google Maps embarquée, il en faudra une.
+Le médiateur n'est pas optionnel : tout professionnel vendant à des consommateurs doit adhérer à un dispositif de médiation et en publier les coordonnées (article L. 612-1 du code de la consommation). L'adhésion se fait auprès d'un médiateur agréé, comptez quelques dizaines d'euros par an.
+
+**Pas de bannière cookies, et c'est volontaire.** Le site ne dépose aucun cookie, n'utilise ni mesure d'audience ni traceur, et les simulateurs tournent entièrement dans le navigateur. L'article 82 de la loi Informatique et Libertés n'impose le consentement que pour les traceurs non essentiels : afficher un bandeau ici serait inutile, et la CNIL sanctionne les bandeaux trompeurs. Le pied de page indique explicitement l'absence de cookies.
+
+Le jour où vous ajoutez Google Analytics, une carte Google Maps embarquée, un pixel Meta ou un chat en ligne, il faudra un vrai bandeau avec refus aussi simple que l'acceptation, et un blocage des traceurs avant consentement.
+
+**Un point à corriger.** Les polices sont chargées depuis Google Fonts, ce qui transmet l'adresse IP du visiteur à Google. Des tribunaux allemands ont condamné cette pratique, la CNIL recommande l'auto-hébergement. Téléchargez les fichiers `.woff2` de Big Shoulders Display et Barlow, déposez-les dans le dépôt et remplacez la balise `<link>` par une règle `@font-face`. La mention figure en attendant dans la politique de données.
 
 ## Les trois fonctions à brancher
 
