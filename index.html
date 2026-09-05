@@ -427,12 +427,16 @@ textarea{min-height:110px;resize:vertical}
 .mobile-cta{display:none}
 @media(max-width:760px){
   body{padding-bottom:78px}
-  .mobile-cta{display:flex;gap:8px;position:fixed;left:0;right:0;bottom:0;z-index:70;background:#fff;border-top:3px solid var(--black);padding:10px 12px;box-shadow:0 -8px 24px rgba(0,0,0,.10)}
-  .mobile-cta .btn{flex:1;font-size:1.15rem;padding:11px 6px 8px}
-  #top-btn{bottom:92px;width:44px;height:44px}
+  .mobile-cta{display:flex;gap:8px;align-items:stretch;position:fixed;left:0;right:0;bottom:0;z-index:70;background:#fff;border-top:3px solid var(--black);padding:10px 12px calc(10px + env(safe-area-inset-bottom));box-shadow:0 -8px 24px rgba(0,0,0,.10)}
+  .mobile-cta .btn{flex:1;font-size:1.12rem;padding:11px 4px 8px}
+  .cta-top{flex:0 0 46px;background:#fff;border:2px solid var(--line);color:var(--ink);font-size:1.2rem;line-height:1;cursor:pointer;transition:opacity .2s,border-color .15s;opacity:0;pointer-events:none}
+  .cta-top.on{opacity:1;pointer-events:auto}
+  .cta-top:hover{border-color:var(--orange);color:var(--orange-deep)}
+  #top-btn{display:none}
 }
 
 /* ---------- retour en haut ---------- */
+.cta-top{display:none}
 #top-btn{position:fixed;right:18px;bottom:18px;z-index:80;background:var(--black);color:#fff;border:none;width:50px;height:50px;cursor:pointer;font-size:1.3rem;line-height:1;opacity:0;pointer-events:none;transition:opacity .2s}
 #top-btn.on{opacity:1;pointer-events:auto}
 #top-btn:hover{background:var(--orange);color:#140800}
@@ -1490,6 +1494,7 @@ footer a{color:#c9c3bb}
 <div class="mobile-cta">
   <a class="btn" href="#rdv">Prendre rendez-vous</a>
   <a class="btn ghost" href="#budget">Mon budget</a>
+  <button class="cta-top" id="cta-top" aria-label="Revenir en haut de la page">&#8593;</button>
 </div>
 
 <button id="top-btn" aria-label="Revenir en haut de la page">&#8593;</button>
@@ -1846,11 +1851,14 @@ footer a{color:#c9c3bb}
   });
 
   /* --- retour en haut --- */
-  var topBtn = document.getElementById('top-btn');
+  var hauts = [document.getElementById('top-btn'), document.getElementById('cta-top')];
   window.addEventListener('scroll', function(){
-    topBtn.classList.toggle('on', window.scrollY > 700);
+    var visible = window.scrollY > 700;
+    hauts.forEach(function(b){ if(b){ b.classList.toggle('on', visible); } });
   }, {passive:true});
-  topBtn.addEventListener('click', function(){ window.scrollTo({top:0, behavior:'smooth'}); });
+  hauts.forEach(function(b){
+    if(b){ b.addEventListener('click', function(){ window.scrollTo({top:0, behavior:'smooth'}); }); }
+  });
 
   document.getElementById('year').textContent = new Date().getFullYear();
 })();
