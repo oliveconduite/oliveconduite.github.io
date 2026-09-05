@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Olive Conduite — Prêt à conduire. Auto-école à Coquelles : permis B, conduite accompagnée et voiture sans permis</title>
-<meta name="description" content="Auto-école Olive Conduite à Coquelles, près de Calais. Permis B boîte manuelle et automatique, conduite accompagnée, permis remorque et formation voiture sans permis. Un seul moniteur du début à la fin, tarifs affichés, simulateur de budget.">
+<meta name="description" content="Auto-école Olive Conduite à Coquelles, près de Calais. Permis B boîte manuelle et automatique, conduite accompagnée, conduite supervisée et formation voiture sans permis. Un seul moniteur du début à la fin, tarifs affichés, simulateur de budget.">
 <meta name="theme-color" content="#F26522">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -121,6 +121,31 @@ header{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.96);backdro
 .hours button small{display:block;font-family:"Barlow",sans-serif;font-weight:500;font-size:.7rem;letter-spacing:.06em;color:#7d7770}
 .hours button[aria-pressed="true"]{border-color:var(--orange);color:var(--orange-deep);background:#FFF4EE}
 .hours button[aria-pressed="true"] small{color:var(--orange-deep)}
+
+#boite button{font-size:1.35rem;letter-spacing:.02em;padding:12px 22px 9px}
+#boite button small{font-size:.66rem}
+
+/* ---------- pack senior ---------- */
+.senior{display:grid;grid-template-columns:1fr 260px;gap:40px;align-items:center;background:#fff;border:2px solid var(--line);border-left:6px solid var(--orange);padding:32px 30px;margin-top:34px}
+@media(max-width:820px){.senior{grid-template-columns:1fr;gap:24px}}
+.senior-prog{list-style:none;margin:18px 0 6px;font-size:.96rem;color:var(--ink-soft)}
+.senior-prog li{padding:7px 0 7px 22px;position:relative}
+.senior-prog li::before{content:"";position:absolute;left:0;top:15px;width:11px;height:3px;background:var(--orange)}
+.senior-prog b{color:var(--black);font-weight:600;display:block}
+.senior-prix{display:grid;gap:2px;background:var(--line)}
+.senior-prix > div{background:var(--paper-2);padding:18px;text-align:center}
+.senior-prix .couple{background:#FFF4EE}
+.senior-prix b{display:block;font-family:"Big Shoulders Display",sans-serif;font-size:2.9rem;font-weight:800;line-height:1;color:var(--black)}
+.senior-prix .couple b{color:var(--orange-deep)}
+.senior-prix span{font-size:.86rem;color:var(--ink-soft)}
+
+/* ---------- tarifs a l'unite ---------- */
+.tarifs{width:100%;border-collapse:collapse;font-size:.96rem;background:#fff;margin-top:8px}
+.tarifs caption{caption-side:top;text-align:left;font-family:"Big Shoulders Display",sans-serif;font-weight:700;font-size:1.5rem;color:var(--orange-deep);padding:22px 0 6px}
+.tarifs td{padding:11px 12px;border-bottom:1px solid var(--line)}
+.tarifs td:last-child{text-align:right;font-weight:600;white-space:nowrap;font-variant-numeric:tabular-nums}
+.tarifs tr:hover td{background:var(--paper-2)}
+.tarifs td small{display:block;color:#7d7770;font-size:.84rem;font-weight:400}
 
 .packs{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:34px;align-items:start}
 @media(max-width:920px){.packs{grid-template-columns:1fr;max-width:460px;margin-inline:auto}}
@@ -463,13 +488,13 @@ footer a{color:#c9c3bb}
       "@type": "DrivingSchool",
       "@id": "https://oliveconduite.github.io/#ecole",
       "name": "Olive Conduite",
-      "description": "Auto-école à Coquelles, près de Calais : permis B boîte manuelle et automatique, conduite accompagnée, permis remorque BE et formation voiture sans permis (permis AM).",
+      "description": "Auto-école à Coquelles, près de Calais : permis B boîte manuelle et automatique, conduite accompagnée, conduite supervisée, pack sénior et formation voiture sans permis (permis AM).",
       "slogan": "Conduire en confiance, avancer en liberté.",
       "url": "https://oliveconduite.github.io/",
       "telephone": "+33300000000",
       "email": "contact@oliveconduite.fr",
       "image": "https://oliveconduite.github.io/olivier.jpg",
-      "priceRange": "290 € - 1800 €",
+      "priceRange": "30 € - 1540 €",
       "currenciesAccepted": "EUR",
       "paymentAccepted": "Carte bancaire, virement, prélèvement, CPF",
       "address": {
@@ -504,14 +529,18 @@ footer a{color:#c9c3bb}
         "@type": "OfferCatalog",
         "name": "Formations",
         "itemListElement": [
-          {"@type":"Offer","priceCurrency":"EUR","price":"1050","itemOffered":{"@type":"Service","name":"Permis B, pack Essentiel 20 heures"}},
-          {"@type":"Offer","priceCurrency":"EUR","price":"1240","itemOffered":{"@type":"Service","name":"Permis B, pack Confort 20 heures"}},
-          {"@type":"Offer","priceCurrency":"EUR","price":"1440","itemOffered":{"@type":"Service","name":"Permis B, pack Accéléré 20 heures"}},
-          {"@type":"Offer","priceCurrency":"EUR","price":"1340","itemOffered":{"@type":"Service","name":"Conduite accompagnée AAC"}},
+          {"@type":"Offer","priceCurrency":"EUR","price":"1245","itemOffered":{"@type":"Service","name":"Permis B, Pack Classic, boîte manuelle, 20 heures"}},
+          {"@type":"Offer","priceCurrency":"EUR","price":"995","itemOffered":{"@type":"Service","name":"Permis B, Pack Classic, boîte automatique, 13 heures"}},
+          {"@type":"Offer","priceCurrency":"EUR","price":"1540","itemOffered":{"@type":"Service","name":"Permis B, Pack Accompagné, conduite accompagnée, boîte manuelle"}},
+          {"@type":"Offer","priceCurrency":"EUR","price":"1300","itemOffered":{"@type":"Service","name":"Permis B, Pack Accompagné, conduite accompagnée, boîte automatique"}},
+          {"@type":"Offer","priceCurrency":"EUR","price":"1340","itemOffered":{"@type":"Service","name":"Permis B, Pack Supervisé, conduite supervisée, boîte manuelle"}},
+          {"@type":"Offer","priceCurrency":"EUR","price":"1100","itemOffered":{"@type":"Service","name":"Permis B, Pack Supervisé, conduite supervisée, boîte automatique"}},
+          {"@type":"Offer","priceCurrency":"EUR","price":"99","itemOffered":{"@type":"Service","name":"Permis B, Pack Sénior, remise à niveau pour les plus de 65 ans"}},
+          {"@type":"Offer","priceCurrency":"EUR","price":"150","itemOffered":{"@type":"Service","name":"Code de la route, salle et Pack Web, 6 mois"}},
+          {"@type":"Offer","priceCurrency":"EUR","price":"150","itemOffered":{"@type":"Service","name":"Stage de code intensif, 3 jours"}},
           {"@type":"Offer","priceCurrency":"EUR","price":"340","itemOffered":{"@type":"Service","name":"Permis AM, voiture sans permis"}},
-          {"@type":"Offer","priceCurrency":"EUR","price":"520","itemOffered":{"@type":"Service","name":"Permis remorque BE"}},
-          {"@type":"Offer","priceCurrency":"EUR","price":"290","itemOffered":{"@type":"Service","name":"Code de la route"}},
-          {"@type":"Offer","priceCurrency":"EUR","price":"480","itemOffered":{"@type":"Service","name":"Parcours Permis Confiance, 8 heures"}}
+          {"@type":"Offer","priceCurrency":"EUR","price":"480","itemOffered":{"@type":"Service","name":"Parcours Permis Confiance, 8 heures"}},
+          {"@type":"Offer","priceCurrency":"EUR","price":"50","itemOffered":{"@type":"Service","name":"Leçon de perfectionnement ou après annulation, une heure"}}
         ]
       }
     },
@@ -671,8 +700,8 @@ footer a{color:#c9c3bb}
 
 <div class="ticker" aria-hidden="true">
   <div>
-    <span>Permis B</span><span class="o">•</span><span>Boîte automatique</span><span class="o">•</span><span>Conduite accompagnée dès 15 ans</span><span class="o">•</span><span>Voiture sans permis dès 14 ans</span><span class="o">•</span><span>Permis remorque</span><span class="o">•</span><span>Code en ligne illimité</span><span class="o">•</span>
-    <span>Permis B</span><span class="o">•</span><span>Boîte automatique</span><span class="o">•</span><span>Conduite accompagnée dès 15 ans</span><span class="o">•</span><span>Voiture sans permis dès 14 ans</span><span class="o">•</span><span>Permis remorque</span><span class="o">•</span><span>Code en ligne illimité</span><span class="o">•</span>
+    <span>Permis B</span><span class="o">•</span><span>Boîte automatique</span><span class="o">•</span><span>Conduite accompagnée dès 15 ans</span><span class="o">•</span><span>Voiture sans permis dès 14 ans</span><span class="o">•</span><span>Conduite supervisée dès 18 ans</span><span class="o">•</span><span>Code en ligne illimité</span><span class="o">•</span>
+    <span>Permis B</span><span class="o">•</span><span>Boîte automatique</span><span class="o">•</span><span>Conduite accompagnée dès 15 ans</span><span class="o">•</span><span>Voiture sans permis dès 14 ans</span><span class="o">•</span><span>Conduite supervisée dès 18 ans</span><span class="o">•</span><span>Code en ligne illimité</span><span class="o">•</span>
   </div>
 </div>
 
@@ -801,92 +830,116 @@ footer a{color:#c9c3bb}
       <button role="tab" id="t-v" aria-controls="p-v" aria-selected="false">Voiture sans permis</button>
       <button role="tab" id="t-a" aria-controls="p-a" aria-selected="false">Autres formations</button>
     </div>
-    <div class="tabpanel" id="p-b" role="tabpanel" aria-labelledby="t-b"><div class="panel-inner">
-    <div style="text-align:center;max-width:640px;margin:0 auto">
+    <div class="tabpanel" id="p-b" role="tabpanel" aria-labelledby="t-b">
+<div class="panel-inner">
+    <div style="text-align:center;max-width:660px;margin:0 auto">
       <p class="eyebrow">Permis B</p>
-      <h2>Trois packs, un seul moniteur</h2>
-      <p class="lede" style="margin-inline:auto">Choisissez d'abord votre volume d'heures. L'évaluation de départ, gratuite et sans engagement, vous dira lequel correspond vraiment à votre niveau.</p>
+      <h2>Trois parcours,<br>un seul moniteur</h2>
+      <p class="lede" style="margin-inline:auto">Commencez par choisir votre boîte de vitesses : elle détermine le nombre d'heures obligatoires et le prix de l'heure. Tarifs TTC en vigueur au 1<sup>er</sup> janvier 2025.</p>
     </div>
 
-    <div class="hours" id="hours" role="group" aria-label="Nombre d'heures de conduite">
-      <button type="button" data-h="13" aria-pressed="false">13<small>HEURES</small></button>
-      <button type="button" data-h="20" aria-pressed="true">20<small>HEURES</small></button>
-      <button type="button" data-h="25" aria-pressed="false">25<small>HEURES</small></button>
-      <button type="button" data-h="30" aria-pressed="false">30<small>HEURES</small></button>
+    <div class="hours" id="boite" role="group" aria-label="Boîte de vitesses">
+      <button type="button" data-b="manu" aria-pressed="true">MANUELLE<small>20 H · 45 € L'HEURE</small></button>
+      <button type="button" data-b="auto" aria-pressed="false">AUTOMATIQUE<small>13 H · 50 € L'HEURE</small></button>
     </div>
-    <p class="note" style="text-align:center">13 heures correspond au minimum réglementaire en boîte automatique, 20 heures en boîte manuelle.</p>
 
     <div class="packs">
-      <div class="pack" data-pack="essentiel">
-        <h3>Essentiel</h3>
-        <p class="sub">Code et conduite, sans option</p>
+      <div class="pack" data-pack="classic">
+        <h3>Pack Classic</h3>
+        <p class="sub">Dès 16 ans, la formation traditionnelle</p>
         <div class="money">
-          <p class="old" data-old>1 190 €</p>
-          <p class="now" data-now>1 050</p>
-          <p class="per">euros, tout compris</p>
+          <p class="now" data-now>1 245</p>
+          <p class="per">euros TTC, <span data-boite>boîte manuelle</span></p>
         </div>
         <ul>
-          <li>Code en salle et en ligne, 6 mois</li>
-          <li>Évaluation de départ incluse</li>
-          <li>Livret d'apprentissage numérique</li>
-          <li>Présentation au code et à la conduite</li>
-          <li class="no">Accompagnement le jour de l'examen</li>
-          <li class="no">Places d'examen prioritaires</li>
+          <li>Évaluation de départ, 45 minutes</li>
+          <li>Inscription et suivi de dossier</li>
+          <li>Pochette pédagogique complète</li>
+          <li>Code en salle, accès 6 mois</li>
+          <li>Accès Pack Web, 6 mois</li>
+          <li data-heures>20 heures de conduite obligatoires</li>
+          <li>Module evérif illimité</li>
+          <li>Accompagnement à l'examen pratique</li>
         </ul>
         <div class="foot">
           <a class="btn ghost" href="#rdv">Choisir ce pack</a>
-          <a class="detail" href="#formations">Ce que contient le pack</a>
+          <a class="detail" href="#budget">Voir le détail des prix</a>
         </div>
       </div>
 
-      <div class="pack top" data-pack="confort">
+      <div class="pack top" data-pack="accompagne">
         <span class="ribbon">Le plus choisi</span>
-        <h3>Confort</h3>
-        <p class="sub">Le pack complet, examen compris</p>
+        <h3>Pack Accompagné</h3>
+        <p class="sub">Dès 15 ans, la conduite accompagnée</p>
         <div class="money">
-          <p class="old" data-old>1 390 €</p>
-          <p class="now" data-now>1 240</p>
-          <p class="per">euros, tout compris</p>
+          <p class="now" data-now>1 540</p>
+          <p class="per">euros TTC, <span data-boite>boîte manuelle</span></p>
         </div>
         <ul>
-          <li>Tout le pack Essentiel</li>
-          <li>Accompagnement le jour de l'examen</li>
-          <li>Pack web illimité jusqu'à l'obtention</li>
-          <li>Places d'examen prioritaires</li>
-          <li>Deux heures de perfectionnement offertes en cas d'échec</li>
-          <li>Livre de code papier</li>
+          <li>Évaluation de départ, 45 minutes</li>
+          <li>Inscription et suivi de dossier</li>
+          <li>Pochette pédagogique AAC complète</li>
+          <li>Code en salle 6 mois et Pack Web 6 mois</li>
+          <li data-heures>20 heures de conduite et rendez-vous préalable de 2 h</li>
+          <li>1<sup>er</sup> rendez-vous pédagogique après 1 000 km</li>
+          <li>2<sup>e</sup> rendez-vous pédagogique après 3 000 km</li>
+          <li>Module evérif illimité</li>
+          <li>Accompagnement à l'examen pratique</li>
         </ul>
         <div class="foot">
           <a class="btn" href="#rdv">Choisir ce pack</a>
-          <a class="detail" href="#formations">Ce que contient le pack</a>
+          <a class="detail" href="#budget">Voir le détail des prix</a>
         </div>
       </div>
 
-      <div class="pack" data-pack="accelere">
-        <h3>Accéléré</h3>
-        <p class="sub">Formation bouclée en 30 jours</p>
+      <div class="pack" data-pack="supervise">
+        <h3>Pack Supervisé</h3>
+        <p class="sub">Dès 18 ans, la conduite supervisée</p>
         <div class="money">
-          <p class="old" data-old>1 590 €</p>
-          <p class="now" data-now>1 440</p>
-          <p class="per">euros, tout compris</p>
+          <p class="now" data-now>1 340</p>
+          <p class="per">euros TTC, <span data-boite>boîte manuelle</span></p>
         </div>
         <ul>
-          <li>Tout le pack Confort</li>
-          <li>Deux à trois leçons par semaine garanties</li>
-          <li>Code en intensif sur deux semaines</li>
-          <li>Date d'examen réservée dès l'inscription</li>
-          <li>Créneaux tôt le matin et en soirée</li>
-          <li>Places limitées à quatre élèves par mois</li>
+          <li>Évaluation de départ, 45 minutes</li>
+          <li>Inscription et suivi de dossier</li>
+          <li>Pochette pédagogique CS complète</li>
+          <li>Code en salle 6 mois et Pack Web 6 mois</li>
+          <li data-heures>20 heures de conduite et rendez-vous préalable de 2 h</li>
+          <li>Module evérif illimité</li>
+          <li>Accompagnement à l'examen pratique</li>
+          <li class="no">Rendez-vous pédagogiques kilométriques</li>
         </ul>
         <div class="foot">
           <a class="btn ghost" href="#rdv">Choisir ce pack</a>
-          <a class="detail" href="#formations">Ce que contient le pack</a>
+          <a class="detail" href="#budget">Voir le détail des prix</a>
         </div>
       </div>
     </div>
-    <p class="note" style="text-align:center">Prix barré : tarif public hors offre de rentrée. Redevance d'examen du code de 30 €, fixée par l'État, à régler séparément.</p>
-</div></div>
-    <div class="tabpanel" id="p-c" role="tabpanel" aria-labelledby="t-c" hidden><div class="tab-plain"><div class="panel-inner">
+
+    <p class="note" style="text-align:center">Ne sont pas compris dans les packs : la prépa examen optionnelle (30 €), le livre de code (15 €), la fabrication du permis (30 €), la redevance d'examen du code fixée par l'État (30 €) et les heures supplémentaires (45 € en manuelle, 50 € en automatique).</p>
+
+    <div class="senior">
+      <div>
+        <p class="eyebrow">Pour les jeunes de plus de 65 ans</p>
+        <h3 style="font-size:2.2rem;margin:4px 0 10px">Pack Sénior</h3>
+        <p style="color:var(--ink-soft)">Une matinée, de 9 h à 12 h, pour continuer à conduire de manière autonome le plus longtemps possible. Dix participants au maximum.</p>
+        <ul class="senior-prog">
+          <li><b>Mon code</b> réactualisation et remise à niveau du code de la route</li>
+          <li><b>Mon âge</b> réflexion sur les effets de l'avancement en âge</li>
+          <li><b>Mes aides</b> approche de la boîte automatique et des aides à la conduite</li>
+          <li><b>Mes conclusions</b> échanges et questions diverses</li>
+        </ul>
+        <p class="note">Une heure de conduite en remise à niveau peut s'ajouter, 50 € en manuelle comme en automatique. Informations également disponibles au CCAS de Coquelles.</p>
+      </div>
+      <div class="senior-prix">
+        <div><b>99 €</b><span>seul</span></div>
+        <div class="couple"><b>149 €</b><span>en couple</span></div>
+        <p style="margin-top:14px"><a class="btn dark-btn" href="#rdv" style="width:100%;text-align:center">M'inscrire</a></p>
+      </div>
+    </div>
+</div>
+</div>
+<div class="tabpanel" id="p-c" role="tabpanel" aria-labelledby="t-c" hidden><div class="tab-plain"><div class="panel-inner">
     <div class="split">
       <div>
         <p class="eyebrow">Parcours spécialisé</p>
@@ -973,57 +1026,57 @@ footer a{color:#c9c3bb}
     </div>
 </div></div></div>
     <div class="tabpanel" id="p-a" role="tabpanel" aria-labelledby="t-a" hidden><div class="panel-inner">
-    <p class="eyebrow">Les autres formations</p>
-    <h2>Et si ce n'est pas<br>le permis B</h2>
+    <p class="eyebrow">Prestations à la carte</p>
+    <h2>Sans passer<br>par un pack</h2>
+    <p class="lede">Le code seul, une remise à niveau après une annulation, une préparation d'examen : tout ne suppose pas un forfait complet.</p>
 
     <div class="cards">
-      <div class="card">
-        <svg class="ico" viewBox="0 0 160 120" aria-hidden="true"><use href="#voiturette" width="160" height="120"/></svg>
-        <p class="tag">Permis AM</p>
-        <h3>Voiture sans permis</h3>
-        <p>Dès 14 ans, huit heures de formation sur nos voiturettes à double commande, dont six en circulation réelle. Pas d'examen, une attestation en fin de stage.</p>
-        <div class="price"><b>340 €</b><small>Sessions pendant les vacances scolaires</small></div>
-      </div>
-
-      <div class="card">
-        <img class="ico-img" src="data:image/png;base64,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" alt="Pictogramme officiel de la conduite accompagnée" width="220" height="220" loading="lazy">
-        <p class="tag">Dès 15 ans</p>
-        <h3>Conduite accompagnée</h3>
-        <p>Vingt heures avec Olivier, puis 3 000 km avec un proche. Examen possible à 17 ans et demi, période probatoire réduite à deux ans, et deux rendez-vous pédagogiques inclus.</p>
-        <div class="price"><b>1 340 €</b><small>Frais de dossier 60 € en sus</small></div>
-      </div>
-
-      <div class="card">
-        <svg class="ico" viewBox="0 0 280 120" aria-hidden="true">
-          <use href="#voiture" width="200" height="120"/>
-          <rect x="196" y="52" width="70" height="42" rx="6" fill="#FFFFFF" stroke="#0B0A09" stroke-width="7"/>
-          <circle cx="232" cy="98" r="15" fill="#0B0A09"/><circle cx="232" cy="98" r="5" fill="#FFFFFF"/>
-        </svg>
-        <p class="tag">Permis BE</p>
-        <h3>Remorque et attelage</h3>
-        <p>Sept heures pour tracter une remorque de plus de 750 kg. Attelage, dételage, manœuvres en marche arrière. Véhicule et remorque fournis, présentation à l'examen incluse.</p>
-        <div class="price"><b>520 €</b><small>Formation sur une ou deux journées</small></div>
-      </div>
-
       <div class="card">
         <svg class="ico" viewBox="0 0 120 120" aria-hidden="true">
           <circle cx="60" cy="60" r="46" fill="#F26522" stroke="#0B0A09" stroke-width="8"/>
           <circle cx="60" cy="60" r="17" fill="#FFFFFF" stroke="#0B0A09" stroke-width="8"/>
-          <g stroke="#0B0A09" stroke-width="8" stroke-linecap="round">
-            <path d="M60 43 V16 M74 70 l24 14 M46 70 l-24 14"/>
-          </g>
+          <g stroke="#0B0A09" stroke-width="8" stroke-linecap="round"><path d="M60 43 V16 M74 70 l24 14 M46 70 l-24 14"/></g>
         </svg>
         <p class="tag">Théorie</p>
         <h3>Code de la route</h3>
-        <p>Salle de code avec séances encadrées, application web et mobile illimitée, tests blancs corrigés chaque semaine. Accessible seul, sans forfait conduite.</p>
-        <div class="price"><b>290 €</b><small>Redevance d'examen de 30 € à part</small></div>
+        <p>Cours en salle encadrés, accès six mois. Le Pack Web s'ajoute pour réviser sur mobile en illimité. Un accès d'un mois existe pour une simple remise à niveau.</p>
+        <div class="price"><b>100 €</b><small>Six mois en salle · Pack Web 6 mois 50 € · un mois 30 €</small></div>
+      </div>
+
+      <div class="card">
+        <svg class="ico" viewBox="0 0 120 120" aria-hidden="true">
+          <rect x="20" y="16" width="80" height="88" rx="8" fill="#FFFFFF" stroke="#0B0A09" stroke-width="8"/>
+          <g stroke="#F26522" stroke-width="9" stroke-linecap="round"><path d="M38 44 h44 M38 64 h44 M38 84 h26"/></g>
+        </svg>
+        <p class="tag">Intensif</p>
+        <h3>Stage de code</h3>
+        <p>Trois journées pour boucler la théorie d'un bloc, avec tests blancs corrigés et travail ciblé sur les thèmes qui coincent. Utile avant une échéance serrée.</p>
+        <div class="price"><b>150 €</b><small>Trois jours · redevance d'examen de 30 € à part</small></div>
+      </div>
+
+      <div class="card">
+        <svg class="ico" viewBox="0 0 200 120" aria-hidden="true"><use href="#voiture" width="200" height="120"/></svg>
+        <p class="tag">À l'heure</p>
+        <h3>Perfectionnement et annulation</h3>
+        <p>Après une annulation de permis, après un long arrêt, ou pour reprendre de l'assurance sur un point précis. Sans forfait et sans engagement de durée.</p>
+        <div class="price"><b>50 €</b><small>L'heure, manuelle comme automatique</small></div>
+      </div>
+
+      <div class="card">
+        <svg class="ico" viewBox="0 0 120 120" aria-hidden="true">
+          <path d="M24 100 V40 q0-8 8-8 h56 q8 0 8 8 v60 z" fill="#FFFFFF" stroke="#0B0A09" stroke-width="8" stroke-linejoin="round"/>
+          <path d="M42 60 h36 M42 78 h22" stroke="#F26522" stroke-width="9" stroke-linecap="round"/>
+          <circle cx="90" cy="32" r="16" fill="#F26522" stroke="#0B0A09" stroke-width="7"/>
+        </svg>
+        <p class="tag">Avant l'examen</p>
+        <h3>Prépa examen</h3>
+        <p>Une heure sur les vérifications intérieures et extérieures, les questions de sécurité routière et les premiers secours. Optionnelle, mais elle rapporte des points le jour J.</p>
+        <div class="price"><b>30 €</b><small>Une heure · module evérif illimité 10 €</small></div>
       </div>
     </div>
 </div></div>
   </div>
 </section>
-
-
 
 <!-- ====== POSITIONNEMENT ====== -->
 <section id="difference" class="alt">
@@ -1163,69 +1216,144 @@ footer a{color:#c9c3bb}
     <h2>Ce que ça coûte,<br>et comment le régler</h2>
     <div class="tabs" role="tablist" aria-label="Budget">
       <button role="tab" id="t-s" aria-controls="p-s" aria-selected="true">Simulateur</button>
+      <button role="tab" id="t-u" aria-controls="p-u" aria-selected="false">Tarifs à l'unité</button>
       <button role="tab" id="t-p" aria-controls="p-p" aria-selected="false">Paiement et aides</button>
     </div>
+
     <div class="tabpanel" id="p-s" role="tabpanel" aria-labelledby="t-s"><div class="panel-inner">
-    <p class="eyebrow">Simulateur</p>
-    <h2>Combien ça va<br>me coûter</h2>
     <p class="lede">Choisissez votre formation, ajoutez les heures dont vous pensez avoir besoin, le total se met à jour. Rien n'est envoyé, le calcul se fait dans votre navigateur.</p>
 
     <div class="sim">
       <div class="sim-panel">
         <fieldset>
           <legend>Votre formation</legend>
-          <label class="opt"><input type="radio" name="forfait" value="1050" data-nom="Pack Essentiel, 20 h" checked><span>Pack Essentiel, 20 h</span><em>1 050 €</em></label>
-          <label class="opt"><input type="radio" name="forfait" value="1240" data-nom="Pack Confort, 20 h"><span>Pack Confort, 20 h</span><em>1 240 €</em></label>
-          <label class="opt"><input type="radio" name="forfait" value="1440" data-nom="Pack Accéléré, 20 h"><span>Pack Accéléré, 20 h</span><em>1 440 €</em></label>
-          <label class="opt"><input type="radio" name="forfait" value="1340" data-nom="Conduite accompagnée"><span>Conduite accompagnée</span><em>1 340 €</em></label>
-          <label class="opt"><input type="radio" name="forfait" value="480" data-nom="Parcours Permis Confiance"><span>Parcours Permis Confiance, 8 h</span><em>480 €</em></label>
-          <label class="opt"><input type="radio" name="forfait" value="340" data-nom="Voiture sans permis"><span>Voiture sans permis, permis AM</span><em>340 €</em></label>
-          <label class="opt"><input type="radio" name="forfait" value="520" data-nom="Permis remorque BE"><span>Permis remorque BE</span><em>520 €</em></label>
-          <label class="opt"><input type="radio" name="forfait" value="290" data-nom="Code seul"><span>Code de la route seul</span><em>290 €</em></label>
+          <label class="opt"><input type="radio" name="forfait" value="1245" data-h="45" data-nom="Pack Classic, boîte manuelle" checked><span>Pack Classic, boîte manuelle</span><em>1 245 €</em></label>
+          <label class="opt"><input type="radio" name="forfait" value="995" data-h="50" data-nom="Pack Classic, boîte automatique"><span>Pack Classic, boîte automatique</span><em>995 €</em></label>
+          <label class="opt"><input type="radio" name="forfait" value="1540" data-h="45" data-nom="Pack Accompagné, boîte manuelle"><span>Pack Accompagné, boîte manuelle</span><em>1 540 €</em></label>
+          <label class="opt"><input type="radio" name="forfait" value="1300" data-h="50" data-nom="Pack Accompagné, boîte automatique"><span>Pack Accompagné, boîte automatique</span><em>1 300 €</em></label>
+          <label class="opt"><input type="radio" name="forfait" value="1340" data-h="45" data-nom="Pack Supervisé, boîte manuelle"><span>Pack Supervisé, boîte manuelle</span><em>1 340 €</em></label>
+          <label class="opt"><input type="radio" name="forfait" value="1100" data-h="50" data-nom="Pack Supervisé, boîte automatique"><span>Pack Supervisé, boîte automatique</span><em>1 100 €</em></label>
+          <label class="opt"><input type="radio" name="forfait" value="99" data-h="50" data-nom="Pack Sénior, une personne"><span>Pack Sénior, une personne</span><em>99 €</em></label>
+          <label class="opt"><input type="radio" name="forfait" value="150" data-h="50" data-nom="Code seul, salle et Pack Web 6 mois"><span>Code seul, salle et Pack Web 6 mois</span><em>150 €</em></label>
+          <label class="opt"><input type="radio" name="forfait" value="340" data-h="50" data-nom="Voiture sans permis, permis AM"><span>Voiture sans permis, permis AM</span><em>340 €</em></label>
+          <label class="opt"><input type="radio" name="forfait" value="480" data-h="50" data-nom="Parcours Permis Confiance, 8 h"><span>Parcours Permis Confiance, 8 h</span><em>480 €</em></label>
         </fieldset>
 
         <fieldset>
           <legend>Heures de conduite en plus</legend>
           <div class="range-head"><span>Au-delà du forfait</span><b><span id="hVal">0</span> h</b></div>
           <input type="range" id="heures" min="0" max="20" step="1" value="0" aria-label="Heures de conduite supplémentaires">
-          <p class="note">Une leçon supplémentaire est facturée 48 €. La moyenne nationale se situe autour de 15 heures au-delà du forfait de base.</p>
+          <p class="note">L'heure supplémentaire est facturée <b><span id="tarifHeure">45</span> €</b> selon la boîte choisie. Elles se règlent à chaque leçon, hors forfait.</p>
         </fieldset>
 
         <fieldset>
           <legend>Options</legend>
-          <label class="opt"><input type="checkbox" class="opt-box" value="60" data-nom="Frais de dossier" checked><span>Frais de dossier et enregistrement ANTS</span><em>60 €</em></label>
-          <label class="opt"><input type="checkbox" class="opt-box" value="45" data-nom="Pack web illimité"><span>Pack web illimité, 6 mois</span><em>45 €</em></label>
-          <label class="opt"><input type="checkbox" class="opt-box" value="18" data-nom="Livre de code"><span>Livre de code papier Ediser</span><em>18 €</em></label>
-          <label class="opt"><input type="checkbox" class="opt-box" value="55" data-nom="Accompagnement à l'examen"><span>Accompagnement à l'épreuve de circulation</span><em>55 €</em></label>
-          <label class="opt"><input type="checkbox" class="opt-box" value="30" data-nom="Redevance code"><span>Redevance d'examen du code</span><em>30 €</em></label>
+          <label class="opt"><input type="checkbox" class="opt-box" value="30" data-nom="Redevance d'examen du code" checked><span>Redevance d'examen du code, fixée par l'État</span><em>30 €</em></label>
+          <label class="opt"><input type="checkbox" class="opt-box" value="30" data-nom="Fabrication du permis" checked><span>Fabrication du permis</span><em>30 €</em></label>
+          <label class="opt"><input type="checkbox" class="opt-box" value="30" data-nom="Prépa examen, cours de vérifications"><span>Prépa examen, cours de vérifications</span><em>30 €</em></label>
+          <label class="opt"><input type="checkbox" class="opt-box" value="15" data-nom="Livre de code papier"><span>Livre de code papier</span><em>15 €</em></label>
+          <label class="opt"><input type="checkbox" class="opt-box" value="10" data-nom="Renouvellement Pack Web, 1 mois"><span>Renouvellement Pack Web, 1 mois</span><em>10 €</em></label>
+          <label class="opt"><input type="checkbox" class="opt-box" value="5" data-nom="Disque A ou AAC"><span>Disque A ou AAC magnétique</span><em>5 €</em></label>
         </fieldset>
       </div>
 
       <div class="sim-out">
         <p class="eyebrow">Budget estimé</p>
-        <p class="total"><span id="total">1 110</span> €</p>
+        <p class="total"><span id="total">1 305</span> €</p>
         <ul class="breakdown" id="detail"></ul>
         <a class="btn" href="#rdv">Bloquer ma place</a>
-        <p class="note">Estimation indicative, sans valeur contractuelle. Paiement en trois fois sans frais. Un devis nominatif vous est remis à l'inscription.</p>
+        <p class="note">Estimation indicative, sans valeur contractuelle. Seuls les prix figurant au contrat de formation vous engagent. Un devis nominatif vous est remis à l'inscription.</p>
       </div>
     </div>
-</div></div>
+    </div></div>
+
+    <div class="tabpanel" id="p-u" role="tabpanel" aria-labelledby="t-u" hidden><div class="panel-inner">
+    <p class="lede">Toutes nos prestations peuvent s'acheter séparément. Tarifs TTC en vigueur au 1<sup>er</sup> janvier 2025.</p>
+    <table class="tarifs"><caption>Dossier administratif</caption><tbody>
+      <tr><td>Inscription, suivi de dossier ou modification de contrat</td><td>50 €</td></tr>
+      <tr><td>Inscription, suivi de dossier après annulation de permis</td><td>50 €</td></tr>
+      <tr><td>Demande de duplicata</td><td>30 €</td></tr>
+      <tr><td>Demande de titre de permis</td><td>30 €</td></tr>
+    </tbody></table>
+    <table class="tarifs"><caption>Suivi pédagogique</caption><tbody>
+      <tr><td>Livre de code</td><td>15 €</td></tr>
+      <tr><td>Livret de vérification</td><td>10 €</td></tr>
+      <tr><td>Livret de suivi du code</td><td>10 €</td></tr>
+      <tr><td>Livret d'apprentissage dématérialisé et application de suivi</td><td>30 €</td></tr>
+      <tr><td>Module evérif</td><td>10 €</td></tr>
+    </tbody></table>
+    <table class="tarifs"><caption>Le code</caption><tbody>
+      <tr><td>Cours de code en salle, accès 6 mois</td><td>100 €</td></tr>
+      <tr><td>Cours de code en salle, accès 1 mois</td><td>30 €</td></tr>
+      <tr><td>Pack Web, accès 6 mois</td><td>50 €</td></tr>
+      <tr><td>Pack Web, accès 1 mois</td><td>10 €</td></tr>
+      <tr><td>Stage de code, 3 jours</td><td>150 €</td></tr>
+    </tbody></table>
+    <table class="tarifs"><caption>La conduite</caption><tbody>
+      <tr><td>Évaluation de départ, 45 minutes<small>Obligatoire avant la signature du contrat</small></td><td>50 €</td></tr>
+      <tr><td>Leçon de conduite d'une heure, boîte manuelle</td><td>45 €</td></tr>
+      <tr><td>Leçon de conduite d'une heure, boîte automatique</td><td>50 €</td></tr>
+      <tr><td>Leçon d'annulation ou de perfectionnement, une heure</td><td>50 €</td></tr>
+      <tr><td>Cours de vérifications, prépa examen, une heure</td><td>30 €</td></tr>
+      <tr><td>Accompagnement à l'examen pratique, boîte manuelle</td><td>45 €</td></tr>
+      <tr><td>Accompagnement à l'examen pratique, boîte automatique</td><td>50 €</td></tr>
+    </tbody></table>
+    <table class="tarifs"><caption>Conduite accompagnée et conduite supervisée</caption><tbody>
+      <tr><td>Rendez-vous préalable, boîte manuelle</td><td>90 €</td></tr>
+      <tr><td>Rendez-vous préalable, boîte automatique</td><td>100 €</td></tr>
+      <tr><td>Rendez-vous pédagogique, manuelle ou automatique</td><td>100 €</td></tr>
+      <tr><td>Leçon de conduite d'une heure, boîte manuelle</td><td>45 €</td></tr>
+      <tr><td>Leçon de conduite d'une heure, boîte automatique</td><td>50 €</td></tr>
+    </tbody></table>
+    <table class="tarifs"><caption>Divers</caption><tbody>
+      <tr><td>Rétroviseurs intérieur et extérieur</td><td>25 €</td></tr>
+      <tr><td>Rétroviseur extérieur seul</td><td>15 €</td></tr>
+      <tr><td>Rétroviseur intérieur seul</td><td>15 €</td></tr>
+      <tr><td>Disque A ou AAC magnétique</td><td>5 €</td></tr>
+      <tr><td>Fabrication du permis</td><td>30 €</td></tr>
+    </tbody></table>
+    <p class="note">Examen du code de la route, article R. 221-3-3 : redevance de <b>30 €</b> versée à l'opérateur agréé, ou à l'auto-école si elle a reçu mandat. Hors forfait, le tarif unitaire appliqué est celui en vigueur le jour de la souscription du forfait, pendant douze mois.</p>
+    </div></div>
+
     <div class="tabpanel" id="p-p" role="tabpanel" aria-labelledby="t-p" hidden><div class="panel-inner">
     <p class="eyebrow">Régler sa formation</p>
     <h2>Payer sans y laisser<br>un mois de salaire</h2>
-    <p class="lede">Personne ne sort 1 200 € d'un coup. Trois échéances, et des aides que beaucoup de candidats ignorent.</p>
+    <p class="lede">Personne ne sort 1 245 € d'un coup. Chaque pack a son échéancier, sans frais, et des aides existent que beaucoup de candidats ignorent.</p>
 
+    <h3 style="margin-top:34px">Pack Classic, en trois fois</h3>
     <div class="echeances">
-      <div><b>413 €</b><span>À l'inscription : frais de dossier, fournitures, forfait code et évaluation de départ</span></div>
-      <div><b>413 €</b><span>Au démarrage des leçons de conduite, trente jours plus tard</span></div>
-      <div><b>414 €</b><span>Solde à soixante jours, avant la présentation à l'examen</span></div>
+      <div><b>295 €</b><span>À la signature du contrat, en manuelle comme en automatique</span></div>
+      <div><b>475 € <small style="font-size:.8rem;color:#7d7770">ou 350 €</small></b><span>À la première leçon de conduite, manuelle ou automatique</span></div>
+      <div><b>475 € <small style="font-size:.8rem;color:#7d7770">ou 350 €</small></b><span>À la onzième leçon de conduite, manuelle ou automatique</span></div>
     </div>
-    <p class="note">Exemple pour le pack Confort à 1 240 €. Trois fois sans frais, par carte ou par prélèvement.</p>
+
+    <h3 style="margin-top:34px">Pack Accompagné, en quatre fois</h3>
+    <div class="echeances">
+      <div><b>385 € <small style="font-size:.8rem;color:#7d7770">ou 325 €</small></b><span>À la signature du contrat</span></div>
+      <div><b>385 € <small style="font-size:.8rem;color:#7d7770">ou 325 €</small></b><span>À la première leçon de conduite</span></div>
+      <div><b>385 € <small style="font-size:.8rem;color:#7d7770">ou 325 €</small></b><span>À la moitié de la formation</span></div>
+    </div>
+    <p class="note">Un quatrième règlement du même montant est appelé au rendez-vous préalable. Le premier montant vaut pour la boîte manuelle, le second pour la boîte automatique. Les heures supplémentaires se règlent à chaque leçon.</p>
+
+    <h3 style="margin-top:34px">Pack Supervisé, en quatre fois</h3>
+    <div class="echeances">
+      <div><b>335 € <small style="font-size:.8rem;color:#7d7770">ou 275 €</small></b><span>À la signature du contrat</span></div>
+      <div><b>335 € <small style="font-size:.8rem;color:#7d7770">ou 275 €</small></b><span>À la première leçon de conduite</span></div>
+      <div><b>335 € <small style="font-size:.8rem;color:#7d7770">ou 275 €</small></b><span>À la moitié de la formation</span></div>
+    </div>
+    <p class="note">Un quatrième règlement du même montant est appelé au rendez-vous préalable.</p>
+
+    <h3 style="margin-top:34px">Pack Sénior, en deux fois</h3>
+    <div class="echeances">
+      <div><b>49 € <small style="font-size:.8rem;color:#7d7770">ou 99 € en couple</small></b><span>À l'inscription</span></div>
+      <div><b>50 €</b><span>Le jour de la formation, seul comme en couple</span></div>
+      <div><b>Sans frais</b><span>Aucun frais de dossier supplémentaire n'est appliqué sur les échéanciers</span></div>
+    </div>
 
     <div class="pay">
       <div>
         <h4>Payer en ligne</h4>
-        <p>Acompte, échéance ou heure supplémentaire, réglés par carte depuis chez vous. Reçu envoyé par e-mail immédiatement.</p>
+        <p>Échéance ou heure supplémentaire réglées par carte depuis chez vous. Reçu envoyé par e-mail dans la seconde.</p>
         <p><a class="btn dark-btn" href="#" id="payLink">Régler une échéance</a></p>
       </div>
       <div>
@@ -1237,14 +1365,13 @@ footer a{color:#c9c3bb}
         <p>Vos droits CPF financent le permis B, y compris en boîte automatique. Le solde suffit souvent à couvrir la moitié du forfait. Vérifiez sur moncompteformation.gouv.fr.</p>
       </div>
       <div>
-        <h4>Aides locales</h4>
-        <p>Aide au permis de la commune, du département, de la mission locale ou de France Travail. Elles se cumulent souvent. Apportez vos justificatifs, on regarde ensemble.</p>
+        <h4>Aides locales et CCAS</h4>
+        <p>Aide au permis de la commune, du département, de la mission locale ou de France Travail. Le CCAS de Coquelles renseigne notamment sur le Pack Sénior. Apportez vos justificatifs.</p>
       </div>
     </div>
-</div></div>
+    </div></div>
   </div>
 </section>
-
 
 <!-- ====== PARTENAIRES ====== -->
 <section id="partenaires" class="alt">
@@ -1291,26 +1418,34 @@ footer a{color:#c9c3bb}
       <div class="q" data-q="formation">
         <p class="eyebrow">Votre formation</p>
         <div class="segs">
-          <button type="button" data-v="B" aria-pressed="true">Permis B</button>
-          <button type="button" data-v="AAC" aria-pressed="false">Conduite accompagnée</button>
+          <button type="button" data-v="B" aria-pressed="true">Pack Classic</button>
+          <button type="button" data-v="AAC" aria-pressed="false">Pack Accompagné</button>
+          <button type="button" data-v="CS" aria-pressed="false">Pack Supervisé</button>
+          <button type="button" data-v="SEN" aria-pressed="false">Pack Sénior</button>
           <button type="button" data-v="AM" aria-pressed="false">Voiture sans permis</button>
-          <button type="button" data-v="BE" aria-pressed="false">Remorque BE</button>
         </div>
       </div>
       <div class="q" data-q="age">
         <p class="eyebrow">Votre âge</p>
         <div class="segs">
-          <button type="button" data-v="14" aria-pressed="false">14 à 15 ans</button>
-          <button type="button" data-v="16" aria-pressed="false">16 à 17 ans</button>
-          <button type="button" data-v="18" aria-pressed="true">18 à 25 ans</button>
-          <button type="button" data-v="26" aria-pressed="false">26 ans et plus</button>
+          <button type="button" data-v="14" aria-pressed="false">14 à 16 ans</button>
+          <button type="button" data-v="17" aria-pressed="true">17 à 25 ans</button>
+          <button type="button" data-v="26" aria-pressed="false">26 à 64 ans</button>
+          <button type="button" data-v="65" aria-pressed="false">65 ans et plus</button>
         </div>
       </div>
       <div class="q" data-q="permis">
         <p class="eyebrow">Avez-vous déjà un permis ?</p>
         <div class="segs">
           <button type="button" data-v="non" aria-pressed="true">Non, aucun</button>
-          <button type="button" data-v="oui" aria-pressed="false">Oui, déjà titulaire</button>
+          <button type="button" data-v="oui" aria-pressed="false">Oui, AM, A ou B</button>
+        </div>
+      </div>
+      <div class="q" data-q="logement">
+        <p class="eyebrow">Le justificatif de domicile est-il à votre nom ?</p>
+        <div class="segs">
+          <button type="button" data-v="oui" aria-pressed="true">Oui, à mon nom</button>
+          <button type="button" data-v="non" aria-pressed="false">Non, je suis hébergé</button>
         </div>
       </div>
     </div>
@@ -1337,16 +1472,16 @@ footer a{color:#c9c3bb}
       <details><summary>Olive Conduite, c'est l'ancienne auto-école de Coquelles ?</summary><p>Oui. Olivier y enseignait depuis des années, il en a repris la gérance et lui a donné son nom. L'adresse ne change pas, 1087 avenue Charles de Gaulle, et c'est toujours lui au volant. Ce qui change : un seul enseignant pour toute la formation, le suivi Permis Score après chaque leçon, et le parcours Permis Confiance. Si vous étiez inscrit sous l'ancienne enseigne, contactez-nous pour faire le point sur votre situation.</p></details>
       <details><summary>Où passe-t-on l'examen quand on s'inscrit à Coquelles ?</summary><p>L'épreuve pratique se déroule au centre d'examen dont dépend notre agrément, à Calais. Selon les périodes et les places disponibles, la direction départementale peut aussi vous convoquer sur Saint-Omer ou Boulogne-sur-Mer. Dans tous les cas, vous vous entraînez sur les parcours du secteur d'examen, pas ailleurs.</p></details>
       <details><summary>Vous prenez des élèves de Calais, Marck ou Guînes ?</summary><p>Oui. Nous formons des élèves de tout le Calaisis : Coquelles, Calais, Marck, Coulogne, Guînes, Guemps, Oye-Plage et les communes voisines. Les leçons peuvent démarrer depuis votre domicile ou votre lieu de travail plutôt que depuis l'agence, si cela vous arrange.</p></details>
-      <details><summary>Combien de temps pour obtenir une place d'examen dans le Pas-de-Calais ?</summary><p>Le délai dépend des places attribuées à l'école par la direction départementale et de la période de l'année. Nous vous donnons une fourchette réaliste dès l'inscription et nous la mettons à jour à chaque palier de votre Permis Score. Le pack Accéléré réserve la date dès le départ.</p></details>
+      <details><summary>Combien de temps pour obtenir une place d'examen dans le Pas-de-Calais ?</summary><p>Le délai dépend des places attribuées à l'école par la direction départementale et de la période de l'année. Nous vous donnons une fourchette réaliste dès l'inscription et nous la mettons à jour à chaque palier de votre Permis Score. Nous vous donnons une fourchette réaliste dès l'inscription.</p></details>
       <details><summary>Peut-on commencer en boîte automatique puis passer en manuelle ?</summary><p>Oui. Après trois mois de conduite avec un permis boîte automatique, une formation passerelle de sept heures suffit pour lever la restriction, sans repasser d'examen. Beaucoup d'élèves stressés démarrent ainsi, avec un embrayage en moins à gérer.</p></details>
       <details><summary>Vous faites encore la moto ?</summary><p>Non. Nous avons arrêté les formations A1, A2 et 125 pour développer la voiture sans permis. Nous pouvons vous orienter vers une moto-école partenaire du Calaisis si vous le souhaitez.</p></details>
       <details><summary>Le Permis Score, c'est officiel ?</summary><p>Non, c'est notre outil interne. Il s'appuie sur le livret d'apprentissage officiel et sur le référentiel de formation, mais la note reste la nôtre. Elle mesure votre progression, elle ne garantit pas le résultat de l'examen, qui dépend de l'inspecteur et du jour.</p></details>
       <details><summary>Permis Confiance, c'est plus cher ?</summary><p>Le parcours s'ajoute à un pack, à raison de 60 € l'heure de séance dédiée, soit 480 € pour huit heures. Beaucoup d'élèves en prennent quatre ou six seulement. Le devis est établi après l'entretien, jamais avant.</p></details>
       <details><summary>Un seul moniteur, ce n'est pas un problème si Olivier est absent ?</summary><p>Nous limitons volontairement le nombre d'élèves pour que ça n'arrive pas. En cas d'absence prolongée, les leçons sont replanifiées et jamais facturées. Vous êtes prévenu au plus tôt.</p></details>
-      <details><summary>En combien de temps j'ai mon permis ?</summary><p>Trois à six mois avec le pack Essentiel ou Confort, selon votre rythme et les délais de présentation. Le pack Accéléré boucle la formation en trente jours avec une date d'examen réservée dès l'inscription.</p></details>
-      <details><summary>Je peux payer en plusieurs fois ?</summary><p>Oui, en trois fois sans frais. Les frais de dossier, les fournitures et le forfait code se règlent à l'inscription, le reste est échelonné sur soixante jours.</p></details>
+      <details><summary>En combien de temps j'ai mon permis ?</summary><p>Trois à six mois selon votre rythme, votre assiduité et les délais de présentation à l'examen. Le Pack Accompagné s'étale forcément davantage, puisqu'il suppose 3 000 km de conduite avec votre accompagnateur.</p></details>
+      <details><summary>Je peux payer en plusieurs fois ?</summary><p>Oui, sans frais. Trois échéances pour le Pack Classic, quatre pour les Packs Accompagné et Supervisé, deux pour le Pack Sénior. Le détail figure dans l'onglet Paiement et aides. Les heures supplémentaires se règlent à chaque leçon.</p></details>
       <details><summary>Ma voiturette, je peux la conduire sans rien passer ?</summary><p>Si vous êtes né avant le 1<sup>er</sup> janvier 1988, oui. Sinon le permis AM est obligatoire, et il s'obtient après huit heures de formation, sans examen.</p></details>
-      <details><summary>J'ai raté le code, je repaye tout ?</summary><p>Non. Vous repayez uniquement la redevance d'examen de 30 €. L'accès aux cours et aux tests Ediser reste ouvert pendant la validité de votre forfait.</p></details>
+      <details><summary>J'ai raté le code, je repaye tout ?</summary><p>Non. Vous repayez uniquement la redevance d'examen de 30 €, fixée par l'État. L'accès aux cours en salle et au Pack Web reste ouvert pendant les six mois de votre forfait, renouvelable un mois pour 10 €.</p></details>
     </div>
 </div></div>
   </div>
@@ -1394,13 +1529,13 @@ footer a{color:#c9c3bb}
         <input type="email" id="rdvMail" required autocomplete="email">
         <label for="rdvObjet">Motif du rendez-vous ou de la demande</label>
         <select id="rdvObjet">
-          <option>Pack Essentiel</option>
-          <option>Pack Confort</option>
-          <option>Pack Accéléré</option>
+          <option>Pack Classic</option>
+          <option>Pack Accompagné</option>
+          <option>Pack Supervisé</option>
           <option>Conduite accompagnée</option>
           <option>Parcours Permis Confiance</option>
           <option>Formation voiture sans permis</option>
-          <option>Permis remorque</option>
+          <option>Pack Sénior</option>
           <option>Financement et aides</option>
           <option>Simple renseignement</option>
         </select>
@@ -1463,7 +1598,7 @@ footer a{color:#c9c3bb}
       <details>
         <summary>Conditions générales de vente</summary>
         <p><b>Contrat écrit.</b> Toute formation fait l'objet d'un contrat écrit remis avant l'inscription, conforme à l'arrêté du 13 avril 2016. Il précise le programme, le volume d'heures, le prix détaillé de chaque prestation, les modalités de paiement et les conditions de résiliation.</p>
-        <p><b>Prix.</b> Les tarifs affichés sur ce site sont indicatifs, en euros toutes taxes comprises, et applicables au [date]. Seuls les prix figurant au contrat vous engagent. La redevance d'examen du code, fixée par l'État, est réglée séparément.</p>
+        <p><b>Prix.</b> Les tarifs affichés sur ce site sont indicatifs, en euros toutes taxes comprises, et en vigueur au 1<sup>er</sup> janvier 2025. Seuls les prix figurant au contrat vous engagent. La redevance d'examen du code, fixée par l'État, est réglée séparément.</p>
         <p><b>Évaluation de départ.</b> Gratuite et sans engagement. Elle sert à estimer le volume d'heures nécessaire, qui reste une estimation et non un forfait garanti.</p>
         <p><b>Annulation d'une leçon.</b> Toute leçon non décommandée au moins 48 heures à l'avance est due, sauf motif légitime justifié.</p>
         <p><b>Résiliation.</b> Vous pouvez résilier à tout moment. Les prestations déjà exécutées restent dues, le solde des prestations non consommées vous est restitué dans les trente jours. Aucun frais de résiliation n'est facturé au-delà des frais de dossier engagés.</p>
@@ -1487,7 +1622,7 @@ footer a{color:#c9c3bb}
       </div>
       <div>
         <h4>Formations</h4>
-        <p><a href="#formations">Packs permis B</a><br><a href="#formations">Voiture sans permis</a><br><a href="#formations">Conduite accompagnée</a><br><a href="#formations">Permis remorque</a></p>
+        <p><a href="#formations">Packs permis B</a><br><a href="#formations">Voiture sans permis</a><br><a href="#formations">Conduite accompagnée</a><br><a href="#formations">Pack Sénior</a></p>
       </div>
       <div>
         <h4>Pratique</h4>
@@ -1499,7 +1634,7 @@ footer a{color:#c9c3bb}
         <p style="margin-top:12px">Ce site ne dépose aucun cookie.</p>
       </div>
     </div>
-    <p>© <span id="year"></span> Olive Conduite. Tarifs applicables au 1<sup>er</sup> janvier 2026, susceptibles de révision. Partenaire Ediser.</p>
+    <p>© <span id="year"></span> Olive Conduite. Tarifs TTC en vigueur au 1<sup>er</sup> janvier 2025, susceptibles de révision. Partenaire Ediser.</p>
   </div>
 </footer>
 
@@ -1527,30 +1662,31 @@ footer a{color:#c9c3bb}
     if(e.target.tagName === 'A'){ menu.classList.remove('open'); burger.setAttribute('aria-expanded','false'); }
   });
 
-  /* --- packs : prix par volume d'heures --- */
-  var TARIFS = {
-    essentiel: {13:{p: 890, r:1030}, 20:{p:1050, r:1190}, 25:{p:1230, r:1390}, 30:{p:1410, r:1590}},
-    confort:   {13:{p:1080, r:1230}, 20:{p:1240, r:1390}, 25:{p:1420, r:1590}, 30:{p:1600, r:1790}},
-    accelere:  {13:{p:1280, r:1430}, 20:{p:1440, r:1590}, 25:{p:1620, r:1790}, 30:{p:1800, r:1990}}
+  /* --- packs : prix selon la boite de vitesses --- */
+  var PACKS = {
+    classic:    {manu:1245, auto:995,  hManu:"20 heures de conduite obligatoires", hAuto:"13 heures de conduite obligatoires"},
+    accompagne: {manu:1540, auto:1300, hManu:"20 heures de conduite et rendez-vous préalable de 2 h", hAuto:"13 heures de conduite et rendez-vous préalable de 2 h"},
+    supervise:  {manu:1340, auto:1100, hManu:"20 heures de conduite et rendez-vous préalable de 2 h", hAuto:"13 heures de conduite et rendez-vous préalable de 2 h"}
   };
-  var hoursBox = document.getElementById('hours');
-  function majPacks(h){
+  var boiteBox = document.getElementById('boite');
+  function majPacks(b){
     document.querySelectorAll('.pack').forEach(function(card){
-      var t = TARIFS[card.dataset.pack][h];
-      card.querySelector('[data-now]').textContent = euro(t.p);
-      card.querySelector('[data-old]').textContent = euro(t.r) + ' €';
+      var t = PACKS[card.dataset.pack]; if(!t) return;
+      card.querySelector('[data-now]').textContent = euro(b === 'manu' ? t.manu : t.auto);
+      card.querySelector('[data-boite]').textContent = b === 'manu' ? 'boîte manuelle' : 'boîte automatique';
+      card.querySelector('[data-heures]').textContent = b === 'manu' ? t.hManu : t.hAuto;
     });
   }
-  hoursBox.addEventListener('click', function(e){
+  boiteBox.addEventListener('click', function(e){
     var b = e.target.closest('button'); if(!b) return;
-    hoursBox.querySelectorAll('button').forEach(function(x){ x.setAttribute('aria-pressed','false'); });
+    boiteBox.querySelectorAll('button').forEach(function(x){ x.setAttribute('aria-pressed','false'); });
     b.setAttribute('aria-pressed','true');
-    majPacks(b.dataset.h);
+    majPacks(b.dataset.b);
   });
-  majPacks('20');
+  majPacks('manu');
 
   /* --- simulateur --- */
-  var HEURE = 48;
+  var tarifHeure = document.getElementById('tarifHeure');
   var heures = document.getElementById('heures'),
       hVal = document.getElementById('hVal'),
       total = document.getElementById('total'),
@@ -1560,8 +1696,10 @@ footer a{color:#c9c3bb}
     var lignes = [], somme = 0;
     var f = document.querySelector('input[name=forfait]:checked');
     somme += Number(f.value); lignes.push([f.dataset.nom, Number(f.value)]);
+    var taux = Number(f.dataset.h || 45);
+    tarifHeure.textContent = taux;
     var h = Number(heures.value); hVal.textContent = h;
-    if(h > 0){ somme += h * HEURE; lignes.push([h + ' h supplémentaires', h * HEURE]); }
+    if(h > 0){ somme += h * taux; lignes.push([h + ' h supplémentaires à ' + taux + ' €', h * taux]); }
     document.querySelectorAll('.opt-box:checked').forEach(function(o){
       somme += Number(o.value); lignes.push([o.dataset.nom, Number(o.value)]);
     });
@@ -1575,29 +1713,32 @@ footer a{color:#c9c3bb}
   calcul();
 
   /* --- liste de pieces personnalisee --- */
-  var rep = {formation:'B', age:'18', permis:'non'};
+  var rep = {formation:'B', age:'17', permis:'non', logement:'oui'};
   var BASE = [
-    "Pièce d'identité en cours de validité, recto verso",
-    "Justificatif de domicile de moins de trois mois",
-    "Quatre photos au format ePhoto avec signature numérique"
+    "Carte nationale d'identité ou passeport, copie recto verso",
+    "Photo numérique d'identité au format ePhoto, avec signature",
+    "Justificatif de domicile de moins de six mois : facture d'eau, d'électricité ou de téléphone"
   ];
-  var NOMS = {B:'Permis B', AAC:'Conduite accompagnée', AM:'Voiture sans permis', BE:'Remorque BE'};
+  var NOMS = {B:'Pack Classic', AAC:'Pack Accompagné', CS:'Pack Supervisé', SEN:'Pack Sénior', AM:'Voiture sans permis'};
 
   function construire(){
+    if(rep.formation === 'SEN'){
+      return {base: ["Carte nationale d'identité ou passeport, copie recto verso",
+                     "Permis de conduire, copie recto verso"], sup: []};
+    }
     var sup = [];
-    if(rep.age === '14' || rep.age === '16'){
-      sup.push("Autorisation parentale signée par le représentant légal");
-      sup.push("Pièce d'identité du représentant légal, recto verso");
+    if(rep.logement === 'non' || rep.age === '14'){
+      sup.push("Carte nationale d'identité ou passeport du parent ou de l'hébergeant, recto verso");
+      sup.push("Attestation d'hébergement signée");
     }
-    if(rep.age === '16'){ sup.push("Attestation de recensement"); }
-    if(rep.age === '18'){ sup.push("Certificat de participation à la journée défense et citoyenneté"); }
+    if(rep.age === '14'){ sup.push("Autorisation parentale signée par le représentant légal"); }
+    if(rep.age === '17'){ sup.push("Convocation ou attestation de participation à la journée défense et citoyenneté"); }
     if(rep.formation === 'AM'){ sup.push("Attestation ASSR 1, ASSR 2 ou ASR"); }
-    if(rep.formation === 'AAC'){
+    if(rep.formation === 'AAC' || rep.formation === 'CS'){
       sup.push("Pièce d'identité de l'accompagnateur, recto verso");
-      sup.push("Accord écrit de son assureur pour la conduite accompagnée");
+      sup.push("Accord écrit de son assureur pour la conduite accompagnée ou supervisée");
     }
-    if(rep.formation === 'BE'){ sup.push("Permis B en cours de validité, recto verso, obligatoire"); }
-    else if(rep.permis === 'oui'){ sup.push("Permis actuel, recto verso"); }
+    if(rep.permis === 'oui'){ sup.push("Permis actuel, AM, A ou B, copie recto verso"); }
     return {base: BASE, sup: sup};
   }
 
@@ -1612,12 +1753,13 @@ footer a{color:#c9c3bb}
     };
     document.getElementById('docs').innerHTML =
       bloc('Dans tous les cas', d.base) + bloc('Dans votre situation', d.sup);
-    document.getElementById('listeTitre').textContent =
-      NOMS[rep.formation] + ' · ' + (rep.age === '26' ? '26 ans et plus' : rep.age + ' ans et plus');
+    var AGES = {'14':'14 à 16 ans','17':'17 à 25 ans','26':'26 à 64 ans','65':'65 ans et plus'};
+    document.getElementById('listeTitre').textContent = NOMS[rep.formation] + ' · ' + AGES[rep.age];
 
     var note = '';
     if(rep.permis === 'oui'){ note = "Titulaire d'un permis obtenu depuis moins de cinq ans : vous êtes dispensé de l'épreuve du code."; }
-    if(rep.formation === 'AM' && rep.age === '26'){ note = "Né avant le 1er janvier 1988 : aucune formation n'est exigée pour conduire un quadricycle léger."; }
+    if(rep.formation === 'SEN'){ note = "Le Pack Sénior ne demande que ces deux pièces. Le programme se déroule sur une matinée, de 9 h à 12 h."; }
+    if(rep.formation === 'AM' && rep.age === '65'){ note = "Né avant le 1er janvier 1988 : aucune formation n'est exigée pour conduire un quadricycle léger."; }
     document.getElementById('listeNote').textContent = note;
 
     brancher();
