@@ -69,7 +69,8 @@ La liste des pièces à fournir se génère à partir de quatre questions : form
 | Fichier | Rôle |
 |---|---|
 | `index.html` | Le site, 360 Ko |
-| `banniere-olive-conduite.jpg` | Bannière illustrée pleine largeur, **à déposer avec le HTML** |
+| `banniere-olive-conduite.jpg` | Bannière illustrée en tête de page, **à déposer avec le HTML** |
+| `agence-interieur.jpg` | Vue de l'accueil, section agence, **à déposer avec le HTML** |
 | `README.md` | Documentation technique : où modifier quoi |
 | `SYNTHESE.md` | Ce document |
 | `qr-oliveconduite.svg` et `.png` | QR code seul, logo au centre, vectoriel et 1200 px |

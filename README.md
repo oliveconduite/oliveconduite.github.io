@@ -6,9 +6,9 @@ Thème clair, accents orange, noir réservé au logo, au bandeau, à la section 
 
 ## Mise en ligne sur GitHub Pages
 
-**Deux fichiers sont désormais nécessaires** : `index.html` et `banniere-olive-conduite.jpg`. La bannière est le seul visuel externe, tous les autres sont encodés dans la page. Si vous ne déposez que le HTML, la bannière apparaîtra cassée.
+**Trois fichiers sont nécessaires** : `index.html`, `banniere-olive-conduite.jpg` et `agence-interieur.jpg`. Ce sont les deux seuls visuels externes, tous les autres sont encodés dans la page et chargés en différé. Si vous ne déposez que le HTML, ces deux images apparaîtront cassées.
 
-1. Déposer `index.html`, `banniere-olive-conduite.jpg` et `README.md` à la racine d'un dépôt public.
+1. Déposer `index.html`, `banniere-olive-conduite.jpg`, `agence-interieur.jpg` et `README.md` à la racine d'un dépôt public.
 2. Settings puis Pages, source *Deploy from a branch*, branche `main`, dossier `/ (root)`, Save.
 3. Le site répond une à deux minutes plus tard.
 
