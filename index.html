@@ -327,9 +327,10 @@ textarea{min-height:110px;resize:vertical}
   .pc{max-width:250px}
 }
 .pw{position:relative;max-width:520px;margin:26px auto 0}
-.pw-wide{max-width:820px;margin-top:40px}
+.pw-wide{max-width:430px;margin-top:40px}
+@media(max-width:560px){.pw-wide{max-width:290px;margin-top:32px}}
 .pw::after{content:"";position:absolute;inset:0;border-radius:28px;background:var(--orange);transform:translate(16px,16px);z-index:0}
-.pw img{position:relative;z-index:1;width:100%;border-radius:28px;border:5px solid var(--black);display:block;filter:saturate(.95) contrast(1.03)}
+.pw img{position:relative;z-index:1;width:100%;height:auto;border-radius:28px;border:5px solid var(--black);display:block;filter:saturate(.95) contrast(1.03)}
 .pc-name{position:absolute;z-index:2;left:50%;bottom:-14px;transform:translateX(-50%);background:var(--black);color:#fff;padding:9px 18px 7px;font-family:"Big Shoulders Display",sans-serif;font-weight:800;font-size:1.4rem;line-height:1;text-align:center;max-width:96%}
 .pc-name small{display:block;font-family:"Barlow",sans-serif;font-size:.68rem;font-weight:400;color:#bdb7af;letter-spacing:.05em;margin-top:3px}
 .agence{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;margin-bottom:56px}
@@ -1514,9 +1515,9 @@ footer a{color:#c9c3bb}
     </div>
     <div class="pw pw-wide">
       <img src="agence-interieur.jpg" alt="L'accueil d'Olive Conduite : le comptoir, la fresque murale et les mots d'accueil"
-           width="1200" height="900" loading="lazy">
+           width="900" height="675" loading="lazy">
     </div>
-    <p class="pc-cap">L'accueil, sous la fresque. Sécurité, confiance, autonomie d'un côté, concentration, respect, vigilance de l'autre. Ce ne sont pas des slogans posés là, ce sont les neuf compétences du Permis Score en langage courant.</p>
+    <p class="pc-cap" style="max-width:430px">L'accueil, sous la fresque. Sécurité, confiance, autonomie d'un côté, concentration, respect, vigilance de l'autre. Ce ne sont pas des slogans posés là, ce sont les neuf compétences du Permis Score en langage courant.</p>
   </div>
 
   <div class="wrap rdv">
