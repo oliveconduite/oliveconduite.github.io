@@ -195,9 +195,14 @@ var MOTS = {0:"non abordé",1:"découverte",2:"guidé",3:"peu guidé",4:"autonom
 function $(id){ return document.getElementById(id); }
 function ech(s){ return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
 function flash(msg, ok){
-  var f = $("flash"); f.textContent = msg; f.className = "bandeau " + (ok ? "ok" : "ko"); f.hidden = false;
-  clearTimeout(flash.t); flash.t = setTimeout(function(){ f.hidden = true; }, 6000);
+  var f = $("flash");
+  f.textContent = msg + (ok ? "" : "   (toucher pour fermer)");
+  f.className = "bandeau " + (ok ? "ok" : "ko");
+  f.hidden = false;
+  clearTimeout(flash.t);
+  if (ok) flash.t = setTimeout(function(){ f.hidden = true; }, 6000);
 }
+document.getElementById("flash").addEventListener("click", function(){ this.hidden = true; });
 function attente(on, txt){ $("attenteTxt").textContent = txt || "Enregistrement…"; $("attente").classList.toggle("on", !!on); }
 function dest(e){
   var out = [];
