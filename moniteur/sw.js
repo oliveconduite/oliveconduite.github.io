@@ -5,7 +5,7 @@
    ci-dessous (par exemple la date du jour). Le service worker détectera
    le changement, purgera l'ancien cache et rechargera tous les fichiers.
 */
-var VERSION = "2026-09-06-01";
+var VERSION = "2026-09-06-02";
 var CACHE   = "permis-score-" + VERSION;
 var SHELL   = ["./", "./index.html", "./manifest.json", "./icone-180.png", "./icone-512.png"];
 
