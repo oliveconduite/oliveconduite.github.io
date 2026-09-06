@@ -13,156 +13,144 @@
 
 <style>
 :root{
-  --noir:#0B0A09; --orange:#F26522; --orange-fonce:#BF4A12;
-  --papier:#F7F5F2; --blanc:#FFFFFF; --ligne:#E2DDD6;
+  --noir:#0B0A09; --orange:#F26522; --fonce:#BF4A12;
+  --papier:#F7F5F2; --blanc:#fff; --ligne:#E2DDD6;
   --texte:#141210; --doux:#5C5651; --pale:#8A847C;
   --vert:#1E7A34; --rouge:#C4321A;
   --haut:env(safe-area-inset-top); --bas:env(safe-area-inset-bottom);
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-body{
-  font:400 16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
-  background:var(--papier);color:var(--texte);
-  overscroll-behavior-y:none;-webkit-font-smoothing:antialiased;
-}
-button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
+body{font:400 16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  background:var(--papier);color:var(--texte);overscroll-behavior-y:none;-webkit-font-smoothing:antialiased}
+button,input,select,textarea{font:inherit;color:inherit}
+button{background:none;border:none;cursor:pointer}
 
-/* ---------- barre du haut ---------- */
-header{
-  position:sticky;top:0;z-index:20;background:var(--noir);color:#fff;
-  padding:calc(12px + var(--haut)) 16px 12px;
-}
+header{position:sticky;top:0;z-index:30;background:var(--noir);color:#fff;
+  padding:calc(11px + var(--haut)) 16px 11px}
 .hd{display:flex;align-items:center;gap:12px}
-.marque{font-size:19px;font-weight:800;letter-spacing:.5px;line-height:1}
+.marque{font-size:18px;font-weight:800;letter-spacing:.5px;line-height:1}
 .marque span{color:var(--orange)}
 .sous{font-size:11px;color:#a9a39b;margin-top:3px}
-.recharger{margin-left:auto;width:38px;height:38px;border:1px solid #33302c;display:grid;place-items:center;flex:none}
-.recharger svg{width:19px;height:19px;fill:none;stroke:#fff;stroke-width:2.2;stroke-linecap:round}
-.recharger.tourne svg{animation:tourner .9s linear infinite}
-/* pastille « mise à jour disponible » sur le bouton recharger */
-.recharger.maj-dispo{position:relative}
-.recharger.maj-dispo::after{content:"";position:absolute;top:-3px;right:-3px;width:11px;height:11px;
-  background:#F26522;border:2px solid #0B0A09;border-radius:50%}
-@keyframes tourner{to{transform:rotate(360deg)}}
-
-.chercher{margin-top:12px;position:relative}
-.chercher input{
-  width:100%;background:#1a1815;border:1px solid #33302c;color:#fff;
-  padding:11px 14px 11px 38px;font-size:16px;border-radius:2px;
-}
+.ico{margin-left:auto;width:36px;height:36px;border:1px solid #33302c;display:grid;place-items:center;flex:none}
+.ico svg{width:18px;height:18px;fill:none;stroke:#fff;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.ico.tourne svg{animation:tr .9s linear infinite}
+@keyframes tr{to{transform:rotate(360deg)}}
+.chercher{margin-top:11px;position:relative}
+.chercher input{width:100%;background:#1a1815;border:1px solid #33302c;color:#fff;
+  padding:10px 12px 10px 36px;font-size:16px}
 .chercher input::placeholder{color:#7d7770}
-.chercher svg{position:absolute;left:12px;top:12px;width:17px;height:17px;
-  fill:none;stroke:#7d7770;stroke-width:2}
+.chercher svg{position:absolute;left:11px;top:11px;width:16px;height:16px;fill:none;stroke:#7d7770;stroke-width:2}
 
-/* ---------- vues ---------- */
-main{padding:14px 14px calc(28px + var(--bas))}
-.vue{display:none;animation:apparait .18s ease-out}
-.vue.on{display:block}
-@keyframes apparait{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+main{padding:13px 13px calc(30px + var(--bas))}
+.vue{display:none}
+.vue.on{display:block;animation:ap .16s ease-out}
+@keyframes ap{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
 
-/* ---------- carte élève ---------- */
-.carte{
-  display:block;width:100%;text-align:left;background:var(--blanc);
-  border:1px solid var(--ligne);border-left:5px solid var(--orange);
-  padding:14px 16px;margin-bottom:10px;
-}
+.bandeau{padding:9px 13px;font-size:13px;font-weight:600;text-align:center}
+.bandeau.demo{background:var(--orange);color:#140800}
+.bandeau.ok{background:#D7F0DB;color:#14532A}
+.bandeau.ko{background:#FFE0DA;color:#8C1C0A}
+
+.carte{display:block;width:100%;text-align:left;background:var(--blanc);border:1px solid var(--ligne);
+  border-left:5px solid var(--orange);padding:13px 15px;margin-bottom:9px}
 .carte:active{background:#FFF7F2}
 .carte.pret{border-left-color:var(--vert)}
+.carte.inactif{opacity:.5}
 .nom{font-size:17px;font-weight:700;line-height:1.2}
+.ligne-nom{display:flex;align-items:flex-start;gap:12px}
+.ligne-nom > div{flex:1;min-width:0}
+.form.manque{color:var(--rouge);font-weight:600}
+.crayon{flex:none;width:38px;height:38px;border:1.5px solid var(--ligne);display:grid;place-items:center}
+.crayon svg{width:19px;height:19px;fill:none;stroke:var(--fonce);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.crayon:active{background:#FFF4EE;border-color:var(--orange)}
 .form{font-size:12px;color:var(--pale);margin-top:2px}
-.rang{display:flex;align-items:center;gap:12px;margin-top:11px}
-.pts{font-size:31px;font-weight:800;color:var(--orange-fonce);line-height:1;min-width:78px;
-  font-variant-numeric:tabular-nums}
-.pts em{font-size:13px;color:var(--pale);font-style:normal;font-weight:400}
+.rang{display:flex;align-items:center;gap:11px;margin-top:10px}
+.pts{font-size:29px;font-weight:800;color:var(--fonce);line-height:1;min-width:74px;font-variant-numeric:tabular-nums}
+.pts em{font-size:12px;color:var(--pale);font-style:normal;font-weight:400}
 .pts.ok{color:var(--vert)}
 .jauge{flex:1;background:var(--ligne);height:10px;position:relative}
 .jauge i{display:block;height:100%;background:var(--orange);transition:width .3s}
 .jauge.ok i{background:var(--vert)}
-.jauge u{position:absolute;top:-3px;bottom:-3px;width:2px;background:var(--noir);text-decoration:none}
-.info{font-size:12px;color:var(--doux);margin-top:9px}
-.puce{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.5px;
-  padding:4px 9px;background:#EFEBE5;color:var(--doux);margin-top:9px}
+.jauge u{position:absolute;top:-3px;bottom:-3px;width:2px;background:var(--noir)}
+.info{font-size:12px;color:var(--doux);margin-top:8px}
+.puce{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.5px;padding:4px 9px;
+  background:#EFEBE5;color:var(--doux);margin-top:8px}
 .puce.ok{background:var(--vert);color:#fff}
-.puce.urgent{background:#FFE8DE;color:var(--orange-fonce)}
+.puce.urgent{background:#FFE8DE;color:var(--fonce)}
 
-/* ---------- fiche ---------- */
-.retour{display:inline-flex;align-items:center;gap:7px;font-size:15px;
-  color:var(--orange-fonce);font-weight:600;padding:6px 0 12px}
-.bloc{background:var(--blanc);border:1px solid var(--ligne);padding:16px;margin-bottom:10px}
-.tt{font-size:10.5px;font-weight:800;letter-spacing:1.2px;color:var(--orange-fonce);margin-bottom:12px}
-.grand{font-size:56px;font-weight:800;color:var(--orange-fonce);line-height:.92;
-  font-variant-numeric:tabular-nums}
+.bloc{background:var(--blanc);border:1px solid var(--ligne);padding:15px;margin-bottom:9px}
+.tt{font-size:10.5px;font-weight:800;letter-spacing:1.2px;color:var(--fonce);margin-bottom:11px}
+.grand{font-size:54px;font-weight:800;color:var(--fonce);line-height:.92;font-variant-numeric:tabular-nums}
 .grand.ok{color:var(--vert)}
-.grand em{font-size:19px;color:var(--pale);font-style:normal;font-weight:400}
-.comp{margin-bottom:11px}
+.grand em{font-size:18px;color:var(--pale);font-style:normal;font-weight:400}
+.retour{display:inline-flex;align-items:center;gap:6px;font-size:15px;color:var(--fonce);font-weight:600;padding:5px 0 11px}
+
+.comp{margin-bottom:10px}
 .comp:last-child{margin-bottom:0}
 .comp .l{display:flex;justify-content:space-between;align-items:baseline;font-size:13.5px;margin-bottom:4px}
-.comp .l b{font-variant-numeric:tabular-nums;font-size:13px}
 .comp .l small{color:var(--pale);font-size:11.5px;margin-left:6px}
 .comp .b{background:#EFEBE5;height:9px}
-.comp .b i{display:block;height:100%;background:var(--orange);transition:width .3s}
+.comp .b i{display:block;height:100%;background:var(--orange)}
 .comp.faible .b i{background:var(--rouge)}
 .comp.acquise .b i{background:var(--vert)}
-.prio{display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid var(--ligne)}
+.prio{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid var(--ligne)}
 .prio:last-child{border-bottom:none}
-.prio b{width:22px;height:22px;flex:none;background:var(--rouge);color:#fff;
-  font-size:12px;display:grid;place-items:center}
-.prio span{font-size:14.5px}
+.prio b{width:21px;height:21px;flex:none;background:var(--rouge);color:#fff;font-size:12px;display:grid;place-items:center}
 .prio small{display:block;color:var(--pale);font-size:12px}
-.courbe{width:100%;height:78px;display:block;margin-top:4px}
-.suite{font-size:15px;font-weight:700;font-variant-numeric:tabular-nums;
-  color:var(--doux);margin-top:8px;word-spacing:2px}
+.courbe{width:100%;height:74px;display:block}
+.suite{font-size:14px;font-weight:700;font-variant-numeric:tabular-nums;color:var(--doux);margin-top:6px}
 
-/* ---------- états ---------- */
-.etat{padding:44px 18px;text-align:center;color:var(--doux);font-size:14.5px}
-.etat b{display:block;font-size:17px;color:var(--texte);margin-bottom:8px}
-.etat code{display:block;background:#EFEBE5;padding:10px;margin-top:12px;
-  font-size:11.5px;text-align:left;word-break:break-all}
-.pied{text-align:center;font-size:11.5px;color:var(--pale);padding:18px 0 4px}
-.demo{background:var(--orange);color:#140800;font-size:12px;font-weight:700;
-  text-align:center;padding:7px 12px}
-/* ---- bouton flottant « saisir » ---- */
-.fab{position:fixed;right:16px;bottom:18px;z-index:40;display:flex;align-items:center;gap:8px;
-  background:#F26522;color:#fff;border:none;border-radius:30px;padding:13px 18px 13px 15px;
-  font-size:15px;font-weight:700;box-shadow:0 6px 18px rgba(0,0,0,.28);cursor:pointer}
-.fab svg{width:22px;height:22px;fill:none;stroke:#fff;stroke-width:2.4;stroke-linecap:round}
-.fab.cache{display:none}
-/* ---- formulaire de saisie ---- */
-.saisie{padding:14px}
-.saisie .bloc{background:#fff;border:1px solid #E2DDD6;padding:16px;margin-bottom:12px}
-.saisie label{display:block;font-size:12px;font-weight:700;letter-spacing:.5px;
-  color:#BF4A12;margin-bottom:7px;text-transform:uppercase}
-.saisie select,.saisie input[type=date],.saisie input[type=text]{
-  width:100%;font-size:16px;padding:11px 12px;border:1px solid #C9C3BA;background:#fff;
-  color:#141210;border-radius:0;-webkit-appearance:none;appearance:none}
-.saisie select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%235C5651' stroke-width='2.4'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
-  background-repeat:no-repeat;background-position:right 12px center;padding-right:36px}
-.comp-saisie{margin-bottom:14px}
-.comp-saisie .titre{font-size:14px;font-weight:600;color:#141210;margin-bottom:6px}
-.niveaux{display:grid;grid-template-columns:repeat(5,1fr);gap:5px}
-.niveaux button{font-size:12px;font-weight:600;padding:9px 2px;border:1px solid #C9C3BA;
-  background:#F7F5F2;color:#5C5651;cursor:pointer;line-height:1.15;border-radius:0}
-.niveaux button .num{display:block;font-size:16px;font-weight:800;margin-bottom:2px}
-.niveaux button.actif{background:#F26522;border-color:#F26522;color:#fff}
-.niveaux button.actif.zero{background:#5C5651;border-color:#5C5651}
-.aide-niv{font-size:11px;color:#8a847c;margin-top:5px}
-.case{display:flex;align-items:center;gap:11px;font-size:15px;color:#141210;cursor:pointer;padding:4px 0}
-.case input{width:22px;height:22px;accent-color:#F26522;flex:none}
-.actions{display:flex;gap:10px;margin-top:4px}
-.actions button{flex:1;font-size:16px;font-weight:700;padding:14px;border:none;cursor:pointer;border-radius:0}
-.btn-ok{background:#F26522;color:#fff}
-.btn-ok:disabled{opacity:.5}
-.btn-annuler{background:#EFEBE5;color:#5C5651}
-.toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);z-index:60;
-  background:#0B0A09;color:#fff;padding:13px 20px;font-size:14px;box-shadow:0 6px 20px rgba(0,0,0,.35);
-  max-width:90%;text-align:center;opacity:0;transition:opacity .25s}
-.toast.on{opacity:1}
-.toast.err{background:#8a1f10}
+.histo{border-top:1px solid var(--ligne);padding:10px 0;display:flex;gap:12px;align-items:flex-start}
+.histo:first-of-type{border-top:none}
+.histo .sc{font-size:19px;font-weight:800;color:var(--fonce);min-width:44px;font-variant-numeric:tabular-nums}
+.histo .d{font-size:13.5px;font-weight:600}
+.histo .t{font-size:12.5px;color:var(--doux)}
+
+.btn{display:block;width:100%;text-align:center;background:var(--orange);color:#140800;
+  font-weight:800;font-size:16px;letter-spacing:.3px;padding:14px;border:2px solid var(--orange);margin-bottom:9px}
+.btn:active{background:#FF7A38}
+.btn.noir{background:var(--noir);border-color:var(--noir);color:#fff}
+.btn.vide{background:transparent;color:var(--texte);border-color:var(--ligne)}
+.btn.danger{background:transparent;color:var(--rouge);border-color:#F0CFC8}
+.btn[disabled]{opacity:.5}
+
+label{display:block;font-size:12px;font-weight:700;letter-spacing:.4px;color:var(--fonce);margin:14px 0 5px}
+input[type=text],input[type=email],input[type=date],textarea{width:100%;background:#fff;
+  border:1px solid var(--ligne);padding:12px;font-size:16px}
+input:focus,textarea:focus{outline:none;border-color:var(--orange)}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{flex:1;min-width:64px;text-align:center;border:1.5px solid var(--ligne);background:#fff;padding:11px 6px;font-size:14px;font-weight:600}
+.chip[aria-pressed=true]{border-color:var(--orange);background:#FFF4EE;color:var(--fonce)}
+.note-l{display:flex;justify-content:space-between;align-items:center;font-size:14px;margin:14px 0 5px}
+.note-l small{color:var(--pale);font-size:11.5px}
+.niv{display:flex;gap:5px}
+.niv button{flex:1;border:1.5px solid var(--ligne);background:#fff;padding:11px 0;font-size:15px;font-weight:700}
+.niv button[aria-pressed=true]{border-color:var(--orange);background:var(--orange);color:#140800}
+.niv button.zero[aria-pressed=true]{background:#EFEBE5;border-color:#c9c3bb;color:var(--doux)}
+.bascule{display:flex;align-items:center;gap:11px;background:#fff;border:1px solid var(--ligne);padding:13px;margin:16px 0 12px}
+.bascule input{width:22px;height:22px;accent-color:var(--orange);flex:none}
+.bascule span{font-size:14px}
+.bascule small{display:block;color:var(--pale);font-size:12px}
+textarea{min-height:96px;resize:vertical;line-height:1.5}
+.aide{font-size:12px;color:var(--pale);margin-top:5px}
+.mot{background:#F7F5F2;border-left:4px solid var(--noir);padding:10px 12px;margin-top:8px;
+  font-size:13.5px;font-style:italic;color:var(--texte);white-space:pre-line}
+.note-suivi{white-space:pre-line;font-size:14px;color:var(--texte)}
+.note-vide{font-size:13.5px;color:var(--pale);font-style:italic}
+
+.etat{padding:40px 18px;text-align:center;color:var(--doux);font-size:14.5px}
+.etat b{display:block;font-size:17px;color:var(--texte);margin-bottom:7px}
+.etat code{display:block;background:#EFEBE5;padding:9px;margin-top:11px;font-size:11px;text-align:left;word-break:break-all}
+.pied{text-align:center;font-size:11.5px;color:var(--pale);padding:16px 0 4px;white-space:pre-line}
+.attente{position:fixed;inset:0;background:rgba(11,10,9,.55);display:none;place-items:center;z-index:60}
+.attente.on{display:grid}
+.attente div{background:#fff;padding:20px 26px;font-size:14px;font-weight:600}
 </style>
 </head>
 <body>
 
-<div class="demo" id="bandeauDemo" hidden>Mode démonstration — données d'exemple</div>
+<div class="bandeau demo" id="bandeauDemo" hidden>Mode démonstration — données d'exemple</div>
+<div class="bandeau" id="flash" hidden></div>
 
 <header>
   <div class="hd">
@@ -170,7 +158,7 @@ main{padding:14px 14px calc(28px + var(--bas))}
       <div class="marque">OLIVE <span>CONDUITE</span></div>
       <div class="sous" id="sous">Permis Score</div>
     </div>
-    <button class="recharger" id="btnRecharger" aria-label="Recharger">
+    <button class="ico" id="btnRecharger" aria-label="Recharger">
       <svg viewBox="0 0 24 24"><path d="M20 11a8 8 0 1 0-2.3 6.3"/><path d="M20 4v7h-7"/></svg>
     </button>
   </div>
@@ -181,449 +169,443 @@ main{padding:14px 14px calc(28px + var(--bas))}
 </header>
 
 <main>
-  <section class="vue on" id="vueListe"><div id="liste"></div><div class="pied" id="pied"></div></section>
-  <section class="vue" id="vueFiche"></section>
-  <section class="vue" id="vueSaisie"></section>
+  <section class="vue on" id="vListe"></section>
+  <section class="vue" id="vFiche"></section>
+  <section class="vue" id="vLecon"></section>
+  <section class="vue" id="vEleve"></section>
 </main>
 
-<button class="fab" id="btnSaisir" aria-label="Saisir une leçon" onclick="ouvrirSaisie()">
-  <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
-  <span>Saisir une leçon</span>
-</button>
+<div class="attente" id="attente"><div id="attenteTxt">Enregistrement…</div></div>
 
 <script>
 /* ====================================================================
-   RÉGLAGES — remplacez ces deux lignes par vos valeurs.
-   Dans le tableur : menu Olive Conduite > Réglages de l'application moniteur
+   RÉGLAGES — deux lignes à remplacer.
+   Tableur : menu Olive Conduite > Réglages de l'application
    ==================================================================== */
-var ADRESSE = "https://script.google.com/macros/s/AKfycbzIgC9vjXElFaAZHAtZA59ywDaxbOlenQ_DYwTTClxCNR9zdiDvQVTYOWKmwbvpwahfsA/exec";
+var ADRESSE = "https://script.google.com/macros/s/METTEZ_VOTRE_ADRESSE_ICI/exec";
 var CLE     = "olive-2026-change-moi";
 /* ==================================================================== */
 
-var donnees = null, filtre = "";
+var D = null, filtre = "", courant = null, DEMO = false;
+var COMP = ["Maîtrise du véhicule","Observation","Anticipation","Intersections","Priorités",
+            "Vitesse et allure","Stationnement et manœuvres","Autonomie","Environnement complexe"];
+var MOTS = {0:"non abordé",1:"découverte",2:"guidé",3:"peu guidé",4:"autonome"};
 
-/* ---------------------------------------------------------- démonstration */
-function jeuDemo() {
-  var comp = ["Maîtrise du véhicule","Observation","Anticipation","Intersections","Priorités",
-              "Vitesse et allure","Stationnement et manœuvres","Autonomie","Environnement complexe"];
-  var mots = {0:"non abordé",1:"découverte",2:"guidé",3:"peu guidé",4:"autonome"};
-  function faire(nom, formation, niv, courbe, date, theme, heures) {
-    var pr = comp.map(function (n, k) { return { nom: n, niveau: niv[k], mot: mots[niv[k]] }; })
-                 .sort(function (a, b) { return a.niveau - b.niveau; }).slice(0, 3);
-    var sc = Math.round(niv.reduce(function (a, b) { return a + b; }, 0) / 36 * 100);
-    return { nom: nom, formation: formation, score: sc, heures: heures,
-             restant: sc >= 80 ? 0 : Math.round((80 - sc) / 1.45), pret: sc >= 80,
-             lecons: courbe.length, niveaux: niv, courbe: courbe, priorites: pr,
-             derniere: { date: date, theme: theme } };
-  }
-  return {
-    ecole: "Olive Conduite", moniteur: "Olivier", objectif: 80, competences: comp, mots: mots,
-    maj: "démonstration",
-    eleves: [
-      faire("Lola G.", "Permis B – Pack Classic", [4,4,3,4,3,4,2,2,2],
-            [50,53,56,58,61,64,67,69,72,75,78], "11/03/2026", "Simulation complète d'examen", 18.75),
-      faire("Mathis V.", "Pack AM – voiture sans permis", [3,3,2,3,3,3,2,2,2],
-            [39,44,50,53,58,64], "07/03/2026", "Rocade et centre de Calais", 6),
-      faire("Sabrina L.", "Permis B – Pack Accompagné", [4,4,4,4,4,4,3,3,3],
-            [58,64,69,75,81,86], "09/03/2026", "Conduite autonome longue distance", 21),
-      faire("Yanis D.", "Permis B – Pack Supervisé", [2,2,1,2,2,2,1,1,1],
-            [28,33,39], "05/03/2026", "Intersections de quartier", 3)
-    ]
-  };
+/* ---------------------------------------------------------- utilitaires */
+function $(id){ return document.getElementById(id); }
+function ech(s){ return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
+function flash(msg, ok){
+  var f = $("flash"); f.textContent = msg; f.className = "bandeau " + (ok ? "ok" : "ko"); f.hidden = false;
+  clearTimeout(flash.t); flash.t = setTimeout(function(){ f.hidden = true; }, 6000);
 }
-
-/* ---------------------------------------------------------- chargement */
-function charger(force) {
-  var btn = document.getElementById("btnRecharger");
-  btn.classList.add("tourne");
-
-  if (ADRESSE.indexOf("METTEZ_VOTRE_ADRESSE_ICI") >= 0) {
-    document.getElementById("bandeauDemo").hidden = false;
-    donnees = jeuDemo(); afficherListe(); btn.classList.remove("tourne"); return;
-  }
-
-  var url = ADRESSE + "?api=1&cle=" + encodeURIComponent(CLE) + "&t=" + Date.now();
-  fetch(url, { cache: force ? "reload" : "default" })
-    .then(function (r) { return r.json(); })
-    .then(function (j) {
-      if (j.erreur) { erreur("Clé d'accès refusée", "Vérifiez la ligne CLE de l'application et le réglage cleApi du script."); return; }
-      donnees = j; afficherListe();
-    })
-    .catch(function () { chargerJsonp(); })
-    .then(function () { btn.classList.remove("tourne"); });
+function attente(on, txt){ $("attenteTxt").textContent = txt || "Enregistrement…"; $("attente").classList.toggle("on", !!on); }
+function dest(e){
+  var out = [];
+  [e.email, e.email2].forEach(function(a){
+    a = String(a || "").trim();
+    if (a && out.indexOf(a) < 0) out.push(a);
+  });
+  return out;
 }
+function eleve(nom){ for (var i=0;i<D.eleves.length;i++) if (D.eleves[i].nom===nom) return D.eleves[i]; return null; }
+function score(niv){ var s=0; for(var i=0;i<niv.length;i++) s+=niv[i]; return Math.round(s/36*100); }
+function auj(){ var d=new Date(); return d.getFullYear()+"-"+("0"+(d.getMonth()+1)).slice(-2)+"-"+("0"+d.getDate()).slice(-2); }
 
-function chargerJsonp() {
-  var nom = "reponsePermisScore";
-  window[nom] = function (j) {
-    document.getElementById("btnRecharger").classList.remove("tourne");
-    if (j.erreur) { erreur("Clé d'accès refusée", "Vérifiez la ligne CLE de l'application."); return; }
-    donnees = j; afficherListe();
+/* ---------------------------------------------------------- appels serveur */
+function appel(params, ensuite) {
+  if (DEMO) { ensuite({ ok:false, erreur:"Mode démonstration : rien n'est enregistré." }); return; }
+  var nomCb = "cb" + Date.now();
+  var fini = false;
+  window[nomCb] = function (r) {
+    fini = true; attente(false);
+    try { delete window[nomCb]; } catch (e) { window[nomCb] = undefined; }
+    ensuite(r);
   };
+  var url = ADRESSE + "?cle=" + encodeURIComponent(CLE) + "&callback=" + nomCb + "&t=" + Date.now();
+  for (var k in params) if (params.hasOwnProperty(k)) url += "&" + k + "=" + encodeURIComponent(params[k]);
   var s = document.createElement("script");
-  s.src = ADRESSE + "?api=1&cle=" + encodeURIComponent(CLE) + "&callback=" + nom + "&t=" + Date.now();
-  s.onerror = function () {
-    document.getElementById("btnRecharger").classList.remove("tourne");
-    erreur("Connexion impossible", "Vérifiez le réseau, puis l'adresse renseignée dans l'application.");
-  };
+  s.src = url;
+  s.onerror = function () { if (!fini) { attente(false); ensuite({ ok:false, erreur:"Connexion impossible." }); } };
   document.body.appendChild(s);
+  setTimeout(function(){ if(!fini){ attente(false); ensuite({ ok:false, erreur:"Le serveur ne répond pas." }); } }, 20000);
 }
 
-function erreur(titre, detail) {
-  document.getElementById("liste").innerHTML =
-    '<div class="etat"><b>' + titre + '</b>' + detail + '<code>' + ADRESSE + '</code></div>';
+function charger(silencieux) {
+  if (ADRESSE.indexOf("METTEZ_VOTRE_ADRESSE_ICI") >= 0) {
+    DEMO = true; $("bandeauDemo").hidden = false; D = jeuDemo(); rendreListe(); return;
+  }
+  $("btnRecharger").classList.add("tourne");
+  appel({ api:"data" }, function (r) {
+    $("btnRecharger").classList.remove("tourne");
+    if (r.ok && r.data) { D = r.data; rendreListe(); if(!silencieux) return; }
+    else if (r.erreur) {
+      if (!D) $("vListe").innerHTML = '<div class="etat"><b>' + ech(r.erreur) + '</b>'
+        + 'Vérifiez l\'adresse et la clé en haut du fichier index.html, '
+        + 'et que le déploiement est en accès « Tous les utilisateurs ».'
+        + '<code>' + ech(ADRESSE) + '</code></div>';
+      else flash(r.erreur, false);
+    }
+  });
 }
 
-/* ---------------------------------------------------------- liste */
-function afficherListe() {
-  var l = document.getElementById("liste");
-  var el = donnees.eleves.slice().sort(function (a, b) {
-    if (a.score === null) return 1;
-    if (b.score === null) return -1;
+function apres(r, msgOk) {
+  if (!r.ok) { flash(r.erreur || "Échec", false); return false; }
+  if (r.data) D = r.data;
+  var m = msgOk || r.message || "Enregistré";
+  if (r.mail && r.mail !== "non demandé") m += " — " + r.mail;
+  flash(m, r.mail ? r.mail.indexOf("Envoyé") === 0 || r.mail === "non demandé" : true);
+  return true;
+}
+
+/* ---------------------------------------------------------- vue : liste */
+function rendreListe() {
+  var el = D.eleves.slice().sort(function (a,b) {
+    if (a.actif !== b.actif) return a.actif ? -1 : 1;
+    if (a.score === null) return 1; if (b.score === null) return -1;
     return b.score - a.score;
   });
   if (filtre) {
     var f = filtre.toLowerCase();
-    el = el.filter(function (e) {
-      return (e.nom + " " + e.formation).toLowerCase().indexOf(f) >= 0;
-    });
+    el = el.filter(function(e){ return (e.nom+" "+e.formation).toLowerCase().indexOf(f) >= 0; });
   }
-  if (!el.length) {
-    l.innerHTML = '<div class="etat"><b>Aucun élève</b>' +
-      (filtre ? "Aucun résultat pour cette recherche." : "Ajoutez vos élèves dans l'onglet Élèves du tableur.") + '</div>';
-  } else {
-    l.innerHTML = el.map(carte).join("");
-  }
-  document.getElementById("sous").textContent =
-    donnees.eleves.length + " élève" + (donnees.eleves.length > 1 ? "s" : "") + " · " + donnees.maj;
-  document.getElementById("pied").textContent =
-    "Objectif examen " + donnees.objectif + "/100 — mis à jour le " + donnees.maj;
-  afficherVersion();
-  montrer("vueListe");
-}
-
-var versionApp = "";
-function afficherVersion() {
-  if (versionApp) { poserVersionPied(); return; }
-  if ("serviceWorker" in navigator && navigator.serviceWorker.controller) {
-    var canal = new MessageChannel();
-    navigator.serviceWorker.controller.postMessage("version");
-    navigator.serviceWorker.addEventListener("message", function (ev) {
-      if (ev.data && ev.data.type === "version") {
-        versionApp = ev.data.version; poserVersionPied();
-      }
-    });
-  }
-}
-function poserVersionPied() {
-  var p = document.getElementById("pied");
-  if (p && versionApp && p.textContent.indexOf("version") < 0) {
-    p.textContent += " · version " + versionApp;
-  }
+  var h = '<button class="btn noir" onclick="formEleve(null)">+ Nouvel élève</button>';
+  h += el.length ? el.map(carte).join("")
+     : '<div class="etat"><b>Aucun élève</b>' + (filtre ? "Aucun résultat." : "Commencez par en créer un.") + '</div>';
+  h += '<div class="pied">Objectif examen ' + D.objectif + '/100 — mis à jour le ' + ech(D.maj)
+     + '\n' + D.totalLecons + ' leçon' + (D.totalLecons>1?"s":"") + ' enregistrée'
+     + (D.totalLecons>1?"s":"") + ' au total</div>';
+  $("vListe").innerHTML = h;
+  $("sous").textContent = D.eleves.length + " élève" + (D.eleves.length>1?"s":"") + " · " + D.maj;
+  montrer("vListe");
 }
 
 function carte(e) {
-  if (e.score === null) {
-    return '<button class="carte" onclick="ouvrir(' + JSON.stringify(e.nom).replace(/"/g, "&quot;") + ')">'
-      + '<div class="nom">' + e.nom + '</div><div class="form">' + (e.formation || "") + '</div>'
-      + '<div class="info">Aucune leçon enregistrée</div></button>';
-  }
-  var seuil = donnees.objectif;
+  var t = 'onclick="ouvrir(\'' + ech(e.nom).replace(/'/g,"\\'") + '\')"';
+  var h = '<button class="carte' + (e.pret?" pret":"") + (e.actif?"":" inactif") + '" ' + t + '>'
+    + '<div class="nom">' + ech(e.nom) + (e.actif?"":" · archivé") + '</div>'
+    + '<div class="form">' + ech(e.formation) + '</div>';
+  if (e.score === null) return h + '<div class="info">Aucune leçon enregistrée</div></button>';
   var urgent = !e.pret && e.restant <= 3;
-  return '<button class="carte' + (e.pret ? " pret" : "") + '" onclick="ouvrir('
-    + JSON.stringify(e.nom).replace(/"/g, "&quot;") + ')">'
-    + '<div class="nom">' + e.nom + '</div>'
-    + '<div class="form">' + (e.formation || "") + '</div>'
-    + '<div class="rang"><div class="pts' + (e.pret ? " ok" : "") + '">' + e.score + '<em>/100</em></div>'
-    + '<div class="jauge' + (e.pret ? " ok" : "") + '"><i style="width:' + Math.max(2, e.score) + '%"></i>'
-    + '<u style="left:' + seuil + '%"></u></div></div>'
-    + '<div class="info">' + e.heures + ' h de conduite · ' + e.lecons + ' leçon'
-    + (e.lecons > 1 ? "s" : "") + ' · dernière le ' + (e.derniere ? e.derniere.date : "—") + '</div>'
-    + '<div class="puce' + (e.pret ? " ok" : (urgent ? " urgent" : "")) + '">'
+  return h
+    + '<div class="rang"><div class="pts' + (e.pret?" ok":"") + '">' + e.score + '<em>/100</em></div>'
+    + '<div class="jauge' + (e.pret?" ok":"") + '"><i style="width:' + Math.max(2,e.score) + '%"></i>'
+    + '<u style="left:' + D.objectif + '%"></u></div></div>'
+    + '<div class="info">' + e.heures + ' h · ' + e.lecons + ' leçon' + (e.lecons>1?"s":"")
+    + ' · dernière le ' + ech(e.derniere.date) + '</div>'
+    + '<div class="puce' + (e.pret?" ok":(urgent?" urgent":"")) + '">'
     + (e.pret ? "PRÊT POUR L'EXAMEN" : "ENCORE " + e.restant + " H ESTIMÉES") + '</div></button>';
 }
 
-/* ---------------------------------------------------------- fiche */
+/* ---------------------------------------------------------- vue : fiche */
 function ouvrir(nom) {
-  var e = donnees.eleves.filter(function (x) { return x.nom === nom; })[0];
-  if (!e) return;
-  var v = document.getElementById("vueFiche");
+  courant = nom;
+  var e = eleve(nom); if (!e) return;
+  var h = '<button class="retour" onclick="rendreListe()">&larr; Tous les élèves</button>';
 
-  if (e.score === null) {
-    v.innerHTML = boutonRetour() + '<div class="bloc"><div class="nom">' + e.nom + '</div>'
-      + '<div class="etat">Aucune leçon enregistrée pour cet élève.</div></div>';
-    montrer("vueFiche"); return;
+  h += '<div class="bloc"><div class="ligne-nom">'
+     + '<div><div class="nom" style="font-size:19px">' + ech(e.nom) + '</div>'
+     + '<div class="form">' + ech(e.formation) + '</div>'
+     + '<div class="form' + (e.email ? '' : ' manque') + '">'
+     + (e.email ? ech(e.email) : 'aucune adresse e-mail') + '</div>'
+     + (e.email2 && e.email2 !== e.email
+        ? '<div class="form">' + ech(e.email2) + ' (parent)</div>' : '') + '</div>'
+     + '<button class="crayon" onclick="formEleve(courant)" aria-label="Modifier la fiche">'
+     + '<svg viewBox="0 0 24 24"><path d="M4 20h4l10-10-4-4L4 16v4z"/><path d="M13.5 6.5l4 4"/></svg>'
+     + '</button></div>';
+  if (e.score !== null) {
+    h += '<div class="grand' + (e.pret?" ok":"") + '" style="margin-top:13px">' + e.score + '<em> / 100</em></div>'
+       + '<div class="jauge' + (e.pret?" ok":"") + '" style="margin-top:11px"><i style="width:'
+       + Math.max(2,e.score) + '%"></i><u style="left:' + D.objectif + '%"></u></div>'
+       + '<div class="info">Objectif ' + D.objectif + ' · ' + e.heures + ' h · '
+       + e.lecons + ' leçon' + (e.lecons>1?"s":"") + '</div>'
+       + '<div class="puce' + (e.pret?" ok":"") + '">'
+       + (e.pret ? "PRÊT POUR L'EXAMEN" : "ENCORE " + e.restant + " H ESTIMÉES") + '</div>';
+  } else {
+    h += '<div class="info" style="margin-top:10px">Aucune leçon enregistrée pour l\'instant.</div>';
   }
+  h += '</div>';
 
-  var noms3 = e.priorites.map(function (p) { return p.nom; });
-  var comps = donnees.competences.map(function (c, k) {
-    var n = e.niveaux[k];
-    var cls = n >= 4 ? " acquise" : (noms3.indexOf(c) >= 0 ? " faible" : "");
-    return '<div class="comp' + cls + '"><div class="l"><span>' + c
-      + '<small>' + (donnees.mots[n] || "") + '</small></span><b>' + n + '/4</b></div>'
-      + '<div class="b"><i style="width:' + (n / 4 * 100) + '%"></i></div></div>';
-  }).join("");
-
-  var prios = e.priorites.map(function (p, i) {
-    return '<div class="prio"><b>' + (i + 1) + '</b><span>' + p.nom
-      + '<small>' + p.mot + ', niveau ' + p.niveau + ' sur 4</small></span></div>';
-  }).join("");
-
-  v.innerHTML = boutonRetour()
-    + '<div class="bloc">'
-    +   '<div class="nom" style="font-size:19px">' + e.nom + '</div>'
-    +   '<div class="form">' + (e.formation || "") + '</div>'
-    +   '<div class="grand' + (e.pret ? " ok" : "") + '" style="margin-top:14px">' + e.score + '<em> / 100</em></div>'
-    +   '<div class="jauge' + (e.pret ? " ok" : "") + '" style="margin-top:12px">'
-    +     '<i style="width:' + Math.max(2, e.score) + '%"></i><u style="left:' + donnees.objectif + '%"></u></div>'
-    +   '<div class="info">Objectif ' + donnees.objectif + ' · ' + e.heures + ' h de conduite · '
-    +   e.lecons + ' leçon' + (e.lecons > 1 ? "s" : "") + '</div>'
-    +   '<div class="puce' + (e.pret ? " ok" : "") + '">'
-    +   (e.pret ? "PRÊT POUR L'EXAMEN" : "ENCORE " + e.restant + " H ESTIMÉES") + '</div>'
+  h += '<div class="bloc"><div class="tt">NOTE DE SUIVI</div>'
+    + '<div id="noteLecture">'
+    +   (e.note ? '<div class="note-suivi">' + ech(e.note) + '</div>'
+              : '<div class="note-vide">Aucune note pour cet élève.</div>')
+    +   '<button class="btn vide" style="margin-top:11px" onclick="editerNote()">'
+    +   (e.note ? 'Modifier la note' : 'Ajouter une note') + '</button>'
     + '</div>'
-    + '<div class="bloc"><div class="tt">À TRAVAILLER EN PRIORITÉ</div>' + prios + '</div>'
-    + '<div class="bloc"><div class="tt">LES NEUF COMPÉTENCES</div>' + comps + '</div>'
-    + '<div class="bloc"><div class="tt">PROGRESSION</div>' + courbeSvg(e.courbe)
-    +   '<div class="suite">' + e.courbe.join(" › ") + '</div>'
-    +   '<div class="info">Dernière leçon le ' + e.derniere.date + ' — ' + e.derniere.theme + '</div>'
-    + '</div>';
-  montrer("vueFiche");
-}
+    + '<div id="noteEdition" hidden>'
+    +   '<textarea id="nTxt" maxlength="800">' + ech(e.note) + '</textarea>'
+    +   '<div class="aide">Note interne. Elle n\'est jamais envoyée à l\'élève.</div>'
+    +   '<button class="btn" style="margin-top:10px" onclick="sauverNote()">Enregistrer la note</button>'
+    +   '<button class="btn vide" onclick="ouvrir(courant)">Annuler</button>'
+    + '</div></div>';
 
-function boutonRetour() {
-  return '<button class="retour" onclick="retour()">&larr; Tous les élèves</button>';
+  h += '<button class="btn" onclick="formLecon()">+ Nouvelle leçon</button>';
+  if (e.score !== null && (e.email || e.email2)) {
+    h += '<button class="btn vide" onclick="renvoyer()">Renvoyer le dernier score par e-mail</button>';
+    h += '<button class="btn vide" onclick="envoyerBilan()">Envoyer le bilan complet à l\'élève</button>';
+    h += '<div class="aide" style="text-align:center;margin:-4px 0 9px">Le bilan reprend toutes les leçons, '
+       + 'les dates, les durées, les commentaires et la progression.</div>';
+  }
+  h += '<button class="btn vide" onclick="formEleve(courant)">Modifier le nom, l\'e-mail, la formation</button>';
+
+  if (e.score !== null) {
+    h += '<div class="bloc"><div class="tt">À TRAVAILLER EN PRIORITÉ</div>'
+      + e.priorites.map(function(p,i){
+          return '<div class="prio"><b>' + (i+1) + '</b><span>' + ech(p.nom)
+               + '<small>' + ech(p.mot) + ', niveau ' + p.niveau + ' sur 4</small></span></div>'; }).join("")
+      + '</div>';
+
+    var noms3 = e.priorites.map(function(p){ return p.nom; });
+    h += '<div class="bloc"><div class="tt">LES NEUF COMPÉTENCES</div>'
+      + D.competences.map(function(c,k){
+          var n = e.niveaux[k];
+          var cls = n>=4 ? " acquise" : (noms3.indexOf(c)>=0 ? " faible" : "");
+          return '<div class="comp' + cls + '"><div class="l"><span>' + ech(c)
+               + '<small>' + (D.mots[n]||"") + '</small></span><b>' + n + '/4</b></div>'
+               + '<div class="b"><i style="width:' + (n/4*100) + '%"></i></div></div>'; }).join("")
+      + '</div>';
+
+    h += '<div class="bloc"><div class="tt">PROGRESSION</div>' + courbeSvg(e.courbe)
+       + '<div class="suite">' + e.courbe.join(" › ") + '</div></div>';
+
+    h += '<div class="bloc"><div class="tt">HISTORIQUE DES LEÇONS</div>'
+      + e.historique.map(function(l){
+          return '<div class="histo"><div class="sc">' + l.score + '</div><div>'
+               + '<div class="d">' + ech(l.date) + ' · ' + l.duree + ' h</div>'
+               + '<div class="t">' + ech(l.theme || "—") + '</div>'
+               + (l.comm ? '<div class="mot">' + ech(l.comm) + '</div>' : '')
+               + '</div></div>'; }).join("")
+      + '</div>';
+  }
+  $("vFiche").innerHTML = h;
+  montrer("vFiche");
 }
 
 function courbeSvg(c) {
   if (!c || c.length < 2) return "";
-  var L = 300, H = 70, mx = 4;
-  var pts = c.map(function (v, i) {
-    var x = mx + i * (L - 2 * mx) / (c.length - 1);
-    var y = H - 6 - (v / 100) * (H - 14);
-    return x.toFixed(1) + "," + y.toFixed(1);
+  var L = 300, H = 68, m = 5;
+  var pts = c.map(function(v,i){
+    var x = m + i*(L-2*m)/(c.length-1);
+    var y = H - 6 - (v/100)*(H-13);
+    return x.toFixed(1)+","+y.toFixed(1);
   });
-  var ySeuil = H - 6 - (donnees.objectif / 100) * (H - 14);
-  return '<svg class="courbe" viewBox="0 0 ' + L + ' ' + H + '" preserveAspectRatio="none">'
-    + '<line x1="0" y1="' + ySeuil.toFixed(1) + '" x2="' + L + '" y2="' + ySeuil.toFixed(1)
-    + '" stroke="#0B0A09" stroke-width="1" stroke-dasharray="4 4"/>'
-    + '<polyline points="' + pts.join(" ") + '" fill="none" stroke="#F26522" stroke-width="3"'
-    + ' stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"/>'
-    + '<circle cx="' + pts[pts.length - 1].split(",")[0] + '" cy="' + pts[pts.length - 1].split(",")[1]
-    + '" r="4" fill="#0B0A09"/></svg>';
+  var ys = H - 6 - (D.objectif/100)*(H-13);
+  var d = pts[pts.length-1].split(",");
+  return '<svg class="courbe" viewBox="0 0 '+L+' '+H+'" preserveAspectRatio="none">'
+    + '<line x1="0" y1="'+ys.toFixed(1)+'" x2="'+L+'" y2="'+ys.toFixed(1)+'" stroke="#0B0A09" stroke-width="1" stroke-dasharray="4 4"/>'
+    + '<polyline points="'+pts.join(" ")+'" fill="none" stroke="#F26522" stroke-width="3" '
+    + 'stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"/>'
+    + '<circle cx="'+d[0]+'" cy="'+d[1]+'" r="4" fill="#0B0A09"/></svg>';
+}
+
+/* ---------------------------------------------------------- vue : nouvelle leçon */
+var saisie = { duree: 1, notes: [null,null,null,null,null,null,null,null,null] };
+
+function formLecon() {
+  var e = eleve(courant); if (!e) return;
+  saisie = { duree: 1, notes: [null,null,null,null,null,null,null,null,null] };
+  var h = '<button class="retour" onclick="ouvrir(courant)">&larr; ' + ech(e.nom) + '</button>'
+    + '<div class="bloc"><div class="tt">NOUVELLE LEÇON — ' + ech(e.nom).toUpperCase() + '</div>'
+    + '<label>Date</label><input type="date" id="lDate" value="' + auj() + '">'
+    + '<label>Durée</label><div class="chips" id="lDuree">'
+    +   ['0.75|45 min','1|1 h','1.5|1 h 30','2|2 h'].map(function(x,i){
+          var p = x.split("|");
+          return '<button class="chip" data-v="'+p[0]+'" aria-pressed="'+(i===1)+'">'+p[1]+'</button>'; }).join("")
+    + '</div>'
+    + '<label>Thème travaillé</label>'
+    + '<input type="text" id="lTheme" placeholder="Ronds-points de la rocade">'
+    + '<label>Commentaire de la leçon</label>'
+    + '<textarea id="lComm" maxlength="400" placeholder="Bien meilleure observation aux intersections. On reverra le créneau la prochaine fois."></textarea>'
+    + '<div class="aide">Facultatif. Ce commentaire figure dans l\'e-mail envoyé à l\'élève, sous le titre « Le mot d\'Olivier ».</div>'
+    + '</div>'
+
+    + '<div class="bloc"><div class="tt">CE QUI A ÉTÉ TRAVAILLÉ AUJOURD\'HUI</div>'
+    + '<div class="info" style="margin:0 0 10px">Laissez sur — pour les compétences non abordées : '
+    + 'le niveau précédent est conservé.</div>'
+    + D.competences.map(function(c,k){
+        var actuel = e.niveaux[k];
+        return '<div class="note-l"><span>' + ech(c)
+             + '<small> actuellement ' + actuel + '/4</small></span></div>'
+             + '<div class="niv" data-k="'+k+'">'
+             + '<button class="zero" data-n="" aria-pressed="true">—</button>'
+             + [1,2,3,4].map(function(n){ return '<button data-n="'+n+'" aria-pressed="false">'+n+'</button>'; }).join("")
+             + '</div>'; }).join("")
+    + '</div>'
+
+    + '<div class="bascule"><input type="checkbox" id="lMail"' + (e.email ? " checked" : " disabled") + '>'
+    + '<span>Envoyer le score à l\'élève'
+    + '<small>' + (dest(e).length ? ech(dest(e).join(" et ")) : "aucune adresse renseignée") + '</small></span></div>'
+
+    + '<button class="btn" onclick="enregistrerLecon()">Enregistrer la leçon</button>'
+    + '<button class="btn vide" onclick="ouvrir(courant)">Annuler</button>';
+
+  $("vLecon").innerHTML = h;
+
+  $("lDuree").addEventListener("click", function(ev){
+    var b = ev.target.closest("button"); if(!b) return;
+    this.querySelectorAll("button").forEach(function(x){ x.setAttribute("aria-pressed","false"); });
+    b.setAttribute("aria-pressed","true"); saisie.duree = parseFloat(b.dataset.v);
+  });
+  $("vLecon").querySelectorAll(".niv").forEach(function(g){
+    g.addEventListener("click", function(ev){
+      var b = ev.target.closest("button"); if(!b) return;
+      this.querySelectorAll("button").forEach(function(x){ x.setAttribute("aria-pressed","false"); });
+      b.setAttribute("aria-pressed","true");
+      saisie.notes[parseInt(this.dataset.k,10)] = b.dataset.n === "" ? null : parseInt(b.dataset.n,10);
+    });
+  });
+  montrer("vLecon");
+}
+
+function enregistrerLecon() {
+  var theme = $("lTheme").value.trim();
+  if (!theme) { flash("Indiquez le thème travaillé.", false); $("lTheme").focus(); return; }
+  attente(true, "Enregistrement de la leçon…");
+  appel({
+    api   : "lecon",
+    eleve : courant,
+    date  : $("lDate").value,
+    duree : saisie.duree,
+    theme : theme,
+    comm  : $("lComm").value.trim(),
+    notes : saisie.notes.map(function(n){ return n === null ? "" : n; }).join(","),
+    mail  : $("lMail").checked ? 1 : 0
+  }, function (r) { if (apres(r)) ouvrir(courant); });
+}
+
+function editerNote() {
+  $("noteLecture").hidden = true;
+  $("noteEdition").hidden = false;
+  $("nTxt").focus();
+}
+
+function sauverNote() {
+  attente(true, "Enregistrement de la note…");
+  appel({ api:"note", eleve: courant, note: $("nTxt").value.trim() },
+    function (r) { if (apres(r)) ouvrir(courant); });
+}
+
+function envoyerBilan() {
+  var e = eleve(courant);
+  if (!confirm("Envoyer le bilan complet de " + e.lecons + " leçon"
+      + (e.lecons > 1 ? "s" : "") + " à " + dest(e).join(" et ") + " ?")) return;
+  attente(true, "Préparation du bilan…");
+  appel({ api:"bilan", eleve: courant }, function (r) {
+    attente(false);
+    if (r.data) D = r.data;
+    flash(r.message || r.erreur || "—", !!r.ok);
+    ouvrir(courant);
+  });
+}
+
+function renvoyer() {
+  attente(true, "Envoi de l'e-mail…");
+  appel({ api:"mail", eleve: courant }, function (r) {
+    attente(false);
+    if (r.data) D = r.data;
+    flash(r.message || r.erreur || "—", !!r.ok);
+    ouvrir(courant);
+  });
+}
+
+/* ---------------------------------------------------------- vue : fiche élève */
+function formEleve(nom) {
+  var e = nom ? eleve(nom) : { nom:"", email:"", email2:"", formation:"", actif:true, score:null };
+  var nouveau = !nom;
+  var h = '<button class="retour" onclick="' + (nouveau ? 'rendreListe()' : 'ouvrir(courant)') + '">&larr; Retour</button>'
+    + '<div class="bloc"><div class="tt">' + (nouveau ? "NOUVEL ÉLÈVE" : "MODIFIER LA FICHE") + '</div>'
+    + '<label>Prénom et nom</label><input type="text" id="eNom" value="' + ech(e.nom) + '" placeholder="Lola G.">'
+    + '<label>Adresse e-mail</label><input type="email" id="eMail" value="' + ech(e.email) + '" placeholder="prenom@exemple.fr">'
+    + '<label>E-mail du parent ou du tuteur</label>'
+    + '<input type="email" id="eMail2" value="' + ech(e.email2 || "") + '" placeholder="facultatif">'
+    + '<div class="aide">Renseignée, cette adresse reçoit une copie de chaque score et du bilan complet.</div>'
+    + '<label>Formation</label><input type="text" id="eForm" value="' + ech(e.formation) + '" placeholder="Permis B – Pack Classic">'
+    + '</div>'
+    + '<button class="btn" onclick="sauverEleve(' + (nouveau ? 'null' : 'true') + ')">Enregistrer</button>';
+  if (!nouveau) {
+    h += '<button class="btn danger" onclick="archiver(' + (e.actif ? 0 : 1) + ')">'
+       + (e.actif ? "Archiver cet élève" : "Réactiver cet élève") + '</button>';
+    h += '<div class="info" style="text-align:center">L\'archivage conserve toutes les leçons.</div>';
+  }
+  $("vEleve").innerHTML = h;
+  montrer("vEleve");
+}
+
+function sauverEleve(modif) {
+  var nom = $("eNom").value.trim();
+  if (!nom) { flash("Le nom est obligatoire.", false); return; }
+  attente(true, "Enregistrement…");
+  if (modif) {
+    var e = eleve(courant);
+    appel({ api:"eleveUpd", ancien: courant, nom: nom,
+            email: $("eMail").value.trim(), email2: $("eMail2").value.trim(),
+            formation: $("eForm").value.trim(), actif: e.actif ? 1 : 0 },
+      function (r) { if (apres(r)) { courant = nom; ouvrir(nom); } });
+  } else {
+    appel({ api:"eleveAdd", nom: nom, email: $("eMail").value.trim(),
+            email2: $("eMail2").value.trim(), formation: $("eForm").value.trim() },
+      function (r) { if (apres(r)) { courant = nom; ouvrir(nom); } });
+  }
+}
+
+function archiver(actif) {
+  attente(true, "Enregistrement…");
+  appel({ api:"eleveArch", nom: courant, actif: actif },
+    function (r) { if (apres(r)) rendreListe(); });
 }
 
 /* ---------------------------------------------------------- navigation */
 function montrer(id) {
-  ["vueListe", "vueFiche", "vueSaisie"].forEach(function (v) {
-    document.getElementById(v).classList.toggle("on", v === id);
+  ["vListe","vFiche","vLecon","vEleve"].forEach(function(v){
+    $(v).classList.toggle("on", v === id);
   });
-  document.getElementById("zoneRecherche").style.display = (id === "vueListe") ? "" : "none";
-  // Le bouton « saisir » n'apparaît que sur la liste, et jamais en démonstration.
-  var fab = document.getElementById("btnSaisir");
-  var demo = !document.getElementById("bandeauDemo").hidden;
-  fab.classList.toggle("cache", id !== "vueListe" || demo);
-  window.scrollTo(0, 0);
-}
-function retour() { location.hash = ""; afficherListe(); }
-
-/* ---------------------------------------------------------- saisie d'une leçon */
-var saisieNotes = [0,0,0,0,0,0,0,0,0];
-
-function ouvrirSaisie() {
-  if (!donnees || !donnees.eleves) return;
-  saisieNotes = [0,0,0,0,0,0,0,0,0];
-
-  var eleves = donnees.eleves.slice().sort(function (a, b) {
-    return a.nom.localeCompare(b.nom, "fr");
-  });
-  var opts = eleves.map(function (e) {
-    return '<option value="' + e.nom.replace(/"/g,"&quot;") + '">' + e.nom + '</option>';
-  }).join("");
-
-  var libelles = ["Pas vu", "1", "2", "3", "4"];
-  var titres   = ["non abordé","je fais à sa place","je le guide","je le corrige","il se débrouille"];
-
-  var comps = donnees.competences.map(function (c, k) {
-    var boutons = [0,1,2,3,4].map(function (n) {
-      return '<button type="button" class="niv-btn' + (n===0?" zero":"") + '" '
-        + 'data-comp="' + k + '" data-niv="' + n + '" onclick="choisirNiveau(' + k + ',' + n + ')">'
-        + '<span class="num">' + libelles[n] + '</span></button>';
-    }).join("");
-    return '<div class="comp-saisie" id="cs-' + k + '">'
-      + '<div class="titre">' + c + '</div>'
-      + '<div class="niveaux">' + boutons + '</div></div>';
-  }).join("");
-
-  var auj = new Date();
-  var iso = auj.getFullYear() + "-"
-    + String(auj.getMonth()+1).padStart(2,"0") + "-"
-    + String(auj.getDate()).padStart(2,"0");
-
-  var v = document.getElementById("vueSaisie");
-  v.innerHTML =
-    '<div class="saisie">'
-    + '<button class="retour" onclick="retour()">&larr; Annuler</button>'
-    + '<div class="bloc">'
-    +   '<label>Élève</label>'
-    +   '<select id="sEleve">' + opts + '</select>'
-    +   '<label style="margin-top:16px">Date de la leçon</label>'
-    +   '<input type="date" id="sDate" value="' + iso + '">'
-    +   '<label style="margin-top:16px">Durée</label>'
-    +   '<select id="sDuree">'
-    +     '<option>45 minutes</option><option selected>1 heure</option>'
-    +     '<option>1 heure 30</option><option>2 heures</option></select>'
-    +   '<label style="margin-top:16px">Thème travaillé</label>'
-    +   '<input type="text" id="sTheme" placeholder="Ex : ronds-points de la rocade">'
-    + '</div>'
-    + '<div class="bloc">'
-    +   '<label>Compétences travaillées</label>'
-    +   '<div class="aide-niv" style="margin:-2px 0 12px">Laissez « Pas vu » pour ce qui n\'a pas été abordé : le niveau précédent est conservé.</div>'
-    +   comps
-    + '</div>'
-    + '<div class="bloc">'
-    +   '<label class="case"><input type="checkbox" id="sEmail" checked>'
-    +   '<span>Envoyer le score à l\'élève par e-mail</span></label>'
-    + '</div>'
-    + '<div class="actions">'
-    +   '<button class="btn-annuler" onclick="retour()">Annuler</button>'
-    +   '<button class="btn-ok" id="sValider" onclick="envoyerSaisie()">Enregistrer</button>'
-    + '</div>'
-    + '</div>';
-
-  montrer("vueSaisie");
+  $("zoneRecherche").style.display = (id === "vListe") ? "" : "none";
+  window.scrollTo(0,0);
 }
 
-function choisirNiveau(comp, niv) {
-  saisieNotes[comp] = niv;
-  var zone = document.getElementById("cs-" + comp);
-  zone.querySelectorAll(".niv-btn").forEach(function (b) {
-    var n = parseInt(b.getAttribute("data-niv"), 10);
-    b.classList.toggle("actif", n === niv);
-    b.classList.toggle("zero", n === 0);   // le bouton « Pas vu » garde son style gris quand actif
-  });
-}
+$("btnRecharger").addEventListener("click", function(){ charger(); });
+$("recherche").addEventListener("input", function(ev){ filtre = ev.target.value; if (D) rendreListe(); });
 
-function envoyerSaisie() {
-  var eleve = document.getElementById("sEleve").value;
-  var date  = document.getElementById("sDate").value;
-  var duree = document.getElementById("sDuree").value;
-  var theme = document.getElementById("sTheme").value.trim();
-  var email = document.getElementById("sEmail").checked;
-
-  if (!eleve) { toast("Choisissez un élève", true); return; }
-  if (!date)  { toast("Indiquez la date", true); return; }
-  if (!theme) { toast("Indiquez le thème travaillé", true); return; }
-  if (saisieNotes.every(function (n) { return n === 0; })) {
-    toast("Notez au moins une compétence", true); return;
+/* ---------------------------------------------------------- démonstration */
+function jeuDemo() {
+  function faire(nom, email, formation, niv, courbe, histo, note, email2) {
+    var pr = COMP.map(function(n,k){ return { nom:n, niveau:niv[k], mot:MOTS[niv[k]] }; })
+                 .sort(function(a,b){ return a.niveau-b.niveau; }).slice(0,3);
+    var sc = score(niv);
+    var h = histo.map(function(l,i){ return { date:l[0], theme:l[1], duree:l[2], score:courbe[i], comm:l[3]||"" }; }).reverse();
+    return { nom:nom, email:email, email2:email2||"", formation:formation, actif:true, note:note, score:sc,
+      heures: histo.reduce(function(a,l){ return a+l[2]; },0),
+      restant: sc>=80?0:Math.round((80-sc)/1.45), pret: sc>=80, lecons: histo.length,
+      niveaux:niv, courbe:courbe, priorites:pr, historique:h,
+      derniere:{ date:histo[histo.length-1][0], theme:histo[histo.length-1][1],
+                 comm:histo[histo.length-1][3]||"" } };
   }
-
-  var btn = document.getElementById("sValider");
-  btn.disabled = true; btn.textContent = "Envoi…";
-
-  var corps = JSON.stringify({
-    cle: CLE, eleve: eleve, date: date, duree: duree,
-    theme: theme, notes: saisieNotes, email: email
-  });
-
-  // Apps Script ne renvoie pas d'en-tête CORS : on envoie en no-cors.
-  // La réponse devient « opaque » (illisible), donc on ne lit pas le JSON :
-  // on considère l'envoi parti, puis on recharge les données pour confirmer
-  // le nouveau score. En cas de vraie panne réseau, le fetch rejette et on
-  // affiche l'échec.
-  fetch(ADRESSE, {
-    method: "POST",
-    mode: "no-cors",
-    headers: { "Content-Type": "text/plain;charset=utf-8" },
-    body: corps
-  })
-  .then(function () {
-    toast("Leçon enregistrée" + (email ? ", e-mail envoyé à l'élève" : ""));
-    location.hash = "";
-    // petit délai : laisse le script écrire la ligne avant de relire
-    setTimeout(function () { charger(true); }, 1200);
-  })
-  .catch(function (err) {
-    btn.disabled = false; btn.textContent = "Enregistrer";
-    toast("Échec de l'enregistrement — vérifiez le réseau", true);
-  });
+  return {
+    ecole:"Olive Conduite", moniteur:"Olivier", objectif:80, rythme:1.45,
+    competences:COMP, mots:MOTS, maj:"démonstration", totalLecons:11,
+    eleves:[
+      faire("Lola G.","Samuel.morieux@gmail.com","Permis B – Pack Classic",[4,4,3,4,3,4,2,2,2],
+        [50,56,61,67,72,78],
+        [["06/01/2026","Évaluation de départ",0.75],["13/01/2026","Allure et trajectoire",1],
+         ["20/01/2026","Intersections de quartier",1],["27/01/2026","Créneau et bataille",1],
+         ["03/02/2026","Ronds-points de la rocade",1,"Nette progression sur les giratoires. Reste le créneau, on y consacrera la prochaine séance."],
+         ["11/03/2026","Simulation d'examen",1,"Parcours complet sans faute éliminatoire. Encore un peu d'hésitation à l'insertion sur la rocade."]],
+        "Très bonne élève, autonome. A besoin d'être rassurée avant l'examen, prévoir un point la veille."),
+      faire("Mathis V.","Samuel.morieux@gmail.com","Pack AM – voiture sans permis",[3,3,2,3,3,3,2,2,2],
+        [39,50,58,64],
+        [["10/02/2026","Prise en main",1],["17/02/2026","Circulation en ville",1],
+         ["24/02/2026","Rocade",1],["07/03/2026","Centre de Calais",1,"Circulation dense bien gérée. Attention à la distance de sécurité."]],
+        "Formation voiturette pendant les vacances. Prévenir les parents des dates de la prochaine session.",
+        "Samuel.morieux@gmail.com"),
+      faire("Sabrina L.","Samuel.morieux@gmail.com","Permis B – Pack Accompagné",[4,4,4,4,4,4,3,3,3],
+        [69,81], [["02/03/2026","Reprise de confiance",1.5],["09/03/2026","Longue distance",2]],
+        "Parcours Permis Confiance. Ne pas la brusquer sur l'autoroute, elle y arrive seule.")
+    ]
+  };
 }
 
-var toastTimer = null;
-function toast(msg, erreur) {
-  var t = document.getElementById("toast");
-  if (!t) {
-    t = document.createElement("div"); t.id = "toast"; document.body.appendChild(t);
-  }
-  t.className = "toast" + (erreur ? " err" : "");
-  t.textContent = msg;
-  void t.offsetWidth;
-  t.classList.add("on");
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(function () { t.classList.remove("on"); }, 3200);
-}
-
-window.addEventListener("hashchange", function () { if (!location.hash) afficherListe(); });
-document.getElementById("btnRecharger").addEventListener("click", function () { actionRecharger(); });
-document.getElementById("recherche").addEventListener("input", function (ev) {
-  filtre = ev.target.value; if (donnees) afficherListe();
-});
-
-/* ---------------------------------------------------------- version & mise à jour */
-var majEnAttente = null;   // registration.waiting quand une nouvelle version est prête
-
-function initServiceWorker() {
-  if (!("serviceWorker" in navigator)) return;
-
-  navigator.serviceWorker.register("sw.js").then(function (reg) {
-    // Une version est déjà en attente (installée mais pas activée) ?
-    if (reg.waiting) { majEnAttente = reg.waiting; montrerPastilleMaj(); }
-
-    // Détecter une nouvelle version qui finit de s'installer.
-    reg.addEventListener("updatefound", function () {
-      var sw = reg.installing;
-      if (!sw) return;
-      sw.addEventListener("statechange", function () {
-        if (sw.state === "installed" && navigator.serviceWorker.controller) {
-          majEnAttente = sw; montrerPastilleMaj();
-        }
-      });
-    });
-
-    // Vérifier tout de suite s'il existe une version plus récente en ligne.
-    reg.update();
-  }).catch(function () { });
-
-  // Quand le nouveau worker prend la main, on recharge une fois.
-  var recharge = false;
-  navigator.serviceWorker.addEventListener("controllerchange", function () {
-    if (recharge) return;
-    recharge = true;
-    window.location.reload();
-  });
-}
-
-function montrerPastilleMaj() {
-  var btn = document.getElementById("btnRecharger");
-  if (btn) btn.classList.add("maj-dispo");
-}
-
-// Bouton recharger : si une MAJ est prête, on l'active ; sinon on recharge les données.
-function actionRecharger() {
-  if (majEnAttente) {
-    majEnAttente.postMessage("activer");   // déclenche skipWaiting puis controllerchange -> reload
-    return;
-  }
-  // pas de nouvelle version : on redemande au SW de vérifier, puis on recharge les données
-  if ("serviceWorker" in navigator && navigator.serviceWorker.controller) {
-    navigator.serviceWorker.getRegistration().then(function (reg) {
-      if (reg) reg.update();
-    });
-  }
-  charger(true);
-}
-
-initServiceWorker();
-charger(false);
+if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(function(){});
+charger();
 </script>
 </body>
 </html>
