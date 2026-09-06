@@ -39,6 +39,10 @@ header{
 .recharger{margin-left:auto;width:38px;height:38px;border:1px solid #33302c;display:grid;place-items:center;flex:none}
 .recharger svg{width:19px;height:19px;fill:none;stroke:#fff;stroke-width:2.2;stroke-linecap:round}
 .recharger.tourne svg{animation:tourner .9s linear infinite}
+/* pastille « mise à jour disponible » sur le bouton recharger */
+.recharger.maj-dispo{position:relative}
+.recharger.maj-dispo::after{content:"";position:absolute;top:-3px;right:-3px;width:11px;height:11px;
+  background:#F26522;border:2px solid #0B0A09;border-radius:50%}
 @keyframes tourner{to{transform:rotate(360deg)}}
 
 .chercher{margin-top:12px;position:relative}
@@ -294,7 +298,28 @@ function afficherListe() {
     donnees.eleves.length + " élève" + (donnees.eleves.length > 1 ? "s" : "") + " · " + donnees.maj;
   document.getElementById("pied").textContent =
     "Objectif examen " + donnees.objectif + "/100 — mis à jour le " + donnees.maj;
+  afficherVersion();
   montrer("vueListe");
+}
+
+var versionApp = "";
+function afficherVersion() {
+  if (versionApp) { poserVersionPied(); return; }
+  if ("serviceWorker" in navigator && navigator.serviceWorker.controller) {
+    var canal = new MessageChannel();
+    navigator.serviceWorker.controller.postMessage("version");
+    navigator.serviceWorker.addEventListener("message", function (ev) {
+      if (ev.data && ev.data.type === "version") {
+        versionApp = ev.data.version; poserVersionPied();
+      }
+    });
+  }
+}
+function poserVersionPied() {
+  var p = document.getElementById("pied");
+  if (p && versionApp && p.textContent.indexOf("version") < 0) {
+    p.textContent += " · version " + versionApp;
+  }
 }
 
 function carte(e) {
@@ -535,14 +560,66 @@ function toast(msg, erreur) {
 }
 
 window.addEventListener("hashchange", function () { if (!location.hash) afficherListe(); });
-document.getElementById("btnRecharger").addEventListener("click", function () { charger(true); });
+document.getElementById("btnRecharger").addEventListener("click", function () { actionRecharger(); });
 document.getElementById("recherche").addEventListener("input", function (ev) {
   filtre = ev.target.value; if (donnees) afficherListe();
 });
 
-if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("sw.js").catch(function () { });
+/* ---------------------------------------------------------- version & mise à jour */
+var majEnAttente = null;   // registration.waiting quand une nouvelle version est prête
+
+function initServiceWorker() {
+  if (!("serviceWorker" in navigator)) return;
+
+  navigator.serviceWorker.register("sw.js").then(function (reg) {
+    // Une version est déjà en attente (installée mais pas activée) ?
+    if (reg.waiting) { majEnAttente = reg.waiting; montrerPastilleMaj(); }
+
+    // Détecter une nouvelle version qui finit de s'installer.
+    reg.addEventListener("updatefound", function () {
+      var sw = reg.installing;
+      if (!sw) return;
+      sw.addEventListener("statechange", function () {
+        if (sw.state === "installed" && navigator.serviceWorker.controller) {
+          majEnAttente = sw; montrerPastilleMaj();
+        }
+      });
+    });
+
+    // Vérifier tout de suite s'il existe une version plus récente en ligne.
+    reg.update();
+  }).catch(function () { });
+
+  // Quand le nouveau worker prend la main, on recharge une fois.
+  var recharge = false;
+  navigator.serviceWorker.addEventListener("controllerchange", function () {
+    if (recharge) return;
+    recharge = true;
+    window.location.reload();
+  });
 }
+
+function montrerPastilleMaj() {
+  var btn = document.getElementById("btnRecharger");
+  if (btn) btn.classList.add("maj-dispo");
+}
+
+// Bouton recharger : si une MAJ est prête, on l'active ; sinon on recharge les données.
+function actionRecharger() {
+  if (majEnAttente) {
+    majEnAttente.postMessage("activer");   // déclenche skipWaiting puis controllerchange -> reload
+    return;
+  }
+  // pas de nouvelle version : on redemande au SW de vérifier, puis on recharge les données
+  if ("serviceWorker" in navigator && navigator.serviceWorker.controller) {
+    navigator.serviceWorker.getRegistration().then(function (reg) {
+      if (reg) reg.update();
+    });
+  }
+  charger(true);
+}
+
+initServiceWorker();
 charger(false);
 </script>
 </body>
