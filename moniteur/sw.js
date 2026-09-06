@@ -5,7 +5,7 @@
    ci-dessous (par exemple la date du jour). Le service worker détectera
    le changement, purgera l'ancien cache et rechargera tous les fichiers.
 */
-var VERSION = "2026-09-06-02";
+var VERSION = "2026-09-06-03";
 var CACHE   = "permis-score-" + VERSION;
 var SHELL   = ["./", "./index.html", "./manifest.json", "./icone-180.png", "./icone-512.png"];
 
@@ -41,6 +41,9 @@ self.addEventListener("message", function (e) {
 self.addEventListener("fetch", function (e) {
   if (e.request.method !== "GET") return;
   var url = e.request.url;
+
+  // Ne traiter que le web http(s). On ignore chrome-extension:// et autres schémas.
+  if (url.indexOf("http") !== 0) return;
 
   // 1) L'API Google : réseau d'abord, sinon dernières données connues.
   if (url.indexOf("script.google.com") >= 0) {

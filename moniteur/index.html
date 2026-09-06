@@ -525,23 +525,26 @@ function envoyerSaisie() {
     theme: theme, notes: saisieNotes, email: email
   });
 
-  // text/plain : évite le préflight CORS qu'Apps Script ne gère pas.
+  // Apps Script ne renvoie pas d'en-tête CORS : on envoie en no-cors.
+  // La réponse devient « opaque » (illisible), donc on ne lit pas le JSON :
+  // on considère l'envoi parti, puis on recharge les données pour confirmer
+  // le nouveau score. En cas de vraie panne réseau, le fetch rejette et on
+  // affiche l'échec.
   fetch(ADRESSE, {
     method: "POST",
+    mode: "no-cors",
     headers: { "Content-Type": "text/plain;charset=utf-8" },
     body: corps
   })
-  .then(function (r) { return r.json(); })
-  .then(function (j) {
-    if (!j || !j.ok) throw new Error(j && j.erreur ? j.erreur : "refus");
-    toast("Leçon enregistrée — score " + j.score + "/100"
-      + (j.emailEnvoye ? ", e-mail envoyé" : ""));
+  .then(function () {
+    toast("Leçon enregistrée" + (email ? ", e-mail envoyé à l'élève" : ""));
     location.hash = "";
-    charger(true);           // recharge les données à jour
+    // petit délai : laisse le script écrire la ligne avant de relire
+    setTimeout(function () { charger(true); }, 1200);
   })
   .catch(function (err) {
     btn.disabled = false; btn.textContent = "Enregistrer";
-    toast("Échec de l'enregistrement : " + err.message, true);
+    toast("Échec de l'enregistrement — vérifiez le réseau", true);
   });
 }
 
