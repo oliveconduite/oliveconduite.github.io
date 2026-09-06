@@ -115,7 +115,7 @@ main{padding:13px 13px calc(30px + var(--bas))}
 .btn[disabled]{opacity:.5}
 
 label{display:block;font-size:12px;font-weight:700;letter-spacing:.4px;color:var(--fonce);margin:14px 0 5px}
-input[type=text],input[type=email],input[type=date],textarea{width:100%;background:#fff;
+input[type=text],input[type=email],input[type=date],textarea,select{width:100%;background:#fff;
   border:1px solid var(--ligne);padding:12px;font-size:16px}
 input:focus,textarea:focus{outline:none;border-color:var(--orange)}
 .chips{display:flex;gap:6px;flex-wrap:wrap}
@@ -127,6 +127,7 @@ input:focus,textarea:focus{outline:none;border-color:var(--orange)}
 .niv button{flex:1;border:1.5px solid var(--ligne);background:#fff;padding:11px 0;font-size:15px;font-weight:700}
 .niv button[aria-pressed=true]{border-color:var(--orange);background:var(--orange);color:#140800}
 .niv button.zero[aria-pressed=true]{background:#EFEBE5;border-color:#c9c3bb;color:var(--doux)}
+label.bascule{cursor:pointer}
 .bascule{display:flex;align-items:center;gap:11px;background:#fff;border:1px solid var(--ligne);padding:13px;margin:16px 0 12px}
 .bascule input{width:22px;height:22px;accent-color:var(--orange);flex:none}
 .bascule span{font-size:14px}
@@ -189,6 +190,16 @@ var CLE     = "olive-2026-change-moi";
 var D = null, filtre = "", courant = null, DEMO = false;
 var COMP = ["Maîtrise du véhicule","Observation","Anticipation","Intersections","Priorités",
             "Vitesse et allure","Stationnement et manœuvres","Autonomie","Environnement complexe"];
+var PACKS = [
+  "Permis B – Pack Classic",
+  "Permis B – Pack Accompagné",
+  "Permis B – Pack Supervisé",
+  "Permis B – Pack Sénior",
+  "Pack AM – voiture sans permis",
+  "Parcours Permis Confiance",
+  "Code de la route seul",
+  "Perfectionnement ou annulation"
+];
 var MOTS = {0:"non abordé",1:"découverte",2:"guidé",3:"peu guidé",4:"autonome"};
 
 /* ---------------------------------------------------------- utilitaires */
@@ -204,6 +215,24 @@ function flash(msg, ok){
 }
 document.getElementById("flash").addEventListener("click", function(){ this.hidden = true; });
 function attente(on, txt){ $("attenteTxt").textContent = txt || "Enregistrement…"; $("attente").classList.toggle("on", !!on); }
+function blocDest(e, prefixe) {
+  var l = [];
+  if (e.email)  l.push({ id: prefixe + "Eleve",  lab: "Élève",            adr: e.email,  coche: true  });
+  if (e.email2 && e.email2 !== e.email)
+                l.push({ id: prefixe + "Parent", lab: "Parent ou tuteur", adr: e.email2, coche: false });
+  if (!l.length) return '<div class="aide">Aucune adresse e-mail renseignée pour cet élève.</div>';
+  return l.map(function (d) {
+    return '<label class="bascule"><input type="checkbox" id="' + d.id + '"'
+      + (d.coche ? " checked" : "") + '>'
+      + '<span>' + d.lab + '<small>' + ech(d.adr) + '</small></span></label>';
+  }).join("");
+}
+
+function litDest(prefixe) {
+  var a = $(prefixe + "Eleve"), b = $(prefixe + "Parent");
+  return { dEleve: (a && a.checked) ? 1 : 0, dParent: (b && b.checked) ? 1 : 0 };
+}
+
 function dest(e){
   var out = [];
   [e.email, e.email2].forEach(function(a){
@@ -346,10 +375,12 @@ function ouvrir(nom) {
 
   h += '<button class="btn" onclick="formLecon()">+ Nouvelle leçon</button>';
   if (e.score !== null && (e.email || e.email2)) {
-    h += '<button class="btn vide" onclick="renvoyer()">Renvoyer le dernier score par e-mail</button>';
-    h += '<button class="btn vide" onclick="envoyerBilan()">Envoyer le bilan complet à l\'élève</button>';
-    h += '<div class="aide" style="text-align:center;margin:-4px 0 9px">Le bilan reprend toutes les leçons, '
-       + 'les dates, les durées, les commentaires et la progression.</div>';
+    h += '<div class="bloc"><div class="tt">ENVOYER PAR E-MAIL</div>'
+      + blocDest(e, "f")
+      + '<button class="btn vide" style="margin-top:6px" onclick="renvoyer()">Le dernier score</button>'
+      + '<button class="btn vide" onclick="envoyerBilan()">Le bilan complet</button>'
+      + '<div class="aide">Le bilan reprend toutes les leçons, les dates, les durées, '
+      + 'les commentaires et la progression.</div></div>';
   }
   h += '<button class="btn vide" onclick="formEleve(courant)">Modifier le nom, l\'e-mail, la formation</button>';
 
@@ -437,9 +468,8 @@ function formLecon() {
              + '</div>'; }).join("")
     + '</div>'
 
-    + '<div class="bascule"><input type="checkbox" id="lMail"' + (e.email ? " checked" : " disabled") + '>'
-    + '<span>Envoyer le score à l\'élève'
-    + '<small>' + (dest(e).length ? ech(dest(e).join(" et ")) : "aucune adresse renseignée") + '</small></span></div>'
+    + '<div class="bloc"><div class="tt">ENVOYER LE SCORE APRÈS ENREGISTREMENT</div>'
+    + blocDest(e, "l") + '</div>'
 
     + '<button class="btn" onclick="enregistrerLecon()">Enregistrer la leçon</button>'
     + '<button class="btn vide" onclick="ouvrir(courant)">Annuler</button>';
@@ -465,6 +495,7 @@ function formLecon() {
 function enregistrerLecon() {
   var theme = $("lTheme").value.trim();
   if (!theme) { flash("Indiquez le thème travaillé.", false); $("lTheme").focus(); return; }
+  var dst = litDest("l");
   attente(true, "Enregistrement de la leçon…");
   appel({
     api   : "lecon",
@@ -474,7 +505,9 @@ function enregistrerLecon() {
     theme : theme,
     comm  : $("lComm").value.trim(),
     notes : saisie.notes.map(function(n){ return n === null ? "" : n; }).join(","),
-    mail  : $("lMail").checked ? 1 : 0
+    mail  : (dst.dEleve || dst.dParent) ? 1 : 0,
+    dEleve: dst.dEleve,
+    dParent: dst.dParent
   }, function (r) { if (apres(r)) ouvrir(courant); });
 }
 
@@ -491,11 +524,15 @@ function sauverNote() {
 }
 
 function envoyerBilan() {
-  var e = eleve(courant);
+  var e = eleve(courant), d = litDest("f");
+  if (!d.dEleve && !d.dParent) { flash("Cochez au moins un destinataire.", false); return; }
+  var qui = [];
+  if (d.dEleve) qui.push(e.email);
+  if (d.dParent) qui.push(e.email2);
   if (!confirm("Envoyer le bilan complet de " + e.lecons + " leçon"
-      + (e.lecons > 1 ? "s" : "") + " à " + dest(e).join(" et ") + " ?")) return;
+      + (e.lecons > 1 ? "s" : "") + " à " + qui.join(" et ") + " ?")) return;
   attente(true, "Préparation du bilan…");
-  appel({ api:"bilan", eleve: courant }, function (r) {
+  appel({ api:"bilan", eleve: courant, dEleve: d.dEleve, dParent: d.dParent }, function (r) {
     attente(false);
     if (r.data) D = r.data;
     flash(r.message || r.erreur || "—", !!r.ok);
@@ -504,8 +541,10 @@ function envoyerBilan() {
 }
 
 function renvoyer() {
+  var d = litDest("f");
+  if (!d.dEleve && !d.dParent) { flash("Cochez au moins un destinataire.", false); return; }
   attente(true, "Envoi de l'e-mail…");
-  appel({ api:"mail", eleve: courant }, function (r) {
+  appel({ api:"mail", eleve: courant, dEleve: d.dEleve, dParent: d.dParent }, function (r) {
     attente(false);
     if (r.data) D = r.data;
     flash(r.message || r.erreur || "—", !!r.ok);
@@ -524,7 +563,17 @@ function formEleve(nom) {
     + '<label>E-mail du parent ou du tuteur</label>'
     + '<input type="email" id="eMail2" value="' + ech(e.email2 || "") + '" placeholder="facultatif">'
     + '<div class="aide">Renseignée, cette adresse reçoit une copie de chaque score et du bilan complet.</div>'
-    + '<label>Formation</label><input type="text" id="eForm" value="' + ech(e.formation) + '" placeholder="Permis B – Pack Classic">'
+    + '<label>Formation</label>'
+    + '<select id="eForm">'
+    +   PACKS.map(function(x){
+          return '<option value="' + ech(x) + '"' + (x === e.formation ? ' selected' : '') + '>'
+               + ech(x) + '</option>'; }).join("")
+    +   '<option value="__autre"' + ((e.formation && PACKS.indexOf(e.formation) < 0) ? ' selected' : '')
+    +   '>Autre, à saisir</option>'
+    + '</select>'
+    + '<input type="text" id="eFormAutre" placeholder="Intitulé de la formation" value="'
+    +   ((e.formation && PACKS.indexOf(e.formation) < 0) ? ech(e.formation) : '') + '"'
+    +   ((e.formation && PACKS.indexOf(e.formation) < 0) ? '' : ' hidden') + ' style="margin-top:8px">'
     + '</div>'
     + '<button class="btn" onclick="sauverEleve(' + (nouveau ? 'null' : 'true') + ')">Enregistrer</button>';
   if (!nouveau) {
@@ -533,7 +582,16 @@ function formEleve(nom) {
     h += '<div class="info" style="text-align:center">L\'archivage conserve toutes les leçons.</div>';
   }
   $("vEleve").innerHTML = h;
+  $("eForm").addEventListener("change", function(){
+    $("eFormAutre").hidden = (this.value !== "__autre");
+    if (this.value === "__autre") $("eFormAutre").focus();
+  });
   montrer("vEleve");
+}
+
+function formationChoisie() {
+  var v = $("eForm").value;
+  return v === "__autre" ? $("eFormAutre").value.trim() : v;
 }
 
 function sauverEleve(modif) {
@@ -544,11 +602,11 @@ function sauverEleve(modif) {
     var e = eleve(courant);
     appel({ api:"eleveUpd", ancien: courant, nom: nom,
             email: $("eMail").value.trim(), email2: $("eMail2").value.trim(),
-            formation: $("eForm").value.trim(), actif: e.actif ? 1 : 0 },
+            formation: formationChoisie(), actif: e.actif ? 1 : 0 },
       function (r) { if (apres(r)) { courant = nom; ouvrir(nom); } });
   } else {
     appel({ api:"eleveAdd", nom: nom, email: $("eMail").value.trim(),
-            email2: $("eMail2").value.trim(), formation: $("eForm").value.trim() },
+            email2: $("eMail2").value.trim(), formation: formationChoisie() },
       function (r) { if (apres(r)) { courant = nom; ouvrir(nom); } });
   }
 }
