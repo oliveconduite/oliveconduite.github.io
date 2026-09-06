@@ -1,1 +1,369 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Permis Score — Olive Conduite</title>
+<meta name="theme-color" content="#0B0A09">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="Permis Score">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icone-180.png">
 
+<style>
+:root{
+  --noir:#0B0A09; --orange:#F26522; --orange-fonce:#BF4A12;
+  --papier:#F7F5F2; --blanc:#FFFFFF; --ligne:#E2DDD6;
+  --texte:#141210; --doux:#5C5651; --pale:#8A847C;
+  --vert:#1E7A34; --rouge:#C4321A;
+  --haut:env(safe-area-inset-top); --bas:env(safe-area-inset-bottom);
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{
+  font:400 16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  background:var(--papier);color:var(--texte);
+  overscroll-behavior-y:none;-webkit-font-smoothing:antialiased;
+}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
+
+/* ---------- barre du haut ---------- */
+header{
+  position:sticky;top:0;z-index:20;background:var(--noir);color:#fff;
+  padding:calc(12px + var(--haut)) 16px 12px;
+}
+.hd{display:flex;align-items:center;gap:12px}
+.marque{font-size:19px;font-weight:800;letter-spacing:.5px;line-height:1}
+.marque span{color:var(--orange)}
+.sous{font-size:11px;color:#a9a39b;margin-top:3px}
+.recharger{margin-left:auto;width:38px;height:38px;border:1px solid #33302c;display:grid;place-items:center;flex:none}
+.recharger svg{width:19px;height:19px;fill:none;stroke:#fff;stroke-width:2.2;stroke-linecap:round}
+.recharger.tourne svg{animation:tourner .9s linear infinite}
+@keyframes tourner{to{transform:rotate(360deg)}}
+
+.chercher{margin-top:12px;position:relative}
+.chercher input{
+  width:100%;background:#1a1815;border:1px solid #33302c;color:#fff;
+  padding:11px 14px 11px 38px;font-size:16px;border-radius:2px;
+}
+.chercher input::placeholder{color:#7d7770}
+.chercher svg{position:absolute;left:12px;top:12px;width:17px;height:17px;
+  fill:none;stroke:#7d7770;stroke-width:2}
+
+/* ---------- vues ---------- */
+main{padding:14px 14px calc(28px + var(--bas))}
+.vue{display:none;animation:apparait .18s ease-out}
+.vue.on{display:block}
+@keyframes apparait{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+/* ---------- carte élève ---------- */
+.carte{
+  display:block;width:100%;text-align:left;background:var(--blanc);
+  border:1px solid var(--ligne);border-left:5px solid var(--orange);
+  padding:14px 16px;margin-bottom:10px;
+}
+.carte:active{background:#FFF7F2}
+.carte.pret{border-left-color:var(--vert)}
+.nom{font-size:17px;font-weight:700;line-height:1.2}
+.form{font-size:12px;color:var(--pale);margin-top:2px}
+.rang{display:flex;align-items:center;gap:12px;margin-top:11px}
+.pts{font-size:31px;font-weight:800;color:var(--orange-fonce);line-height:1;min-width:78px;
+  font-variant-numeric:tabular-nums}
+.pts em{font-size:13px;color:var(--pale);font-style:normal;font-weight:400}
+.pts.ok{color:var(--vert)}
+.jauge{flex:1;background:var(--ligne);height:10px;position:relative}
+.jauge i{display:block;height:100%;background:var(--orange);transition:width .3s}
+.jauge.ok i{background:var(--vert)}
+.jauge u{position:absolute;top:-3px;bottom:-3px;width:2px;background:var(--noir);text-decoration:none}
+.info{font-size:12px;color:var(--doux);margin-top:9px}
+.puce{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.5px;
+  padding:4px 9px;background:#EFEBE5;color:var(--doux);margin-top:9px}
+.puce.ok{background:var(--vert);color:#fff}
+.puce.urgent{background:#FFE8DE;color:var(--orange-fonce)}
+
+/* ---------- fiche ---------- */
+.retour{display:inline-flex;align-items:center;gap:7px;font-size:15px;
+  color:var(--orange-fonce);font-weight:600;padding:6px 0 12px}
+.bloc{background:var(--blanc);border:1px solid var(--ligne);padding:16px;margin-bottom:10px}
+.tt{font-size:10.5px;font-weight:800;letter-spacing:1.2px;color:var(--orange-fonce);margin-bottom:12px}
+.grand{font-size:56px;font-weight:800;color:var(--orange-fonce);line-height:.92;
+  font-variant-numeric:tabular-nums}
+.grand.ok{color:var(--vert)}
+.grand em{font-size:19px;color:var(--pale);font-style:normal;font-weight:400}
+.comp{margin-bottom:11px}
+.comp:last-child{margin-bottom:0}
+.comp .l{display:flex;justify-content:space-between;align-items:baseline;font-size:13.5px;margin-bottom:4px}
+.comp .l b{font-variant-numeric:tabular-nums;font-size:13px}
+.comp .l small{color:var(--pale);font-size:11.5px;margin-left:6px}
+.comp .b{background:#EFEBE5;height:9px}
+.comp .b i{display:block;height:100%;background:var(--orange);transition:width .3s}
+.comp.faible .b i{background:var(--rouge)}
+.comp.acquise .b i{background:var(--vert)}
+.prio{display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid var(--ligne)}
+.prio:last-child{border-bottom:none}
+.prio b{width:22px;height:22px;flex:none;background:var(--rouge);color:#fff;
+  font-size:12px;display:grid;place-items:center}
+.prio span{font-size:14.5px}
+.prio small{display:block;color:var(--pale);font-size:12px}
+.courbe{width:100%;height:78px;display:block;margin-top:4px}
+.suite{font-size:15px;font-weight:700;font-variant-numeric:tabular-nums;
+  color:var(--doux);margin-top:8px;word-spacing:2px}
+
+/* ---------- états ---------- */
+.etat{padding:44px 18px;text-align:center;color:var(--doux);font-size:14.5px}
+.etat b{display:block;font-size:17px;color:var(--texte);margin-bottom:8px}
+.etat code{display:block;background:#EFEBE5;padding:10px;margin-top:12px;
+  font-size:11.5px;text-align:left;word-break:break-all}
+.pied{text-align:center;font-size:11.5px;color:var(--pale);padding:18px 0 4px}
+.demo{background:var(--orange);color:#140800;font-size:12px;font-weight:700;
+  text-align:center;padding:7px 12px}
+</style>
+</head>
+<body>
+
+<div class="demo" id="bandeauDemo" hidden>Mode démonstration — données d'exemple</div>
+
+<header>
+  <div class="hd">
+    <div>
+      <div class="marque">OLIVE <span>CONDUITE</span></div>
+      <div class="sous" id="sous">Permis Score</div>
+    </div>
+    <button class="recharger" id="btnRecharger" aria-label="Recharger">
+      <svg viewBox="0 0 24 24"><path d="M20 11a8 8 0 1 0-2.3 6.3"/><path d="M20 4v7h-7"/></svg>
+    </button>
+  </div>
+  <div class="chercher" id="zoneRecherche">
+    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+    <input id="recherche" type="search" placeholder="Chercher un élève" autocomplete="off">
+  </div>
+</header>
+
+<main>
+  <section class="vue on" id="vueListe"><div id="liste"></div><div class="pied" id="pied"></div></section>
+  <section class="vue" id="vueFiche"></section>
+</main>
+
+<script>
+/* ====================================================================
+   RÉGLAGES — remplacez ces deux lignes par vos valeurs.
+   Dans le tableur : menu Olive Conduite > Réglages de l'application moniteur
+   ==================================================================== */
+var ADRESSE = "https://script.google.com/macros/s/AKfycbxwe9YNJF3IzCdfjnTuQ2TILoUZLtLlgos7qAVsFrBTjLZdsn6s/exec";
+var CLE     = "olive-2026-change-moi";
+/* ==================================================================== */
+
+var donnees = null, filtre = "";
+
+/* ---------------------------------------------------------- démonstration */
+function jeuDemo() {
+  var comp = ["Maîtrise du véhicule","Observation","Anticipation","Intersections","Priorités",
+              "Vitesse et allure","Stationnement et manœuvres","Autonomie","Environnement complexe"];
+  var mots = {0:"non abordé",1:"découverte",2:"guidé",3:"peu guidé",4:"autonome"};
+  function faire(nom, formation, niv, courbe, date, theme, heures) {
+    var pr = comp.map(function (n, k) { return { nom: n, niveau: niv[k], mot: mots[niv[k]] }; })
+                 .sort(function (a, b) { return a.niveau - b.niveau; }).slice(0, 3);
+    var sc = Math.round(niv.reduce(function (a, b) { return a + b; }, 0) / 36 * 100);
+    return { nom: nom, formation: formation, score: sc, heures: heures,
+             restant: sc >= 80 ? 0 : Math.round((80 - sc) / 1.45), pret: sc >= 80,
+             lecons: courbe.length, niveaux: niv, courbe: courbe, priorites: pr,
+             derniere: { date: date, theme: theme } };
+  }
+  return {
+    ecole: "Olive Conduite", moniteur: "Olivier", objectif: 80, competences: comp, mots: mots,
+    maj: "démonstration",
+    eleves: [
+      faire("Lola G.", "Permis B – Pack Classic", [4,4,3,4,3,4,2,2,2],
+            [50,53,56,58,61,64,67,69,72,75,78], "11/03/2026", "Simulation complète d'examen", 18.75),
+      faire("Mathis V.", "Pack AM – voiture sans permis", [3,3,2,3,3,3,2,2,2],
+            [39,44,50,53,58,64], "07/03/2026", "Rocade et centre de Calais", 6),
+      faire("Sabrina L.", "Permis B – Pack Accompagné", [4,4,4,4,4,4,3,3,3],
+            [58,64,69,75,81,86], "09/03/2026", "Conduite autonome longue distance", 21),
+      faire("Yanis D.", "Permis B – Pack Supervisé", [2,2,1,2,2,2,1,1,1],
+            [28,33,39], "05/03/2026", "Intersections de quartier", 3)
+    ]
+  };
+}
+
+/* ---------------------------------------------------------- chargement */
+function charger(force) {
+  var btn = document.getElementById("btnRecharger");
+  btn.classList.add("tourne");
+
+  if (ADRESSE.indexOf("METTEZ_VOTRE_ADRESSE_ICI") >= 0) {
+    document.getElementById("bandeauDemo").hidden = false;
+    donnees = jeuDemo(); afficherListe(); btn.classList.remove("tourne"); return;
+  }
+
+  var url = ADRESSE + "?api=1&cle=" + encodeURIComponent(CLE) + "&t=" + Date.now();
+  fetch(url, { cache: force ? "reload" : "default" })
+    .then(function (r) { return r.json(); })
+    .then(function (j) {
+      if (j.erreur) { erreur("Clé d'accès refusée", "Vérifiez la ligne CLE de l'application et le réglage cleApi du script."); return; }
+      donnees = j; afficherListe();
+    })
+    .catch(function () { chargerJsonp(); })
+    .then(function () { btn.classList.remove("tourne"); });
+}
+
+function chargerJsonp() {
+  var nom = "reponsePermisScore";
+  window[nom] = function (j) {
+    document.getElementById("btnRecharger").classList.remove("tourne");
+    if (j.erreur) { erreur("Clé d'accès refusée", "Vérifiez la ligne CLE de l'application."); return; }
+    donnees = j; afficherListe();
+  };
+  var s = document.createElement("script");
+  s.src = ADRESSE + "?api=1&cle=" + encodeURIComponent(CLE) + "&callback=" + nom + "&t=" + Date.now();
+  s.onerror = function () {
+    document.getElementById("btnRecharger").classList.remove("tourne");
+    erreur("Connexion impossible", "Vérifiez le réseau, puis l'adresse renseignée dans l'application.");
+  };
+  document.body.appendChild(s);
+}
+
+function erreur(titre, detail) {
+  document.getElementById("liste").innerHTML =
+    '<div class="etat"><b>' + titre + '</b>' + detail + '<code>' + ADRESSE + '</code></div>';
+}
+
+/* ---------------------------------------------------------- liste */
+function afficherListe() {
+  var l = document.getElementById("liste");
+  var el = donnees.eleves.slice().sort(function (a, b) {
+    if (a.score === null) return 1;
+    if (b.score === null) return -1;
+    return b.score - a.score;
+  });
+  if (filtre) {
+    var f = filtre.toLowerCase();
+    el = el.filter(function (e) {
+      return (e.nom + " " + e.formation).toLowerCase().indexOf(f) >= 0;
+    });
+  }
+  if (!el.length) {
+    l.innerHTML = '<div class="etat"><b>Aucun élève</b>' +
+      (filtre ? "Aucun résultat pour cette recherche." : "Ajoutez vos élèves dans l'onglet Élèves du tableur.") + '</div>';
+  } else {
+    l.innerHTML = el.map(carte).join("");
+  }
+  document.getElementById("sous").textContent =
+    donnees.eleves.length + " élève" + (donnees.eleves.length > 1 ? "s" : "") + " · " + donnees.maj;
+  document.getElementById("pied").textContent =
+    "Objectif examen " + donnees.objectif + "/100 — mis à jour le " + donnees.maj;
+  montrer("vueListe");
+}
+
+function carte(e) {
+  if (e.score === null) {
+    return '<button class="carte" onclick="ouvrir(' + JSON.stringify(e.nom).replace(/"/g, "&quot;") + ')">'
+      + '<div class="nom">' + e.nom + '</div><div class="form">' + (e.formation || "") + '</div>'
+      + '<div class="info">Aucune leçon enregistrée</div></button>';
+  }
+  var seuil = donnees.objectif;
+  var urgent = !e.pret && e.restant <= 3;
+  return '<button class="carte' + (e.pret ? " pret" : "") + '" onclick="ouvrir('
+    + JSON.stringify(e.nom).replace(/"/g, "&quot;") + ')">'
+    + '<div class="nom">' + e.nom + '</div>'
+    + '<div class="form">' + (e.formation || "") + '</div>'
+    + '<div class="rang"><div class="pts' + (e.pret ? " ok" : "") + '">' + e.score + '<em>/100</em></div>'
+    + '<div class="jauge' + (e.pret ? " ok" : "") + '"><i style="width:' + Math.max(2, e.score) + '%"></i>'
+    + '<u style="left:' + seuil + '%"></u></div></div>'
+    + '<div class="info">' + e.heures + ' h de conduite · ' + e.lecons + ' leçon'
+    + (e.lecons > 1 ? "s" : "") + ' · dernière le ' + (e.derniere ? e.derniere.date : "—") + '</div>'
+    + '<div class="puce' + (e.pret ? " ok" : (urgent ? " urgent" : "")) + '">'
+    + (e.pret ? "PRÊT POUR L'EXAMEN" : "ENCORE " + e.restant + " H ESTIMÉES") + '</div></button>';
+}
+
+/* ---------------------------------------------------------- fiche */
+function ouvrir(nom) {
+  var e = donnees.eleves.filter(function (x) { return x.nom === nom; })[0];
+  if (!e) return;
+  var v = document.getElementById("vueFiche");
+
+  if (e.score === null) {
+    v.innerHTML = boutonRetour() + '<div class="bloc"><div class="nom">' + e.nom + '</div>'
+      + '<div class="etat">Aucune leçon enregistrée pour cet élève.</div></div>';
+    montrer("vueFiche"); return;
+  }
+
+  var noms3 = e.priorites.map(function (p) { return p.nom; });
+  var comps = donnees.competences.map(function (c, k) {
+    var n = e.niveaux[k];
+    var cls = n >= 4 ? " acquise" : (noms3.indexOf(c) >= 0 ? " faible" : "");
+    return '<div class="comp' + cls + '"><div class="l"><span>' + c
+      + '<small>' + (donnees.mots[n] || "") + '</small></span><b>' + n + '/4</b></div>'
+      + '<div class="b"><i style="width:' + (n / 4 * 100) + '%"></i></div></div>';
+  }).join("");
+
+  var prios = e.priorites.map(function (p, i) {
+    return '<div class="prio"><b>' + (i + 1) + '</b><span>' + p.nom
+      + '<small>' + p.mot + ', niveau ' + p.niveau + ' sur 4</small></span></div>';
+  }).join("");
+
+  v.innerHTML = boutonRetour()
+    + '<div class="bloc">'
+    +   '<div class="nom" style="font-size:19px">' + e.nom + '</div>'
+    +   '<div class="form">' + (e.formation || "") + '</div>'
+    +   '<div class="grand' + (e.pret ? " ok" : "") + '" style="margin-top:14px">' + e.score + '<em> / 100</em></div>'
+    +   '<div class="jauge' + (e.pret ? " ok" : "") + '" style="margin-top:12px">'
+    +     '<i style="width:' + Math.max(2, e.score) + '%"></i><u style="left:' + donnees.objectif + '%"></u></div>'
+    +   '<div class="info">Objectif ' + donnees.objectif + ' · ' + e.heures + ' h de conduite · '
+    +   e.lecons + ' leçon' + (e.lecons > 1 ? "s" : "") + '</div>'
+    +   '<div class="puce' + (e.pret ? " ok" : "") + '">'
+    +   (e.pret ? "PRÊT POUR L'EXAMEN" : "ENCORE " + e.restant + " H ESTIMÉES") + '</div>'
+    + '</div>'
+    + '<div class="bloc"><div class="tt">À TRAVAILLER EN PRIORITÉ</div>' + prios + '</div>'
+    + '<div class="bloc"><div class="tt">LES NEUF COMPÉTENCES</div>' + comps + '</div>'
+    + '<div class="bloc"><div class="tt">PROGRESSION</div>' + courbeSvg(e.courbe)
+    +   '<div class="suite">' + e.courbe.join(" › ") + '</div>'
+    +   '<div class="info">Dernière leçon le ' + e.derniere.date + ' — ' + e.derniere.theme + '</div>'
+    + '</div>';
+  montrer("vueFiche");
+}
+
+function boutonRetour() {
+  return '<button class="retour" onclick="retour()">&larr; Tous les élèves</button>';
+}
+
+function courbeSvg(c) {
+  if (!c || c.length < 2) return "";
+  var L = 300, H = 70, mx = 4;
+  var pts = c.map(function (v, i) {
+    var x = mx + i * (L - 2 * mx) / (c.length - 1);
+    var y = H - 6 - (v / 100) * (H - 14);
+    return x.toFixed(1) + "," + y.toFixed(1);
+  });
+  var ySeuil = H - 6 - (donnees.objectif / 100) * (H - 14);
+  return '<svg class="courbe" viewBox="0 0 ' + L + ' ' + H + '" preserveAspectRatio="none">'
+    + '<line x1="0" y1="' + ySeuil.toFixed(1) + '" x2="' + L + '" y2="' + ySeuil.toFixed(1)
+    + '" stroke="#0B0A09" stroke-width="1" stroke-dasharray="4 4"/>'
+    + '<polyline points="' + pts.join(" ") + '" fill="none" stroke="#F26522" stroke-width="3"'
+    + ' stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"/>'
+    + '<circle cx="' + pts[pts.length - 1].split(",")[0] + '" cy="' + pts[pts.length - 1].split(",")[1]
+    + '" r="4" fill="#0B0A09"/></svg>';
+}
+
+/* ---------------------------------------------------------- navigation */
+function montrer(id) {
+  ["vueListe", "vueFiche"].forEach(function (v) {
+    document.getElementById(v).classList.toggle("on", v === id);
+  });
+  document.getElementById("zoneRecherche").style.display = (id === "vueListe") ? "" : "none";
+  window.scrollTo(0, 0);
+}
+function retour() { location.hash = ""; afficherListe(); }
+
+window.addEventListener("hashchange", function () { if (!location.hash) afficherListe(); });
+document.getElementById("btnRecharger").addEventListener("click", function () { charger(true); });
+document.getElementById("recherche").addEventListener("input", function (ev) {
+  filtre = ev.target.value; if (donnees) afficherListe();
+});
+
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("sw.js").catch(function () { });
+}
+charger(false);
+</script>
+</body>
+</html>

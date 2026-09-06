@@ -1,0 +1,17 @@
+{
+  "name": "Permis Score — Olive Conduite",
+  "short_name": "Permis Score",
+  "description": "Suivi de progression des élèves d'Olive Conduite",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#F7F5F2",
+  "theme_color": "#0B0A09",
+  "lang": "fr",
+  "icons": [
+    { "src": "icone-180.png", "sizes": "180x180", "type": "image/png" },
+    { "src": "icone-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icone-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
