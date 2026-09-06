@@ -117,6 +117,43 @@ main{padding:14px 14px calc(28px + var(--bas))}
 .pied{text-align:center;font-size:11.5px;color:var(--pale);padding:18px 0 4px}
 .demo{background:var(--orange);color:#140800;font-size:12px;font-weight:700;
   text-align:center;padding:7px 12px}
+/* ---- bouton flottant « saisir » ---- */
+.fab{position:fixed;right:16px;bottom:18px;z-index:40;display:flex;align-items:center;gap:8px;
+  background:#F26522;color:#fff;border:none;border-radius:30px;padding:13px 18px 13px 15px;
+  font-size:15px;font-weight:700;box-shadow:0 6px 18px rgba(0,0,0,.28);cursor:pointer}
+.fab svg{width:22px;height:22px;fill:none;stroke:#fff;stroke-width:2.4;stroke-linecap:round}
+.fab.cache{display:none}
+/* ---- formulaire de saisie ---- */
+.saisie{padding:14px}
+.saisie .bloc{background:#fff;border:1px solid #E2DDD6;padding:16px;margin-bottom:12px}
+.saisie label{display:block;font-size:12px;font-weight:700;letter-spacing:.5px;
+  color:#BF4A12;margin-bottom:7px;text-transform:uppercase}
+.saisie select,.saisie input[type=date],.saisie input[type=text]{
+  width:100%;font-size:16px;padding:11px 12px;border:1px solid #C9C3BA;background:#fff;
+  color:#141210;border-radius:0;-webkit-appearance:none;appearance:none}
+.saisie select{background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%235C5651' stroke-width='2.4'><path d='M6 9l6 6 6-6'/></svg>');
+  background-repeat:no-repeat;background-position:right 12px center;padding-right:36px}
+.comp-saisie{margin-bottom:14px}
+.comp-saisie .titre{font-size:14px;font-weight:600;color:#141210;margin-bottom:6px}
+.niveaux{display:grid;grid-template-columns:repeat(5,1fr);gap:5px}
+.niveaux button{font-size:12px;font-weight:600;padding:9px 2px;border:1px solid #C9C3BA;
+  background:#F7F5F2;color:#5C5651;cursor:pointer;line-height:1.15;border-radius:0}
+.niveaux button .num{display:block;font-size:16px;font-weight:800;margin-bottom:2px}
+.niveaux button.actif{background:#F26522;border-color:#F26522;color:#fff}
+.niveaux button.actif.zero{background:#5C5651;border-color:#5C5651}
+.aide-niv{font-size:11px;color:#8a847c;margin-top:5px}
+.case{display:flex;align-items:center;gap:11px;font-size:15px;color:#141210;cursor:pointer;padding:4px 0}
+.case input{width:22px;height:22px;accent-color:#F26522;flex:none}
+.actions{display:flex;gap:10px;margin-top:4px}
+.actions button{flex:1;font-size:16px;font-weight:700;padding:14px;border:none;cursor:pointer;border-radius:0}
+.btn-ok{background:#F26522;color:#fff}
+.btn-ok:disabled{opacity:.5}
+.btn-annuler{background:#EFEBE5;color:#5C5651}
+.toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);z-index:60;
+  background:#0B0A09;color:#fff;padding:13px 20px;font-size:14px;box-shadow:0 6px 20px rgba(0,0,0,.35);
+  max-width:90%;text-align:center;opacity:0;transition:opacity .25s}
+.toast.on{opacity:1}
+.toast.err{background:#8a1f10}
 </style>
 </head>
 <body>
@@ -142,7 +179,13 @@ main{padding:14px 14px calc(28px + var(--bas))}
 <main>
   <section class="vue on" id="vueListe"><div id="liste"></div><div class="pied" id="pied"></div></section>
   <section class="vue" id="vueFiche"></section>
+  <section class="vue" id="vueSaisie"></section>
 </main>
+
+<button class="fab" id="btnSaisir" aria-label="Saisir une leçon" onclick="ouvrirSaisie()">
+  <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+  <span>Saisir une leçon</span>
+</button>
 
 <script>
 /* ====================================================================
@@ -346,13 +389,150 @@ function courbeSvg(c) {
 
 /* ---------------------------------------------------------- navigation */
 function montrer(id) {
-  ["vueListe", "vueFiche"].forEach(function (v) {
+  ["vueListe", "vueFiche", "vueSaisie"].forEach(function (v) {
     document.getElementById(v).classList.toggle("on", v === id);
   });
   document.getElementById("zoneRecherche").style.display = (id === "vueListe") ? "" : "none";
+  // Le bouton « saisir » n'apparaît que sur la liste, et jamais en démonstration.
+  var fab = document.getElementById("btnSaisir");
+  var demo = !document.getElementById("bandeauDemo").hidden;
+  fab.classList.toggle("cache", id !== "vueListe" || demo);
   window.scrollTo(0, 0);
 }
 function retour() { location.hash = ""; afficherListe(); }
+
+/* ---------------------------------------------------------- saisie d'une leçon */
+var saisieNotes = [0,0,0,0,0,0,0,0,0];
+
+function ouvrirSaisie() {
+  if (!donnees || !donnees.eleves) return;
+  saisieNotes = [0,0,0,0,0,0,0,0,0];
+
+  var eleves = donnees.eleves.slice().sort(function (a, b) {
+    return a.nom.localeCompare(b.nom, "fr");
+  });
+  var opts = eleves.map(function (e) {
+    return '<option value="' + e.nom.replace(/"/g,"&quot;") + '">' + e.nom + '</option>';
+  }).join("");
+
+  var libelles = ["Pas vu", "1", "2", "3", "4"];
+  var titres   = ["non abordé","je fais à sa place","je le guide","je le corrige","il se débrouille"];
+
+  var comps = donnees.competences.map(function (c, k) {
+    var boutons = [0,1,2,3,4].map(function (n) {
+      return '<button type="button" class="niv-btn' + (n===0?" zero":"") + '" '
+        + 'data-comp="' + k + '" data-niv="' + n + '" onclick="choisirNiveau(' + k + ',' + n + ')">'
+        + '<span class="num">' + libelles[n] + '</span></button>';
+    }).join("");
+    return '<div class="comp-saisie" id="cs-' + k + '">'
+      + '<div class="titre">' + c + '</div>'
+      + '<div class="niveaux">' + boutons + '</div></div>';
+  }).join("");
+
+  var auj = new Date();
+  var iso = auj.getFullYear() + "-"
+    + String(auj.getMonth()+1).padStart(2,"0") + "-"
+    + String(auj.getDate()).padStart(2,"0");
+
+  var v = document.getElementById("vueSaisie");
+  v.innerHTML =
+    '<div class="saisie">'
+    + '<button class="retour" onclick="retour()">&larr; Annuler</button>'
+    + '<div class="bloc">'
+    +   '<label>Élève</label>'
+    +   '<select id="sEleve">' + opts + '</select>'
+    +   '<label style="margin-top:16px">Date de la leçon</label>'
+    +   '<input type="date" id="sDate" value="' + iso + '">'
+    +   '<label style="margin-top:16px">Durée</label>'
+    +   '<select id="sDuree">'
+    +     '<option>45 minutes</option><option selected>1 heure</option>'
+    +     '<option>1 heure 30</option><option>2 heures</option></select>'
+    +   '<label style="margin-top:16px">Thème travaillé</label>'
+    +   '<input type="text" id="sTheme" placeholder="Ex : ronds-points de la rocade">'
+    + '</div>'
+    + '<div class="bloc">'
+    +   '<label>Compétences travaillées</label>'
+    +   '<div class="aide-niv" style="margin:-2px 0 12px">Laissez « Pas vu » pour ce qui n\'a pas été abordé : le niveau précédent est conservé.</div>'
+    +   comps
+    + '</div>'
+    + '<div class="bloc">'
+    +   '<label class="case"><input type="checkbox" id="sEmail" checked>'
+    +   '<span>Envoyer le score à l\'élève par e-mail</span></label>'
+    + '</div>'
+    + '<div class="actions">'
+    +   '<button class="btn-annuler" onclick="retour()">Annuler</button>'
+    +   '<button class="btn-ok" id="sValider" onclick="envoyerSaisie()">Enregistrer</button>'
+    + '</div>'
+    + '</div>';
+
+  montrer("vueSaisie");
+}
+
+function choisirNiveau(comp, niv) {
+  saisieNotes[comp] = niv;
+  var zone = document.getElementById("cs-" + comp);
+  zone.querySelectorAll(".niv-btn").forEach(function (b) {
+    var n = parseInt(b.getAttribute("data-niv"), 10);
+    b.classList.toggle("actif", n === niv);
+    b.classList.toggle("zero", n === 0);   // le bouton « Pas vu » garde son style gris quand actif
+  });
+}
+
+function envoyerSaisie() {
+  var eleve = document.getElementById("sEleve").value;
+  var date  = document.getElementById("sDate").value;
+  var duree = document.getElementById("sDuree").value;
+  var theme = document.getElementById("sTheme").value.trim();
+  var email = document.getElementById("sEmail").checked;
+
+  if (!eleve) { toast("Choisissez un élève", true); return; }
+  if (!date)  { toast("Indiquez la date", true); return; }
+  if (!theme) { toast("Indiquez le thème travaillé", true); return; }
+  if (saisieNotes.every(function (n) { return n === 0; })) {
+    toast("Notez au moins une compétence", true); return;
+  }
+
+  var btn = document.getElementById("sValider");
+  btn.disabled = true; btn.textContent = "Envoi…";
+
+  var corps = JSON.stringify({
+    cle: CLE, eleve: eleve, date: date, duree: duree,
+    theme: theme, notes: saisieNotes, email: email
+  });
+
+  // text/plain : évite le préflight CORS qu'Apps Script ne gère pas.
+  fetch(ADRESSE, {
+    method: "POST",
+    headers: { "Content-Type": "text/plain;charset=utf-8" },
+    body: corps
+  })
+  .then(function (r) { return r.json(); })
+  .then(function (j) {
+    if (!j || !j.ok) throw new Error(j && j.erreur ? j.erreur : "refus");
+    toast("Leçon enregistrée — score " + j.score + "/100"
+      + (j.emailEnvoye ? ", e-mail envoyé" : ""));
+    location.hash = "";
+    charger(true);           // recharge les données à jour
+  })
+  .catch(function (err) {
+    btn.disabled = false; btn.textContent = "Enregistrer";
+    toast("Échec de l'enregistrement : " + err.message, true);
+  });
+}
+
+var toastTimer = null;
+function toast(msg, erreur) {
+  var t = document.getElementById("toast");
+  if (!t) {
+    t = document.createElement("div"); t.id = "toast"; document.body.appendChild(t);
+  }
+  t.className = "toast" + (erreur ? " err" : "");
+  t.textContent = msg;
+  void t.offsetWidth;
+  t.classList.add("on");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(function () { t.classList.remove("on"); }, 3200);
+}
 
 window.addEventListener("hashchange", function () { if (!location.hash) afficherListe(); });
 document.getElementById("btnRecharger").addEventListener("click", function () { charger(true); });
