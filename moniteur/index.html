@@ -35,7 +35,7 @@ button{background:none;border:none;cursor:pointer}
 
 .colonne{flex:1;min-width:0;display:flex;flex-direction:column}
 
-header{position:sticky;top:0;z-index:30;background:var(--noir);color:#fff;
+header{position:relative;z-index:30;background:var(--noir);color:#fff;
   padding:calc(10px + var(--haut)) 14px 11px}
 .hd{display:flex;align-items:center;gap:10px;min-height:34px}
 .logo{height:30px;width:auto;color:#fff}
@@ -186,7 +186,7 @@ main{flex:1;padding:14px 14px calc(18px + var(--barre) + var(--bas))}
 .btn.vide{background:transparent;color:var(--texte);border-color:var(--ligne)}
 .btn.danger{background:transparent;color:var(--rouge);border-color:#F0CFC8}
 .btn[disabled]{opacity:.5}
-.btn-eval{position:sticky;bottom:calc(10px + var(--barre) + var(--bas));z-index:8;box-shadow:0 6px 18px rgba(191,74,18,.35)}
+.btn-eval{z-index:8;box-shadow:0 6px 18px rgba(191,74,18,.35)}
 
 /* formulaires */
 label{display:block;font-size:12px;font-weight:700;letter-spacing:.4px;color:var(--fonce);margin:14px 0 5px}
@@ -306,7 +306,7 @@ button.skip[aria-pressed=true]{border-style:solid;border-color:var(--pale);backg
   main{padding:26px 30px 40px}
   .wrap,.fin-wrap{max-width:760px}
   .onglets{position:sticky;top:0}
-  .btn-eval{bottom:14px}
+  .btn-eval{position:sticky;bottom:14px}
 }
 @media (min-width:1120px){ .wrap,.fin-wrap{max-width:860px} }
 </style>
