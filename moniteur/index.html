@@ -16,8 +16,9 @@
   --noir:#0B0A09; --orange:#F26522; --fonce:#BF4A12;
   --papier:#F7F5F2; --blanc:#fff; --ligne:#E2DDD6;
   --texte:#141210; --doux:#5C5651; --pale:#8A847C;
-  --vert:#1E7A34; --rouge:#C4321A;
+  --vert:#1E7A34; --rouge:#C4321A; --ambre:#E08A1E;
   --haut:env(safe-area-inset-top); --bas:env(safe-area-inset-bottom);
+  --barre:64px;
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 body{font:400 16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
@@ -26,87 +27,150 @@ button,input,select,textarea{font:inherit;color:inherit}
 button{background:none;border:none;cursor:pointer}
 [hidden]{display:none !important}
 
+/* ---------- structure d'ensemble : rail (desktop) + colonne ---------- */
+.app{display:flex;min-height:100vh}
+
+/* rail latéral, masqué en mobile */
+.rail{display:none}
+
+.colonne{flex:1;min-width:0;display:flex;flex-direction:column}
+
 header{position:sticky;top:0;z-index:30;background:var(--noir);color:#fff;
-  padding:calc(8px + var(--haut)) 14px 9px}
-.hd{display:flex;align-items:center;gap:10px}
-.marque{font-size:18px;font-weight:800;letter-spacing:.5px;line-height:1}
-.marque span{color:var(--orange)}
+  padding:calc(10px + var(--haut)) 14px 11px}
+.hd{display:flex;align-items:center;gap:10px;min-height:34px}
+.logo{height:30px;width:auto;color:#fff}
+.titres{display:flex;flex-direction:column;justify-content:center}
 .sous{font-size:10.5px;color:#a9a39b;margin-top:2px}
-.ico{margin-left:auto;width:32px;height:32px;border:1px solid #33302c;display:grid;place-items:center;flex:none}
-.ico svg{width:16px;height:16px;fill:none;stroke:#fff;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.hd .ttl{font-size:17px;font-weight:800;letter-spacing:.3px}
+.ico{width:34px;height:34px;border:1px solid #33302c;display:grid;place-items:center;flex:none}
+.ico svg{width:17px;height:17px;fill:none;stroke:#fff;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
 .ico.tourne svg{animation:tr .9s linear infinite}
 @keyframes tr{to{transform:rotate(360deg)}}
-.chercher{margin-top:9px;position:relative}
-.chercher input{width:100%;background:#1a1815;border:1px solid #33302c;color:#fff;
-  padding:8px 12px 8px 34px;font-size:16px}
-.chercher input::placeholder{color:#7d7770}
-.chercher svg{position:absolute;left:11px;top:10px;width:16px;height:16px;fill:none;stroke:#7d7770;stroke-width:2}
+.pousse{margin-left:auto}
 
-main{padding:13px 13px calc(30px + var(--bas))}
+/* barre de recherche d'en-tête (écran recherche seulement) */
+.chercher{margin-top:10px;position:relative}
+.chercher input{width:100%;background:#1a1815;border:1px solid #33302c;color:#fff;
+  padding:11px 12px 11px 38px;font-size:16px}
+.chercher input::placeholder{color:#7d7770}
+.chercher > svg{position:absolute;left:12px;top:12px;width:17px;height:17px;fill:none;stroke:#7d7770;stroke-width:2}
+
+main{flex:1;padding:14px 14px calc(18px + var(--barre) + var(--bas))}
 .vue{display:none}
 .vue.on{display:block;animation:ap .16s ease-out}
 @keyframes ap{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+.wrap{max-width:640px;margin:0 auto}
 
 .bandeau{padding:9px 13px;font-size:13px;font-weight:600;text-align:center}
 .bandeau.demo{background:var(--orange);color:#140800}
 .bandeau.ok{background:#D7F0DB;color:#14532A}
 .bandeau.ko{background:#FFE0DA;color:#8C1C0A}
 
-.carte{display:block;width:100%;text-align:left;background:var(--blanc);border:1px solid var(--ligne);
-  border-left:5px solid var(--orange);padding:13px 15px;margin-bottom:9px}
+/* ---------- titres de section ---------- */
+.jour{font-size:12px;font-weight:800;letter-spacing:1.4px;color:var(--fonce);text-transform:uppercase}
+.bonjour{font-size:24px;font-weight:800;line-height:1.1;margin-bottom:2px}
+.section-tt{font-size:11px;font-weight:800;letter-spacing:1.3px;color:var(--pale);
+  text-transform:uppercase;margin:22px 2px 10px}
+.filet{height:1px;background:var(--ligne);margin:14px 0}
+
+/* ---------- carte "prochain élève" ---------- */
+.hero{background:var(--noir);color:#fff;padding:18px 18px 16px;margin-bottom:4px;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;right:-40px;top:-40px;width:150px;height:150px;
+  background:radial-gradient(circle,rgba(242,101,34,.28),transparent 70%)}
+.hero .q{font-size:11px;font-weight:700;letter-spacing:1px;color:#a9a39b;text-transform:uppercase}
+.hero .n{font-size:22px;font-weight:800;margin-top:3px}
+.hero .h{font-size:15px;color:#F2A878;font-weight:700;margin-top:1px}
+.hero .obj{display:inline-flex;align-items:center;gap:7px;background:#1f1c19;border:1px solid #38332e;
+  padding:7px 11px;margin-top:12px;font-size:13px}
+.hero .obj b{color:var(--orange);font-weight:700}
+.hero .go{display:block;width:100%;text-align:center;background:var(--orange);color:#140800;
+  font-weight:800;font-size:15px;letter-spacing:.3px;padding:12px;margin-top:14px;position:relative;z-index:2}
+.hero .go:active{background:#FF7A38}
+
+/* ---------- carte élève (liste / récents) ---------- */
+.carte{display:flex;align-items:center;gap:13px;width:100%;text-align:left;background:var(--blanc);
+  border:1px solid var(--ligne);border-left:4px solid var(--orange);padding:13px 14px;margin-bottom:8px}
 .carte:active{background:#FFF7F2}
 .carte.pret{border-left-color:var(--vert)}
-.carte.inactif{opacity:.5}
-.nom{font-size:17px;font-weight:700;line-height:1.2}
-.ligne-nom{display:flex;align-items:flex-start;gap:12px}
-.ligne-nom > div{flex:1;min-width:0}
-.form.manque{color:var(--rouge);font-weight:600}
-.crayon{flex:none;width:38px;height:38px;border:1.5px solid var(--ligne);display:grid;place-items:center}
-.crayon svg{width:19px;height:19px;fill:none;stroke:var(--fonce);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.crayon:active{background:#FFF4EE;border-color:var(--orange)}
-.form{font-size:12px;color:var(--pale);margin-top:2px}
-.rang{display:flex;align-items:center;gap:11px;margin-top:10px}
-.pts{font-size:29px;font-weight:800;color:var(--fonce);line-height:1;min-width:74px;font-variant-numeric:tabular-nums}
-.pts em{font-size:12px;color:var(--pale);font-style:normal;font-weight:400}
-.pts.ok{color:var(--vert)}
-.jauge{flex:1;background:var(--ligne);height:10px;position:relative}
-.jauge i{display:block;height:100%;background:var(--orange);transition:width .3s}
-.jauge.ok i{background:var(--vert)}
-.jauge u{position:absolute;top:-3px;bottom:-3px;width:2px;background:var(--noir)}
-.info{font-size:12px;color:var(--doux);margin-top:8px}
-.puce{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.5px;padding:4px 9px;
-  background:#EFEBE5;color:var(--doux);margin-top:8px}
-.puce.ok{background:var(--vert);color:#fff}
-.puce.urgent{background:#FFE8DE;color:var(--fonce)}
+.carte.inactif{opacity:.55}
+.carte .txt{flex:1;min-width:0}
+.carte .nom{font-size:16px;font-weight:700;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.carte .sub{font-size:12px;color:var(--pale);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.carte .val{flex:none;text-align:right}
+.carte .val .p{font-size:22px;font-weight:800;color:var(--fonce);line-height:1;font-variant-numeric:tabular-nums}
+.carte .val .p.ok{color:var(--vert)}
+.carte .val .p em{font-size:10px;color:var(--pale);font-style:normal;font-weight:400}
+.pastille{display:inline-block;width:11px;height:11px;border-radius:50%;flex:none;margin-left:3px}
+.pastille.v{background:var(--vert)}.pastille.o{background:var(--ambre)}.pastille.r{background:var(--rouge)}
+.carte .chev{flex:none;width:9px;height:9px;border-right:2px solid var(--pale);border-bottom:2px solid var(--pale);
+  transform:rotate(-45deg);margin-left:2px}
 
+/* ---------- blocs génériques ---------- */
 .bloc{background:var(--blanc);border:1px solid var(--ligne);padding:15px;margin-bottom:9px}
 .tt{font-size:10.5px;font-weight:800;letter-spacing:1.2px;color:var(--fonce);margin-bottom:11px}
 .grand{font-size:54px;font-weight:800;color:var(--fonce);line-height:.92;font-variant-numeric:tabular-nums}
 .grand.ok{color:var(--vert)}
 .grand em{font-size:18px;color:var(--pale);font-style:normal;font-weight:400}
-.retour{display:inline-flex;align-items:center;gap:6px;font-size:15px;color:var(--fonce);font-weight:600;padding:5px 0 11px}
 
-.comp{margin-bottom:10px}
+.retour{display:inline-flex;align-items:center;gap:6px;font-size:15px;color:var(--fonce);font-weight:600;padding:2px 0 12px}
+
+/* jauge */
+.jauge{background:var(--ligne);height:11px;position:relative}
+.jauge i{display:block;height:100%;background:var(--orange);transition:width .35s}
+.jauge.ok i{background:var(--vert)}
+.jauge u{position:absolute;top:-3px;bottom:-3px;width:2px;background:var(--noir)}
+.info{font-size:12px;color:var(--doux);margin-top:8px}
+.puce{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.5px;padding:4px 9px;
+  background:#EFEBE5;color:var(--doux);margin-top:9px}
+.puce.ok{background:var(--vert);color:#fff}
+.puce.urgent{background:#FFE8DE;color:var(--fonce)}
+
+/* objectif prochaine séance */
+.cible{background:#FFF4EE;border:1px solid #F6D8C6;border-left:4px solid var(--orange);padding:14px}
+.cible .tt{margin-bottom:6px}
+.cible .obj-nom{font-size:17px;font-weight:800;color:var(--texte)}
+.cible .liste{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.tag{font-size:12px;font-weight:600;background:#fff;border:1px solid #F0CBB4;color:var(--fonce);padding:5px 9px}
+
+/* à travailler / points forts */
+.critere{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--ligne)}
+.critere:last-child{border-bottom:none}
+.critere .rd{width:11px;height:11px;border-radius:50%;flex:none}
+.rd.r{background:var(--rouge)}.rd.o{background:var(--ambre)}.rd.v{background:var(--vert)}
+.critere .cn{flex:1;font-size:14.5px;font-weight:600}
+.critere .cm{font-size:12px;color:var(--pale)}
+.critere .cv{font-size:13px;font-weight:700;color:var(--doux);font-variant-numeric:tabular-nums}
+
+/* onglets fiche */
+.onglets{display:flex;gap:2px;background:#EDE8E1;padding:3px;margin-bottom:12px;position:sticky;
+  top:calc(56px + var(--haut));z-index:10}
+.onglets button{flex:1;padding:9px 4px;font-size:13px;font-weight:700;color:var(--doux)}
+.onglets button[aria-selected=true]{background:#fff;color:var(--texte);box-shadow:0 1px 2px rgba(0,0,0,.08)}
+
+/* compétences détaillées, groupées */
+.groupe-tt{font-size:11px;font-weight:800;letter-spacing:1px;color:var(--pale);text-transform:uppercase;margin:16px 0 8px}
+.groupe-tt:first-child{margin-top:0}
+.comp{margin-bottom:11px}
 .comp:last-child{margin-bottom:0}
 .comp .l{display:flex;justify-content:space-between;align-items:baseline;font-size:13.5px;margin-bottom:4px}
 .comp .l small{color:var(--pale);font-size:11.5px;margin-left:6px}
+.comp .l b{font-variant-numeric:tabular-nums}
 .comp .b{background:#EFEBE5;height:9px}
 .comp .b i{display:block;height:100%;background:var(--orange)}
 .comp.faible .b i{background:var(--rouge)}
 .comp.acquise .b i{background:var(--vert)}
-.prio{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid var(--ligne)}
-.prio:last-child{border-bottom:none}
-.prio b{width:21px;height:21px;flex:none;background:var(--rouge);color:#fff;font-size:12px;display:grid;place-items:center}
-.prio small{display:block;color:var(--pale);font-size:12px}
-.courbe{width:100%;height:74px;display:block}
+
+.courbe{width:100%;height:80px;display:block}
 .suite{font-size:14px;font-weight:700;font-variant-numeric:tabular-nums;color:var(--doux);margin-top:6px}
 
-.histo{border-top:1px solid var(--ligne);padding:10px 0;display:flex;gap:12px;align-items:flex-start}
+/* historique */
+.histo{border-top:1px solid var(--ligne);padding:11px 0;display:flex;gap:12px;align-items:flex-start}
 .histo:first-of-type{border-top:none}
 .histo .sc{font-size:19px;font-weight:800;color:var(--fonce);min-width:44px;font-variant-numeric:tabular-nums}
 .histo .d{font-size:13.5px;font-weight:600}
 .histo .t{font-size:12.5px;color:var(--doux)}
 
+/* boutons */
 .btn{display:block;width:100%;text-align:center;background:var(--orange);color:#140800;
   font-weight:800;font-size:16px;letter-spacing:.3px;padding:14px;border:2px solid var(--orange);margin-bottom:9px}
 .btn:active{background:#FF7A38}
@@ -114,22 +178,18 @@ main{padding:13px 13px calc(30px + var(--bas))}
 .btn.vide{background:transparent;color:var(--texte);border-color:var(--ligne)}
 .btn.danger{background:transparent;color:var(--rouge);border-color:#F0CFC8}
 .btn[disabled]{opacity:.5}
+.btn-eval{position:sticky;bottom:calc(10px + var(--barre) + var(--bas));z-index:8;box-shadow:0 6px 18px rgba(191,74,18,.35)}
 
+/* formulaires */
 label{display:block;font-size:12px;font-weight:700;letter-spacing:.4px;color:var(--fonce);margin:14px 0 5px}
-input[type=text],input[type=email],input[type=date],textarea,select{width:100%;background:#fff;
+input[type=text],input[type=email],input[type=date],input[type=search],textarea,select{width:100%;background:#fff;
   border:1px solid var(--ligne);padding:12px;font-size:16px}
-input:focus,textarea:focus{outline:none;border-color:var(--orange)}
+input:focus,textarea:focus,select:focus{outline:none;border-color:var(--orange)}
 .chips{display:flex;gap:6px;flex-wrap:wrap}
 .chip{flex:1;min-width:64px;text-align:center;border:1.5px solid var(--ligne);background:#fff;padding:11px 6px;font-size:14px;font-weight:600}
 .chip[aria-pressed=true]{border-color:var(--orange);background:#FFF4EE;color:var(--fonce)}
-.note-l{display:flex;justify-content:space-between;align-items:center;font-size:14px;margin:14px 0 5px}
-.note-l small{color:var(--pale);font-size:11.5px}
-.niv{display:flex;gap:5px}
-.niv button{flex:1;border:1.5px solid var(--ligne);background:#fff;padding:11px 0;font-size:15px;font-weight:700}
-.niv button[aria-pressed=true]{border-color:var(--orange);background:var(--orange);color:#140800}
-.niv button.zero[aria-pressed=true]{background:#EFEBE5;border-color:#c9c3bb;color:var(--doux)}
-label.bascule{cursor:pointer}
-.bascule{display:flex;align-items:center;gap:11px;background:#fff;border:1px solid var(--ligne);padding:13px;margin:16px 0 12px}
+
+.bascule{display:flex;align-items:center;gap:11px;background:#fff;border:1px solid var(--ligne);padding:13px;margin:10px 0 0;cursor:pointer}
 .bascule input{width:22px;height:22px;accent-color:var(--orange);flex:none}
 .bascule span{font-size:14px}
 .bascule small{display:block;color:var(--pale);font-size:12px}
@@ -140,47 +200,172 @@ textarea{min-height:96px;resize:vertical;line-height:1.5}
 .note-suivi{white-space:pre-line;font-size:14px;color:var(--texte)}
 .note-vide{font-size:13.5px;color:var(--pale);font-style:italic}
 
+/* ---------- ÉVALUATION : gros boutons pouce ---------- */
+.eval-comp{background:var(--blanc);border:1px solid var(--ligne);padding:14px;margin-bottom:10px}
+.eval-comp.rempli{border-left:4px solid var(--vert)}
+.eval-comp .cn{font-size:16px;font-weight:700;margin-bottom:3px}
+.eval-comp .ca{font-size:12px;color:var(--pale);margin-bottom:11px}
+.eval-grille{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.eval-grille button{padding:15px 8px;font-size:14.5px;font-weight:700;border:2px solid var(--ligne);
+  background:#fff;display:flex;flex-direction:column;align-items:center;gap:3px;line-height:1.15}
+.eval-grille button .em{font-size:19px}
+.eval-grille button[aria-pressed=true]{color:#fff}
+.eval-grille button.n1[aria-pressed=true]{background:var(--rouge);border-color:var(--rouge)}
+.eval-grille button.n2[aria-pressed=true]{background:var(--ambre);border-color:var(--ambre);color:#241200}
+.eval-grille button.n3[aria-pressed=true]{background:var(--vert);border-color:var(--vert)}
+.eval-grille button.n4[aria-pressed=true]{background:var(--noir);border-color:var(--noir)}
+.retirer{display:block;margin:9px auto 0;font-size:12px;color:var(--pale);font-weight:600}
+
+.ajout-comp{border:2px dashed var(--ligne);background:transparent;color:var(--fonce);font-weight:700;
+  width:100%;padding:14px;font-size:15px;margin-bottom:10px}
+.ajout-comp:active{background:#FFF4EE}
+.choix-comp{display:flex;flex-wrap:wrap;gap:7px;margin:4px 0 12px}
+.choix-comp button{border:1.5px solid var(--ligne);background:#fff;padding:9px 12px;font-size:13.5px;font-weight:600}
+.choix-comp button:active{border-color:var(--orange);background:#FFF4EE}
+
+/* ---------- écran fin de séance ---------- */
+.fin-wrap{max-width:520px;margin:0 auto}
+.fin-tt{text-align:center;font-size:22px;font-weight:800;margin:6px 0 2px}
+.fin-nom{text-align:center;font-size:16px;color:var(--doux);margin-bottom:18px}
+.delta{text-align:center;background:var(--blanc);border:1px solid var(--ligne);padding:20px;margin-bottom:14px}
+.delta .g{font-size:52px;font-weight:800;line-height:1;color:var(--vert);font-variant-numeric:tabular-nums}
+.delta .g.neg{color:var(--rouge)}.delta .g.nul{color:var(--doux)}
+.delta .l{font-size:12px;font-weight:700;letter-spacing:1px;color:var(--pale);text-transform:uppercase;margin-top:6px}
+.delta .sc{font-size:14px;color:var(--doux);margin-top:8px}
+.rub{background:var(--blanc);border:1px solid var(--ligne);padding:14px;margin-bottom:10px}
+.rub .h{font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;margin-bottom:9px;display:flex;align-items:center;gap:7px}
+.rub.p .h{color:var(--vert)}.rub.s .h{color:var(--ambre)}.rub.c .h{color:var(--fonce)}
+.rub .item{font-size:15px;font-weight:600;padding:4px 0}
+
+/* ---------- écran partage bilan (aperçu) ---------- */
+.share-card{background:var(--blanc);border:2px solid var(--noir);padding:0;margin-bottom:14px;overflow:hidden}
+.share-head{background:var(--noir);color:#fff;padding:16px 18px}
+.share-head .k{font-size:11px;letter-spacing:2px;color:var(--orange);font-weight:800}
+.share-head .n{font-size:20px;font-weight:800;margin-top:4px}
+.share-head .d{font-size:12.5px;color:#a9a39b;margin-top:2px}
+.share-body{padding:16px 18px}
+.share-body .s-tt{font-size:10.5px;font-weight:800;letter-spacing:1px;color:var(--pale);text-transform:uppercase;margin:14px 0 7px}
+.share-body .s-tt:first-child{margin-top:0}
+.share-pts{font-size:38px;font-weight:800;color:var(--fonce);font-variant-numeric:tabular-nums;line-height:1}
+.share-li{font-size:14.5px;font-weight:600;padding:2px 0}
+.canaux{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.canaux .btn{margin-bottom:0}
+
+/* ---------- états / pied ---------- */
 .etat{padding:40px 18px;text-align:center;color:var(--doux);font-size:14.5px}
 .etat b{display:block;font-size:17px;color:var(--texte);margin-bottom:7px}
 .etat code{display:block;background:#EFEBE5;padding:9px;margin-top:11px;font-size:11px;text-align:left;word-break:break-all}
-.pied{text-align:center;font-size:11.5px;color:var(--pale);padding:16px 0 4px;white-space:pre-line}
+.pied{text-align:center;font-size:11.5px;color:var(--pale);padding:20px 0 4px;white-space:pre-line}
+
 .attente{position:fixed;inset:0;background:rgba(11,10,9,.55);display:none;place-items:center;z-index:60}
 .attente.on{display:grid}
 .attente div{background:#fff;padding:20px 26px;font-size:14px;font-weight:600}
+
+/* ---------- BARRE D'ONGLETS (mobile) ---------- */
+.tabbar{position:fixed;left:0;right:0;bottom:0;z-index:40;background:var(--blanc);
+  border-top:1px solid var(--ligne);display:flex;padding-bottom:var(--bas);
+  box-shadow:0 -2px 12px rgba(0,0,0,.05)}
+.tabbar button{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;
+  padding:9px 2px 8px;color:var(--pale);font-size:10.5px;font-weight:700}
+.tabbar button svg{width:23px;height:23px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.tabbar button[aria-current=true]{color:var(--fonce)}
+.tabbar .central{margin-top:-16px}
+.tabbar .central .rond{width:54px;height:54px;border-radius:50%;background:var(--orange);
+  display:grid;place-items:center;box-shadow:0 4px 12px rgba(191,74,18,.4);border:3px solid var(--papier)}
+.tabbar .central .rond svg{width:26px;height:26px;stroke:#140800;stroke-width:2.6}
+.tabbar .central span{color:var(--fonce);margin-top:2px}
+
+/* ---------- DESKTOP / TABLETTE : rail latéral ---------- */
+@media (min-width:820px){
+  :root{--barre:0px}
+  .rail{display:flex;flex-direction:column;width:236px;flex:none;background:var(--noir);color:#fff;
+    padding:22px 16px calc(22px + var(--bas));position:sticky;top:0;height:100vh;gap:4px}
+  .rail .marque{display:flex;flex-direction:column;gap:8px;padding:2px 8px 20px;border-bottom:1px solid #262320;margin-bottom:14px}
+  .rail .marque .logo{height:34px}
+  .rail .marque .sous{font-size:11px;color:#a9a39b}
+  .rail .lien{display:flex;align-items:center;gap:13px;padding:12px 14px;font-size:15px;font-weight:600;color:#c9c3bb;border-radius:2px}
+  .rail .lien svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+  .rail .lien:hover{background:#1c1916;color:#fff}
+  .rail .lien[aria-current=true]{background:#231f1b;color:#fff}
+  .rail .lien.eval{background:var(--orange);color:#140800;margin:6px 0}
+  .rail .lien.eval:hover{background:#FF7A38}
+  .rail .creux{flex:1}
+  .tabbar{display:none}
+  header{display:none}
+  main{padding:26px 30px 40px}
+  .wrap,.fin-wrap{max-width:760px}
+  .onglets{top:0}
+  .btn-eval{bottom:14px}
+}
+@media (min-width:1120px){ .wrap,.fin-wrap{max-width:860px} }
 </style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="logo-oc" viewBox="0 0 740 462"><g><path d="M277.2 138.8 L267.7 135.7 A139 139 0 0 1 280.8 102.6 L293.1 110.5 A127 127 0 0 0 277.2 138.8 Z" fill="#F58A20" stroke="currentColor" stroke-width="4" stroke-linejoin="round"/><path d="M298.1 103.4 L286.4 94.7 A142 142 0 0 1 309.9 67.2 L321.8 82.2 A125 125 0 0 0 298.1 103.4 Z" fill="#F58220" stroke="currentColor" stroke-width="4" stroke-linejoin="round"/><path d="M328.7 77.1 L317.8 61.3 A144 144 0 0 1 349.4 42.6 L357.4 65.0 A122 122 0 0 0 328.7 77.1 Z" fill="#F87A16" stroke="currentColor" stroke-width="4" stroke-linejoin="round"/><path d="M365.4 62.4 L358.9 39.5 A146 146 0 0 1 395.4 31.8 L395.9 60.2 A120 120 0 0 0 365.4 62.4 Z" fill="#FA6E12" stroke="currentColor" stroke-width="4" stroke-linejoin="round"/><path d="M404.2 60.4 L405.7 32.0 A148 148 0 0 1 443.3 36.6 L433.2 68.0 A118 118 0 0 0 404.2 60.4 Z" fill="#FC5F0C" stroke="currentColor" stroke-width="4" stroke-linejoin="round"/><path d="M440.8 70.7 L453.0 40.1 A151 151 0 0 1 487.7 56.8 L465.3 87.0 A116 116 0 0 0 440.8 70.7 Z" fill="#FB3D08" stroke="currentColor" stroke-width="4" stroke-linejoin="round"/><path d="M471.5 91.9 L495.9 63.3 A153 153 0 0 1 523.8 90.7 L489.1 114.8 A113 113 0 0 0 471.5 91.9 Z" fill="#F41505" stroke="currentColor" stroke-width="4" stroke-linejoin="round"/><path d="M493.3 121.3 L529.6 99.7 A155 155 0 0 1 548.8 140.4 L503.4 151.7 A111 111 0 0 0 493.3 121.3 Z" fill="none" stroke="currentColor" stroke-width="5" stroke-linejoin="round"/></g><path d="M407.4 195.7 L504.1 106.4 L385.1 162.7 Z" fill="none" stroke="currentColor" stroke-width="7" stroke-linejoin="round"/><circle cx="398.0" cy="178.0" r="27" fill="currentColor"/><circle cx="398.0" cy="178.0" r="19" fill="#F26522"/><circle cx="398.0" cy="178.0" r="8" fill="currentColor"/><g fill="currentColor"><path transform="translate(128.66,300) scale(0.13800,-0.13800)" d="M363 -8Q237 -8 166.5 8.0Q96 24 67.0 60.5Q38 97 38 160Q38 198 48.0 246.5Q58 295 69 358Q85 443 100.0 502.5Q115 562 139.5 600.0Q164 638 205.0 659.0Q246 680 312.0 688.0Q378 696 478 696Q602 696 672.0 680.0Q742 664 770.5 627.0Q799 590 799 527Q799 489 791.0 440.5Q783 392 769 330Q749 242 732.0 182.0Q715 122 691.0 84.5Q667 47 628.0 27.0Q589 7 525.0 -0.5Q461 -8 363 -8ZM381 174Q406 174 423.0 176.0Q440 178 451.0 186.5Q462 195 470.5 213.0Q479 231 487.0 263.0Q495 295 506 344Q515 388 520.5 419.5Q526 451 526 470Q526 492 519.0 501.0Q512 510 496.5 512.0Q481 514 455 514Q429 514 412.5 512.0Q396 510 385.0 501.5Q374 493 366.0 475.0Q358 457 350.5 425.5Q343 394 332 344Q326 314 320.5 289.5Q315 265 312.0 247.0Q309 229 309 215Q309 196 316.5 187.0Q324 178 340.0 176.0Q356 174 381 174Z"/><path transform="translate(247.03,300) scale(0.13800,-0.13800)" d="M-1 0 145 688H411L304 190H582L541 0Z"/><path transform="translate(337.52,300) scale(0.13800,-0.13800)" d="M-1 0 145 688H411L264 0Z"/><path transform="translate(396.41,300) scale(0.13800,-0.13800)" d="M152 0 80 688H347L373 283H384L585 688H857L491 0Z"/><path transform="translate(508.43,300) scale(0.13800,-0.13800)" d="M-1 0 145 688H739L701 510H372L356 434H626L589 261H319L301 178H631L592 0Z"/></g><g><circle cx="196.5" cy="339.0" r="52.0" fill="none" stroke="#F26522" stroke-width="12"/><g stroke="#F26522" stroke-width="11" stroke-linecap="round" fill="none"><path d="M196.5 327.4 L196.5 292.6"/><path d="M206.6 344.8 L236.7 362.2"/><path d="M186.5 344.8 L156.3 362.2"/></g><circle cx="196.5" cy="339.0" r="13.3" fill="none" stroke="#F26522" stroke-width="10"/><circle cx="196.5" cy="339.0" r="4.1" fill="currentColor"/></g><g fill="#F26522" stroke="currentColor" stroke-width="5" stroke-linejoin="round" paint-order="stroke"><path transform="translate(80.47,386) scale(0.09200,-0.09200)" d="M331 -8Q234 -8 168.5 8.0Q103 24 70.0 61.5Q37 99 37 164Q37 200 43.0 244.5Q49 289 62 344Q85 438 106.5 501.5Q128 565 155.5 603.5Q183 642 224.0 662.0Q265 682 327.5 689.0Q390 696 482 696Q519 696 559.5 693.5Q600 691 637.5 686.5Q675 682 702 676L667 504Q616 508 585.5 510.0Q555 512 538.5 513.0Q522 514 512 514Q469 514 441.0 512.0Q413 510 395.5 501.5Q378 493 367.0 475.0Q356 457 347.5 425.0Q339 393 329 344Q322 308 316.5 280.0Q311 252 311 235Q311 208 323.0 195.0Q335 182 363.0 178.0Q391 174 438 174Q473 174 519.5 177.0Q566 180 603 184L565 7Q537 3 497.0 -0.5Q457 -4 414.0 -6.0Q371 -8 331 -8Z"/><path transform="translate(247.53,386) scale(0.09200,-0.09200)" d="M-1 0 145 688H429L530 422H537L594 688H842L695 0H440L323 328H316L246 0Z"/><path transform="translate(327.77,386) scale(0.09200,-0.09200)" d="M-1 0 145 688H437Q562 688 632.5 673.5Q703 659 731.5 624.0Q760 589 760 526Q760 488 752.5 439.5Q745 391 734 330Q718 245 702.5 186.5Q687 128 663.0 91.5Q639 55 598.0 35.0Q557 15 491.0 7.5Q425 0 324 0ZM304 178H328Q360 178 380.5 180.5Q401 183 414.0 191.5Q427 200 436.0 217.5Q445 235 452.0 265.5Q459 296 469 342Q478 383 483.0 412.5Q488 442 488 462Q488 479 483.0 488.5Q478 498 467.5 502.5Q457 507 439.5 508.5Q422 510 398 510H374Z"/><path transform="translate(404.25,386) scale(0.09200,-0.09200)" d="M338 -8Q223 -8 160.0 7.5Q97 23 73.0 58.5Q49 94 49 153Q49 185 54.0 227.5Q59 270 69 320L147 688H413L328 288Q322 259 318.5 239.0Q315 219 315 206Q315 192 320.0 185.0Q325 178 336.5 176.5Q348 175 367 175Q390 175 403.5 178.0Q417 181 425.5 192.0Q434 203 440.0 225.5Q446 248 454 288L539 688H805L726 320Q709 240 693.5 183.0Q678 126 655.5 88.5Q633 51 595.0 30.0Q557 9 495.0 0.5Q433 -8 338 -8Z"/><path transform="translate(481.64,386) scale(0.09200,-0.09200)" d="M-1 0 145 688H411L264 0Z"/><path transform="translate(522.23,386) scale(0.09200,-0.09200)" d="M144 0 251 498H53L94 688H756L715 498H516L410 0Z"/><path transform="translate(589.59,386) scale(0.09200,-0.09200)" d="M-1 0 145 688H739L701 510H372L356 434H626L589 261H319L301 178H631L592 0Z"/></g><g fill="#F26522"><path d="M77 426 L163 434 L163 440 L77 436 Z"/><path d="M667 426 L581 434 L581 440 L667 436 Z"/></g><g fill="currentColor"><path transform="translate(181.02,442) scale(0.04000,-0.04000)" d="M0.7437945805067869 0 221.82115325562398 688H515.5813625423982L736.5530483675117 0H521.5277314912959L485.9987455887121 116.54803237854149H245.21505924842876L210.36905479583376 0ZM286.664304399909 265.2265516861096H443.65517328723564L369.680545012283 518.9143437585732H360.8088203545865Z"/><path transform="translate(222.50,442) scale(0.04000,-0.04000)" d="M361.90998821992156 -8Q275.7599771291089 -8 220.21397296597462 1.9627261032882375Q164.6679688028403 11.925452206576475 132.8103318635338 34.289071877336774Q100.9526949242273 56.65269154809707 85.84848002755035 93.82437175193598Q70.7442651308734 130.9960519557749 66.83100149484986 185.72213530133706Q62.917737858826314 240.44821864689922 62.917737858826314 314.9584376402883V688H278.31272475356025V282.513413218432Q278.31272475356025 237.88575319385913 280.1769318034565 211.64835054928767Q282.0411388533528 185.41094790471618 289.4054736350918 172.53535961933545Q296.76980841683087 159.65977133395475 314.01494952324583 155.7616004791625Q331.26009062966074 151.86342962437024 361.570877714925 151.86342962437024Q392.759379572073 151.86342962437024 409.72149527281226 155.7616004791625Q426.6836109735515 159.65977133395475 434.40012898693783 172.53535961933545Q442.11664700032424 185.41094790471618 443.95066406055156 211.64835054928767Q445.7846811207789 237.88575319385913 445.7846811207789 282.513413218432V688H660.7796436014503V314.9584376402883Q660.7796436014503 240.44821864689922 656.8663799654267 185.72213530133706Q652.9531163294032 130.9960519557749 638.0915906180635 93.7842329022916Q623.2300649067239 56.57241384880832 591.2441480407958 34.20503849620995Q559.2582311748678 11.837663143611582 503.65911524280097 1.9188315718057911Q448.05999931073416 -8 361.90998821992156 -8Z"/><path transform="translate(263.46,442) scale(0.04000,-0.04000)" d="M208.09605988596118 0V525.4197393053546H17.50595592063423V688H614.7113118944221V525.4197393053546H423.09102236663256V0Z"/><path transform="translate(300.74,442) scale(0.04000,-0.04000)" d="M371.858652892803 -8Q277.50322536459373 -8 217.43325949362156 2.5358217913725802Q157.3632936226494 13.07164358274516 123.48016177190368 36.886724156945206Q89.59702992115797 60.70180473114525 74.27055481882545 101.14328716549032Q58.944079716492915 141.5847695998354 55.33272572583611 201.54894780846283Q51.72137173517932 261.51312601709026 51.72137173517932 343.7056484359412Q51.72137173517932 425.8981708547922 55.33272572583611 485.86234906341963Q58.944079716492915 545.8265272720471 74.27055481882545 586.4151854884215Q89.59702992115797 627.0038437047959 123.48016177190368 650.9661000610254Q157.3632936226494 674.9283564172548 217.4561156999426 685.4641782086273Q277.5489377772358 696 371.88456629869563 696Q466.2201948201555 696 526.3130168974487 685.4641782086273Q586.4058389747419 674.9283564172548 620.4568756176582 650.9661000610254Q654.5079122605746 627.0038437047959 669.6400562965289 586.4151854884215Q684.7722003324833 545.8265272720471 688.6042955403127 485.86234906341963Q692.436390748142 425.8981708547922 692.436390748142 343.7056484359412Q692.436390748142 261.51312601709026 688.6042955403127 201.54894780846283Q684.7722003324833 141.5847695998354 669.6400562965289 101.14328716549032Q654.5079122605746 60.70180473114525 620.4668034809547 36.886724156945206Q586.4256947013349 13.07164358274516 526.3198875611736 2.5358217913725802Q466.2140804210123 -8 371.858652892803 -8ZM371.88456629869563 147.30111511668866Q402.734852149285 147.30111511668866 422.26512969143096 149.61811754328673Q441.79540723357695 151.9351199698848 452.9220516268768 161.36588107308404Q464.04869602017664 170.79664217628329 469.00730629302177 191.66600545230827Q473.9659165658669 212.53536872833325 475.28291899246494 249.47889347791863Q476.599921419063 286.422418227504 476.599921419063 343.7056484359412Q476.599921419063 401.28323020843726 475.28291899246494 438.0795791759932Q473.9659165658669 474.87592814354923 469.00730629302177 495.8924672016036Q464.04869602017664 516.909006259658 452.9220516268768 526.4869431448866Q441.79540723357695 536.0648800301152 422.250222873217 538.3818824567132Q402.7050385128571 540.6988848833113 371.83221909985116 540.6988848833113Q341.51791725250024 540.6988848833113 321.82506788395347 538.3818824567132Q302.13221851540675 536.0648800301152 291.0942323384814 526.4988043831522Q280.05624616155603 516.9327287361893 274.95614124733453 495.9043284398693Q269.856036333113 474.87592814354923 268.70693869868563 438.0795791759932Q267.55784106425824 401.28323020843726 267.55784106425824 343.7056484359412Q267.55784106425824 286.422418227504 268.70693869868563 249.47889347791863Q269.856036333113 212.53536872833325 274.95614124733453 191.65414421404256Q280.05624616155603 170.77291969975184 291.0942323384814 161.3540198348183Q302.13221851540675 151.9351199698848 321.8397641081262 149.61811754328673Q341.54730970084563 147.30111511668866 371.88456629869563 147.30111511668866Z"/><path transform="translate(342.50,442) scale(0.04000,-0.04000)" d="M47.98886412843551 210.87206992281025V357.55058923037836H347.1402366741695V210.87206992281025Z"/><path transform="translate(370.30,442) scale(0.04000,-0.04000)" d="M64.78956685595196 0V688H592.6928516092628V533.8762911395463H278.8600166241645V422.75809122558985H540.9777427945467V271.8720699228103H278.8600166241645V154.12370886045363H592.6928516092628V0ZM226.86939372848911 748.872023160041V753.872023160041L324.86262208979696 896.1625632661301H509.5032393934245V891.1625632661301L361.9176153014016 748.872023160041Z"/><path transform="translate(408.18,442) scale(0.04000,-0.04000)" d="M366.64303503622557 -8Q282.97489336140137 -8 226.5521032724586 2.535821791372581Q170.12931318351582 13.071643582745162 135.02544011559758 37.107465374117744Q99.92156704767933 61.14328716549032 82.22149380549183 101.51120416469223Q64.52142056330432 141.87912116389415 58.12139614924182 201.84329937252159Q51.72137173517932 261.807477581149 51.72137173517932 344Q51.72137173517932 426.2981952688547 57.97422036721244 486.1151976954528Q64.22706899924556 545.9322001220509 81.92714224143306 586.3001171212527Q99.62721548362056 626.6680341204546 134.67825212653693 650.7981952688547Q169.72928876945332 674.9283564172548 226.20491528339798 685.4641782086273Q282.68054179734264 696 366.64303503622557 696Q399.45063468768706 696 435.0997860992992 693.632083000798Q470.74893751091133 691.2641660015962 503.89808892252347 687.1169902195668Q537.0472403341356 682.9698144375374 561.5492159637183 677.2339804391336V531.4761769019977Q521.6624686689445 534.8762013160602 494.09441739239884 536.9554478918565Q466.5263661158532 539.0346944676527 448.62806593277696 539.866789675482Q430.72976574970073 540.6988848833113 418.72207834010874 540.6988848833113Q374.7970483145139 540.6988848833113 346.6514064000305 537.4347188817151Q318.50576448554716 534.170552880119 302.3546156704378 523.3044894401874Q286.20346685532843 512.4384260002556 278.8090103770482 490.96286212893745Q271.41455389876796 469.4872982576192 269.63337326354247 433.85885408223385Q267.852192628317 398.23040990684854 267.852192628317 344Q267.852192628317 289.92808324474385 269.63337326354247 254.07321671153295Q271.41455389876796 218.21835017832203 278.8090103770482 196.66922087186066Q286.20346685532843 175.12009156539926 302.3546156704378 164.47476934264014Q318.50576448554716 153.82944711988102 346.6514064000305 150.56528111828484Q374.7970483145139 147.30111511668866 418.72207834010874 147.30111511668866Q451.83171696522095 147.30111511668866 493.3224884301115 149.8596326823436Q534.813259895002 152.41815024799854 565.9492403777808 156.52382309800228V7.335809584341331Q541.9491183074683 3.3358095843413302 507.96223545911687 -0.3320952078293349Q473.9753526107654 -4 437.2431792116888 -6.0Q400.5110058126122 -8 366.64303503622557 -8Z"/><path transform="translate(444.50,442) scale(0.04000,-0.04000)" d="M371.858652892803 -8Q277.50322536459373 -8 217.43325949362156 2.5358217913725802Q157.3632936226494 13.07164358274516 123.48016177190368 36.886724156945206Q89.59702992115797 60.70180473114525 74.27055481882545 101.14328716549032Q58.944079716492915 141.5847695998354 55.33272572583611 201.54894780846283Q51.72137173517932 261.51312601709026 51.72137173517932 343.7056484359412Q51.72137173517932 425.8981708547922 55.33272572583611 485.86234906341963Q58.944079716492915 545.8265272720471 74.27055481882545 586.4151854884215Q89.59702992115797 627.0038437047959 123.48016177190368 650.9661000610254Q157.3632936226494 674.9283564172548 217.4561156999426 685.4641782086273Q277.5489377772358 696 371.88456629869563 696Q466.2201948201555 696 526.3130168974487 685.4641782086273Q586.4058389747419 674.9283564172548 620.4568756176582 650.9661000610254Q654.5079122605746 627.0038437047959 669.6400562965289 586.4151854884215Q684.7722003324833 545.8265272720471 688.6042955403127 485.86234906341963Q692.436390748142 425.8981708547922 692.436390748142 343.7056484359412Q692.436390748142 261.51312601709026 688.6042955403127 201.54894780846283Q684.7722003324833 141.5847695998354 669.6400562965289 101.14328716549032Q654.5079122605746 60.70180473114525 620.4668034809547 36.886724156945206Q586.4256947013349 13.07164358274516 526.3198875611736 2.5358217913725802Q466.2140804210123 -8 371.858652892803 -8ZM371.88456629869563 147.30111511668866Q402.734852149285 147.30111511668866 422.26512969143096 149.61811754328673Q441.79540723357695 151.9351199698848 452.9220516268768 161.36588107308404Q464.04869602017664 170.79664217628329 469.00730629302177 191.66600545230827Q473.9659165658669 212.53536872833325 475.28291899246494 249.47889347791863Q476.599921419063 286.422418227504 476.599921419063 343.7056484359412Q476.599921419063 401.28323020843726 475.28291899246494 438.0795791759932Q473.9659165658669 474.87592814354923 469.00730629302177 495.8924672016036Q464.04869602017664 516.909006259658 452.9220516268768 526.4869431448866Q441.79540723357695 536.0648800301152 422.250222873217 538.3818824567132Q402.7050385128571 540.6988848833113 371.83221909985116 540.6988848833113Q341.51791725250024 540.6988848833113 321.82506788395347 538.3818824567132Q302.13221851540675 536.0648800301152 291.0942323384814 526.4988043831522Q280.05624616155603 516.9327287361893 274.95614124733453 495.9043284398693Q269.856036333113 474.87592814354923 268.70693869868563 438.0795791759932Q267.55784106425824 401.28323020843726 267.55784106425824 343.7056484359412Q267.55784106425824 286.422418227504 268.70693869868563 249.47889347791863Q269.856036333113 212.53536872833325 274.95614124733453 191.65414421404256Q280.05624616155603 170.77291969975184 291.0942323384814 161.3540198348183Q302.13221851540675 151.9351199698848 321.8397641081262 149.61811754328673Q341.54730970084563 147.30111511668866 371.88456629869563 147.30111511668866Z"/><path transform="translate(486.26,442) scale(0.04000,-0.04000)" d="M64.78956685595196 0V688H279.8902021866271V162.58026069464535H548.5039287545827V0Z"/><path transform="translate(521.10,442) scale(0.04000,-0.04000)" d="M64.78956685595196 0V688H592.6928516092628V533.8762911395463H278.8600166241645V422.75809122558985H540.9777427945467V271.8720699228103H278.8600166241645V154.12370886045363H592.6928516092628V0Z"/></g></symbol></svg>
 
 <div class="bandeau demo" id="bandeauDemo" hidden>Mode démonstration — données d'exemple</div>
 <div class="bandeau" id="flash" hidden></div>
 
-<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="logo-oc" viewBox="0 0 740 462"><g><path d="M277.2 138.8 L267.7 135.7 A139 139 0 0 1 280.8 102.6 L293.1 110.5 A127 127 0 0 0 277.2 138.8 Z" fill="#F58A20" stroke="currentColor" stroke-width="4" stroke-linejoin="round"/><path d="M298.1 103.4 L286.4 94.7 A142 142 0 0 1 309.9 67.2 L321.8 82.2 A125 125 0 0 0 298.1 103.4 Z" fill="#F58220" stroke="currentColor" stroke-width="4" stroke-linejoin="round"/><path d="M328.7 77.1 L317.8 61.3 A144 144 0 0 1 349.4 42.6 L357.4 65.0 A122 122 0 0 0 328.7 77.1 Z" fill="#F87A16" stroke="currentColor" stroke-width="4" stroke-linejoin="round"/><path d="M365.4 62.4 L358.9 39.5 A146 146 0 0 1 395.4 31.8 L395.9 60.2 A120 120 0 0 0 365.4 62.4 Z" fill="#FA6E12" stroke="currentColor" stroke-width="4" stroke-linejoin="round"/><path d="M404.2 60.4 L405.7 32.0 A148 148 0 0 1 443.3 36.6 L433.2 68.0 A118 118 0 0 0 404.2 60.4 Z" fill="#FC5F0C" stroke="currentColor" stroke-width="4" stroke-linejoin="round"/><path d="M440.8 70.7 L453.0 40.1 A151 151 0 0 1 487.7 56.8 L465.3 87.0 A116 116 0 0 0 440.8 70.7 Z" fill="#FB3D08" stroke="currentColor" stroke-width="4" stroke-linejoin="round"/><path d="M471.5 91.9 L495.9 63.3 A153 153 0 0 1 523.8 90.7 L489.1 114.8 A113 113 0 0 0 471.5 91.9 Z" fill="#F41505" stroke="currentColor" stroke-width="4" stroke-linejoin="round"/><path d="M493.3 121.3 L529.6 99.7 A155 155 0 0 1 548.8 140.4 L503.4 151.7 A111 111 0 0 0 493.3 121.3 Z" fill="none" stroke="currentColor" stroke-width="5" stroke-linejoin="round"/></g><path d="M407.4 195.7 L504.1 106.4 L385.1 162.7 Z" fill="none" stroke="currentColor" stroke-width="7" stroke-linejoin="round"/><circle cx="398.0" cy="178.0" r="27" fill="currentColor"/><circle cx="398.0" cy="178.0" r="19" fill="#F26522"/><circle cx="398.0" cy="178.0" r="8" fill="currentColor"/><g fill="currentColor"><path transform="translate(128.66,300) scale(0.13800,-0.13800)" d="M363 -8Q237 -8 166.5 8.0Q96 24 67.0 60.5Q38 97 38 160Q38 198 48.0 246.5Q58 295 69 358Q85 443 100.0 502.5Q115 562 139.5 600.0Q164 638 205.0 659.0Q246 680 312.0 688.0Q378 696 478 696Q602 696 672.0 680.0Q742 664 770.5 627.0Q799 590 799 527Q799 489 791.0 440.5Q783 392 769 330Q749 242 732.0 182.0Q715 122 691.0 84.5Q667 47 628.0 27.0Q589 7 525.0 -0.5Q461 -8 363 -8ZM381 174Q406 174 423.0 176.0Q440 178 451.0 186.5Q462 195 470.5 213.0Q479 231 487.0 263.0Q495 295 506 344Q515 388 520.5 419.5Q526 451 526 470Q526 492 519.0 501.0Q512 510 496.5 512.0Q481 514 455 514Q429 514 412.5 512.0Q396 510 385.0 501.5Q374 493 366.0 475.0Q358 457 350.5 425.5Q343 394 332 344Q326 314 320.5 289.5Q315 265 312.0 247.0Q309 229 309 215Q309 196 316.5 187.0Q324 178 340.0 176.0Q356 174 381 174Z"/><path transform="translate(247.03,300) scale(0.13800,-0.13800)" d="M-1 0 145 688H411L304 190H582L541 0Z"/><path transform="translate(337.52,300) scale(0.13800,-0.13800)" d="M-1 0 145 688H411L264 0Z"/><path transform="translate(396.41,300) scale(0.13800,-0.13800)" d="M152 0 80 688H347L373 283H384L585 688H857L491 0Z"/><path transform="translate(508.43,300) scale(0.13800,-0.13800)" d="M-1 0 145 688H739L701 510H372L356 434H626L589 261H319L301 178H631L592 0Z"/></g><g><circle cx="196.5" cy="339.0" r="52.0" fill="none" stroke="#F26522" stroke-width="12"/><g stroke="#F26522" stroke-width="11" stroke-linecap="round" fill="none"><path d="M196.5 327.4 L196.5 292.6"/><path d="M206.6 344.8 L236.7 362.2"/><path d="M186.5 344.8 L156.3 362.2"/></g><circle cx="196.5" cy="339.0" r="13.3" fill="none" stroke="#F26522" stroke-width="10"/><circle cx="196.5" cy="339.0" r="4.1" fill="currentColor"/></g><g fill="#F26522" stroke="currentColor" stroke-width="5" stroke-linejoin="round" paint-order="stroke"><path transform="translate(80.47,386) scale(0.09200,-0.09200)" d="M331 -8Q234 -8 168.5 8.0Q103 24 70.0 61.5Q37 99 37 164Q37 200 43.0 244.5Q49 289 62 344Q85 438 106.5 501.5Q128 565 155.5 603.5Q183 642 224.0 662.0Q265 682 327.5 689.0Q390 696 482 696Q519 696 559.5 693.5Q600 691 637.5 686.5Q675 682 702 676L667 504Q616 508 585.5 510.0Q555 512 538.5 513.0Q522 514 512 514Q469 514 441.0 512.0Q413 510 395.5 501.5Q378 493 367.0 475.0Q356 457 347.5 425.0Q339 393 329 344Q322 308 316.5 280.0Q311 252 311 235Q311 208 323.0 195.0Q335 182 363.0 178.0Q391 174 438 174Q473 174 519.5 177.0Q566 180 603 184L565 7Q537 3 497.0 -0.5Q457 -4 414.0 -6.0Q371 -8 331 -8Z"/><path transform="translate(247.53,386) scale(0.09200,-0.09200)" d="M-1 0 145 688H429L530 422H537L594 688H842L695 0H440L323 328H316L246 0Z"/><path transform="translate(327.77,386) scale(0.09200,-0.09200)" d="M-1 0 145 688H437Q562 688 632.5 673.5Q703 659 731.5 624.0Q760 589 760 526Q760 488 752.5 439.5Q745 391 734 330Q718 245 702.5 186.5Q687 128 663.0 91.5Q639 55 598.0 35.0Q557 15 491.0 7.5Q425 0 324 0ZM304 178H328Q360 178 380.5 180.5Q401 183 414.0 191.5Q427 200 436.0 217.5Q445 235 452.0 265.5Q459 296 469 342Q478 383 483.0 412.5Q488 442 488 462Q488 479 483.0 488.5Q478 498 467.5 502.5Q457 507 439.5 508.5Q422 510 398 510H374Z"/><path transform="translate(404.25,386) scale(0.09200,-0.09200)" d="M338 -8Q223 -8 160.0 7.5Q97 23 73.0 58.5Q49 94 49 153Q49 185 54.0 227.5Q59 270 69 320L147 688H413L328 288Q322 259 318.5 239.0Q315 219 315 206Q315 192 320.0 185.0Q325 178 336.5 176.5Q348 175 367 175Q390 175 403.5 178.0Q417 181 425.5 192.0Q434 203 440.0 225.5Q446 248 454 288L539 688H805L726 320Q709 240 693.5 183.0Q678 126 655.5 88.5Q633 51 595.0 30.0Q557 9 495.0 0.5Q433 -8 338 -8Z"/><path transform="translate(481.64,386) scale(0.09200,-0.09200)" d="M-1 0 145 688H411L264 0Z"/><path transform="translate(522.23,386) scale(0.09200,-0.09200)" d="M144 0 251 498H53L94 688H756L715 498H516L410 0Z"/><path transform="translate(589.59,386) scale(0.09200,-0.09200)" d="M-1 0 145 688H739L701 510H372L356 434H626L589 261H319L301 178H631L592 0Z"/></g><g fill="#F26522"><path d="M77 426 L163 434 L163 440 L77 436 Z"/><path d="M667 426 L581 434 L581 440 L667 436 Z"/></g><g fill="currentColor"><path transform="translate(181.02,442) scale(0.04000,-0.04000)" d="M0.7437945805067869 0 221.82115325562398 688H515.5813625423982L736.5530483675117 0H521.5277314912959L485.9987455887121 116.54803237854149H245.21505924842876L210.36905479583376 0ZM286.664304399909 265.2265516861096H443.65517328723564L369.680545012283 518.9143437585732H360.8088203545865Z"/><path transform="translate(222.50,442) scale(0.04000,-0.04000)" d="M361.90998821992156 -8Q275.7599771291089 -8 220.21397296597462 1.9627261032882375Q164.6679688028403 11.925452206576475 132.8103318635338 34.289071877336774Q100.9526949242273 56.65269154809707 85.84848002755035 93.82437175193598Q70.7442651308734 130.9960519557749 66.83100149484986 185.72213530133706Q62.917737858826314 240.44821864689922 62.917737858826314 314.9584376402883V688H278.31272475356025V282.513413218432Q278.31272475356025 237.88575319385913 280.1769318034565 211.64835054928767Q282.0411388533528 185.41094790471618 289.4054736350918 172.53535961933545Q296.76980841683087 159.65977133395475 314.01494952324583 155.7616004791625Q331.26009062966074 151.86342962437024 361.570877714925 151.86342962437024Q392.759379572073 151.86342962437024 409.72149527281226 155.7616004791625Q426.6836109735515 159.65977133395475 434.40012898693783 172.53535961933545Q442.11664700032424 185.41094790471618 443.95066406055156 211.64835054928767Q445.7846811207789 237.88575319385913 445.7846811207789 282.513413218432V688H660.7796436014503V314.9584376402883Q660.7796436014503 240.44821864689922 656.8663799654267 185.72213530133706Q652.9531163294032 130.9960519557749 638.0915906180635 93.7842329022916Q623.2300649067239 56.57241384880832 591.2441480407958 34.20503849620995Q559.2582311748678 11.837663143611582 503.65911524280097 1.9188315718057911Q448.05999931073416 -8 361.90998821992156 -8Z"/><path transform="translate(263.46,442) scale(0.04000,-0.04000)" d="M208.09605988596118 0V525.4197393053546H17.50595592063423V688H614.7113118944221V525.4197393053546H423.09102236663256V0Z"/><path transform="translate(300.74,442) scale(0.04000,-0.04000)" d="M371.858652892803 -8Q277.50322536459373 -8 217.43325949362156 2.5358217913725802Q157.3632936226494 13.07164358274516 123.48016177190368 36.886724156945206Q89.59702992115797 60.70180473114525 74.27055481882545 101.14328716549032Q58.944079716492915 141.5847695998354 55.33272572583611 201.54894780846283Q51.72137173517932 261.51312601709026 51.72137173517932 343.7056484359412Q51.72137173517932 425.8981708547922 55.33272572583611 485.86234906341963Q58.944079716492915 545.8265272720471 74.27055481882545 586.4151854884215Q89.59702992115797 627.0038437047959 123.48016177190368 650.9661000610254Q157.3632936226494 674.9283564172548 217.4561156999426 685.4641782086273Q277.5489377772358 696 371.88456629869563 696Q466.2201948201555 696 526.3130168974487 685.4641782086273Q586.4058389747419 674.9283564172548 620.4568756176582 650.9661000610254Q654.5079122605746 627.0038437047959 669.6400562965289 586.4151854884215Q684.7722003324833 545.8265272720471 688.6042955403127 485.86234906341963Q692.436390748142 425.8981708547922 692.436390748142 343.7056484359412Q692.436390748142 261.51312601709026 688.6042955403127 201.54894780846283Q684.7722003324833 141.5847695998354 669.6400562965289 101.14328716549032Q654.5079122605746 60.70180473114525 620.4668034809547 36.886724156945206Q586.4256947013349 13.07164358274516 526.3198875611736 2.5358217913725802Q466.2140804210123 -8 371.858652892803 -8ZM371.88456629869563 147.30111511668866Q402.734852149285 147.30111511668866 422.26512969143096 149.61811754328673Q441.79540723357695 151.9351199698848 452.9220516268768 161.36588107308404Q464.04869602017664 170.79664217628329 469.00730629302177 191.66600545230827Q473.9659165658669 212.53536872833325 475.28291899246494 249.47889347791863Q476.599921419063 286.422418227504 476.599921419063 343.7056484359412Q476.599921419063 401.28323020843726 475.28291899246494 438.0795791759932Q473.9659165658669 474.87592814354923 469.00730629302177 495.8924672016036Q464.04869602017664 516.909006259658 452.9220516268768 526.4869431448866Q441.79540723357695 536.0648800301152 422.250222873217 538.3818824567132Q402.7050385128571 540.6988848833113 371.83221909985116 540.6988848833113Q341.51791725250024 540.6988848833113 321.82506788395347 538.3818824567132Q302.13221851540675 536.0648800301152 291.0942323384814 526.4988043831522Q280.05624616155603 516.9327287361893 274.95614124733453 495.9043284398693Q269.856036333113 474.87592814354923 268.70693869868563 438.0795791759932Q267.55784106425824 401.28323020843726 267.55784106425824 343.7056484359412Q267.55784106425824 286.422418227504 268.70693869868563 249.47889347791863Q269.856036333113 212.53536872833325 274.95614124733453 191.65414421404256Q280.05624616155603 170.77291969975184 291.0942323384814 161.3540198348183Q302.13221851540675 151.9351199698848 321.8397641081262 149.61811754328673Q341.54730970084563 147.30111511668866 371.88456629869563 147.30111511668866Z"/><path transform="translate(342.50,442) scale(0.04000,-0.04000)" d="M47.98886412843551 210.87206992281025V357.55058923037836H347.1402366741695V210.87206992281025Z"/><path transform="translate(370.30,442) scale(0.04000,-0.04000)" d="M64.78956685595196 0V688H592.6928516092628V533.8762911395463H278.8600166241645V422.75809122558985H540.9777427945467V271.8720699228103H278.8600166241645V154.12370886045363H592.6928516092628V0ZM226.86939372848911 748.872023160041V753.872023160041L324.86262208979696 896.1625632661301H509.5032393934245V891.1625632661301L361.9176153014016 748.872023160041Z"/><path transform="translate(408.18,442) scale(0.04000,-0.04000)" d="M366.64303503622557 -8Q282.97489336140137 -8 226.5521032724586 2.535821791372581Q170.12931318351582 13.071643582745162 135.02544011559758 37.107465374117744Q99.92156704767933 61.14328716549032 82.22149380549183 101.51120416469223Q64.52142056330432 141.87912116389415 58.12139614924182 201.84329937252159Q51.72137173517932 261.807477581149 51.72137173517932 344Q51.72137173517932 426.2981952688547 57.97422036721244 486.1151976954528Q64.22706899924556 545.9322001220509 81.92714224143306 586.3001171212527Q99.62721548362056 626.6680341204546 134.67825212653693 650.7981952688547Q169.72928876945332 674.9283564172548 226.20491528339798 685.4641782086273Q282.68054179734264 696 366.64303503622557 696Q399.45063468768706 696 435.0997860992992 693.632083000798Q470.74893751091133 691.2641660015962 503.89808892252347 687.1169902195668Q537.0472403341356 682.9698144375374 561.5492159637183 677.2339804391336V531.4761769019977Q521.6624686689445 534.8762013160602 494.09441739239884 536.9554478918565Q466.5263661158532 539.0346944676527 448.62806593277696 539.866789675482Q430.72976574970073 540.6988848833113 418.72207834010874 540.6988848833113Q374.7970483145139 540.6988848833113 346.6514064000305 537.4347188817151Q318.50576448554716 534.170552880119 302.3546156704378 523.3044894401874Q286.20346685532843 512.4384260002556 278.8090103770482 490.96286212893745Q271.41455389876796 469.4872982576192 269.63337326354247 433.85885408223385Q267.852192628317 398.23040990684854 267.852192628317 344Q267.852192628317 289.92808324474385 269.63337326354247 254.07321671153295Q271.41455389876796 218.21835017832203 278.8090103770482 196.66922087186066Q286.20346685532843 175.12009156539926 302.3546156704378 164.47476934264014Q318.50576448554716 153.82944711988102 346.6514064000305 150.56528111828484Q374.7970483145139 147.30111511668866 418.72207834010874 147.30111511668866Q451.83171696522095 147.30111511668866 493.3224884301115 149.8596326823436Q534.813259895002 152.41815024799854 565.9492403777808 156.52382309800228V7.335809584341331Q541.9491183074683 3.3358095843413302 507.96223545911687 -0.3320952078293349Q473.9753526107654 -4 437.2431792116888 -6.0Q400.5110058126122 -8 366.64303503622557 -8Z"/><path transform="translate(444.50,442) scale(0.04000,-0.04000)" d="M371.858652892803 -8Q277.50322536459373 -8 217.43325949362156 2.5358217913725802Q157.3632936226494 13.07164358274516 123.48016177190368 36.886724156945206Q89.59702992115797 60.70180473114525 74.27055481882545 101.14328716549032Q58.944079716492915 141.5847695998354 55.33272572583611 201.54894780846283Q51.72137173517932 261.51312601709026 51.72137173517932 343.7056484359412Q51.72137173517932 425.8981708547922 55.33272572583611 485.86234906341963Q58.944079716492915 545.8265272720471 74.27055481882545 586.4151854884215Q89.59702992115797 627.0038437047959 123.48016177190368 650.9661000610254Q157.3632936226494 674.9283564172548 217.4561156999426 685.4641782086273Q277.5489377772358 696 371.88456629869563 696Q466.2201948201555 696 526.3130168974487 685.4641782086273Q586.4058389747419 674.9283564172548 620.4568756176582 650.9661000610254Q654.5079122605746 627.0038437047959 669.6400562965289 586.4151854884215Q684.7722003324833 545.8265272720471 688.6042955403127 485.86234906341963Q692.436390748142 425.8981708547922 692.436390748142 343.7056484359412Q692.436390748142 261.51312601709026 688.6042955403127 201.54894780846283Q684.7722003324833 141.5847695998354 669.6400562965289 101.14328716549032Q654.5079122605746 60.70180473114525 620.4668034809547 36.886724156945206Q586.4256947013349 13.07164358274516 526.3198875611736 2.5358217913725802Q466.2140804210123 -8 371.858652892803 -8ZM371.88456629869563 147.30111511668866Q402.734852149285 147.30111511668866 422.26512969143096 149.61811754328673Q441.79540723357695 151.9351199698848 452.9220516268768 161.36588107308404Q464.04869602017664 170.79664217628329 469.00730629302177 191.66600545230827Q473.9659165658669 212.53536872833325 475.28291899246494 249.47889347791863Q476.599921419063 286.422418227504 476.599921419063 343.7056484359412Q476.599921419063 401.28323020843726 475.28291899246494 438.0795791759932Q473.9659165658669 474.87592814354923 469.00730629302177 495.8924672016036Q464.04869602017664 516.909006259658 452.9220516268768 526.4869431448866Q441.79540723357695 536.0648800301152 422.250222873217 538.3818824567132Q402.7050385128571 540.6988848833113 371.83221909985116 540.6988848833113Q341.51791725250024 540.6988848833113 321.82506788395347 538.3818824567132Q302.13221851540675 536.0648800301152 291.0942323384814 526.4988043831522Q280.05624616155603 516.9327287361893 274.95614124733453 495.9043284398693Q269.856036333113 474.87592814354923 268.70693869868563 438.0795791759932Q267.55784106425824 401.28323020843726 267.55784106425824 343.7056484359412Q267.55784106425824 286.422418227504 268.70693869868563 249.47889347791863Q269.856036333113 212.53536872833325 274.95614124733453 191.65414421404256Q280.05624616155603 170.77291969975184 291.0942323384814 161.3540198348183Q302.13221851540675 151.9351199698848 321.8397641081262 149.61811754328673Q341.54730970084563 147.30111511668866 371.88456629869563 147.30111511668866Z"/><path transform="translate(486.26,442) scale(0.04000,-0.04000)" d="M64.78956685595196 0V688H279.8902021866271V162.58026069464535H548.5039287545827V0Z"/><path transform="translate(521.10,442) scale(0.04000,-0.04000)" d="M64.78956685595196 0V688H592.6928516092628V533.8762911395463H278.8600166241645V422.75809122558985H540.9777427945467V271.8720699228103H278.8600166241645V154.12370886045363H592.6928516092628V0Z"/></g></symbol></svg>
+<div class="app">
 
-<header>
-  <div class="hd">
-    <button class="ico retourHaut" id="btnRetour" aria-label="Revenir à la liste" hidden>
-      <svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg>
-    </button>
-    <div class="titres">
+  <!-- RAIL LATÉRAL (tablette / PC) -->
+  <nav class="rail" aria-label="Navigation principale">
+    <div class="marque">
       <svg class="logo" viewBox="0 0 740 462" role="img" aria-label="Olive Conduite"><use href="#logo-oc"/></svg>
-      <div class="sous" id="sous">Permis Score</div>
+      <div class="sous">Permis Score</div>
     </div>
-    <button class="ico" id="btnRecharger" aria-label="Recharger">
-      <svg viewBox="0 0 24 24"><path d="M20 11a8 8 0 1 0-2.3 6.3"/><path d="M20 4v7h-7"/></svg>
-    </button>
-  </div>
-  <div class="chercher" id="zoneRecherche">
-    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
-    <input id="recherche" type="search" placeholder="Chercher un élève" autocomplete="off">
-  </div>
-</header>
+    <button class="lien" data-onglet="accueil"><svg viewBox="0 0 24 24"><path d="M4 11l8-7 8 7"/><path d="M6 10v9h12v-9"/></svg>Accueil</button>
+    <button class="lien" data-onglet="eleves"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19c0-3 2.5-5 5.5-5s5.5 2 5.5 5"/><circle cx="17" cy="8" r="2.6"/><path d="M15.5 13.5c2.2.3 4 2.2 4 4.6"/></svg>Élèves</button>
+    <button class="lien eval" data-onglet="evaluer"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>Évaluer une séance</button>
+    <button class="lien" data-onglet="suivi"><svg viewBox="0 0 24 24"><path d="M4 19V5"/><path d="M4 15l4-4 3 3 5-6 4 4"/></svg>Suivi</button>
+    <div class="creux"></div>
+    <button class="lien" data-onglet="plus"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19 12a7 7 0 0 0-.1-1l2-1.5-2-3.5-2.3 1a7 7 0 0 0-1.7-1L14.5 3h-5l-.4 2.5a7 7 0 0 0-1.7 1l-2.3-1-2 3.5 2 1.5a7 7 0 0 0 0 2l-2 1.5 2 3.5 2.3-1a7 7 0 0 0 1.7 1l.4 2.5h5l.4-2.5a7 7 0 0 0 1.7-1l2.3 1 2-3.5-2-1.5a7 7 0 0 0 .1-1z"/></svg>Paramètres</button>
+  </nav>
 
-<main>
-  <section class="vue on" id="vListe"></section>
-  <section class="vue" id="vFiche"></section>
-  <section class="vue" id="vLecon"></section>
-  <section class="vue" id="vEleve"></section>
-</main>
+  <div class="colonne">
+
+    <!-- EN-TÊTE MOBILE -->
+    <header>
+      <div class="hd">
+        <button class="ico" id="btnRetour" aria-label="Retour" hidden>
+          <svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg>
+        </button>
+        <svg class="logo" id="hdLogo" viewBox="0 0 740 462" role="img" aria-label="Olive Conduite"><use href="#logo-oc"/></svg>
+        <div class="titres" id="hdTitre" hidden><div class="ttl" id="hdTtlTxt"></div><div class="sous" id="hdSousTxt"></div></div>
+        <button class="ico pousse" id="btnRecharger" aria-label="Recharger">
+          <svg viewBox="0 0 24 24"><path d="M20 11a8 8 0 1 0-2.3 6.3"/><path d="M20 4v7h-7"/></svg>
+        </button>
+      </div>
+      <div class="chercher" id="zoneRecherche" hidden>
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+        <input id="recherche" type="search" placeholder="Nom, prénom ou formation" autocomplete="off">
+      </div>
+    </header>
+
+    <main>
+      <section class="vue on" id="vAccueil"></section>
+      <section class="vue" id="vListe"></section>
+      <section class="vue" id="vFiche"></section>
+      <section class="vue" id="vLecon"></section>
+      <section class="vue" id="vFin"></section>
+      <section class="vue" id="vPartage"></section>
+      <section class="vue" id="vSuivi"></section>
+      <section class="vue" id="vEleve"></section>
+      <section class="vue" id="vChoixEval"></section>
+      <section class="vue" id="vPlus"></section>
+    </main>
+
+  </div>
+</div>
+
+<!-- BARRE D'ONGLETS MOBILE -->
+<nav class="tabbar" id="tabbar" aria-label="Navigation">
+  <button data-onglet="accueil"><svg viewBox="0 0 24 24"><path d="M4 11l8-7 8 7"/><path d="M6 10v9h12v-9"/></svg><span>Accueil</span></button>
+  <button data-onglet="eleves"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19c0-3 2.5-5 5.5-5s5.5 2 5.5 5"/><circle cx="17" cy="8" r="2.6"/><path d="M15.5 13.5c2.2.3 4 2.2 4 4.6"/></svg><span>Élèves</span></button>
+  <button class="central" data-onglet="evaluer"><span class="rond"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span><span>Évaluer</span></button>
+  <button data-onglet="suivi"><svg viewBox="0 0 24 24"><path d="M4 19V5"/><path d="M4 15l4-4 3 3 5-6 4 4"/></svg><span>Suivi</span></button>
+  <button data-onglet="plus"><svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg><span>Plus</span></button>
+</nav>
 
 <div class="attente" id="attente"><div id="attenteTxt">Enregistrement…</div></div>
 
@@ -196,6 +381,13 @@ var CLE     = "olive-2026-change-moi";
 var D = null, filtre = "", courant = null, DEMO = false;
 var COMP = ["Maîtrise du véhicule","Observation","Anticipation","Intersections","Priorités",
             "Vitesse et allure","Stationnement et manœuvres","Autonomie","Environnement complexe"];
+/* familles pour l'affichage détaillé des compétences */
+var FAMILLES = [
+  { nom:"Maîtrise du véhicule", idx:[0,7] },
+  { nom:"Observation et anticipation", idx:[1,2] },
+  { nom:"Circulation", idx:[3,4,5] },
+  { nom:"Manœuvres et environnement", idx:[6,8] }
+];
 var PACKS = [
   "Permis B – Pack Classic",
   "Permis B – Pack Accompagné",
@@ -221,6 +413,7 @@ function flash(msg, ok){
 }
 document.getElementById("flash").addEventListener("click", function(){ this.hidden = true; });
 function attente(on, txt){ $("attenteTxt").textContent = txt || "Enregistrement…"; $("attente").classList.toggle("on", !!on); }
+
 function blocDest(e, prefixe) {
   var l = [];
   if (e.email)  l.push({ id: prefixe + "Eleve",  lab: "Élève",            adr: e.email,  coche: true  });
@@ -233,23 +426,14 @@ function blocDest(e, prefixe) {
       + '<span>' + d.lab + '<small>' + ech(d.adr) + '</small></span></label>';
   }).join("");
 }
-
 function litDest(prefixe) {
   var a = $(prefixe + "Eleve"), b = $(prefixe + "Parent");
   return { dEleve: (a && a.checked) ? 1 : 0, dParent: (b && b.checked) ? 1 : 0 };
 }
-
-function dest(e){
-  var out = [];
-  [e.email, e.email2].forEach(function(a){
-    a = String(a || "").trim();
-    if (a && out.indexOf(a) < 0) out.push(a);
-  });
-  return out;
-}
-function eleve(nom){ for (var i=0;i<D.eleves.length;i++) if (D.eleves[i].nom===nom) return D.eleves[i]; return null; }
+function eleve(nom){ if(!D) return null; for (var i=0;i<D.eleves.length;i++) if (D.eleves[i].nom===nom) return D.eleves[i]; return null; }
 function score(niv){ var s=0; for(var i=0;i<niv.length;i++) s+=niv[i]; return Math.round(s/36*100); }
 function auj(){ var d=new Date(); return d.getFullYear()+"-"+("0"+(d.getMonth()+1)).slice(-2)+"-"+("0"+d.getDate()).slice(-2); }
+function pastilleClasse(e){ if(e.pret) return "v"; if(e.score!=null && e.score>=60) return "o"; return "r"; }
 
 /* ---------------------------------------------------------- appels serveur */
 function appel(params, ensuite) {
@@ -272,14 +456,14 @@ function appel(params, ensuite) {
 
 function charger(silencieux) {
   if (ADRESSE.indexOf("METTEZ_VOTRE_ADRESSE_ICI") >= 0) {
-    DEMO = true; $("bandeauDemo").hidden = false; D = jeuDemo(); rendreListe(); return;
+    DEMO = true; $("bandeauDemo").hidden = false; D = jeuDemo(); rendreOnglet(); return;
   }
   $("btnRecharger").classList.add("tourne");
   appel({ api:"data" }, function (r) {
     $("btnRecharger").classList.remove("tourne");
-    if (r.ok && r.data) { D = r.data; rendreListe(); if(!silencieux) return; }
+    if (r.ok && r.data) { D = r.data; rendreOnglet(); }
     else if (r.erreur) {
-      if (!D) $("vListe").innerHTML = '<div class="etat"><b>' + ech(r.erreur) + '</b>'
+      if (!D) $("vAccueil").innerHTML = '<div class="etat"><b>' + ech(r.erreur) + '</b>'
         + 'Vérifiez l\'adresse et la clé en haut du fichier index.html, '
         + 'et que le déploiement est en accès « Tous les utilisateurs ».'
         + '<code>' + ech(ADRESSE) + '</code></div>';
@@ -297,8 +481,170 @@ function apres(r, msgOk) {
   return true;
 }
 
-/* ---------------------------------------------------------- vue : liste */
-function rendreListe() {
+/* ====================================================================
+   NAVIGATION — onglets + pile de vues
+   ==================================================================== */
+var ongletActif = "accueil";
+var pile = [];               /* pile de navigation à l'intérieur d'un onglet */
+
+var TITRES = {
+  accueil:{t:"",s:""}, eleves:{t:"Mes élèves",s:""},
+  suivi:{t:"Mon activité",s:""}, plus:{t:"Paramètres",s:""}
+};
+
+function estMobile(){ return window.matchMedia("(max-width:819px)").matches; }
+
+function majBarres(){
+  /* surligne l'onglet courant dans la tabbar et le rail */
+  document.querySelectorAll(".tabbar button, .rail .lien").forEach(function(b){
+    var o = b.dataset.onglet;
+    b.setAttribute("aria-current", (o === ongletActif) ? "true" : "false");
+  });
+}
+
+function afficher(id){
+  ["vAccueil","vListe","vFiche","vLecon","vFin","vPartage","vSuivi","vEleve","vChoixEval","vPlus"]
+    .forEach(function(v){ $(v).classList.toggle("on", v === id); });
+  window.scrollTo(0,0);
+  /* en-tête mobile : recherche visible seulement sur la liste d'élèves */
+  $("zoneRecherche").hidden = (id !== "vListe");
+  /* bouton retour mobile : visible dès qu'on est en profondeur */
+  var profond = pile.length > 1;
+  $("btnRetour").hidden = !profond;
+  /* logo vs titre dans le header mobile */
+  var infos = enTeteDe(id);
+  var afficheTitre = !!infos.t && profond;
+  $("hdLogo").hidden = afficheTitre;
+  $("hdTitre").hidden = !afficheTitre;
+  if (afficheTitre){ $("hdTtlTxt").textContent = infos.t; $("hdSousTxt").textContent = infos.s || ""; }
+}
+
+function enTeteDe(id){
+  if (id==="vFiche" && courant){ var e=eleve(courant); return {t:e?e.nom:"Élève", s:e?e.formation:""}; }
+  if (id==="vLecon") return {t:"Évaluation", s:courant||""};
+  if (id==="vFin") return {t:"Séance terminée", s:courant||""};
+  if (id==="vPartage") return {t:"Partager le bilan", s:courant||""};
+  if (id==="vEleve") return {t:"Fiche élève", s:""};
+  if (id==="vChoixEval") return {t:"Évaluer", s:"Choisir l'élève"};
+  return {t:"", s:""};
+}
+
+/* empile une vue et la rend */
+function pousser(id, rendu){
+  pile.push({id:id, rendu:rendu});
+  rendu();
+  afficher(id);
+}
+/* remplace la vue racine de l'onglet (réinitialise la pile) */
+function racine(id, rendu){
+  pile = [{id:id, rendu:rendu}];
+  rendu();
+  afficher(id);
+}
+function revenir(){
+  if (pile.length > 1){
+    pile.pop();
+    var v = pile[pile.length-1];
+    v.rendu();
+    afficher(v.id);
+  } else {
+    allerOnglet("accueil");
+  }
+}
+
+function allerOnglet(o){
+  ongletActif = o;
+  majBarres();
+  if (o === "accueil") racine("vAccueil", rendreAccueil);
+  else if (o === "eleves") racine("vListe", rendreListe);
+  else if (o === "evaluer") racine("vChoixEval", rendreChoixEval);
+  else if (o === "suivi") racine("vSuivi", rendreSuivi);
+  else if (o === "plus") racine("vPlus", rendrePlus);
+}
+
+function rendreOnglet(){ allerOnglet(ongletActif); }
+
+/* branchements navigation */
+document.querySelectorAll(".tabbar button, .rail .lien").forEach(function(b){
+  b.addEventListener("click", function(){ allerOnglet(b.dataset.onglet); });
+});
+$("btnRetour").addEventListener("click", revenir);
+$("btnRecharger").addEventListener("click", function(){ charger(); });
+$("recherche").addEventListener("input", function(ev){ filtre = ev.target.value; if (D) rendreListe(); });
+window.addEventListener("resize", function(){ if(D) afficher(pile.length?pile[pile.length-1].id:"vAccueil"); });
+</script>
+
+<script>
+/* ====================================================================
+   ACCUEIL — liste de tâches pédagogiques, pas un tableau de bord
+   ==================================================================== */
+function rendreAccueil(){
+  var actifs = D.eleves.filter(function(e){ return e.actif; });
+  var avecScore = actifs.filter(function(e){ return e.score !== null; });
+
+  /* "prochain élève" : le plus prioritaire = plus faible score non prêt,
+     sinon le dernier vu. Pas de vrai agenda dans les données, on met en avant
+     l'élève qui a le plus besoin de travail. */
+  var prochain = avecScore.slice().sort(function(a,b){ return a.score - b.score; })
+                          .filter(function(e){ return !e.pret; })[0]
+                 || avecScore.slice().sort(function(a,b){ return a.score - b.score; })[0]
+                 || actifs[0];
+
+  var derniers = actifs.slice().sort(function(a,b){
+      var da = a.derniere ? a.derniere.date : "", db = b.derniere ? b.derniere.date : "";
+      return db.localeCompare(da);
+    }).slice(0,4);
+
+  var h = '<div class="wrap">';
+  h += '<div class="jour">Aujourd\'hui</div>';
+  h += '<div class="bonjour">Bonjour ' + ech(D.moniteur || "") + ' 👋</div>';
+  h += '<div class="info" style="margin-top:0">' + actifs.length + ' élève'
+     + (actifs.length>1?"s":"") + ' en formation</div>';
+
+  if (prochain){
+    var prio = (prochain.priorites && prochain.priorites[0]) ? prochain.priorites[0].nom : null;
+    h += '<div class="hero" style="margin-top:16px">'
+      + '<div class="q">À travailler en priorité</div>'
+      + '<div class="n">' + ech(prochain.nom) + '</div>'
+      + '<div class="h">' + ech(prochain.formation) + '</div>'
+      + (prio ? '<div class="obj">🎯 <b>' + ech(prio) + '</b></div>' : '')
+      + '<button class="go" onclick="ouvrirFiche(\'' + echJs(prochain.nom) + '\')">Voir l\'élève →</button>'
+      + '</div>';
+  }
+
+  h += '<div class="section-tt">Mes derniers élèves</div>';
+  h += derniers.length ? derniers.map(carteEleve).join("")
+     : '<div class="etat"><b>Aucun élève actif</b>Créez un élève depuis l\'onglet Élèves.</div>';
+
+  h += '<button class="btn vide" style="margin-top:6px" onclick="allerOnglet(\'eleves\')">Voir tous les élèves</button>';
+  h += '</div>';
+  $("vAccueil").innerHTML = h;
+}
+
+function echJs(s){ return String(s).replace(/\\/g,"\\\\").replace(/'/g,"\\'"); }
+
+/* carte élève réutilisée partout (accueil, liste, récents recherche) */
+function carteEleve(e){
+  var cl = (e.pret?" pret":"") + (e.actif?"":" inactif");
+  var h = '<button class="carte' + cl + '" onclick="ouvrirFiche(\'' + echJs(e.nom) + '\')">'
+    + '<div class="txt"><div class="nom">' + ech(e.nom) + (e.actif?"":" · archivé") + '</div>'
+    + '<div class="sub">' + ech(e.formation) + '</div></div>';
+  if (e.score === null){
+    h += '<div class="sub" style="color:var(--pale)">— </div>'
+       + '<div class="chev"></div></button>';
+    return h;
+  }
+  h += '<div class="val"><div class="p' + (e.pret?" ok":"") + '">' + e.score
+     + '<em>/100</em></div></div>'
+     + '<span class="pastille ' + pastilleClasse(e) + '"></span>'
+     + '<div class="chev"></div></button>';
+  return h;
+}
+
+/* ====================================================================
+   LISTE D'ÉLÈVES (onglet Élèves) + recherche rapide
+   ==================================================================== */
+function rendreListe(){
   var el = D.eleves.slice().sort(function (a,b) {
     if (a.actif !== b.actif) return a.actif ? -1 : 1;
     if (a.score === null) return 1; if (b.score === null) return -1;
@@ -308,52 +654,62 @@ function rendreListe() {
     var f = filtre.toLowerCase();
     el = el.filter(function(e){ return (e.nom+" "+e.formation).toLowerCase().indexOf(f) >= 0; });
   }
-  var h = '<button class="btn noir" onclick="formEleve(null)">+ Nouvel élève</button>';
-  h += el.length ? el.map(carte).join("")
+  var h = '<div class="wrap">';
+  h += '<button class="btn noir" onclick="formEleve(null)">+ Nouvel élève</button>';
+
+  if (!filtre){
+    var recents = D.eleves.filter(function(e){return e.actif;}).slice().sort(function(a,b){
+      var da=a.derniere?a.derniere.date:"", db=b.derniere?b.derniere.date:"";
+      return db.localeCompare(da);
+    }).slice(0,3);
+    if (recents.length){
+      h += '<div class="section-tt">Récents</div>';
+      h += recents.map(carteEleve).join("");
+      h += '<div class="section-tt">Tous les élèves</div>';
+    }
+  }
+
+  h += el.length ? el.map(carteEleve).join("")
      : '<div class="etat"><b>Aucun élève</b>' + (filtre ? "Aucun résultat." : "Commencez par en créer un.") + '</div>';
   h += '<div class="pied">Objectif examen ' + D.objectif + '/100 — mis à jour le ' + ech(D.maj)
      + '\n' + D.totalLecons + ' leçon' + (D.totalLecons>1?"s":"") + ' enregistrée'
      + (D.totalLecons>1?"s":"") + ' au total</div>';
+  h += '</div>';
   $("vListe").innerHTML = h;
-  $("sous").textContent = D.eleves.length + " élève" + (D.eleves.length>1?"s":"") + " · " + D.maj;
-  montrer("vListe");
 }
 
-function carte(e) {
-  var t = 'onclick="ouvrir(\'' + ech(e.nom).replace(/'/g,"\\'") + '\')"';
-  var h = '<button class="carte' + (e.pret?" pret":"") + (e.actif?"":" inactif") + '" ' + t + '>'
-    + '<div class="nom">' + ech(e.nom) + (e.actif?"":" · archivé") + '</div>'
-    + '<div class="form">' + ech(e.formation) + '</div>';
-  if (e.score === null) return h + '<div class="info">Aucune leçon enregistrée</div></button>';
-  var urgent = !e.pret && e.restant <= 3;
-  return h
-    + '<div class="rang"><div class="pts' + (e.pret?" ok":"") + '">' + e.score + '<em>/100</em></div>'
-    + '<div class="jauge' + (e.pret?" ok":"") + '"><i style="width:' + Math.max(2,e.score) + '%"></i>'
-    + '<u style="left:' + D.objectif + '%"></u></div></div>'
-    + '<div class="info">' + e.heures + ' h · ' + e.lecons + ' leçon' + (e.lecons>1?"s":"")
-    + ' · dernière le ' + ech(e.derniere.date) + '</div>'
-    + '<div class="puce' + (e.pret?" ok":(urgent?" urgent":"")) + '">'
-    + (e.pret ? "PRÊT POUR L'EXAMEN" : "ENCORE " + e.restant + " H ESTIMÉES") + '</div></button>';
-}
+/* ====================================================================
+   FICHE ÉLÈVE — onglets Synthèse / Compétences / Séances / Notes
+   ==================================================================== */
+var ongletFiche = "synthese";
 
-/* ---------------------------------------------------------- vue : fiche */
-function ouvrir(nom) {
+function ouvrirFiche(nom){
   courant = nom;
-  var e = eleve(nom); if (!e) return;
-  var h = '<button class="retour" onclick="revenir()">&larr; Tous les élèves</button>';
+  ongletFiche = "synthese";
+  if (!eleve(nom)){ flash("Élève introuvable.", false); return; }
+  pousser("vFiche", rendreFiche);
+}
 
-  h += '<div class="bloc"><div class="ligne-nom">'
-     + '<div><div class="nom" style="font-size:19px">' + ech(e.nom) + '</div>'
-     + '<div class="form">' + ech(e.formation) + '</div>'
-     + '<div class="form' + (e.email ? '' : ' manque') + '">'
-     + (e.email ? ech(e.email) : 'aucune adresse e-mail') + '</div>'
-     + (e.email2 && e.email2 !== e.email
-        ? '<div class="form">' + ech(e.email2) + ' (parent)</div>' : '') + '</div>'
-     + '<button class="crayon" onclick="formEleve(courant)" aria-label="Modifier la fiche">'
-     + '<svg viewBox="0 0 24 24"><path d="M4 20h4l10-10-4-4L4 16v4z"/><path d="M13.5 6.5l4 4"/></svg>'
+function rendreFiche(){
+  var e = eleve(courant);
+  if (!e){ revenir(); return; }
+  var h = '<div class="wrap">';
+
+  /* bandeau retour (utile surtout desktop) */
+  h += '<button class="retour" onclick="revenir()">&larr; Mes élèves</button>';
+
+  /* en-tête nom + score */
+  h += '<div class="bloc"><div class="ligne-nom" style="display:flex;gap:12px;align-items:flex-start">'
+     + '<div style="flex:1;min-width:0"><div class="nom" style="font-size:20px;font-weight:800">' + ech(e.nom) + '</div>'
+     + '<div class="sub" style="font-size:13px;color:var(--pale);margin-top:2px">' + ech(e.formation) + '</div></div>'
+     + '<button class="crayon" onclick="formEleve(courant)" aria-label="Modifier la fiche" '
+     + 'style="flex:none;width:38px;height:38px;border:1.5px solid var(--ligne);display:grid;place-items:center">'
+     + '<svg viewBox="0 0 24 24" style="width:19px;height:19px;fill:none;stroke:var(--fonce);stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="M4 20h4l10-10-4-4L4 16v4z"/><path d="M13.5 6.5l4 4"/></svg>'
      + '</button></div>';
-  if (e.score !== null) {
-    h += '<div class="grand' + (e.pret?" ok":"") + '" style="margin-top:13px">' + e.score + '<em> / 100</em></div>'
+
+  if (e.score !== null){
+    h += '<div class="grand' + (e.pret?" ok":"") + '" style="margin-top:14px">' + e.score + '<em> / 100</em></div>'
+       + '<div class="info" style="margin-top:0;font-weight:700;color:var(--pale);letter-spacing:.5px">PROGRESSION</div>'
        + '<div class="jauge' + (e.pret?" ok":"") + '" style="margin-top:11px"><i style="width:'
        + Math.max(2,e.score) + '%"></i><u style="left:' + D.objectif + '%"></u></div>'
        + '<div class="info">Objectif ' + D.objectif + ' · ' + e.heures + ' h · '
@@ -361,11 +717,133 @@ function ouvrir(nom) {
        + '<div class="puce' + (e.pret?" ok":"") + '">'
        + (e.pret ? "PRÊT POUR L'EXAMEN" : "ENCORE " + e.restant + " H ESTIMÉES") + '</div>';
   } else {
-    h += '<div class="info" style="margin-top:10px">Aucune leçon enregistrée pour l\'instant.</div>';
+    h += '<div class="info" style="margin-top:12px">Aucune leçon enregistrée pour l\'instant.</div>';
   }
   h += '</div>';
 
-  h += '<div class="bloc"><div class="tt">NOTE DE SUIVI</div>'
+  /* onglets */
+  h += '<div class="onglets" role="tablist">'
+     + ongletBtn("synthese","Synthèse")
+     + ongletBtn("competences","Compétences")
+     + ongletBtn("seances","Séances")
+     + ongletBtn("notes","Notes")
+     + '</div>';
+
+  h += '<div id="ongletContenu">' + contenuOnglet(e) + '</div>';
+
+  /* gros bouton d'action, collant en bas */
+  h += '<button class="btn btn-eval" onclick="formLecon()">＋ Évaluer une séance</button>';
+  h += '</div>';
+
+  $("vFiche").innerHTML = h;
+}
+
+function ongletBtn(id,label){
+  return '<button role="tab" aria-selected="' + (ongletFiche===id) + '" '
+    + 'onclick="ongletFiche=\'' + id + '\';rafraichirOnglet()">' + label + '</button>';
+}
+function rafraichirOnglet(){
+  var e = eleve(courant); if(!e) return;
+  $("ongletContenu").innerHTML = contenuOnglet(e);
+  document.querySelectorAll("#vFiche .onglets button").forEach(function(b){
+    b.setAttribute("aria-selected", b.getAttribute("onclick").indexOf("'"+ongletFiche+"'")>=0 ? "true":"false");
+  });
+}
+
+function contenuOnglet(e){
+  if (e.score === null && ongletFiche !== "notes")
+    return '<div class="bloc"><div class="info" style="margin:0">Enregistrez une première séance pour voir apparaître les compétences et la progression.</div></div>';
+  if (ongletFiche === "synthese")    return ongSynthese(e);
+  if (ongletFiche === "competences") return ongCompetences(e);
+  if (ongletFiche === "seances")     return ongSeances(e);
+  if (ongletFiche === "notes")       return ongNotes(e);
+  return "";
+}
+
+/* ---- onglet Synthèse ---- */
+function ongSynthese(e){
+  var noms3 = (e.priorites||[]).map(function(p){ return p.nom; });
+  var prioPrincipale = (e.priorites && e.priorites[0]) ? e.priorites[0] : null;
+
+  var h = "";
+
+  /* objectif prochaine séance */
+  if (prioPrincipale){
+    h += '<div class="cible" style="margin-bottom:9px">'
+      + '<div class="tt">🎯 Objectif prochaine séance</div>'
+      + '<div class="obj-nom">' + ech(prioPrincipale.nom) + '</div>'
+      + '<div class="aide" style="margin-top:4px">' + ech(prioPrincipale.mot)
+      + ', niveau ' + prioPrincipale.niveau + ' sur 4</div>'
+      + '<div class="liste">'
+      + (e.priorites||[]).map(function(p){ return '<span class="tag">' + ech(p.nom) + '</span>'; }).join("")
+      + '</div></div>';
+  }
+
+  /* à travailler */
+  if (e.priorites && e.priorites.length){
+    h += '<div class="bloc"><div class="tt">À TRAVAILLER</div>'
+      + e.priorites.map(function(p){
+          var c = p.niveau<=1 ? "r" : (p.niveau<=2 ? "o" : "o");
+          return '<div class="critere"><span class="rd ' + c + '"></span>'
+               + '<span class="cn">' + ech(p.nom) + '<div class="cm">' + ech(p.mot) + '</div></span>'
+               + '<span class="cv">' + p.niveau + '/4</span></div>'; }).join("")
+      + '</div>';
+  }
+
+  /* points forts */
+  var forts = [];
+  e.niveaux.forEach(function(n,k){ if (n>=4 && noms3.indexOf(COMP[k])<0) forts.push(COMP[k]); });
+  if (forts.length){
+    h += '<div class="bloc"><div class="tt">POINTS FORTS</div>'
+      + forts.slice(0,5).map(function(c){
+          return '<div class="critere"><span class="rd v"></span>'
+               + '<span class="cn">' + ech(c) + '</span>'
+               + '<span class="cv" style="color:var(--vert)">acquis</span></div>'; }).join("")
+      + '</div>';
+  }
+  return h;
+}
+
+/* ---- onglet Compétences (détail par famille) ---- */
+function ongCompetences(e){
+  var noms3 = (e.priorites||[]).map(function(p){ return p.nom; });
+  var h = '<div class="bloc">';
+  FAMILLES.forEach(function(fam){
+    h += '<div class="groupe-tt">' + ech(fam.nom) + '</div>';
+    fam.idx.forEach(function(k){
+      var n = e.niveaux[k];
+      var cls = n>=4 ? " acquise" : (noms3.indexOf(COMP[k])>=0 ? " faible" : "");
+      h += '<div class="comp' + cls + '"><div class="l"><span>' + ech(COMP[k])
+         + '<small>' + (D.mots[n]||"") + '</small></span><b>' + n + '/4</b></div>'
+         + '<div class="b"><i style="width:' + (n/4*100) + '%"></i></div></div>';
+    });
+  });
+  h += '</div>';
+  return h;
+}
+
+/* ---- onglet Séances (chronologie + progression) ---- */
+function ongSeances(e){
+  var h = '<div class="bloc"><div class="tt">PROGRESSION</div>' + courbeSvg(e.courbe)
+     + '<div class="suite">' + e.courbe.join(" › ") + '</div>'
+     + '<div class="aide">De la première leçon, à gauche, à la plus récente, à droite.</div></div>';
+
+  h += '<div class="bloc"><div class="tt">HISTORIQUE DES LEÇONS</div>'
+    + '<div class="aide" style="margin:-6px 0 10px">De la plus récente à la plus ancienne. '
+    + 'Le nombre à gauche est le score atteint après cette leçon.</div>'
+    + e.historique.map(function(l){
+        return '<div class="histo"><div class="sc">' + l.score + '</div><div>'
+             + '<div class="d">' + ech(l.date) + ' · ' + l.duree + ' h</div>'
+             + '<div class="t">' + ech(l.theme || "—") + '</div>'
+             + (l.comm ? '<div class="mot">' + ech(l.comm) + '</div>' : '')
+             + '</div></div>'; }).join("")
+    + '</div>';
+  return h;
+}
+
+/* ---- onglet Notes + envoi e-mail ---- */
+function ongNotes(e){
+  var h = '<div class="bloc"><div class="tt">NOTE DE SUIVI</div>'
     + '<div id="noteLecture">'
     +   (e.note ? '<div class="note-suivi">' + ech(e.note) + '</div>'
               : '<div class="note-vide">Aucune note pour cet élève.</div>')
@@ -376,60 +854,31 @@ function ouvrir(nom) {
     +   '<textarea id="nTxt" maxlength="800">' + ech(e.note) + '</textarea>'
     +   '<div class="aide">Note interne. Elle n\'est jamais envoyée à l\'élève.</div>'
     +   '<button class="btn" style="margin-top:10px" onclick="sauverNote()">Enregistrer la note</button>'
-    +   '<button class="btn vide" onclick="ouvrir(courant)">Annuler</button>'
+    +   '<button class="btn vide" onclick="rafraichirOnglet()">Annuler</button>'
     + '</div></div>';
 
-  h += '<button class="btn" onclick="formLecon()">+ Nouvelle leçon</button>';
-  if (e.score !== null && (e.email || e.email2)) {
+  if (e.score !== null && (e.email || e.email2)){
     h += '<div class="bloc"><div class="tt">ENVOYER PAR E-MAIL</div>'
       + '<div class="aide" style="margin:-6px 0 10px">Choisissez le ou les destinataires, '
       + 'puis ce que vous voulez leur envoyer.</div>'
       + blocDest(e, "f")
-      + '<button class="btn vide" style="margin-top:6px" onclick="renvoyer()">Le dernier score</button>'
+      + '<button class="btn vide" style="margin-top:8px" onclick="renvoyer()">Le dernier score</button>'
       + '<button class="btn vide" onclick="envoyerBilan()">Le bilan complet</button>'
       + '<div class="aide">Le bilan reprend toutes les leçons, les dates, les durées, '
       + 'les commentaires et la progression.</div></div>';
   }
 
-  if (e.score !== null) {
-    h += '<div class="bloc"><div class="tt">À TRAVAILLER EN PRIORITÉ</div>'
-      + e.priorites.map(function(p,i){
-          return '<div class="prio"><b>' + (i+1) + '</b><span>' + ech(p.nom)
-               + '<small>' + ech(p.mot) + ', niveau ' + p.niveau + ' sur 4</small></span></div>'; }).join("")
-      + '</div>';
-
-    var noms3 = e.priorites.map(function(p){ return p.nom; });
-    h += '<div class="bloc"><div class="tt">LES NEUF COMPÉTENCES</div>'
-      + D.competences.map(function(c,k){
-          var n = e.niveaux[k];
-          var cls = n>=4 ? " acquise" : (noms3.indexOf(c)>=0 ? " faible" : "");
-          return '<div class="comp' + cls + '"><div class="l"><span>' + ech(c)
-               + '<small>' + (D.mots[n]||"") + '</small></span><b>' + n + '/4</b></div>'
-               + '<div class="b"><i style="width:' + (n/4*100) + '%"></i></div></div>'; }).join("")
-      + '</div>';
-
-    h += '<div class="bloc"><div class="tt">PROGRESSION</div>' + courbeSvg(e.courbe)
-       + '<div class="suite">' + e.courbe.join(" › ") + '</div>'
-       + '<div class="aide">De la première leçon, à gauche, à la plus récente, à droite.</div></div>';
-
-    h += '<div class="bloc"><div class="tt">HISTORIQUE DES LEÇONS</div>'
-      + '<div class="aide" style="margin:-6px 0 10px">De la plus récente à la plus ancienne. '
-      + 'Le nombre à gauche est le score atteint après cette leçon.</div>'
-      + e.historique.map(function(l){
-          return '<div class="histo"><div class="sc">' + l.score + '</div><div>'
-               + '<div class="d">' + ech(l.date) + ' · ' + l.duree + ' h</div>'
-               + '<div class="t">' + ech(l.theme || "—") + '</div>'
-               + (l.comm ? '<div class="mot">' + ech(l.comm) + '</div>' : '')
-               + '</div></div>'; }).join("")
-      + '</div>';
+  if (e.score !== null){
+    h += '<button class="btn vide" onclick="ouvrirPartage()">Aperçu du bilan à partager</button>';
   }
-  $("vFiche").innerHTML = h;
-  montrer("vFiche");
+  return h;
 }
 
+function editerNote(){ $("noteLecture").hidden = true; $("noteEdition").hidden = false; $("nTxt").focus(); }
+
 function courbeSvg(c) {
-  if (!c || c.length < 2) return "";
-  var L = 300, H = 68, m = 5;
+  if (!c || c.length < 2) return '<div class="aide" style="margin:0">Au moins deux leçons sont nécessaires pour tracer la courbe.</div>';
+  var L = 300, H = 74, m = 5;
   var pts = c.map(function(v,i){
     var x = m + i*(L-2*m)/(c.length-1);
     var y = H - 6 - (v/100)*(H-13);
@@ -443,15 +892,54 @@ function courbeSvg(c) {
     + 'stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"/>'
     + '<circle cx="'+d[0]+'" cy="'+d[1]+'" r="4" fill="#0B0A09"/></svg>';
 }
+</script>
 
-/* ---------------------------------------------------------- vue : nouvelle leçon */
-var saisie = { duree: 1, notes: [null,null,null,null,null,null,null,null,null] };
+<script>
+/* ====================================================================
+   ONGLET ÉVALUER — d'abord choisir l'élève
+   ==================================================================== */
+function rendreChoixEval(){
+  var actifs = D.eleves.filter(function(e){ return e.actif; }).sort(function(a,b){
+    var da=a.derniere?a.derniere.date:"", db=b.derniere?b.derniere.date:"";
+    return db.localeCompare(da);
+  });
+  var h = '<div class="wrap">';
+  h += '<div class="bonjour" style="font-size:20px">Évaluer une séance</div>';
+  h += '<div class="info" style="margin-top:0">Choisissez l\'élève que vous venez de faire rouler.</div>';
+  h += '<div style="margin-top:14px">';
+  h += actifs.length ? actifs.map(carteEleve).join("")
+     : '<div class="etat"><b>Aucun élève actif</b>Créez d\'abord un élève.</div>';
+  h += '</div></div>';
+  $("vChoixEval").innerHTML = h;
+}
 
-function formLecon() {
+/* ====================================================================
+   ÉVALUATION D'UNE SÉANCE — évaluation rapide, gros boutons pouce
+   Compatible back-end : on envoie toujours 9 valeurs (null = non abordé).
+   ==================================================================== */
+var saisie = { duree: 1, notes: [null,null,null,null,null,null,null,null,null], visibles: [] };
+var scoreAvant = null;
+
+function formLecon(){
   var e = eleve(courant); if (!e) return;
-  saisie = { duree: 1, notes: [null,null,null,null,null,null,null,null,null] };
-  var h = '<button class="retour" onclick="revenir()">&larr; ' + ech(e.nom) + '</button>'
-    + '<div class="bloc"><div class="tt">NOUVELLE LEÇON — ' + ech(e.nom).toUpperCase() + '</div>'
+  scoreAvant = e.score;
+  saisie = { duree: 1, notes: [null,null,null,null,null,null,null,null,null], visibles: [] };
+
+  /* pré-sélection : les 3 priorités de l'élève, sinon les 3 premières compétences */
+  var pre = (e.priorites && e.priorites.length)
+    ? e.priorites.map(function(p){ return COMP.indexOf(p.nom); }).filter(function(i){return i>=0;})
+    : [0,1,2];
+  saisie.visibles = pre.slice(0,3);
+
+  rendreFormLecon(e);
+  pousser("vLecon", function(){ rendreFormLecon(eleve(courant)); });
+}
+
+function rendreFormLecon(e){
+  var h = '<div class="wrap">';
+  h += '<button class="retour" onclick="revenir()">&larr; ' + ech(e.nom) + '</button>';
+
+  h += '<div class="bloc"><div class="tt">SÉANCE — ' + ech(e.nom).toUpperCase() + '</div>'
     + '<label>Date</label><input type="date" id="lDate" value="' + auj() + '">'
     + '<label>Durée</label><div class="chips" id="lDuree">'
     +   ['0.75|45 min','1|1 h','1.5|1 h 30','2|2 h'].map(function(x,i){
@@ -459,32 +947,29 @@ function formLecon() {
           return '<button class="chip" data-v="'+p[0]+'" aria-pressed="'+(i===1)+'">'+p[1]+'</button>'; }).join("")
     + '</div>'
     + '<label>Thème travaillé</label>'
-    + '<input type="text" id="lTheme" placeholder="Ronds-points de la rocade">'
-    + '<label>Commentaire de la leçon</label>'
+    + '<input type="text" id="lTheme" placeholder="Ronds-points de la rocade" value="'+ ech(themeSuggere(e)) +'">'
+    + '<label>Commentaire pour l\'élève</label>'
     + '<textarea id="lComm" maxlength="400" placeholder="Bien meilleure observation aux intersections. On reverra le créneau la prochaine fois."></textarea>'
-    + '<div class="aide">Facultatif. Ce commentaire figure dans l\'e-mail envoyé à l\'élève, sous le titre « Le mot d\'Olivier ».</div>'
-    + '</div>'
+    + '<div class="aide">Facultatif. Ce commentaire figure dans l\'e-mail, sous « Le mot d\'Olivier ».</div>'
+    + '</div>';
 
-    + '<div class="bloc"><div class="tt">CE QUI A ÉTÉ TRAVAILLÉ AUJOURD\'HUI</div>'
-    + '<div class="info" style="margin:0 0 10px">Laissez sur — pour les compétences non abordées : '
-    + 'le niveau précédent est conservé.</div>'
-    + D.competences.map(function(c,k){
-        var actuel = e.niveaux[k];
-        return '<div class="note-l"><span>' + ech(c)
-             + '<small> actuellement ' + actuel + '/4</small></span></div>'
-             + '<div class="niv" data-k="'+k+'">'
-             + '<button class="zero" data-n="" aria-pressed="true">—</button>'
-             + [1,2,3,4].map(function(n){ return '<button data-n="'+n+'" aria-pressed="false">'+n+'</button>'; }).join("")
-             + '</div>'; }).join("")
-    + '</div>'
+  h += '<div class="section-tt" style="margin-top:18px">Compétences travaillées</div>'
+     + '<div class="info" style="margin:-4px 2px 12px">Évaluez seulement ce que vous avez vu aujourd\'hui. '
+     + 'Le reste garde son niveau précédent.</div>';
 
-    + '<div class="bloc"><div class="tt">ENVOYER LE SCORE APRÈS ENREGISTREMENT</div>'
+  h += '<div id="listeEval">' + saisie.visibles.map(function(k){ return blocEval(e,k); }).join("") + '</div>';
+
+  h += '<button class="ajout-comp" id="btnAjout" onclick="basculerAjout()">＋ Ajouter une compétence</button>';
+  h += '<div id="zoneAjout" hidden></div>';
+
+  h += '<div class="bloc"><div class="tt">ENVOYER LE SCORE APRÈS ENREGISTREMENT</div>'
     + '<div class="aide" style="margin:-6px 0 10px">Cochez qui doit recevoir le score. '
     + 'Décochez tout pour n\'envoyer aucun e-mail.</div>'
-    + blocDest(e, "l") + '</div>'
+    + blocDest(e, "l") + '</div>';
 
-    + '<button class="btn" onclick="enregistrerLecon()">Enregistrer la leçon</button>'
-    + '<button class="btn vide" onclick="ouvrir(courant)">Annuler</button>';
+  h += '<button class="btn" onclick="enregistrerLecon()">Enregistrer la séance</button>'
+    + '<button class="btn vide" onclick="revenir()">Annuler</button>';
+  h += '</div>';
 
   $("vLecon").innerHTML = h;
 
@@ -493,22 +978,87 @@ function formLecon() {
     this.querySelectorAll("button").forEach(function(x){ x.setAttribute("aria-pressed","false"); });
     b.setAttribute("aria-pressed","true"); saisie.duree = parseFloat(b.dataset.v);
   });
-  $("vLecon").querySelectorAll(".niv").forEach(function(g){
-    g.addEventListener("click", function(ev){
-      var b = ev.target.closest("button"); if(!b) return;
-      this.querySelectorAll("button").forEach(function(x){ x.setAttribute("aria-pressed","false"); });
-      b.setAttribute("aria-pressed","true");
-      saisie.notes[parseInt(this.dataset.k,10)] = b.dataset.n === "" ? null : parseInt(b.dataset.n,10);
-    });
-  });
-  montrer("vLecon");
+  brancherEval();
 }
 
-function enregistrerLecon() {
+function themeSuggere(e){
+  return (e.priorites && e.priorites[0]) ? e.priorites[0].nom : "";
+}
+
+/* un bloc d'évaluation gros boutons pour la compétence d'indice k */
+function blocEval(e,k){
+  var actuel = e.niveaux[k];
+  var val = saisie.notes[k];
+  var boutons = [
+    {n:1, em:"❌", l:"À revoir"},
+    {n:2, em:"🟠", l:"À améliorer"},
+    {n:3, em:"🟢", l:"Acquis"},
+    {n:4, em:"⭐", l:"Maîtrisé"}
+  ];
+  return '<div class="eval-comp' + (val!=null?" rempli":"") + '" data-k="'+k+'">'
+    + '<div class="cn">' + ech(COMP[k]) + '</div>'
+    + '<div class="ca">Niveau actuel : ' + actuel + '/4 · ' + (MOTS[actuel]||"") + '</div>'
+    + '<div class="eval-grille">'
+    + boutons.map(function(b){
+        return '<button class="n'+b.n+'" data-n="'+b.n+'" aria-pressed="'+(val===b.n)+'">'
+             + '<span class="em">'+b.em+'</span>'+b.l+'</button>';
+      }).join("")
+    + '</div>'
+    + '<button class="retirer" onclick="retirerComp('+k+')">Retirer cette compétence</button>'
+    + '</div>';
+}
+
+function brancherEval(){
+  $("listeEval").querySelectorAll(".eval-comp").forEach(function(bloc){
+    var k = parseInt(bloc.dataset.k,10);
+    bloc.querySelector(".eval-grille").addEventListener("click", function(ev){
+      var b = ev.target.closest("button"); if(!b) return;
+      var n = parseInt(b.dataset.n,10);
+      /* toggle : re-clic sur le même niveau annule */
+      if (saisie.notes[k] === n){ saisie.notes[k] = null; }
+      else { saisie.notes[k] = n; }
+      /* re-rendu du bloc */
+      var e = eleve(courant);
+      var neuf = document.createElement("div");
+      neuf.innerHTML = blocEval(e,k);
+      bloc.replaceWith(neuf.firstChild);
+      brancherEval();
+    });
+  });
+}
+
+function retirerComp(k){
+  saisie.notes[k] = null;
+  saisie.visibles = saisie.visibles.filter(function(i){ return i!==k; });
+  $("listeEval").innerHTML = saisie.visibles.map(function(i){ return blocEval(eleve(courant),i); }).join("");
+  brancherEval();
+}
+
+function basculerAjout(){
+  var z = $("zoneAjout");
+  if (!z.hidden){ z.hidden = true; z.innerHTML=""; return; }
+  var reste = [];
+  for (var k=0;k<COMP.length;k++) if (saisie.visibles.indexOf(k)<0) reste.push(k);
+  if (!reste.length){ flash("Toutes les compétences sont déjà affichées.", true); return; }
+  z.innerHTML = '<div class="choix-comp">'
+    + reste.map(function(k){ return '<button onclick="ajouterComp('+k+')">'+ech(COMP[k])+'</button>'; }).join("")
+    + '</div>';
+  z.hidden = false;
+}
+function ajouterComp(k){
+  if (saisie.visibles.indexOf(k)<0) saisie.visibles.push(k);
+  $("zoneAjout").hidden = true; $("zoneAjout").innerHTML="";
+  $("listeEval").innerHTML = saisie.visibles.map(function(i){ return blocEval(eleve(courant),i); }).join("");
+  brancherEval();
+}
+
+function enregistrerLecon(){
   var theme = $("lTheme").value.trim();
   if (!theme) { flash("Indiquez le thème travaillé.", false); $("lTheme").focus(); return; }
+  var aEvalue = saisie.notes.some(function(n){ return n!=null; });
+  if (!aEvalue && !confirm("Aucune compétence évaluée. Enregistrer quand même la séance ?")) return;
   var dst = litDest("l");
-  attente(true, "Enregistrement de la leçon…");
+  attente(true, "Enregistrement de la séance…");
   appel({
     api   : "lecon",
     eleve : courant,
@@ -520,56 +1070,232 @@ function enregistrerLecon() {
     mail  : (dst.dEleve || dst.dParent) ? 1 : 0,
     dEleve: dst.dEleve,
     dParent: dst.dParent
-  }, function (r) { if (apres(r)) ouvrir(courant); });
-}
-
-function editerNote() {
-  $("noteLecture").hidden = true;
-  $("noteEdition").hidden = false;
-  $("nTxt").focus();
-}
-
-function sauverNote() {
-  attente(true, "Enregistrement de la note…");
-  appel({ api:"note", eleve: courant, note: $("nTxt").value.trim() },
-    function (r) { if (apres(r)) ouvrir(courant); });
-}
-
-function envoyerBilan() {
-  var e = eleve(courant), d = litDest("f");
-  if (!d.dEleve && !d.dParent) { flash("Cochez au moins un destinataire.", false); return; }
-  var qui = [];
-  if (d.dEleve) qui.push(e.email);
-  if (d.dParent) qui.push(e.email2);
-  if (!confirm("Envoyer le bilan complet de " + e.lecons + " leçon"
-      + (e.lecons > 1 ? "s" : "") + " à " + qui.join(" et ") + " ?")) return;
-  attente(true, "Préparation du bilan…");
-  appel({ api:"bilan", eleve: courant, dEleve: d.dEleve, dParent: d.dParent }, function (r) {
-    attente(false);
-    if (r.data) D = r.data;
-    flash(r.message || r.erreur || "—", !!r.ok);
-    ouvrir(courant);
+  }, function (r) {
+    if (apres(r)) {
+      /* on remplace la vue leçon par l'écran de fin dans la pile */
+      pile.pop();
+      ouvrirFin();
+    }
   });
 }
 
-function renvoyer() {
-  var d = litDest("f");
-  if (!d.dEleve && !d.dParent) { flash("Cochez au moins un destinataire.", false); return; }
-  attente(true, "Envoi de l'e-mail…");
-  appel({ api:"mail", eleve: courant, dEleve: d.dEleve, dParent: d.dParent }, function (r) {
-    attente(false);
-    if (r.data) D = r.data;
-    flash(r.message || r.erreur || "—", !!r.ok);
-    ouvrir(courant);
+/* ====================================================================
+   ÉCRAN FIN DE SÉANCE
+   ==================================================================== */
+function ouvrirFin(){
+  pousser("vFin", rendreFin);
+}
+function rendreFin(){
+  var e = eleve(courant);
+  if (!e){ allerOnglet("accueil"); return; }
+  var delta = (scoreAvant==null) ? e.score : (e.score - scoreAvant);
+  var signe = delta>0 ? "+" : (delta<0 ? "" : "±");
+  var clsDelta = delta>0 ? "" : (delta<0 ? " neg" : " nul");
+
+  /* progrès = compétences qu'on vient de monter ; à surveiller = priorités restantes */
+  var montees = [];
+  saisie.notes.forEach(function(n,k){
+    if (n!=null && scoreAvant!=null && n >= 3) montees.push(COMP[k]);
+    else if (n!=null && n>=3) montees.push(COMP[k]);
   });
+  montees = montees.filter(function(v,i,a){ return a.indexOf(v)===i; }).slice(0,3);
+  var surveiller = (e.priorites||[]).slice(0,2).map(function(p){ return p.nom; });
+  var prio = (e.priorites && e.priorites[0]) ? e.priorites[0].nom : null;
+
+  var h = '<div class="fin-wrap">';
+  h += '<div class="fin-tt">Séance terminée ✓</div>';
+  h += '<div class="fin-nom">' + ech(e.nom) + '</div>';
+
+  h += '<div class="delta"><div class="g' + clsDelta + '">' + signe + Math.abs(delta) + '</div>'
+     + '<div class="l">'+(scoreAvant==null?"Premier score":"points de progression")+'</div>'
+     + '<div class="sc">Score total : <b>' + e.score + ' / 100</b></div></div>';
+
+  if (montees.length){
+    h += '<div class="rub p"><div class="h">🟢 Progrès</div>'
+       + montees.map(function(c){ return '<div class="item">'+ech(c)+'</div>'; }).join("") + '</div>';
+  }
+  if (surveiller.length){
+    h += '<div class="rub s"><div class="h">🟠 À surveiller</div>'
+       + surveiller.map(function(c){ return '<div class="item">'+ech(c)+'</div>'; }).join("") + '</div>';
+  }
+  if (prio){
+    h += '<div class="rub c"><div class="h">🎯 Prochaine priorité</div>'
+       + '<div class="item">'+ech(prio)+'</div></div>';
+  }
+
+  h += '<button class="btn" onclick="ouvrirPartage()">Partager le bilan avec l\'élève</button>';
+  h += '<button class="btn vide" onclick="terminerSeance()">Terminer</button>';
+  h += '</div>';
+  $("vFin").innerHTML = h;
+}
+function terminerSeance(){
+  /* retour à la fiche de l'élève */
+  ongletActif = "eleves"; majBarres();
+  pile = [{id:"vListe", rendu:rendreListe}];
+  ouvrirFiche(courant);
 }
 
-/* ---------------------------------------------------------- vue : fiche élève */
+/* ====================================================================
+   PARTAGE DU BILAN (aperçu + canaux)
+   ==================================================================== */
+function ouvrirPartage(){ pousser("vPartage", rendrePartage); }
+
+function rendrePartage(){
+  var e = eleve(courant);
+  if (!e){ revenir(); return; }
+  var noms3 = (e.priorites||[]).map(function(p){ return p.nom; });
+  var forts = [];
+  e.niveaux.forEach(function(n,k){ if (n>=4 && noms3.indexOf(COMP[k])<0) forts.push(COMP[k]); });
+  var prio = (e.priorites && e.priorites[0]) ? e.priorites[0].nom : null;
+  var dateTxt = e.derniere ? e.derniere.date : auj();
+
+  var h = '<div class="fin-wrap">';
+  h += '<button class="retour" onclick="revenir()">&larr; Retour</button>';
+
+  h += '<div class="share-card">'
+    + '<div class="share-head"><div class="k">🚗 PERMIS SCORE</div>'
+    + '<div class="n">' + ech(e.nom) + '</div>'
+    + '<div class="d">' + ech(e.formation) + ' · séance du ' + ech(dateTxt) + '</div></div>'
+    + '<div class="share-body">'
+    + '<div class="s-tt">Votre progression</div>'
+    + '<div class="share-pts">' + e.score + '<span style="font-size:16px;color:var(--pale)"> / 100</span></div>'
+    + '<div class="jauge" style="margin-top:10px"><i style="width:'+Math.max(2,e.score)+'%"></i>'
+    + '<u style="left:'+D.objectif+'%"></u></div>';
+
+  if (forts.length){
+    h += '<div class="s-tt">✓ Points forts</div>'
+       + forts.slice(0,3).map(function(c){ return '<div class="share-li">'+ech(c)+'</div>'; }).join("");
+  }
+  if (prio){
+    h += '<div class="s-tt">🎯 À travailler</div><div class="share-li">'+ech(prio)+'</div>';
+  }
+  h += '</div></div>';
+
+  h += '<div class="aide" style="text-align:center;margin-bottom:10px">Choisissez comment envoyer ce bilan.</div>';
+  h += '<div class="canaux">'
+    + '<button class="btn noir" onclick="partagerTexte()">Copier / Partager</button>'
+    + '<button class="btn" onclick="partagerWhatsApp()">WhatsApp</button>'
+    + '</div>';
+  if (e.email || e.email2){
+    h += '<button class="btn vide" style="margin-top:8px" onclick="renvoyer()">Envoyer par e-mail</button>';
+  }
+  h += '</div>';
+  $("vPartage").innerHTML = h;
+}
+
+function texteBilan(){
+  var e = eleve(courant);
+  var noms3 = (e.priorites||[]).map(function(p){ return p.nom; });
+  var forts = [];
+  e.niveaux.forEach(function(n,k){ if (n>=4 && noms3.indexOf(COMP[k])<0) forts.push(COMP[k]); });
+  var prio = (e.priorites && e.priorites[0]) ? e.priorites[0].nom : null;
+  var t = "🚗 PERMIS SCORE — Olive Conduite\n"
+        + e.nom + " · " + e.formation + "\n"
+        + "Séance du " + (e.derniere?e.derniere.date:auj()) + "\n\n"
+        + "Progression : " + e.score + "/100 (objectif " + D.objectif + ")\n";
+  if (forts.length) t += "\n✓ Points forts : " + forts.slice(0,3).join(", ") + "\n";
+  if (prio) t += "🎯 À travailler : " + prio + "\n";
+  t += "\nÀ bientôt sur la route !";
+  return t;
+}
+function partagerTexte(){
+  var t = texteBilan();
+  if (navigator.share){
+    navigator.share({ title:"Permis Score — "+courant, text:t }).catch(function(){});
+  } else if (navigator.clipboard){
+    navigator.clipboard.writeText(t).then(function(){ flash("Bilan copié dans le presse-papiers.", true); },
+      function(){ flash("Copie impossible.", false); });
+  } else {
+    flash("Partage non disponible sur cet appareil.", false);
+  }
+}
+function partagerWhatsApp(){
+  window.open("https://wa.me/?text=" + encodeURIComponent(texteBilan()), "_blank");
+}
+
+/* ====================================================================
+   ONGLET SUIVI — activité globale de l'école
+   ==================================================================== */
+function rendreSuivi(){
+  var actifs = D.eleves.filter(function(e){ return e.actif; });
+  var avec = actifs.filter(function(e){ return e.score!=null; });
+  var prets = avec.filter(function(e){ return e.pret; }).length;
+  var moyenne = avec.length ? Math.round(avec.reduce(function(a,e){return a+e.score;},0)/avec.length) : 0;
+  var heures = actifs.reduce(function(a,e){ return a + (e.heures||0); }, 0);
+
+  var h = '<div class="wrap">';
+  h += '<div class="bonjour" style="font-size:20px">Mon activité</div>';
+
+  h += '<div class="bloc" style="display:flex;gap:10px;text-align:center">'
+    + statCase(actifs.length, "élèves actifs")
+    + statCase(prets, "prêts examen")
+    + statCase(moyenne, "score moyen")
+    + '</div>';
+
+  h += '<div class="bloc"><div class="tt">VOLUME</div>'
+    + '<div class="info" style="margin:0">' + Math.round(heures) + ' h de conduite cumulées · '
+    + D.totalLecons + ' leçon' + (D.totalLecons>1?"s":"") + ' au total.</div></div>';
+
+  /* prêts pour l'examen */
+  var listePrets = avec.filter(function(e){ return e.pret; });
+  if (listePrets.length){
+    h += '<div class="section-tt">Prêts pour l\'examen</div>'
+       + listePrets.map(carteEleve).join("");
+  }
+
+  /* à surveiller : proches du but mais pas prêts */
+  var proches = avec.filter(function(e){ return !e.pret && e.restant<=4; })
+                    .sort(function(a,b){ return a.restant-b.restant; });
+  if (proches.length){
+    h += '<div class="section-tt">Bientôt prêts</div>'
+       + proches.map(carteEleve).join("");
+  }
+  h += '</div>';
+  $("vSuivi").innerHTML = h;
+}
+function statCase(val,lab){
+  return '<div style="flex:1"><div style="font-size:26px;font-weight:800;color:var(--fonce);font-variant-numeric:tabular-nums">'
+    + val + '</div><div style="font-size:11px;color:var(--pale);font-weight:600">'+lab+'</div></div>';
+}
+
+/* ====================================================================
+   ONGLET PLUS / PARAMÈTRES
+   ==================================================================== */
+function rendrePlus(){
+  var h = '<div class="wrap">';
+  h += '<div class="bonjour" style="font-size:20px">Paramètres</div>';
+  h += '<div class="bloc"><div class="tt">ÉCOLE</div>'
+    + '<div class="info" style="margin:0"><b>' + ech(D.ecole||"Olive Conduite") + '</b><br>'
+    + 'Moniteur : ' + ech(D.moniteur||"—") + '<br>'
+    + 'Objectif examen : ' + D.objectif + '/100<br>'
+    + 'Dernière mise à jour : ' + ech(D.maj) + '</div></div>';
+
+  h += '<div class="bloc"><div class="tt">DONNÉES</div>'
+    + '<button class="btn vide" onclick="charger()">Recharger depuis le tableur</button>'
+    + '<div class="aide">Les données sont stockées dans votre feuille Google. '
+    + 'L\'application fonctionne hors-ligne et affiche les dernières données connues.</div></div>';
+
+  if (DEMO){
+    h += '<div class="bloc"><div class="tt">MODE</div>'
+      + '<div class="info" style="margin:0">Vous êtes en mode démonstration. '
+      + 'Renseignez l\'adresse et la clé en haut du fichier index.html pour connecter votre tableur.</div></div>';
+  }
+
+  h += '<div class="pied">Permis Score · Olive Conduite\n'
+    + D.eleves.length + ' élève' + (D.eleves.length>1?"s":"") + ' au fichier</div>';
+  h += '</div>';
+  $("vPlus").innerHTML = h;
+}
+
+/* ====================================================================
+   FORMULAIRE ÉLÈVE (création / modification)
+   ==================================================================== */
 function formEleve(nom) {
   var e = nom ? eleve(nom) : { nom:"", email:"", email2:"", formation:"", actif:true, score:null };
   var nouveau = !nom;
-  var h = '<button class="retour" onclick="' + (nouveau ? 'rendreListe()' : 'revenir()') + '">&larr; Retour</button>'
-    + '<div class="bloc"><div class="tt">' + (nouveau ? "NOUVEL ÉLÈVE" : "MODIFIER LA FICHE") + '</div>'
+  var h = '<div class="wrap">';
+  h += '<button class="retour" onclick="revenir()">&larr; Retour</button>';
+  h += '<div class="bloc"><div class="tt">' + (nouveau ? "NOUVEL ÉLÈVE" : "MODIFIER LA FICHE") + '</div>'
     + '<label>Prénom et nom</label><input type="text" id="eNom" value="' + ech(e.nom) + '" placeholder="Lola G.">'
     + '<label>Adresse e-mail</label><input type="email" id="eMail" value="' + ech(e.email) + '" placeholder="prenom@exemple.fr">'
     + '<label>E-mail du parent ou du tuteur</label>'
@@ -593,12 +1319,17 @@ function formEleve(nom) {
        + (e.actif ? "Archiver cet élève" : "Réactiver cet élève") + '</button>';
     h += '<div class="info" style="text-align:center">L\'archivage conserve toutes les leçons.</div>';
   }
-  $("vEleve").innerHTML = h;
-  $("eForm").addEventListener("change", function(){
+  h += '</div>';
+
+  pousser("vEleve", function(){ $("vEleve").innerHTML = h; brancherFormEleve(); });
+}
+
+function brancherFormEleve(){
+  var sel = $("eForm"); if(!sel) return;
+  sel.addEventListener("change", function(){
     $("eFormAutre").hidden = (this.value !== "__autre");
     if (this.value === "__autre") $("eFormAutre").focus();
   });
-  montrer("vEleve");
 }
 
 function formationChoisie() {
@@ -615,47 +1346,60 @@ function sauverEleve(modif) {
     appel({ api:"eleveUpd", ancien: courant, nom: nom,
             email: $("eMail").value.trim(), email2: $("eMail2").value.trim(),
             formation: formationChoisie(), actif: e.actif ? 1 : 0 },
-      function (r) { if (apres(r)) { courant = nom; ouvrir(nom); } });
+      function (r) { if (apres(r)) { courant = nom; pile.pop(); ouvrirFiche(nom); } });
   } else {
     appel({ api:"eleveAdd", nom: nom, email: $("eMail").value.trim(),
             email2: $("eMail2").value.trim(), formation: formationChoisie() },
-      function (r) { if (apres(r)) { courant = nom; ouvrir(nom); } });
+      function (r) { if (apres(r)) { courant = nom; pile.pop(); ouvrirFiche(nom); } });
   }
 }
 
 function archiver(actif) {
   attente(true, "Enregistrement…");
   appel({ api:"eleveArch", nom: courant, actif: actif },
-    function (r) { if (apres(r)) rendreListe(); });
+    function (r) { if (apres(r)) { pile.pop(); allerOnglet("eleves"); } });
 }
 
-/* ---------------------------------------------------------- navigation */
-var vueCourante = "vListe";
-
-function montrer(id) {
-  vueCourante = id;
-  ["vListe","vFiche","vLecon","vEleve"].forEach(function(v){
-    $(v).classList.toggle("on", v === id);
+/* ---- note & e-mails (inchangés côté serveur) ---- */
+function sauverNote() {
+  attente(true, "Enregistrement de la note…");
+  appel({ api:"note", eleve: courant, note: $("nTxt").value.trim() },
+    function (r) { if (apres(r)) rafraichirOnglet(); });
+}
+function envoyerBilan() {
+  var e = eleve(courant), d = litDest("f");
+  if (!d.dEleve && !d.dParent) { flash("Cochez au moins un destinataire.", false); return; }
+  var qui = [];
+  if (d.dEleve) qui.push(e.email);
+  if (d.dParent) qui.push(e.email2);
+  if (!confirm("Envoyer le bilan complet de " + e.lecons + " leçon"
+      + (e.lecons > 1 ? "s" : "") + " à " + qui.join(" et ") + " ?")) return;
+  attente(true, "Préparation du bilan…");
+  appel({ api:"bilan", eleve: courant, dEleve: d.dEleve, dParent: d.dParent }, function (r) {
+    attente(false);
+    if (r.data) D = r.data;
+    flash(r.message || r.erreur || "—", !!r.ok);
+    rafraichirOnglet();
   });
-  $("zoneRecherche").style.display = (id === "vListe") ? "" : "none";
-  $("btnRetour").hidden = (id === "vListe");
-  window.scrollTo(0,0);
 }
-
-function revenir() {
-  if (vueCourante === "vFiche") { rendreListe(); return; }
-  if (vueCourante === "vLecon" || vueCourante === "vEleve") {
-    if (courant && eleve(courant)) { ouvrir(courant); } else { rendreListe(); }
-    return;
-  }
-  rendreListe();
+function renvoyer() {
+  var e = eleve(courant), d = litDest("f");
+  /* si les cases n'existent pas (écran partage), on envoie à l'élève par défaut */
+  if (!$("fEleve") && !$("fParent")) { d = { dEleve: e.email?1:0, dParent:(e.email2&&!e.email)?1:0 }; }
+  if (!d.dEleve && !d.dParent) { flash("Cochez au moins un destinataire.", false); return; }
+  attente(true, "Envoi de l'e-mail…");
+  appel({ api:"mail", eleve: courant, dEleve: d.dEleve, dParent: d.dParent }, function (r) {
+    attente(false);
+    if (r.data) D = r.data;
+    flash(r.message || r.erreur || "—", !!r.ok);
+  });
 }
+</script>
 
-$("btnRetour").addEventListener("click", revenir);
-$("btnRecharger").addEventListener("click", function(){ charger(); });
-$("recherche").addEventListener("input", function(ev){ filtre = ev.target.value; if (D) rendreListe(); });
-
-/* ---------------------------------------------------------- démonstration */
+<script>
+/* ====================================================================
+   DÉMONSTRATION — données d'exemple (structure identique au serveur)
+   ==================================================================== */
 function jeuDemo() {
   function faire(nom, email, formation, niv, courbe, histo, note, email2) {
     var pr = COMP.map(function(n,k){ return { nom:n, niveau:niv[k], mot:MOTS[niv[k]] }; })
@@ -693,7 +1437,11 @@ function jeuDemo() {
   };
 }
 
+/* ====================================================================
+   AMORÇAGE
+   ==================================================================== */
 if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(function(){});
+majBarres();
 charger();
 </script>
 </body>
