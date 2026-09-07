@@ -1,6 +1,6 @@
 /* Permis Score — service worker : l'appli s'ouvre même sans réseau,
    et affiche les dernières données connues. */
-var CACHE = "permis-score-v2";
+var CACHE = "permis-score-v3";
 var SHELL = ["./", "./index.html", "./manifest.json", "./icone-180.png", "./icone-512.png"];
 
 self.addEventListener("install", function (e) {

@@ -47,6 +47,15 @@ header{position:sticky;top:0;z-index:30;background:var(--noir);color:#fff;
 .ico.tourne svg{animation:tr .9s linear infinite}
 @keyframes tr{to{transform:rotate(360deg)}}
 .pousse{margin-left:auto}
+.dateJour{font-size:11.5px;font-weight:700;color:#c9c3bb;letter-spacing:.3px;text-align:right;
+  text-transform:capitalize;line-height:1.25;max-width:120px}
+.contact{display:flex;gap:8px;margin-top:12px}
+.contact a{display:inline-flex;align-items:center;gap:8px;border:1.5px solid var(--ligne);
+  padding:9px 13px;font-size:14px;font-weight:600;color:var(--fonce);text-decoration:none}
+.contact a:active{background:#FFF4EE;border-color:var(--orange)}
+.contact a svg{width:17px;height:17px;fill:none;stroke:var(--fonce);stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.contact .lien-tel{flex:1}
+.contact .lien-sms{flex:none}
 
 /* barre de recherche d'en-tête (écran recherche seulement) */
 .chercher{margin-top:10px;position:relative}
@@ -214,7 +223,10 @@ textarea{min-height:96px;resize:vertical;line-height:1.5}
 .eval-grille button.n2[aria-pressed=true]{background:var(--ambre);border-color:var(--ambre);color:#241200}
 .eval-grille button.n3[aria-pressed=true]{background:var(--vert);border-color:var(--vert)}
 .eval-grille button.n4[aria-pressed=true]{background:var(--noir);border-color:var(--noir)}
-.retirer{display:block;margin:9px auto 0;font-size:12px;color:var(--pale);font-weight:600}
+button.skip{width:100%;margin-top:8px;padding:11px;font-size:13.5px;font-weight:600;color:var(--doux);
+  border:1.5px dashed var(--ligne);background:#fff}
+button.skip[aria-pressed=true]{border-style:solid;border-color:var(--pale);background:#EFEBE5;color:var(--texte)}
+.eval-comp.saute{border-left:4px solid var(--pale);opacity:.9}
 
 .ajout-comp{border:2px dashed var(--ligne);background:transparent;color:var(--fonce);font-weight:700;
   width:100%;padding:14px;font-size:15px;margin-bottom:10px}
@@ -332,7 +344,8 @@ textarea{min-height:96px;resize:vertical;line-height:1.5}
         </button>
         <svg class="logo" id="hdLogo" viewBox="0 0 740 462" role="img" aria-label="Olive Conduite"><use href="#logo-oc"/></svg>
         <div class="titres" id="hdTitre" hidden><div class="ttl" id="hdTtlTxt"></div><div class="sous" id="hdSousTxt"></div></div>
-        <button class="ico pousse" id="btnRecharger" aria-label="Recharger">
+        <div class="dateJour pousse" id="dateJour"></div>
+        <button class="ico" id="btnRecharger" aria-label="Recharger">
           <svg viewBox="0 0 24 24"><path d="M20 11a8 8 0 1 0-2.3 6.3"/><path d="M20 4v7h-7"/></svg>
         </button>
       </div>
@@ -433,6 +446,9 @@ function litDest(prefixe) {
 function eleve(nom){ if(!D) return null; for (var i=0;i<D.eleves.length;i++) if (D.eleves[i].nom===nom) return D.eleves[i]; return null; }
 function score(niv){ var s=0; for(var i=0;i<niv.length;i++) s+=niv[i]; return Math.round(s/36*100); }
 function auj(){ var d=new Date(); return d.getFullYear()+"-"+("0"+(d.getMonth()+1)).slice(-2)+"-"+("0"+d.getDate()).slice(-2); }
+var JOURS=["dimanche","lundi","mardi","mercredi","jeudi","vendredi","samedi"];
+var MOIS=["janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"];
+function dateLisible(){ var d=new Date(); return JOURS[d.getDay()]+" "+d.getDate()+" "+MOIS[d.getMonth()]; }
 function pastilleClasse(e){ if(e.pret) return "v"; if(e.score!=null && e.score>=60) return "o"; return "r"; }
 
 /* ---------------------------------------------------------- appels serveur */
@@ -502,10 +518,10 @@ function majBarres(){
   });
 }
 
-function afficher(id){
+function afficher(id, garderScroll){
   ["vAccueil","vListe","vFiche","vLecon","vFin","vPartage","vSuivi","vEleve","vChoixEval","vPlus"]
     .forEach(function(v){ $(v).classList.toggle("on", v === id); });
-  window.scrollTo(0,0);
+  if (!garderScroll) window.scrollTo(0,0);
   /* en-tête mobile : recherche visible seulement sur la liste d'élèves */
   $("zoneRecherche").hidden = (id !== "vListe");
   /* bouton retour mobile : visible dès qu'on est en profondeur */
@@ -516,6 +532,7 @@ function afficher(id){
   var afficheTitre = !!infos.t && profond;
   $("hdLogo").hidden = afficheTitre;
   $("hdTitre").hidden = !afficheTitre;
+  $("dateJour").hidden = afficheTitre;
   if (afficheTitre){ $("hdTtlTxt").textContent = infos.t; $("hdSousTxt").textContent = infos.s || ""; }
 }
 
@@ -596,7 +613,6 @@ function rendreAccueil(){
     }).slice(0,4);
 
   var h = '<div class="wrap">';
-  h += '<div class="jour">Aujourd\'hui</div>';
   h += '<div class="bonjour">Bonjour ' + ech(D.moniteur || "") + ' 👋</div>';
   h += '<div class="info" style="margin-top:0">' + actifs.length + ' élève'
      + (actifs.length>1?"s":"") + ' en formation</div>';
@@ -706,6 +722,16 @@ function rendreFiche(){
      + 'style="flex:none;width:38px;height:38px;border:1.5px solid var(--ligne);display:grid;place-items:center">'
      + '<svg viewBox="0 0 24 24" style="width:19px;height:19px;fill:none;stroke:var(--fonce);stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="M4 20h4l10-10-4-4L4 16v4z"/><path d="M13.5 6.5l4 4"/></svg>'
      + '</button></div>';
+  if (e.tel){
+    var telBrut = String(e.tel).replace(/[^0-9+]/g,"");
+    h += '<div class="contact">'
+       + '<a class="lien-tel" href="tel:' + ech(telBrut) + '">'
+       + '<svg viewBox="0 0 24 24"><path d="M6 3h3l1.5 5-2 1.5a11 11 0 0 0 5 5l1.5-2 5 1.5v3a2 2 0 0 1-2 2A16 16 0 0 1 4 5a2 2 0 0 1 2-2z"/></svg>'
+       + ech(e.tel) + '</a>'
+       + '<a class="lien-sms" href="sms:' + ech(telBrut) + '" aria-label="SMS">'
+       + '<svg viewBox="0 0 24 24"><path d="M4 5h16v11H8l-4 3z"/></svg></a>'
+       + '</div>';
+  }
 
   if (e.score !== null){
     h += '<div class="grand' + (e.pret?" ok":"") + '" style="margin-top:14px">' + e.score + '<em> / 100</em></div>'
@@ -917,20 +943,16 @@ function rendreChoixEval(){
    ÉVALUATION D'UNE SÉANCE — évaluation rapide, gros boutons pouce
    Compatible back-end : on envoie toujours 9 valeurs (null = non abordé).
    ==================================================================== */
-var saisie = { duree: 1, notes: [null,null,null,null,null,null,null,null,null], visibles: [] };
+/* notes[k] : entier 1..4 = niveau attribué ce jour ; "skip" = non évalué ce jour
+   (choix explicite) ; null = pas encore touché. "skip" et null gardent le
+   niveau précédent côté serveur (envoyés comme chaîne vide). */
+var saisie = { duree: 1, notes: [null,null,null,null,null,null,null,null,null] };
 var scoreAvant = null;
 
 function formLecon(){
   var e = eleve(courant); if (!e) return;
   scoreAvant = e.score;
-  saisie = { duree: 1, notes: [null,null,null,null,null,null,null,null,null], visibles: [] };
-
-  /* pré-sélection : les 3 priorités de l'élève, sinon les 3 premières compétences */
-  var pre = (e.priorites && e.priorites.length)
-    ? e.priorites.map(function(p){ return COMP.indexOf(p.nom); }).filter(function(i){return i>=0;})
-    : [0,1,2];
-  saisie.visibles = pre.slice(0,3);
-
+  saisie = { duree: 1, notes: [null,null,null,null,null,null,null,null,null] };
   rendreFormLecon(e);
   pousser("vLecon", function(){ rendreFormLecon(eleve(courant)); });
 }
@@ -953,14 +975,13 @@ function rendreFormLecon(e){
     + '<div class="aide">Facultatif. Ce commentaire figure dans l\'e-mail, sous « Le mot d\'Olivier ».</div>'
     + '</div>';
 
-  h += '<div class="section-tt" style="margin-top:18px">Compétences travaillées</div>'
-     + '<div class="info" style="margin:-4px 2px 12px">Évaluez seulement ce que vous avez vu aujourd\'hui. '
-     + 'Le reste garde son niveau précédent.</div>';
+  h += '<div class="section-tt" style="margin-top:18px">Compétences</div>'
+     + '<div class="info" style="margin:-4px 2px 12px">Notez ce que vous avez vu aujourd\'hui. '
+     + 'Une compétence laissée telle quelle garde son niveau précédent.</div>';
 
-  h += '<div id="listeEval">' + saisie.visibles.map(function(k){ return blocEval(e,k); }).join("") + '</div>';
-
-  h += '<button class="ajout-comp" id="btnAjout" onclick="basculerAjout()">＋ Ajouter une compétence</button>';
-  h += '<div id="zoneAjout" hidden></div>';
+  h += '<div id="listeEval">'
+     + COMP.map(function(c,k){ return blocEval(e,k); }).join("")
+     + '</div>';
 
   h += '<div class="bloc"><div class="tt">ENVOYER LE SCORE APRÈS ENREGISTREMENT</div>'
     + '<div class="aide" style="margin:-6px 0 10px">Cochez qui doit recevoir le score. '
@@ -989,13 +1010,14 @@ function themeSuggere(e){
 function blocEval(e,k){
   var actuel = e.niveaux[k];
   var val = saisie.notes[k];
+  var rempli = (val!=null && val!=="skip");
   var boutons = [
     {n:1, em:"❌", l:"À revoir"},
     {n:2, em:"🟠", l:"À améliorer"},
     {n:3, em:"🟢", l:"Acquis"},
     {n:4, em:"⭐", l:"Maîtrisé"}
   ];
-  return '<div class="eval-comp' + (val!=null?" rempli":"") + '" data-k="'+k+'">'
+  return '<div class="eval-comp' + (rempli?" rempli":"") + (val==="skip"?" saute":"") + '" data-k="'+k+'">'
     + '<div class="cn">' + ech(COMP[k]) + '</div>'
     + '<div class="ca">Niveau actuel : ' + actuel + '/4 · ' + (MOTS[actuel]||"") + '</div>'
     + '<div class="eval-grille">'
@@ -1004,59 +1026,45 @@ function blocEval(e,k){
              + '<span class="em">'+b.em+'</span>'+b.l+'</button>';
       }).join("")
     + '</div>'
-    + '<button class="retirer" onclick="retirerComp('+k+')">Retirer cette compétence</button>'
+    + '<button class="skip" data-n="skip" aria-pressed="'+(val==="skip")+'">Non évalué ce jour</button>'
     + '</div>';
+}
+
+/* mise à jour IN-PLACE : on ne remplace jamais le noeud ni la liste,
+   on ne fait que basculer les attributs. Aucun scroll déclenché. */
+function majBlocEval(bloc, k){
+  var val = saisie.notes[k];
+  var rempli = (val!=null && val!=="skip");
+  bloc.classList.toggle("rempli", rempli);
+  bloc.classList.toggle("saute", val==="skip");
+  bloc.querySelectorAll(".eval-grille button").forEach(function(x){
+    x.setAttribute("aria-pressed", (saisie.notes[k] === parseInt(x.dataset.n,10)) ? "true":"false");
+  });
+  var s = bloc.querySelector("button.skip");
+  if (s) s.setAttribute("aria-pressed", (val==="skip") ? "true":"false");
 }
 
 function brancherEval(){
   $("listeEval").querySelectorAll(".eval-comp").forEach(function(bloc){
     var k = parseInt(bloc.dataset.k,10);
-    bloc.querySelector(".eval-grille").addEventListener("click", function(ev){
+    bloc.addEventListener("click", function(ev){
       var b = ev.target.closest("button"); if(!b) return;
-      var n = parseInt(b.dataset.n,10);
-      /* toggle : re-clic sur le même niveau annule */
-      if (saisie.notes[k] === n){ saisie.notes[k] = null; }
-      else { saisie.notes[k] = n; }
-      /* re-rendu du bloc */
-      var e = eleve(courant);
-      var neuf = document.createElement("div");
-      neuf.innerHTML = blocEval(e,k);
-      bloc.replaceWith(neuf.firstChild);
-      brancherEval();
+      if (b.dataset.n === "skip"){
+        saisie.notes[k] = (saisie.notes[k] === "skip") ? null : "skip";
+      } else if (b.dataset.n){
+        var n = parseInt(b.dataset.n,10);
+        saisie.notes[k] = (saisie.notes[k] === n) ? null : n;  /* re-clic annule */
+      } else return;
+      majBlocEval(bloc, k);   /* in-place, pas de re-render */
     });
   });
-}
-
-function retirerComp(k){
-  saisie.notes[k] = null;
-  saisie.visibles = saisie.visibles.filter(function(i){ return i!==k; });
-  $("listeEval").innerHTML = saisie.visibles.map(function(i){ return blocEval(eleve(courant),i); }).join("");
-  brancherEval();
-}
-
-function basculerAjout(){
-  var z = $("zoneAjout");
-  if (!z.hidden){ z.hidden = true; z.innerHTML=""; return; }
-  var reste = [];
-  for (var k=0;k<COMP.length;k++) if (saisie.visibles.indexOf(k)<0) reste.push(k);
-  if (!reste.length){ flash("Toutes les compétences sont déjà affichées.", true); return; }
-  z.innerHTML = '<div class="choix-comp">'
-    + reste.map(function(k){ return '<button onclick="ajouterComp('+k+')">'+ech(COMP[k])+'</button>'; }).join("")
-    + '</div>';
-  z.hidden = false;
-}
-function ajouterComp(k){
-  if (saisie.visibles.indexOf(k)<0) saisie.visibles.push(k);
-  $("zoneAjout").hidden = true; $("zoneAjout").innerHTML="";
-  $("listeEval").innerHTML = saisie.visibles.map(function(i){ return blocEval(eleve(courant),i); }).join("");
-  brancherEval();
 }
 
 function enregistrerLecon(){
   var theme = $("lTheme").value.trim();
   if (!theme) { flash("Indiquez le thème travaillé.", false); $("lTheme").focus(); return; }
-  var aEvalue = saisie.notes.some(function(n){ return n!=null; });
-  if (!aEvalue && !confirm("Aucune compétence évaluée. Enregistrer quand même la séance ?")) return;
+  var aEvalue = saisie.notes.some(function(n){ return n!=null && n!=="skip"; });
+  if (!aEvalue && !confirm("Aucune compétence notée. Enregistrer quand même la séance ?")) return;
   var dst = litDest("l");
   attente(true, "Enregistrement de la séance…");
   appel({
@@ -1066,13 +1074,13 @@ function enregistrerLecon(){
     duree : saisie.duree,
     theme : theme,
     comm  : $("lComm").value.trim(),
-    notes : saisie.notes.map(function(n){ return n === null ? "" : n; }).join(","),
+    /* "skip" et null -> chaîne vide : le serveur conserve le niveau précédent */
+    notes : saisie.notes.map(function(n){ return (n === null || n === "skip") ? "" : n; }).join(","),
     mail  : (dst.dEleve || dst.dParent) ? 1 : 0,
     dEleve: dst.dEleve,
     dParent: dst.dParent
   }, function (r) {
     if (apres(r)) {
-      /* on remplace la vue leçon par l'écran de fin dans la pile */
       pile.pop();
       ouvrirFin();
     }
@@ -1183,18 +1191,33 @@ function rendrePartage(){
   $("vPartage").innerHTML = h;
 }
 
+function jaugeTexte(n){
+  var pleins = "▰▰▰▰".slice(0,n);
+  var vides = "▱▱▱▱".slice(0, 4-n);
+  return pleins + vides;
+}
 function texteBilan(){
   var e = eleve(courant);
   var noms3 = (e.priorites||[]).map(function(p){ return p.nom; });
   var forts = [];
   e.niveaux.forEach(function(n,k){ if (n>=4 && noms3.indexOf(COMP[k])<0) forts.push(COMP[k]); });
   var prio = (e.priorites && e.priorites[0]) ? e.priorites[0].nom : null;
-  var t = "🚗 PERMIS SCORE — Olive Conduite\n"
+
+  var t = "🚗 *PERMIS SCORE — Olive Conduite*\n"
         + e.nom + " · " + e.formation + "\n"
         + "Séance du " + (e.derniere?e.derniere.date:auj()) + "\n\n"
-        + "Progression : " + e.score + "/100 (objectif " + D.objectif + ")\n";
-  if (forts.length) t += "\n✓ Points forts : " + forts.slice(0,3).join(", ") + "\n";
-  if (prio) t += "🎯 À travailler : " + prio + "\n";
+        + "*Progression : " + e.score + "/100*  (objectif " + D.objectif + ")\n"
+        + jaugeTexte(Math.round(e.score/25)) + "\n\n";
+
+  /* tableau des compétences, une ligne par compétence */
+  t += "*Compétences*\n";
+  COMP.forEach(function(c,k){
+    var n = e.niveaux[k];
+    t += jaugeTexte(n) + " " + c + " (" + n + "/4)\n";
+  });
+
+  if (forts.length) t += "\n✓ *Points forts* : " + forts.slice(0,3).join(", ") + "\n";
+  if (prio) t += "🎯 *À travailler* : " + prio + "\n";
   t += "\nÀ bientôt sur la route !";
   return t;
 }
@@ -1297,6 +1320,7 @@ function formEleve(nom) {
   h += '<button class="retour" onclick="revenir()">&larr; Retour</button>';
   h += '<div class="bloc"><div class="tt">' + (nouveau ? "NOUVEL ÉLÈVE" : "MODIFIER LA FICHE") + '</div>'
     + '<label>Prénom et nom</label><input type="text" id="eNom" value="' + ech(e.nom) + '" placeholder="Lola G.">'
+    + '<label>Téléphone</label><input type="tel" id="eTel" value="' + ech(e.tel || "") + '" placeholder="06 12 34 56 78" inputmode="tel">'
     + '<label>Adresse e-mail</label><input type="email" id="eMail" value="' + ech(e.email) + '" placeholder="prenom@exemple.fr">'
     + '<label>E-mail du parent ou du tuteur</label>'
     + '<input type="email" id="eMail2" value="' + ech(e.email2 || "") + '" placeholder="facultatif">'
@@ -1343,12 +1367,12 @@ function sauverEleve(modif) {
   attente(true, "Enregistrement…");
   if (modif) {
     var e = eleve(courant);
-    appel({ api:"eleveUpd", ancien: courant, nom: nom,
+    appel({ api:"eleveUpd", ancien: courant, nom: nom, tel: $("eTel").value.trim(),
             email: $("eMail").value.trim(), email2: $("eMail2").value.trim(),
             formation: formationChoisie(), actif: e.actif ? 1 : 0 },
       function (r) { if (apres(r)) { courant = nom; pile.pop(); ouvrirFiche(nom); } });
   } else {
-    appel({ api:"eleveAdd", nom: nom, email: $("eMail").value.trim(),
+    appel({ api:"eleveAdd", nom: nom, tel: $("eTel").value.trim(), email: $("eMail").value.trim(),
             email2: $("eMail2").value.trim(), formation: formationChoisie() },
       function (r) { if (apres(r)) { courant = nom; pile.pop(); ouvrirFiche(nom); } });
   }
@@ -1441,6 +1465,7 @@ function jeuDemo() {
    AMORÇAGE
    ==================================================================== */
 if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(function(){});
+$("dateJour").textContent = dateLisible();
 majBarres();
 charger();
 </script>
