@@ -27,20 +27,20 @@ button{background:none;border:none;cursor:pointer}
 [hidden]{display:none !important}
 
 header{position:sticky;top:0;z-index:30;background:var(--noir);color:#fff;
-  padding:calc(11px + var(--haut)) 16px 11px}
-.hd{display:flex;align-items:center;gap:12px}
+  padding:calc(8px + var(--haut)) 14px 9px}
+.hd{display:flex;align-items:center;gap:10px}
 .marque{font-size:18px;font-weight:800;letter-spacing:.5px;line-height:1}
 .marque span{color:var(--orange)}
-.sous{font-size:11px;color:#a9a39b;margin-top:3px}
-.ico{margin-left:auto;width:36px;height:36px;border:1px solid #33302c;display:grid;place-items:center;flex:none}
-.ico svg{width:18px;height:18px;fill:none;stroke:#fff;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.sous{font-size:10.5px;color:#a9a39b;margin-top:2px}
+.ico{margin-left:auto;width:32px;height:32px;border:1px solid #33302c;display:grid;place-items:center;flex:none}
+.ico svg{width:16px;height:16px;fill:none;stroke:#fff;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
 .ico.tourne svg{animation:tr .9s linear infinite}
 @keyframes tr{to{transform:rotate(360deg)}}
-.chercher{margin-top:11px;position:relative}
+.chercher{margin-top:9px;position:relative}
 .chercher input{width:100%;background:#1a1815;border:1px solid #33302c;color:#fff;
-  padding:10px 12px 10px 36px;font-size:16px}
+  padding:8px 12px 8px 34px;font-size:16px}
 .chercher input::placeholder{color:#7d7770}
-.chercher svg{position:absolute;left:11px;top:11px;width:16px;height:16px;fill:none;stroke:#7d7770;stroke-width:2}
+.chercher svg{position:absolute;left:11px;top:10px;width:16px;height:16px;fill:none;stroke:#7d7770;stroke-width:2}
 
 main{padding:13px 13px calc(30px + var(--bas))}
 .vue{display:none}
@@ -382,13 +382,14 @@ function ouvrir(nom) {
   h += '<button class="btn" onclick="formLecon()">+ Nouvelle leçon</button>';
   if (e.score !== null && (e.email || e.email2)) {
     h += '<div class="bloc"><div class="tt">ENVOYER PAR E-MAIL</div>'
+      + '<div class="aide" style="margin:-6px 0 10px">Choisissez le ou les destinataires, '
+      + 'puis ce que vous voulez leur envoyer.</div>'
       + blocDest(e, "f")
       + '<button class="btn vide" style="margin-top:6px" onclick="renvoyer()">Le dernier score</button>'
       + '<button class="btn vide" onclick="envoyerBilan()">Le bilan complet</button>'
       + '<div class="aide">Le bilan reprend toutes les leçons, les dates, les durées, '
       + 'les commentaires et la progression.</div></div>';
   }
-  h += '<button class="btn vide" onclick="formEleve(courant)">Modifier le nom, l\'e-mail, la formation</button>';
 
   if (e.score !== null) {
     h += '<div class="bloc"><div class="tt">À TRAVAILLER EN PRIORITÉ</div>'
@@ -408,9 +409,12 @@ function ouvrir(nom) {
       + '</div>';
 
     h += '<div class="bloc"><div class="tt">PROGRESSION</div>' + courbeSvg(e.courbe)
-       + '<div class="suite">' + e.courbe.join(" › ") + '</div></div>';
+       + '<div class="suite">' + e.courbe.join(" › ") + '</div>'
+       + '<div class="aide">De la première leçon, à gauche, à la plus récente, à droite.</div></div>';
 
     h += '<div class="bloc"><div class="tt">HISTORIQUE DES LEÇONS</div>'
+      + '<div class="aide" style="margin:-6px 0 10px">De la plus récente à la plus ancienne. '
+      + 'Le nombre à gauche est le score atteint après cette leçon.</div>'
       + e.historique.map(function(l){
           return '<div class="histo"><div class="sc">' + l.score + '</div><div>'
                + '<div class="d">' + ech(l.date) + ' · ' + l.duree + ' h</div>'
@@ -475,6 +479,8 @@ function formLecon() {
     + '</div>'
 
     + '<div class="bloc"><div class="tt">ENVOYER LE SCORE APRÈS ENREGISTREMENT</div>'
+    + '<div class="aide" style="margin:-6px 0 10px">Cochez qui doit recevoir le score. '
+    + 'Décochez tout pour n\'envoyer aucun e-mail.</div>'
     + blocDest(e, "l") + '</div>'
 
     + '<button class="btn" onclick="enregistrerLecon()">Enregistrer la leçon</button>'
