@@ -544,6 +544,33 @@ footer a{color:#c9c3bb}
   .mobile-cta .btn{font-size:1.02rem;padding:12px 3px 9px}
   @media(max-width:360px){.mobile-cta .btn{font-size:.82rem}}
 }
+
+/* ---------- comparatif compact Olive vs plateforme ---------- */
+.vs{margin-top:34px}
+.vs h3{font-size:1.9rem;margin-bottom:6px}
+.vs-table{width:100%;border-collapse:collapse;margin-top:20px;font-size:1rem;background:#fff;border:1px solid var(--line)}
+.vs-table th,.vs-table td{padding:14px 16px;text-align:left;border-bottom:1px solid var(--line);vertical-align:middle}
+.vs-table thead th{font-family:"Big Shoulders Display",sans-serif;font-weight:800;font-size:1.4rem;border-bottom:3px solid var(--orange);color:var(--black)}
+.vs-table thead th:first-child{color:#7d7770;font-family:"Barlow",sans-serif;font-size:.82rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase}
+.vs-table thead th.oc{color:var(--orange-deep)}
+.vs-table td:first-child{color:#7d7770;font-weight:500;width:34%}
+.vs-table td.oc{font-weight:600;color:var(--black)}
+.vs-table td.pf{color:#8c867f}
+.vs-table tbody tr:last-child td{border-bottom:none}
+.vs-table tbody tr:hover td{background:var(--paper-2)}
+@media(max-width:560px){
+  .vs-table td:first-child{width:40%;font-size:.92rem}
+  .vs-table th,.vs-table td{padding:12px 12px}
+  .vs-table thead th{font-size:1.15rem}
+}
+.vs-detail{margin-top:14px}
+.vs-detail summary{cursor:pointer;font-weight:600;color:var(--orange-deep);padding:8px 0;list-style:none}
+.vs-detail summary::-webkit-details-marker{display:none}
+.vs-detail summary::before{content:"+ ";font-weight:700}
+.vs-detail[open] summary::before{content:"– "}
+.vs-detail .vs-more{margin-top:10px}
+.vs-detail .vs-more p{font-size:.95rem;color:var(--ink-soft);margin:10px 0}
+.vs-detail .vs-more p b{color:var(--black);font-weight:600}
 </style>
 <script type="application/ld+json">
 {
@@ -711,9 +738,10 @@ footer a{color:#c9c3bb}
     </a>
     <button class="burger" id="burger" aria-expanded="false" aria-controls="menu">Menu</button>
     <ul id="menu">
+      <li><a href="#score">Permis Score</a></li>
       <li><a href="#formations">Formations</a></li>
       <li><a href="#budget">Tarifs</a></li>
-      <li><a href="#score">Pourquoi Olive ?</a></li>
+      <li><a href="#olivier">Pourquoi Olive ?</a></li>
       <li><a href="#avis">Avis</a></li>
       <li><a href="#demarrer" class="nav-start">Démarrer mon permis</a></li>
     </ul>
@@ -872,10 +900,11 @@ footer a{color:#c9c3bb}
           <li><b>Envoyez vos pièces depuis votre téléphone</b><span>Photographiez vos documents et transmettez-les par e-mail. On s'occupe du NEPH et du dépôt sur l'ANTS. Aucun aller-retour en préfecture.</span></li>
           <li><b>Réservez vos leçons quand vous voulez</b><span>Le planning d'Olivier est en ligne. Vous prenez, vous décalez, vous annulez jusqu'à 48 h avant, sans appeler.</span></li>
           <li><b>Payez en ligne, en trois fois</b><span>Acompte, échéance ou heure supplémentaire, par carte. Reçu par e-mail dans la seconde.</span></li>
-          <li><b>Suivez votre Permis Score en direct</b><span>Votre note, vos neuf compétences et votre courbe, mises à jour dès la fin de la leçon.</span></li>
-          <li><b>Révisez le code où vous voulez</b><span>Séries Ediser illimitées sur mobile, statistiques par thème, tests blancs corrigés.</span></li>
-          <li><b>Recevez vos convocations par e-mail</b><span>Date, lieu, heure de rendez-vous et pièces à apporter. Rappel automatique la veille.</span></li>
+          <li class="online-more" hidden><b>Suivez votre Permis Score en direct</b><span>Votre note, vos neuf compétences et votre courbe, mises à jour dès la fin de la leçon.</span></li>
+          <li class="online-more" hidden><b>Révisez le code où vous voulez</b><span>Séries Ediser illimitées sur mobile, statistiques par thème, tests blancs corrigés.</span></li>
+          <li class="online-more" hidden><b>Recevez vos convocations par e-mail</b><span>Date, lieu, heure de rendez-vous et pièces à apporter. Rappel automatique la veille.</span></li>
         </ul>
+        <p style="margin-top:6px"><button class="btn ghost" id="onlineToggle" type="button" aria-expanded="false">Voir tout ce qu'on fait en ligne</button></p>
 
         <div class="online-foot">
           <b>Et si vous préférez le contact</b>
@@ -1186,23 +1215,6 @@ footer a{color:#c9c3bb}
         <div><h4>Suivi</h4><p>Neuf compétences notées après chaque leçon, par le même moniteur, avec une courbe que vous gardez.</p></div>
       </div>
     </div>
-
-    <h3 style="font-size:2.1rem;margin-top:52px">Face à une plateforme en ligne</h3>
-    <p class="lede">Les plateformes en ligne affichent des tarifs plus bas, et nous ne prétendrons pas le contraire. Voilà ce que vous avez chez nous et pas ailleurs. À vous de juger.</p>
-
-    <table class="compare">
-      <thead>
-        <tr><th scope="col"><span class="sr">Critère</span></th><th scope="col">Chez Olive Conduite</th><th scope="col">Sur une plateforme en ligne</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Votre moniteur</td><td>Olivier, du premier cours au jour de l'examen. Il connaît vos réflexes et vos points faibles.</td><td>Un enseignant indépendant différent à chaque créneau disponible.</td></tr>
-        <tr><td>Le passage de l'examen</td><td>Nos places, nos dates, notre voiture. Vous passez sur les routes où vous vous êtes entraîné.</td><td>Dépend des places attribuées à la plateforme dans le département.</td></tr>
-        <tr><td>Quand ça coince</td><td>Vous poussez la porte du bureau, ou vous appelez et quelqu'un décroche.</td><td>Un formulaire, un numéro de ticket, un délai de réponse.</td></tr>
-        <tr><td>Les parents</td><td>Reçus avec l'élève, informés de la progression réelle, pas d'une barre de pourcentage.</td><td>Un compte pour payer, un tableau de bord pour suivre.</td></tr>
-        <tr><td>La voiture sans permis</td><td>Formation permis AM sur nos voiturettes à double commande, en circulation.</td><td>Non proposé.</td></tr>
-        <tr><td>Le terrain</td><td>Coquelles, Calais, Marck, Guînes. Les giratoires du Calaisis, la rocade, le tunnel, le port.</td><td>Là où un enseignant est disponible ce jour-là.</td></tr>
-      </tbody>
-    </table>
   </div>
 </section>
 
@@ -1217,11 +1229,46 @@ footer a{color:#c9c3bb}
       <p class="eyebrow">Votre moniteur</p>
       <h2>Vingt-cinq ans<br>dans le siège de droite</h2>
       <p class="lede">Olivier forme des conducteurs depuis 2001. Moniteur à Marck, puis à l'auto-école de Coquelles, il a accompagné plusieurs centaines d'élèves du Calaisis jusqu'à leur permis. Aujourd'hui il en reprend la gérance, avenue Charles de Gaulle, et donne son nom à l'établissement.</p>
-      <p style="margin-top:16px;color:var(--ink-soft)">Vingt-cinq ans de métier, ça veut dire qu'il a déjà vu votre blocage. Le regard qui reste collé au capot, le pied qui tremble au démarrage en côte, la panique au premier rond-point de la rocade. Rien de ce que vous ferez ne le surprendra, et rien ne l'agacera.</p>
-      <p style="margin-top:16px;color:var(--ink-soft)">C'est aussi pour ça qu'il n'y a qu'un seul moniteur ici. Nous prenons moins d'élèves, mais chacun garde le même interlocuteur du premier démarrage jusqu'au jour de l'examen. Personne ne vous fera recommencer une manœuvre que vous maîtrisez déjà parce qu'il ne vous connaît pas.</p>
       <p class="quotes">« Mon travail, ce n'est pas de vous faire réussir un examen. C'est de faire en sorte que vous rouliez seul, en sécurité, dans dix ans. »</p>
+      <details class="vs-detail" style="margin-top:20px">
+        <summary>En savoir plus sur Olivier</summary>
+        <div class="vs-more">
+          <p style="color:var(--ink-soft)">Vingt-cinq ans de métier, ça veut dire qu'il a déjà vu votre blocage. Le regard qui reste collé au capot, le pied qui tremble au démarrage en côte, la panique au premier rond-point de la rocade. Rien de ce que vous ferez ne le surprendra, et rien ne l'agacera.</p>
+          <p style="color:var(--ink-soft)">C'est aussi pour ça qu'il n'y a qu'un seul moniteur ici. Nous prenons moins d'élèves, mais chacun garde le même interlocuteur du premier démarrage jusqu'au jour de l'examen. Personne ne vous fera recommencer une manœuvre que vous maîtrisez déjà parce qu'il ne vous connaît pas.</p>
+        </div>
+      </details>
       <p style="margin-top:26px"><a class="btn dark-btn" href="#rdv">Rencontrer Olivier</a></p>
     </div>
+  </div>
+
+  <div class="wrap vs">
+    <h3>Pourquoi certains choisissent Olive plutôt qu'une plateforme ?</h3>
+    <p class="lede">Les plateformes en ligne affichent des tarifs plus bas, et nous ne prétendrons pas le contraire. Voilà, en un coup d'œil, ce qui change quand c'est Olivier qui vous forme.</p>
+    <table class="vs-table">
+      <thead>
+        <tr><th scope="col">Critère</th><th scope="col" class="oc">Olive Conduite</th><th scope="col">Plateforme en ligne</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Moniteur</td><td class="oc">Toujours Olivier</td><td class="pf">Variable</td></tr>
+        <tr><td>Suivi</td><td class="oc">9 compétences notées</td><td class="pf">Variable</td></tr>
+        <tr><td>Bureau</td><td class="oc">Oui, ouvert 6 j/7</td><td class="pf">En ligne</td></tr>
+        <tr><td>Examen</td><td class="oc">Nos places, nos routes</td><td class="pf">Variable</td></tr>
+        <tr><td>Voiture sans permis</td><td class="oc">Oui, permis AM</td><td class="pf">Non</td></tr>
+        <tr><td>Relation</td><td class="oc">Directe</td><td class="pf">Support / ticket</td></tr>
+      </tbody>
+    </table>
+
+    <details class="vs-detail">
+      <summary>Le détail, point par point</summary>
+      <div class="vs-more">
+        <p><b>Votre moniteur.</b> Olivier, du premier cours au jour de l'examen. Il connaît vos réflexes et vos points faibles. Sur une plateforme, un enseignant indépendant différent à chaque créneau disponible.</p>
+        <p><b>Le passage de l'examen.</b> Nos places, nos dates, notre voiture. Vous passez sur les routes où vous vous êtes entraîné. Ailleurs, cela dépend des places attribuées à la plateforme dans le département.</p>
+        <p><b>Quand ça coince.</b> Vous poussez la porte du bureau, ou vous appelez et quelqu'un décroche. Ailleurs, un formulaire, un numéro de ticket, un délai de réponse.</p>
+        <p><b>Les parents.</b> Reçus avec l'élève, informés de la progression réelle, pas d'une barre de pourcentage. Ailleurs, un compte pour payer, un tableau de bord pour suivre.</p>
+        <p><b>La voiture sans permis.</b> Formation permis AM sur nos voiturettes à double commande, en circulation. Non proposé sur les plateformes.</p>
+        <p><b>Le terrain.</b> Coquelles, Calais, Marck, Guînes. Les giratoires du Calaisis, la rocade, le tunnel, le port. Ailleurs, là où un enseignant est disponible ce jour-là.</p>
+      </div>
+    </details>
   </div>
 </section>
 
@@ -1264,22 +1311,23 @@ footer a{color:#c9c3bb}
         <p class="stars" aria-hidden="true">★★★★★</p>
         <p>Un moniteur vraiment pédagogue et patient. Il explique la logique au lieu de faire répéter bêtement, et il ne s'énerve jamais. Grâce à ses conseils j'ai progressé beaucoup plus vite que prévu.</p>
       </article>
-      <article>
+      <article class="avis-more" hidden>
         <div class="who"><span class="ini" aria-hidden="true">AC</span><span>Alicia C.<small>octobre 2024</small></span></div>
         <p class="stars" aria-hidden="true">★★★★★</p>
         <p>Olivier encourage ses élèves et il a une patience immense. Pas déçue du tout, c'était un vrai plaisir d'apprendre à conduire avec lui. Je le recommande à tout le monde autour de moi.</p>
       </article>
-      <article>
+      <article class="avis-more" hidden>
         <div class="who"><span class="ini" aria-hidden="true">CD</span><span>Camille D.<small>octobre 2024</small></span></div>
         <p class="stars" aria-hidden="true">★★★★★</p>
         <p>Je recommande mille fois. Olivier a été présent du début à la fin, et il a toujours cru en moi, y compris les jours où moi je n'y croyais plus du tout. C'est ça qui fait la différence.</p>
       </article>
-      <article>
+      <article class="avis-more" hidden>
         <div class="who"><span class="ini" aria-hidden="true">CA</span><span>Caroline B.<small>octobre 2024</small></span></div>
         <p class="stars" aria-hidden="true">★★★★★</p>
         <p>Un grand merci à Olivier. Un moniteur au top, qui prend le temps d'enseigner et qui ne m'a jamais lâchée jusqu'à l'obtention de mon permis. Rien à voir avec ce qu'on m'avait raconté.</p>
       </article>
     </div>
+    <p style="margin-top:22px"><button class="btn ghost" id="avisToggle" type="button" aria-expanded="false">Voir plus d'avis</button></p>
     <p class="note">Avis déposés sur la fiche Google de l'établissement, avant sa reprise par Olivier. Textes reformulés pour la maquette, à remplacer par les avis d'origine ou par un widget relié à la fiche Google.</p>
   </div>
 </section>
@@ -2315,6 +2363,28 @@ footer a{color:#c9c3bb}
       var note = document.getElementById('piNote');
       note.textContent = 'Récapitulatif prêt. Branchez Formspree, votre e-mail ou votre outil de gestion pour recevoir la demande. En attendant, aucune donnée n\'a été transmise.';
       piShow(5);
+    });
+  }
+
+  /* --- voir plus (avantages en ligne) --- */
+  var onlineToggle = document.getElementById('onlineToggle');
+  if(onlineToggle){
+    onlineToggle.addEventListener('click', function(){
+      var open = this.getAttribute('aria-expanded') === 'true';
+      document.querySelectorAll('.online-more').forEach(function(a){ a.hidden = open; });
+      this.setAttribute('aria-expanded', open ? 'false' : 'true');
+      this.textContent = open ? 'Voir tout ce qu\'on fait en ligne' : 'Réduire';
+    });
+  }
+
+  /* --- voir plus d'avis --- */
+  var avisToggle = document.getElementById('avisToggle');
+  if(avisToggle){
+    avisToggle.addEventListener('click', function(){
+      var open = this.getAttribute('aria-expanded') === 'true';
+      document.querySelectorAll('.avis-more').forEach(function(a){ a.hidden = open; });
+      this.setAttribute('aria-expanded', open ? 'false' : 'true');
+      this.textContent = open ? 'Voir plus d\'avis' : 'Voir moins d\'avis';
     });
   }
 
