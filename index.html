@@ -279,17 +279,6 @@ input[type=range]{width:100%;accent-color:var(--orange);height:26px}
 /* ---------- rendez-vous ---------- */
 .rdv{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
 @media(max-width:900px){.rdv{grid-template-columns:1fr;gap:30px}}
-.days{display:flex;gap:8px;overflow-x:auto;padding-bottom:8px;margin-top:20px}
-.day{flex:none;background:#fff;border:1px solid var(--line);padding:11px 15px;cursor:pointer;text-align:center;font:500 .85rem "Barlow";color:var(--ink)}
-.day b{display:block;font-family:"Big Shoulders Display",sans-serif;font-size:1.85rem;font-weight:800;line-height:1}
-.day[aria-pressed="true"]{border-color:var(--orange);background:#FFF4EE;color:var(--orange-deep)}
-.slots{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
-.slot{flex:0 0 auto;background:#fff;border:1px solid var(--line);color:var(--ink);padding:10px 17px;font:500 .94rem "Barlow";cursor:pointer;font-variant-numeric:tabular-nums}
-.slot:hover:not([disabled]){border-color:var(--orange)}
-.slot[aria-pressed="true"]{background:var(--orange);color:#140800;border-color:var(--orange)}
-.slot[disabled]{opacity:.4;cursor:not-allowed;text-decoration:line-through}
-.recap{background:#FFF4EE;border-left:5px solid var(--orange);padding:20px;margin-top:24px}
-.recap b{font-family:"Big Shoulders Display",sans-serif;font-size:1.65rem;font-weight:700;display:block;margin-bottom:4px}
 
 /* ---------- faq / form ---------- */
 details{border-bottom:1px solid var(--line);padding:20px 0}
@@ -621,11 +610,11 @@ footer a{color:#c9c3bb}
         "@type": "OfferCatalog",
         "name": "Formations",
         "itemListElement": [
-          {"@type":"Offer","priceCurrency":"EUR","price":"1245","itemOffered":{"@type":"Service","name":"Permis B, Pack Classic, boîte manuelle, 20 heures"}},
+          {"@type":"Offer","priceCurrency":"EUR","price":"1345","itemOffered":{"@type":"Service","name":"Permis B, Pack Classic, boîte manuelle, 20 heures"}},
           {"@type":"Offer","priceCurrency":"EUR","price":"995","itemOffered":{"@type":"Service","name":"Permis B, Pack Classic, boîte automatique, 13 heures"}},
-          {"@type":"Offer","priceCurrency":"EUR","price":"1540","itemOffered":{"@type":"Service","name":"Permis B, Pack Accompagné, conduite accompagnée, boîte manuelle"}},
+          {"@type":"Offer","priceCurrency":"EUR","price":"1640","itemOffered":{"@type":"Service","name":"Permis B, Pack Accompagné, conduite accompagnée, boîte manuelle"}},
           {"@type":"Offer","priceCurrency":"EUR","price":"1300","itemOffered":{"@type":"Service","name":"Permis B, Pack Accompagné, conduite accompagnée, boîte automatique"}},
-          {"@type":"Offer","priceCurrency":"EUR","price":"1340","itemOffered":{"@type":"Service","name":"Permis B, Pack Supervisé, conduite supervisée, boîte manuelle"}},
+          {"@type":"Offer","priceCurrency":"EUR","price":"1440","itemOffered":{"@type":"Service","name":"Permis B, Pack Supervisé, conduite supervisée, boîte manuelle"}},
           {"@type":"Offer","priceCurrency":"EUR","price":"1100","itemOffered":{"@type":"Service","name":"Permis B, Pack Supervisé, conduite supervisée, boîte automatique"}},
           {"@type":"Offer","priceCurrency":"EUR","price":"99","itemOffered":{"@type":"Service","name":"Permis B, Pack Sénior, remise à niveau pour les plus de 65 ans"}},
           {"@type":"Offer","priceCurrency":"EUR","price":"150","itemOffered":{"@type":"Service","name":"Code de la route, salle et Pack Web, 6 mois"}},
@@ -738,7 +727,7 @@ footer a{color:#c9c3bb}
     </a>
     <button class="burger" id="burger" aria-expanded="false" aria-controls="menu">Menu</button>
     <ul id="menu">
-      <li><a href="#score">Permis Score</a></li>
+      <li><a href="#score">Score Pilote</a></li>
       <li><a href="#formations">Formations</a></li>
       <li><a href="#budget">Tarifs</a></li>
       <li><a href="#olivier">Pourquoi Olive ?</a></li>
@@ -764,7 +753,7 @@ footer a{color:#c9c3bb}
       <h1>Prêt à conduire.</h1>
       <p class="baseline">Conduire en confiance, avancer en liberté.</p>
       <div class="rule"></div>
-      <p class="lede">Pas simplement apprendre à conduire : être prêt à conduire. Après chaque leçon, vous savez où vous en êtes sur neuf compétences, ce qui vous manque encore, et combien d'heures il vous reste. Plus de « je pense qu'il vous faudrait quelques heures de plus ».</p>
+      <p class="lede">Pas simplement apprendre à conduire : être prêt à conduire. Après chaque leçon, vous savez où vous en êtes sur vos compétences, ce qui vous manque encore et combien d'heures il vous reste ! Plus de « je pense qu'il vous faudrait quelques heures de plus ». Score Pilote est votre meilleur allié.</p>
       <div class="hero-cta">
         <a class="btn" href="#demarrer">Démarrer mon permis →</a>
       </div>
@@ -806,8 +795,8 @@ footer a{color:#c9c3bb}
     <div class="split">
       <div>
         <p class="eyebrow">Notre méthode</p>
-        <h2>Le Permis Score</h2>
-        <p class="lede">Après chaque leçon, Olivier note neuf compétences sur cent. Vous repartez avec un chiffre, une courbe, et les trois points qui vous séparent encore du niveau examen. Déplacez le curseur pour voir la progression d'un élève type.</p>
+        <h2>Score Pilote</h2>
+        <p class="lede">Après chaque leçon, Olivier note les compétences. Vous repartez avec un bilan, une courbe et les points qui vous séparent encore du niveau examen. Vous suivez votre progression après chaque leçon. C'est votre Coach !</p>
       </div>
       <div class="pc "><img src="data:image/jpeg;base64,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" alt="Élève au volant pendant une leçon de conduite" width="400" height="400" loading="lazy"></div>
     </div>
@@ -825,7 +814,7 @@ footer a{color:#c9c3bb}
               <span><b>Bonjour Lola</b><small>Permis B · Olivier</small></span>
             </div>
             <div class="ph-body">
-              <p class="ph-lbl">Mon Permis Score</p>
+              <p class="ph-lbl">Mon Score Pilote</p>
               <svg viewBox="0 0 150 132" style="display:block;margin:0 auto 12px" role="img" aria-label="Score de progression">
                 <circle cx="75" cy="70" r="52" fill="none" stroke="#EFEBE5" stroke-width="14"/>
                 <circle id="ringArc" cx="75" cy="70" r="52" fill="none" stroke="#F26522" stroke-width="14"
@@ -863,7 +852,7 @@ footer a{color:#c9c3bb}
 
         <div class="curve">
           <p class="eyebrow">Votre courbe</p>
-          <svg viewBox="0 0 480 190" role="img" aria-label="Courbe de progression du Permis Score">
+          <svg viewBox="0 0 480 190" role="img" aria-label="Courbe de progression du Score Pilote">
             <line x1="38" y1="20" x2="38" y2="158" stroke="#E2DDD6" stroke-width="2"/>
             <line x1="38" y1="158" x2="468" y2="158" stroke="#E2DDD6" stroke-width="2"/>
             <line x1="38" y1="52" x2="468" y2="52" stroke="#0B0A09" stroke-width="2" stroke-dasharray="5 5"/>
@@ -877,43 +866,11 @@ footer a{color:#c9c3bb}
       </div>
     </div>
 
-    <p class="note">Le Permis Score est un outil pédagogique interne, adossé au livret d'apprentissage officiel. Il mesure votre progression, il ne préjuge pas du résultat de l'examen, qui reste à l'appréciation de l'inspecteur.</p>
+    <p class="note">Score Pilote est un outil pédagogique interne, adossé au livret d'apprentissage officiel. Il mesure votre progression, il ne préjuge pas du résultat de l'examen, qui reste à l'appréciation de l'inspecteur.</p>
   </div>
 </section>
 
 
-<!-- ====== TOUT EN LIGNE ====== -->
-<section id="enligne" class="alt">
-  <div class="wrap">
-    <p class="eyebrow">Sans paperasse</p>
-    <h2>Tout se fait en ligne,<br>quand ça vous arrange</h2>
-    <p class="lede">Une auto-école de quartier n'oblige pas à revenir au bureau pour chaque signature. Vous gérez votre formation depuis votre canapé à 23 h, et vous poussez la porte quand vous en avez envie.</p>
-
-    <div class="online">
-      <svg viewBox="0 0 300 340" role="img" aria-label="Illustration : une olive souriante tenant une clé de voiture">
-        <circle cx="150" cy="150" r="132" fill="#FFF0E6"/>
-        <g transform="translate(28,36)"><use href="#mascotte" width="250" height="288"/></g>
-      </svg>
-
-      <div>
-        <ul class="online-list">
-          <li><b>Envoyez vos pièces depuis votre téléphone</b><span>Photographiez vos documents et transmettez-les par e-mail. On s'occupe du NEPH et du dépôt sur l'ANTS. Aucun aller-retour en préfecture.</span></li>
-          <li><b>Réservez vos leçons quand vous voulez</b><span>Le planning d'Olivier est en ligne. Vous prenez, vous décalez, vous annulez jusqu'à 48 h avant, sans appeler.</span></li>
-          <li><b>Payez en ligne, en trois fois</b><span>Acompte, échéance ou heure supplémentaire, par carte. Reçu par e-mail dans la seconde.</span></li>
-          <li class="online-more" hidden><b>Suivez votre Permis Score en direct</b><span>Votre note, vos neuf compétences et votre courbe, mises à jour dès la fin de la leçon.</span></li>
-          <li class="online-more" hidden><b>Révisez le code où vous voulez</b><span>Séries Ediser illimitées sur mobile, statistiques par thème, tests blancs corrigés.</span></li>
-          <li class="online-more" hidden><b>Recevez vos convocations par e-mail</b><span>Date, lieu, heure de rendez-vous et pièces à apporter. Rappel automatique la veille.</span></li>
-        </ul>
-        <p style="margin-top:6px"><button class="btn ghost" id="onlineToggle" type="button" aria-expanded="false">Voir tout ce qu'on fait en ligne</button></p>
-
-        <div class="online-foot">
-          <b>Et si vous préférez le contact</b>
-          <p style="color:var(--ink-soft);font-size:.96rem;margin-top:4px">Le bureau est ouvert six jours sur sept et le téléphone décroche. Le numérique enlève la paperasse, il ne remplace pas Olivier.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- ====== OFFRE ====== -->
 <section id="formations">
@@ -935,7 +892,7 @@ footer a{color:#c9c3bb}
     </div>
 
     <div class="hours" id="boite" role="group" aria-label="Boîte de vitesses">
-      <button type="button" data-b="manu" aria-pressed="true">MANUELLE<small>20 H · 45 € L'HEURE</small></button>
+      <button type="button" data-b="manu" aria-pressed="true">MANUELLE<small>20 H · 50 € L'HEURE</small></button>
       <button type="button" data-b="auto" aria-pressed="false">AUTOMATIQUE<small>13 H · 50 € L'HEURE</small></button>
     </div>
 
@@ -945,7 +902,7 @@ footer a{color:#c9c3bb}
         <h3>Pack Classic</h3>
         <p class="sub">Dès 16 ans, la formation traditionnelle</p>
         <div class="money">
-          <p class="now" data-now>1 245</p>
+          <p class="now" data-now>1 345</p>
           <p class="per">euros TTC, <span data-boite>boîte manuelle</span></p>
         </div>
         <ul>
@@ -970,7 +927,7 @@ footer a{color:#c9c3bb}
         <h3>Pack Accompagné</h3>
         <p class="sub">Dès 15 ans, la conduite accompagnée</p>
         <div class="money">
-          <p class="now" data-now>1 540</p>
+          <p class="now" data-now>1 640</p>
           <p class="per">euros TTC, <span data-boite>boîte manuelle</span></p>
         </div>
         <ul>
@@ -995,7 +952,7 @@ footer a{color:#c9c3bb}
         <h3>Pack Supervisé</h3>
         <p class="sub">Dès 18 ans, la conduite supervisée</p>
         <div class="money">
-          <p class="now" data-now>1 340</p>
+          <p class="now" data-now>1 440</p>
           <p class="per">euros TTC, <span data-boite>boîte manuelle</span></p>
         </div>
         <ul>
@@ -1015,7 +972,7 @@ footer a{color:#c9c3bb}
       </div>
     </div>
 
-    <p class="note" style="text-align:center">Ne sont pas compris dans les packs : la prépa examen optionnelle (30 €), le livre de code (15 €), la fabrication du permis (30 €), la redevance d'examen du code fixée par l'État (30 €) et les heures supplémentaires (45 € en manuelle, 50 € en automatique).</p>
+    <p class="note" style="text-align:center">Ne sont pas compris dans les packs : la prépa examen optionnelle (30 €), le livre de code (15 €), la fabrication du permis (30 €), la redevance d'examen du code fixée par l'État (30 €) et les heures supplémentaires (50 € l'heure, en manuelle comme en automatique).</p>
 
     <div class="senior">
       <div>
@@ -1088,7 +1045,7 @@ footer a{color:#c9c3bb}
           </div>
           <div>
             <h4>Un bilan écrit à chaque palier</h4>
-            <p>Votre Permis Score, mais lu autrement : on regarde ce qui a bougé, pas ce qui manque.</p>
+            <p>Votre Score Pilote, mais lu autrement : on regarde ce qui a bougé, pas ce qui manque.</p>
           </div>
           <div>
             <h4>Une simulation d'examen complète</h4>
@@ -1350,11 +1307,11 @@ footer a{color:#c9c3bb}
       <div class="sim-panel">
         <fieldset>
           <legend>Votre formation</legend>
-          <label class="opt"><input type="radio" name="forfait" value="1245" data-h="45" data-nom="Pack Classic, boîte manuelle" checked><span>Pack Classic, boîte manuelle</span><em>1 245 €</em></label>
+          <label class="opt"><input type="radio" name="forfait" value="1345" data-h="50" data-nom="Pack Classic, boîte manuelle" checked><span>Pack Classic, boîte manuelle</span><em>1 345 €</em></label>
           <label class="opt"><input type="radio" name="forfait" value="995" data-h="50" data-nom="Pack Classic, boîte automatique"><span>Pack Classic, boîte automatique</span><em>995 €</em></label>
-          <label class="opt"><input type="radio" name="forfait" value="1540" data-h="45" data-nom="Pack Accompagné, boîte manuelle"><span>Pack Accompagné, boîte manuelle</span><em>1 540 €</em></label>
+          <label class="opt"><input type="radio" name="forfait" value="1640" data-h="50" data-nom="Pack Accompagné, boîte manuelle"><span>Pack Accompagné, boîte manuelle</span><em>1 640 €</em></label>
           <label class="opt"><input type="radio" name="forfait" value="1300" data-h="50" data-nom="Pack Accompagné, boîte automatique"><span>Pack Accompagné, boîte automatique</span><em>1 300 €</em></label>
-          <label class="opt"><input type="radio" name="forfait" value="1340" data-h="45" data-nom="Pack Supervisé, boîte manuelle"><span>Pack Supervisé, boîte manuelle</span><em>1 340 €</em></label>
+          <label class="opt"><input type="radio" name="forfait" value="1440" data-h="50" data-nom="Pack Supervisé, boîte manuelle"><span>Pack Supervisé, boîte manuelle</span><em>1 440 €</em></label>
           <label class="opt"><input type="radio" name="forfait" value="1100" data-h="50" data-nom="Pack Supervisé, boîte automatique"><span>Pack Supervisé, boîte automatique</span><em>1 100 €</em></label>
           <label class="opt"><input type="radio" name="forfait" value="99" data-h="50" data-nom="Pack Sénior, une personne"><span>Pack Sénior, une personne</span><em>99 €</em></label>
           <label class="opt"><input type="radio" name="forfait" value="150" data-h="50" data-nom="Code seul, salle et Pack Web 6 mois"><span>Code seul, salle et Pack Web 6 mois</span><em>150 €</em></label>
@@ -1366,7 +1323,7 @@ footer a{color:#c9c3bb}
           <legend>Heures de conduite en plus</legend>
           <div class="range-head"><span>Au-delà du forfait</span><b><span id="hVal">0</span> h</b></div>
           <input type="range" id="heures" min="0" max="20" step="1" value="0" aria-label="Heures de conduite supplémentaires">
-          <p class="note">L'heure supplémentaire est facturée <b><span id="tarifHeure">45</span> €</b> selon la boîte choisie. Elles se règlent à chaque leçon, hors forfait.</p>
+          <p class="note">L'heure supplémentaire est facturée <b><span id="tarifHeure">50</span> €</b>, en manuelle comme en automatique. Elles se règlent à chaque leçon, hors forfait.</p>
         </fieldset>
 
         <fieldset>
@@ -1414,18 +1371,18 @@ footer a{color:#c9c3bb}
     </tbody></table>
     <table class="tarifs"><caption>La conduite</caption><tbody>
       <tr><td>Évaluation de départ, 45 minutes<small>Obligatoire avant la signature du contrat</small></td><td>50 €</td></tr>
-      <tr><td>Leçon de conduite d'une heure, boîte manuelle</td><td>45 €</td></tr>
+      <tr><td>Leçon de conduite d'une heure, boîte manuelle</td><td>50 €</td></tr>
       <tr><td>Leçon de conduite d'une heure, boîte automatique</td><td>50 €</td></tr>
       <tr><td>Leçon d'annulation ou de perfectionnement, une heure</td><td>50 €</td></tr>
       <tr><td>Cours de vérifications, prépa examen, une heure</td><td>30 €</td></tr>
-      <tr><td>Accompagnement à l'examen pratique, boîte manuelle</td><td>45 €</td></tr>
+      <tr><td>Accompagnement à l'examen pratique, boîte manuelle</td><td>50 €</td></tr>
       <tr><td>Accompagnement à l'examen pratique, boîte automatique</td><td>50 €</td></tr>
     </tbody></table>
     <table class="tarifs"><caption>Conduite accompagnée et conduite supervisée</caption><tbody>
-      <tr><td>Rendez-vous préalable, boîte manuelle</td><td>90 €</td></tr>
+      <tr><td>Rendez-vous préalable, boîte manuelle</td><td>100 €</td></tr>
       <tr><td>Rendez-vous préalable, boîte automatique</td><td>100 €</td></tr>
       <tr><td>Rendez-vous pédagogique, manuelle ou automatique</td><td>100 €</td></tr>
-      <tr><td>Leçon de conduite d'une heure, boîte manuelle</td><td>45 €</td></tr>
+      <tr><td>Leçon de conduite d'une heure, boîte manuelle</td><td>50 €</td></tr>
       <tr><td>Leçon de conduite d'une heure, boîte automatique</td><td>50 €</td></tr>
     </tbody></table>
     <table class="tarifs"><caption>Divers</caption><tbody>
@@ -1441,28 +1398,28 @@ footer a{color:#c9c3bb}
     <div class="tabpanel" id="p-p" role="tabpanel" aria-labelledby="t-p" hidden><div class="panel-inner">
     <p class="eyebrow">Régler sa formation</p>
     <h2>Payer sans y laisser<br>un mois de salaire</h2>
-    <p class="lede">Personne ne sort 1 245 € d'un coup. Chaque pack a son échéancier, sans frais, et des aides existent que beaucoup de candidats ignorent.</p>
+    <p class="lede">Personne ne sort 1 345 € d'un coup. Chaque pack a son échéancier, sans frais, et des aides existent que beaucoup de candidats ignorent.</p>
 
     <h3 style="margin-top:34px">Pack Classic, en trois fois</h3>
     <div class="echeances">
       <div><b>295 €</b><span>À la signature du contrat, en manuelle comme en automatique</span></div>
-      <div><b>475 € <small style="font-size:.8rem;color:#7d7770">ou 350 €</small></b><span>À la première leçon de conduite, manuelle ou automatique</span></div>
-      <div><b>475 € <small style="font-size:.8rem;color:#7d7770">ou 350 €</small></b><span>À la onzième leçon de conduite, manuelle ou automatique</span></div>
+      <div><b>525 € <small style="font-size:.8rem;color:#7d7770">ou 350 €</small></b><span>À la première leçon de conduite, manuelle ou automatique</span></div>
+      <div><b>525 € <small style="font-size:.8rem;color:#7d7770">ou 350 €</small></b><span>À la onzième leçon de conduite, manuelle ou automatique</span></div>
     </div>
 
     <h3 style="margin-top:34px">Pack Accompagné, en quatre fois</h3>
     <div class="echeances">
-      <div><b>385 € <small style="font-size:.8rem;color:#7d7770">ou 325 €</small></b><span>À la signature du contrat</span></div>
-      <div><b>385 € <small style="font-size:.8rem;color:#7d7770">ou 325 €</small></b><span>À la première leçon de conduite</span></div>
-      <div><b>385 € <small style="font-size:.8rem;color:#7d7770">ou 325 €</small></b><span>À la moitié de la formation</span></div>
+      <div><b>410 € <small style="font-size:.8rem;color:#7d7770">ou 325 €</small></b><span>À la signature du contrat</span></div>
+      <div><b>410 € <small style="font-size:.8rem;color:#7d7770">ou 325 €</small></b><span>À la première leçon de conduite</span></div>
+      <div><b>410 € <small style="font-size:.8rem;color:#7d7770">ou 325 €</small></b><span>À la moitié de la formation</span></div>
     </div>
     <p class="note">Un quatrième règlement du même montant est appelé au rendez-vous préalable. Le premier montant vaut pour la boîte manuelle, le second pour la boîte automatique. Les heures supplémentaires se règlent à chaque leçon.</p>
 
     <h3 style="margin-top:34px">Pack Supervisé, en quatre fois</h3>
     <div class="echeances">
-      <div><b>335 € <small style="font-size:.8rem;color:#7d7770">ou 275 €</small></b><span>À la signature du contrat</span></div>
-      <div><b>335 € <small style="font-size:.8rem;color:#7d7770">ou 275 €</small></b><span>À la première leçon de conduite</span></div>
-      <div><b>335 € <small style="font-size:.8rem;color:#7d7770">ou 275 €</small></b><span>À la moitié de la formation</span></div>
+      <div><b>360 € <small style="font-size:.8rem;color:#7d7770">ou 275 €</small></b><span>À la signature du contrat</span></div>
+      <div><b>360 € <small style="font-size:.8rem;color:#7d7770">ou 275 €</small></b><span>À la première leçon de conduite</span></div>
+      <div><b>360 € <small style="font-size:.8rem;color:#7d7770">ou 275 €</small></b><span>À la moitié de la formation</span></div>
     </div>
     <p class="note">Un quatrième règlement du même montant est appelé au rendez-vous préalable.</p>
 
@@ -1592,13 +1549,13 @@ footer a{color:#c9c3bb}
     <p class="eyebrow">Questions fréquentes</p>
     <h2>Ce qu'on nous demande</h2>
     <div style="margin-top:30px;max-width:820px">
-      <details><summary>Olive Conduite, c'est l'ancienne auto-école de Coquelles ?</summary><p>Oui. Olivier y enseignait depuis des années, il en a repris la gérance et lui a donné son nom. L'adresse ne change pas, 1087 avenue Charles de Gaulle, et c'est toujours lui au volant. Ce qui change : un seul enseignant pour toute la formation, le suivi Permis Score après chaque leçon, et le parcours Permis Confiance. Si vous étiez inscrit sous l'ancienne enseigne, contactez-nous pour faire le point sur votre situation.</p></details>
+      <details><summary>Olive Conduite, c'est l'ancienne auto-école de Coquelles ?</summary><p>Oui. Olivier y enseignait depuis des années, il en a repris la gérance et lui a donné son nom. L'adresse ne change pas, 1087 avenue Charles de Gaulle, et c'est toujours lui au volant. Ce qui change : un seul enseignant pour toute la formation, le suivi Score Pilote après chaque leçon, et le parcours Permis Confiance. Si vous étiez inscrit sous l'ancienne enseigne, contactez-nous pour faire le point sur votre situation.</p></details>
       <details><summary>Où passe-t-on l'examen quand on s'inscrit à Coquelles ?</summary><p>L'épreuve pratique se déroule au centre d'examen dont dépend notre agrément, à Calais. Selon les périodes et les places disponibles, la direction départementale peut aussi vous convoquer sur Saint-Omer ou Boulogne-sur-Mer. Dans tous les cas, vous vous entraînez sur les parcours du secteur d'examen, pas ailleurs.</p></details>
       <details><summary>Vous prenez des élèves de Calais, Marck ou Guînes ?</summary><p>Oui. Nous formons des élèves de tout le Calaisis : Coquelles, Calais, Marck, Coulogne, Guînes, Guemps, Oye-Plage et les communes voisines. Les leçons peuvent démarrer depuis votre domicile ou votre lieu de travail plutôt que depuis l'agence, si cela vous arrange.</p></details>
-      <details><summary>Combien de temps pour obtenir une place d'examen dans le Pas-de-Calais ?</summary><p>Le délai dépend des places attribuées à l'école par la direction départementale et de la période de l'année. Nous vous donnons une fourchette réaliste dès l'inscription et nous la mettons à jour à chaque palier de votre Permis Score. Nous vous donnons une fourchette réaliste dès l'inscription.</p></details>
+      <details><summary>Combien de temps pour obtenir une place d'examen dans le Pas-de-Calais ?</summary><p>Le délai dépend des places attribuées à l'école par la direction départementale et de la période de l'année. Nous vous donnons une fourchette réaliste dès l'inscription et nous la mettons à jour à chaque palier de votre Score Pilote. Nous vous donnons une fourchette réaliste dès l'inscription.</p></details>
       <details><summary>Peut-on commencer en boîte automatique puis passer en manuelle ?</summary><p>Oui. Après trois mois de conduite avec un permis boîte automatique, une formation passerelle de sept heures suffit pour lever la restriction, sans repasser d'examen. Beaucoup d'élèves stressés démarrent ainsi, avec un embrayage en moins à gérer.</p></details>
       <details><summary>Vous faites encore la moto ?</summary><p>Non. Nous avons arrêté les formations A1, A2 et 125 pour développer la voiture sans permis. Nous pouvons vous orienter vers une moto-école partenaire du Calaisis si vous le souhaitez.</p></details>
-      <details><summary>Le Permis Score, c'est officiel ?</summary><p>Non, c'est notre outil interne. Il s'appuie sur le livret d'apprentissage officiel et sur le référentiel de formation, mais la note reste la nôtre. Elle mesure votre progression, elle ne garantit pas le résultat de l'examen, qui dépend de l'inspecteur et du jour.</p></details>
+      <details><summary>Le Score Pilote, c'est officiel ?</summary><p>Non, c'est notre outil interne. Il s'appuie sur le livret d'apprentissage officiel et sur le référentiel de formation, mais la note reste la nôtre. Elle mesure votre progression, elle ne garantit pas le résultat de l'examen, qui dépend de l'inspecteur et du jour.</p></details>
       <details><summary>Permis Confiance, c'est plus cher ?</summary><p>Le parcours s'ajoute à un pack, à raison de 60 € l'heure de séance dédiée, soit 480 € pour huit heures. Beaucoup d'élèves en prennent quatre ou six seulement. Le devis est établi après l'entretien, jamais avant.</p></details>
       <details><summary>Un seul moniteur, ce n'est pas un problème si Olivier est absent ?</summary><p>Nous limitons volontairement le nombre d'élèves pour que ça n'arrive pas. En cas d'absence prolongée, les leçons sont replanifiées et jamais facturées. Vous êtes prévenu au plus tôt.</p></details>
       <details><summary>En combien de temps j'ai mon permis ?</summary><p>Trois à six mois selon votre rythme, votre assiduité et les délais de présentation à l'examen. Le Pack Accompagné s'étale forcément davantage, puisqu'il suppose 3 000 km de conduite avec votre accompagnateur.</p></details>
@@ -1629,27 +1586,17 @@ footer a{color:#c9c3bb}
       </div>
 
       <div class="path reco">
-        <span class="ribbon">Le plus utile pour commencer</span>
-        <div class="picto" aria-hidden="true">🎯</div>
-        <h3>Connaître mon niveau</h3>
-        <p>Une première évaluation pour situer où vous en êtes et estimer le nombre d'heures dont vous aurez besoin. C'est le point de départ de votre Permis Score.</p>
-        <div class="foot">
-          <a class="btn" href="#rdv">Faire mon évaluation</a>
-          <span class="small">Gratuite et sans engagement</span>
-        </div>
-      </div>
-
-      <div class="path">
+        <span class="ribbon">Le plus simple pour commencer</span>
         <div class="picto" aria-hidden="true">📝</div>
         <h3>Je me pré-inscris</h3>
         <p>Vous avez choisi Olive Conduite et souhaitez ouvrir votre dossier. Quelques minutes depuis votre téléphone suffisent pour démarrer, Olivier reprend contact ensuite.</p>
         <div class="foot">
-          <a class="btn dark-btn" href="#preinscription">Me pré-inscrire</a>
+          <a class="btn" href="#preinscription">Me pré-inscrire</a>
         </div>
       </div>
     </div>
 
-    <p class="note" style="margin-top:26px">La pré-inscription ouvre votre dossier, elle ne vous engage pas définitivement. L'inscription est finalisée avec Olivier, après l'évaluation de départ et la signature du contrat de formation.</p>
+    <p class="note" style="margin-top:26px">La pré-inscription ouvre votre dossier, elle ne vous engage pas définitivement. Une première évaluation permet de situer où vous en êtes et d'estimer le nombre d'heures dont vous aurez besoin : c'est le point de départ de votre formation. Elle peut se faire à domicile et n'est pas gratuite (50 €). À l'issue de cette évaluation, le contrat de formation peut être édité. Ces informations vous sont communiquées à la suite de la pré-inscription.</p>
   </div>
 </section>
 
@@ -1785,25 +1732,28 @@ footer a{color:#c9c3bb}
       <img src="agence-interieur.jpg" alt="L'accueil d'Olive Conduite : le comptoir, la fresque murale et les mots d'accueil"
            width="900" height="675" loading="lazy">
     </div>
-    <p class="lede" style="max-width:640px;margin:20px auto 0;text-align:center">Sécurité, confiance, autonomie d'un côté, concentration, respect, vigilance de l'autre. Ce ne sont pas des slogans posés là, ce sont les neuf compétences du Permis Score en langage courant.</p>
+    <p class="lede" style="max-width:640px;margin:20px auto 0;text-align:center">Sécurité, confiance, autonomie d'un côté, concentration, respect, vigilance de l'autre. Ce ne sont pas des slogans posés là, ce sont les neuf compétences du Score Pilote en langage courant.</p>
   </div>
 
   <div class="wrap rdv">
     <div>
-      <p class="eyebrow">Rendez-vous en ligne</p>
-      <h2>Choisissez<br>votre créneau</h2>
-      <p class="lede">Trente minutes avec Olivier pour faire le point sur votre situation, votre budget et votre planning. Sans engagement, et sans avoir à appeler pendant vos heures de cours ou de travail.</p>
+      <p class="eyebrow">Rencontrer Olivier</p>
+      <h2>Passez quand<br>ça vous arrange</h2>
+      <p class="lede">Trente minutes avec Olivier pour faire le point sur votre situation, votre budget et votre planning. Sans engagement, et sans avoir à appeler pendant vos heures de cours ou de travail. Voici les plages d'ouverture du bureau : passez pendant ces horaires ou laissez-nous vos coordonnées, Olivier vous rappelle.</p>
 
-      <p class="eyebrow" style="margin-top:30px">Le jour</p>
-      <div class="days" id="days" role="group" aria-label="Choix du jour"></div>
-
-      <p class="eyebrow" style="margin-top:18px">L'heure</p>
-      <div class="slots" id="slots" role="group" aria-label="Choix de l'horaire"></div>
-
-      <div class="recap" id="recap" hidden>
-        <b id="recapTxt"></b>
-        <p style="color:var(--ink-soft);font-size:.94rem">Complétez le formulaire pour confirmer. Vous recevrez un rappel la veille.</p>
-      </div>
+      <p class="eyebrow" style="margin-top:30px">Plages d'ouverture</p>
+      <table class="hrs">
+        <caption class="sr">Plages d'ouverture du bureau</caption>
+        <tbody>
+          <tr><td>Lundi</td><td>14 h – 19 h</td></tr>
+          <tr><td>Mardi</td><td>9 h – 12 h · 14 h – 19 h</td></tr>
+          <tr><td>Mercredi</td><td>9 h – 12 h · 14 h – 19 h</td></tr>
+          <tr><td>Jeudi</td><td>9 h – 12 h · 14 h – 19 h</td></tr>
+          <tr><td>Vendredi</td><td>9 h – 12 h · 14 h – 19 h</td></tr>
+          <tr><td>Samedi</td><td>9 h – 12 h</td></tr>
+          <tr><td>Dimanche</td><td>Fermé</td></tr>
+        </tbody>
+      </table>
     </div>
 
     <div>
@@ -1837,7 +1787,7 @@ footer a{color:#c9c3bb}
         <p class="note">Vos coordonnées servent uniquement à traiter votre demande, sont conservées trois ans et ne sont jamais transmises à des tiers commerciaux. Vous pouvez demander leur suppression à tout moment. <a href="#legal">En savoir plus</a>.</p>
       </form>
 
-      <table class="hrs" id="hours-table">
+      <table class="hrs">
         <caption class="sr">Horaires d'ouverture du bureau</caption>
         <tbody>
           <tr data-d="1"><td>Lundi</td><td>14 h – 19 h</td></tr>
@@ -1954,9 +1904,9 @@ footer a{color:#c9c3bb}
 
   /* --- packs : prix selon la boite de vitesses --- */
   var PACKS = {
-    classic:    {manu:1245, auto:995,  hManu:"20 heures de conduite obligatoires", hAuto:"13 heures de conduite obligatoires"},
-    accompagne: {manu:1540, auto:1300, hManu:"20 heures de conduite et rendez-vous préalable de 2 h", hAuto:"13 heures de conduite et rendez-vous préalable de 2 h"},
-    supervise:  {manu:1340, auto:1100, hManu:"20 heures de conduite et rendez-vous préalable de 2 h", hAuto:"13 heures de conduite et rendez-vous préalable de 2 h"}
+    classic:    {manu:1345, auto:995,  hManu:"20 heures de conduite obligatoires", hAuto:"13 heures de conduite obligatoires"},
+    accompagne: {manu:1640, auto:1300, hManu:"20 heures de conduite et rendez-vous préalable de 2 h", hAuto:"13 heures de conduite et rendez-vous préalable de 2 h"},
+    supervise:  {manu:1440, auto:1100, hManu:"20 heures de conduite et rendez-vous préalable de 2 h", hAuto:"13 heures de conduite et rendez-vous préalable de 2 h"}
   };
   var boiteBox = document.getElementById('boite');
   function majPacks(b){
@@ -1986,7 +1936,7 @@ footer a{color:#c9c3bb}
     var lignes = [], somme = 0;
     var f = document.querySelector('input[name=forfait]:checked');
     somme += Number(f.value); lignes.push([f.dataset.nom, Number(f.value)]);
-    var taux = Number(f.dataset.h || 45);
+    var taux = Number(f.dataset.h || 50);
     tarifHeure.textContent = taux;
     var h = Number(heures.value); hVal.textContent = h;
     if(h > 0){ somme += h * taux; lignes.push([h + ' h supplémentaires à ' + taux + ' €', h * taux]); }
@@ -2116,8 +2066,7 @@ footer a{color:#c9c3bb}
   var ouvert = (PLAGES[jour] || []).some(function(p){ return hNow >= p[0] && hNow < p[1]; });
   document.getElementById('statut').innerHTML = '<span class="dot' + (ouvert ? '' : ' off') + '"></span>' +
     (ouvert ? 'Bureau ouvert en ce moment' : 'Bureau fermé, laissez-nous un message');
-  var ligne = document.querySelector('#hours-table tr[data-d="' + jour + '"]');
-  if(ligne){ ligne.classList.add('now'); }
+
 
   /* --- sessions voiture sans permis --- */
   var PLACES_MAX = 4, SESSIONS = [{dans:11, prises:3}, {dans:25, prises:1}, {dans:39, prises:0}];
@@ -2135,60 +2084,15 @@ footer a{color:#c9c3bb}
   }).join('');
 
   /* --- rendez-vous --- */
-  var CRENEAUX = {1:[14,15,16,17,18], 2:[9,10,11,14,15,16,17,18], 3:[9,10,11,14,15,16,17,18],
-                  4:[9,10,11,14,15,16,17,18], 5:[9,10,11,14,15,16,17,18], 6:[9,10,11], 0:[]};
-  var pris = function(d, hr){ return ((d.getDate() * 7 + hr * 3) % 11) < 4; };
-  var daysBox = document.getElementById('days'), slotsBox = document.getElementById('slots'),
-      recap = document.getElementById('recap'), recapTxt = document.getElementById('recapTxt');
-  var jours = [], choixJour = null, choixHeure = null;
-
-  var curseur = new Date(); curseur.setDate(curseur.getDate() + 1);
-  while(jours.length < 7){
-    if(CRENEAUX[curseur.getDay()].length){ jours.push(new Date(curseur)); }
-    curseur.setDate(curseur.getDate() + 1);
+  var formRdv = document.getElementById('formRdv');
+  if(formRdv){
+    formRdv.addEventListener('submit', function(e){
+      e.preventDefault();
+      var n = document.getElementById('rdvNote');
+      n.textContent = 'Demande prête. Branchez Formspree, votre e-mail ou votre outil de gestion pour recevoir la demande. Olivier vous recontacte pour convenir d\'un moment pendant les heures d\'ouverture.';
+      n.style.color = '#BF4A12';
+    });
   }
-  daysBox.innerHTML = jours.map(function(d,i){
-    return '<button type="button" class="day" data-i="' + i + '" aria-pressed="false">' +
-      d.toLocaleDateString('fr-FR',{weekday:'short'}) + '<b>' + d.getDate() + '</b>' +
-      d.toLocaleDateString('fr-FR',{month:'short'}) + '</button>';
-  }).join('');
-
-  function afficheSlots(){
-    var d = jours[choixJour];
-    slotsBox.innerHTML = CRENEAUX[d.getDay()].map(function(hr){
-      var occupe = pris(d, hr);
-      return '<button type="button" class="slot" data-h="' + hr + '" aria-pressed="false"' +
-        (occupe ? ' disabled aria-label="Créneau déjà réservé"' : '') + '>' + hr + ' h 00</button>';
-    }).join('');
-  }
-  daysBox.addEventListener('click', function(e){
-    var b = e.target.closest('.day'); if(!b) return;
-    daysBox.querySelectorAll('.day').forEach(function(x){ x.setAttribute('aria-pressed','false'); });
-    b.setAttribute('aria-pressed','true');
-    choixJour = Number(b.dataset.i); choixHeure = null; recap.hidden = true;
-    afficheSlots();
-  });
-  slotsBox.addEventListener('click', function(e){
-    var b = e.target.closest('.slot'); if(!b || b.disabled) return;
-    slotsBox.querySelectorAll('.slot').forEach(function(x){ x.setAttribute('aria-pressed','false'); });
-    b.setAttribute('aria-pressed','true');
-    choixHeure = Number(b.dataset.h);
-    var d = jours[choixJour];
-    recapTxt.textContent = cap(d.toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long'})) + ' à ' + choixHeure + ' h 00';
-    recap.hidden = false;
-  });
-  daysBox.querySelector('.day').click();
-
-  document.getElementById('formRdv').addEventListener('submit', function(e){
-    e.preventDefault();
-    var n = document.getElementById('rdvNote');
-    if(choixHeure === null){
-      n.textContent = 'Choisissez d\'abord un jour et une heure ci-contre.';
-      n.style.color = '#BF4A12'; return;
-    }
-    n.textContent = 'Créneau retenu : ' + recapTxt.textContent + '. Branchez Cal.com, Calendly ou votre agenda pour envoyer la confirmation.';
-    n.style.color = '#BF4A12';
-  });
 
   /* --- paiement --- */
   document.getElementById('payLink').addEventListener('click', function(e){
