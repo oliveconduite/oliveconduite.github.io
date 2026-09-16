@@ -93,8 +93,12 @@ header{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.96);backdro
 .baseline{font-family:"Big Shoulders Display",sans-serif;font-weight:700;font-size:clamp(1.35rem,4vw,1.85rem);color:var(--orange-deep);letter-spacing:.02em;margin-top:14px;line-height:1.1}
 .hero .rule{height:7px;background:var(--orange);width:104px;margin:20px 0}
 .hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
-.hero-proof{display:flex;gap:26px;flex-wrap:wrap;margin-top:32px;padding-top:22px;border-top:1px solid var(--line);font-size:.93rem;color:var(--ink-soft)}
-.hero-proof b{display:block;font-family:"Big Shoulders Display",sans-serif;font-size:2.1rem;font-weight:800;color:var(--black);line-height:1}
+.hero-proof{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:36px;padding-top:0;border-top:0;font-size:.93rem;color:var(--ink-soft)}
+.hero-proof>div{position:relative;background:var(--paper);border:2px solid var(--black);box-shadow:8px 8px 0 0 var(--orange);padding:22px 20px 18px;display:flex;flex-direction:column;gap:6px}
+.hero-proof b{display:block;font-family:"Big Shoulders Display",sans-serif;font-size:3rem;font-weight:800;color:var(--black);line-height:.9;letter-spacing:.01em}
+.hero-proof .lbl{font-family:"Big Shoulders Display",sans-serif;font-weight:700;font-size:1.05rem;color:var(--orange-deep);letter-spacing:.04em;text-transform:uppercase}
+.hero-proof .sub{font-family:"Barlow",sans-serif;font-weight:500;font-size:.92rem;color:var(--ink-soft);line-height:1.3}
+@media(max-width:700px){.hero-proof{grid-template-columns:1fr;gap:14px}}
 @media(max-width:900px){
   .hero-grid{grid-template-columns:1fr;gap:26px}
   .hero{padding-top:26px}
@@ -782,9 +786,9 @@ footer a{color:#c9c3bb}
       </div>
       <p class="hero-alt">Vous préférez d'abord échanger avec Olivier ? <a href="#rdv">Prendre rendez-vous</a></p>
       <div class="hero-proof">
-        <div><b>4,7</b>note Google de l'établissement</div>
-        <div><b>4</b>compétences suivies à chaque leçon</div>
-        <div><b>1</b>seul moniteur, du début à la fin</div>
+        <div><b>4,7</b><span class="lbl">Note Google</span><span class="sub">de l'établissement</span></div>
+        <div><b>4</b><span class="lbl">Compétences suivies</span><span class="sub">à chaque leçon</span></div>
+        <div><b>1</b><span class="lbl">Seul moniteur</span><span class="sub">du début à la fin</span></div>
       </div>
     </div>
 
@@ -1873,7 +1877,7 @@ footer a{color:#c9c3bb}
     <div style="margin-top:28px;max-width:860px">
       <details>
         <summary>Mentions légales</summary>
-        <p><b>Éditeur du site.</b> Olive Go Drive, [forme juridique] au capital de [montant] €, 1087 avenue Charles de Gaulle, 62231 Coquelles. RCS Boulogne-sur-Mer [numéro], SIRET [numéro], TVA intracommunautaire [numéro]. Téléphone 03 00 00 00 00, contact@oliveconduite.fr.</p>
+        <p><b>Éditeur du site.</b> Olive Go Drive, [forme juridique] au capital de [montant] €, 1087 avenue Charles de Gaulle, 62231 Coquelles. RCS Boulogne-sur-Mer [numéro], SIRET [numéro], TVA intracommunautaire [numéro]. Téléphone 03 00 00 00 00, <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="88ebe7e6fce9ebfcc8e7e4e1feedebe7e6ecfde1fceda6eefa">[email&#160;protected]</a>.</p>
         <p><b>Directeur de la publication.</b> Olivier [nom], gérant.</p>
         <p><b>Agrément préfectoral.</b> École de conduite agréée sous le numéro E [numéro], délivré par la préfecture du Pas-de-Calais, conformément à l'article R. 213-2 du code de la route. Enseignant titulaire d'une autorisation d'enseigner en cours de validité.</p>
         <p><b>Hébergement.</b> [Nom de l'hébergeur], [adresse], [téléphone].</p>
@@ -1883,12 +1887,12 @@ footer a{color:#c9c3bb}
       <details>
         <summary>Données personnelles et cookies</summary>
         <p><b>Ce site ne dépose aucun cookie.</b> Il n'utilise ni mesure d'audience, ni traceur publicitaire, ni carte interactive tierce, ni stockage dans votre navigateur. Aucun consentement n'est donc requis au titre de l'article 82 de la loi Informatique et Libertés. Les simulateurs, la liste de pièces et le sélecteur de créneaux fonctionnent entièrement dans votre navigateur et n'envoient rien.</p>
-        <p><b>Responsable de traitement.</b> Olive Go Drive, 1087 avenue Charles de Gaulle, 62231 Coquelles, contact@oliveconduite.fr.</p>
+        <p><b>Responsable de traitement.</b> Olive Go Drive, 1087 avenue Charles de Gaulle, 62231 Coquelles, <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f4979b9a80959780b49b989d8291979b9a90819d8091da9286">[email&#160;protected]</a>.</p>
         <p><b>Données collectées.</b> Uniquement celles que vous saisissez dans le formulaire de contact : nom, prénom, téléphone, adresse e-mail, motif de la demande et message éventuel.</p>
         <p><b>Finalité et base légale.</b> Traiter votre demande de rendez-vous ou de renseignement, et vous recontacter. Base légale : votre démarche préalable, au sens de l'article 6.1.b du RGPD.</p>
         <p><b>Destinataires.</b> Le gérant d'Olive Go Drive et, le cas échéant, notre prestataire d'envoi de formulaire. Aucune donnée n'est vendue, louée ni transmise à des fins commerciales.</p>
         <p><b>Durée de conservation.</b> Trois ans à compter du dernier contact si vous ne vous inscrivez pas. En cas d'inscription, la durée légale de conservation du dossier de formation s'applique.</p>
-        <p><b>Vos droits.</b> Accès, rectification, effacement, limitation, opposition et portabilité, à exercer à contact@oliveconduite.fr avec un justificatif d'identité. Vous pouvez introduire une réclamation auprès de la CNIL, 3 place de Fontenoy, 75007 Paris, ou sur cnil.fr.</p>
+        <p><b>Vos droits.</b> Accès, rectification, effacement, limitation, opposition et portabilité, à exercer à <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e0838f8e94818394a08f8c899685838f8e8495899485ce8692">[email&#160;protected]</a> avec un justificatif d'identité. Vous pouvez introduire une réclamation auprès de la CNIL, 3 place de Fontenoy, 75007 Paris, ou sur cnil.fr.</p>
         <p><b>Polices de caractères.</b> Les polices d'affichage sont chargées depuis Google Fonts, ce qui transmet votre adresse IP à Google. Nous travaillons à les héberger sur notre propre serveur pour supprimer cette transmission.</p>
       </details>
 
@@ -1900,7 +1904,7 @@ footer a{color:#c9c3bb}
         <p><b>Annulation d'une leçon.</b> Toute leçon non décommandée au moins 48 heures à l'avance est due, sauf motif légitime justifié.</p>
         <p><b>Résiliation.</b> Vous pouvez résilier à tout moment. Les prestations déjà exécutées restent dues, le solde des prestations non consommées vous est restitué dans les trente jours. Aucun frais de résiliation n'est facturé au-delà des frais de dossier engagés.</p>
         <p><b>Droit de rétractation.</b> Pour un contrat conclu à distance ou hors établissement, vous disposez de quatorze jours pour vous rétracter, conformément à l'article L. 221-18 du code de la consommation.</p>
-        <p><b>Réclamations.</b> Adressez-les à contact@oliveconduite.fr. Nous répondons sous quinze jours.</p>
+        <p><b>Réclamations.</b> Adressez-les à <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="aac9c5c4decbc9deeac5c6c3dccfc9c5c4cedfc3decf84ccd8">[email&#160;protected]</a>. Nous répondons sous quinze jours.</p>
         <p><b>Médiation de la consommation.</b> En cas de litige non résolu, vous pouvez saisir gratuitement le médiateur de la consommation dont nous relevons, conformément à l'article L. 612-1 du code de la consommation : [nom du médiateur], [adresse], [site web]. La plateforme européenne de règlement en ligne des litiges est également accessible.</p>
       </details>
     </div>
@@ -1944,7 +1948,7 @@ footer a{color:#c9c3bb}
 
 <button id="top-btn" aria-label="Revenir en haut de la page">&#8593;</button>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 (function(){
   "use strict";
   var euro = function(n){ return n.toLocaleString('fr-FR'); };
@@ -2363,5 +2367,6 @@ footer a{color:#c9c3bb}
   document.getElementById('year').textContent = new Date().getFullYear();
 })();
 </script>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495" integrity="sha512-iIg7k2xntmwu6/uSb5tpc/hySgZc4eoL31yB29W6tJFo2akwjPWcEqnCEdJvGexCL0KEQwVYv5BlowfhVz26hg==" data-cf-beacon='{"version":"2024.11.0","token":"8607d2a720d14b038279025b2b5a82e5","spa":2}' crossorigin="anonymous"></script>
 </body>
 </html>
